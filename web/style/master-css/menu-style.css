@@ -1,0 +1,60 @@
+/* 
+    Document   : menu-style
+    Created on : Jan 14, 2011, 11:27:30 AM
+    Author     : nic
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#menu {
+    /*padding: 8% 0% 0% 0%;*/
+/*    position: relative;*/
+/*    height: 10em;*/
+    font-size: .95em;
+    /*    height: 20%;*/
+    /*    border:1px solid black;*/
+}
+#menu ul li a{
+    color: #3e778c;
+    text-decoration: none;
+    font-family: 'FreightMacro Pro Light';
+}
+#menu ul li a:hover {
+    color: #3e778c;
+    text-decoration: none;
+    /*    font-weight: bold;*/
+}
+
+#menu ul li a:active {
+    color: #3e778c;
+    text-decoration: none;
+
+}
+
+#menu ul li a:visited {
+    color: #3e778c;
+    text-decoration: none;
+}
+
+#common-menu a{
+    font-size: .8em;
+    color: white;text-decoration: none;font-weight: bold;
+}
+
+
+/*log in details in left-frame*/
+#logindetails{
+    height: 15em;
+    padding-left: .8em;
+    font-size: .7em;
+    font-family: "Trebuchet MS";
+    /*vertical-align: middle;*/
+}
+#logindetails td{
+    color: #333333;
+}
+
+#menu-container tr{
+    height:15em;
+}
+

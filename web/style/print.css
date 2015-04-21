@@ -1,0 +1,33 @@
+/* 
+    Document   : print
+    Created on : 23 Dec, 2011, 3:46:43 PM
+    Author     : nic
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.noPrint { 
+          display: none; 
+} 
+
+.toPrint {
+  color : #000000;
+  background : #ffffff;
+  font-family : "Times New Roman", Times, serif;
+  font-size : 12pt;
+  margin-top: 0cm;
+  height: 900px;
+  width: 595px;
+}
+
+#header-span{
+    display: none;
+}
+#header{
+    display: none;
+}

@@ -1,0 +1,311 @@
+/* 
+    Document   : master-layout
+    Created on : Dec 14, 2010, 5:08:35 PM
+    Author     : nic
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.leftcontainer{
+    /*border-right-style:  dashed;
+   border-right-width: 1px;*/
+    border-right-color: gray;
+    background-color: whitesmoke;
+    
+     background-image: url("images/rulebg.gif");
+}
+.rightcontainer{
+    font-size: 1em;
+    background-color: whitesmoke;
+}
+
+#page-header{
+    font-family: monospace;
+    font-size: 16px;
+}
+#master-layout{
+    font-family: monospace;
+    font-size: 1em;
+}
+
+
+#left-frame{
+    /*    border:1px solid #3e778c;*/
+    /*float:left;*/
+    /*width:100%;*/
+}
+#right-frame{
+    /*            background-color: #D5EAEA;*/
+    /*background-color:whitesmoke;*/
+    /*    border-left: 1px solid #E2E2E2;
+        border-right: 1px solid #E2E2E2;
+        border-bottom: 1px solid #E2E2E2;*/
+    /*float:right;*/
+    /*width:98%;*/
+}
+
+.frame-header{
+    background-color: #6391A2;
+    color: white;
+    height: 17px;
+    padding-left:1em;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+
+}
+
+#processing-area{
+    /*height:40em;*/
+    padding-top: 3em;
+    font-size: 1em;
+    padding-left: 1em;
+    padding-right:  1em;
+/*    background-image: url("../../misc/images/rulebg.gif");*/
+
+    /*    padding-bottom:  13em;*/
+    /*    background-color: whitesmoke;*/
+}
+
+.header-label{
+    font-family: monospace;
+    font-weight: bold;
+}
+#header-span{
+    font-weight: bold;
+    font-size: 30px;
+    color:whitesmoke;
+    position: relative;
+    top:10%;
+    left:11%;
+    text-transform: capitalize;
+    font-family: trench100free;
+    
+}
+
+
+/*------------------------- will go to the style.css file ---------------------------------------------------*/
+/*imp note*/
+#note{
+    font-size: .97em;
+    border:1px solid #3e778c;
+    width: 100%;
+    padding-left: 2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+
+}
+
+/*table for lists of applications*/
+.listofapplications{
+    font-size: .9em;
+    border-collapse: collapse;
+    border-color:whitesmoke;
+    /*    font-family: verdana;*/
+}
+.listofapplications td{
+    border-color: #FFFFEC;
+    padding-left: 1em;
+    text-align: left;
+}
+
+.listofapplications  thead {
+    background-color: #E2E2E2;
+    font-weight:600;
+    height: 2.5em;
+}
+.listofapplications  tbody {
+    font-size: .89em;
+    font-family: verdana;
+}
+.listofapplications  tbody a {
+    cursor:pointer;
+    color: #3e778c;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+
+hr{
+    /*    color: #3e778c;*/
+    color:#E2E2E2;
+    border-collapse: collapse;
+    height: .01%;
+}
+/* style for error messages */
+.errormessage{
+    color:red;
+    font-size: 12px;
+}
+.errorstyle{
+    background-color: #FFFFEC;
+}
+
+/* style for element holder */
+.elementHolder{
+
+}
+
+/*flow remarks div*/
+#flowremarks{
+    height:8em;
+    overflow: auto;
+    border: .09em solid #E1E1E1;
+    text-align: center;
+}
+#flowremarks table{
+    text-align: center;
+    font-size: .7em;
+}
+
+#flowremarks table thead tr{
+    background-color: #d3d3d3;
+    font-weight: bold;
+    font-size: 1.18em;
+}
+
+#flowremarks table tbody tr{
+    background-color: white;
+}
+
+/*action div of lightbox*/
+#actionDiv{
+    font-size: .9em;
+    font-weight: bold;
+}
+
+
+/*citizens*/
+.citizens-frame-header{
+    background-color: #3e778c;color: white;
+    vertical-align: baseline;
+    height: 19px;
+    padding-left:1em;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
+#citizens-frame{
+    /*width:85%;*/
+    /*background-color: whitesmoke;*/
+    /* border-left: 1px solid #E2E2E2;
+     border-right: 1px solid #E2E2E2;
+     border-bottom: 1px solid #E2E2E2;*/
+}
+
+#citizens-processing-area{
+    font-size: .8em;
+    padding-left: 10%;
+    padding-right:  10%;
+}
+
+#citizens-uploading-area{
+    font-size: .9em;
+    padding-left: 10%;
+    padding-right:  10%;
+    padding-bottom: 10%;
+    text-align: left;
+}
+#citizens-uploading-area .filebrowser{
+    font-size: .8em;
+    width:30em;
+}
+#citizens-uploading-area .removeButon{
+    font-size: .8em;
+    /*    width:30em;*/
+}
+
+#citizens-search-area{
+    font-size: .1em;
+    padding-left: 10%;
+    padding-right:  10%;
+}
+
+.onlinequery{
+    font-family: Arial,Helvetica,Sans-serif;
+    font-size:11px;
+    /*    border-style: none;*/
+    /*    font-weight: bold;*/
+    /*    width:100px;*/
+    /*    width:16em;*/
+    cursor:pointer;
+}
+#options {
+    text-align: center;
+    color: maroon;
+}
+#options a{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    /*    width:30em;*/
+}
+
+
+
+/* login */
+#userlogin{
+    padding-top: 5%;
+    padding-bottom: 8%;
+    text-align: center;
+    font-size: .9em;
+    font-weight: bold;
+}
+#userlogin .loginfields{
+    font-size: .7em;
+    font-weight: bold;
+}
+#userlogin .bigtextboxes{
+    font-size: .7em;
+    width:13em;
+}
+#userlogin select{
+    font-size: .7em;
+    width:13em;
+}
+#userlogin .log_button{
+    width:6em;
+    font-family: Arial,Helvetica,Sans-serif;
+    font-size: 12px;
+    border-style: none;
+    border:1px solid #555555;
+}
+
+.bodycontainer{
+    background-color: whitesmoke;
+    font-size: .9em;
+}
+
+#statusSearchButton{
+    width:6em;
+    font-family: Arial,Helvetica,Sans-serif;
+    font-size: 12px;
+    border-style: none;
+    border:1px solid #555555;
+}
+
+.statusSearchText{
+    font-size:.9em;
+    width:13em;
+}
+
+.content-frame-header{
+    border:1px solid #d3d3d3;
+    
+      background-color: #d3d3d3;
+/*    border-bottom:1px solid #3e778c;*/
+    color: #555555;
+    height: 17px;
+    padding-left:1em;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: bold;
+
+}
+
+
+
+/*        */
+

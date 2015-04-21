@@ -1,0 +1,103 @@
+/* 
+    Document   : html-elements
+    Created on : Dec 14, 2010, 4:45:39 PM
+    Author     : nic
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+
+/*      texbox      */
+.bigInputText{
+    /*    height:14px;*/
+    font-family: Arial,Helvetica,Sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+/*    font-size: 90%;*/
+    width:210px;
+    /*width:19.7em;*/
+}
+
+
+/*      combobox      */
+.bigSelect{
+    text-transform: uppercase;
+    font-family: Arial,Helvetica,Sans-serif;
+    /*    height:18px;*/
+    font-size: 11px;
+    width:210px;
+    /*width:18.7em;*/
+
+}
+
+/*  extra-large combo  */
+.extraLarge{
+    text-transform: uppercase;
+    font-family: Arial,Helvetica,Sans-serif;
+    font-size: 11px;
+    /*    width:200px;*/
+    width:16em;
+}
+/*  extra-large combo  */
+.doubleExtraLarge{
+    text-transform: uppercase;
+    font-family: Arial,Helvetica,Sans-serif;
+    font-size: 11px;
+    /*    width:200px;*/
+    width:25em;
+}
+
+/*      button      */
+.bigInputButton{
+    font-family: Arial,Helvetica,Sans-serif;
+    font-size: 12px;
+    border-style: none;
+    border:1px solid #555555;
+
+/*    font-weight: bold;*/
+    /*    width:100px;*/
+    width:16em;
+    cursor:pointer;
+}
+
+/*    calender input box    */
+.dateInput{
+/*    cursor: pointer;*/
+color:gray;
+    font-family: Arial,Helvetica,Sans-serif;
+/*    text-transform: uppercase;*/
+    font-size: 13px;
+    /*    width:152px;*/
+    width:210px;
+    /*width:16em;*/
+}
+/*  email input box */
+.emailInput{
+    font-family: Arial,Helvetica,Sans-serif;
+    font-size: 13px;
+    font-size: 90%;
+    width:210px;
+    /*width:17.7em;*/
+
+}
+/*body{
+    font-family:  "Helvetica", "Arial",  "sans-serif";
+    font-size: .9em;
+}*/
+table {
+    font-size: 1em;
+}
+
+/*      image   */
+#reportIcon img{
+    cursor:pointer;
+}
+#reportIcon img:hover{
+    background-color:#555555;
+}
+#reportIcon a{
+    cursor:pointer;
+    color:navy;
+    text-decoration: none;
+}
