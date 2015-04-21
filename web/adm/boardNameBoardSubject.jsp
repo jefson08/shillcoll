@@ -127,7 +127,10 @@
                                         i = boardnamesubjectDAO.insertBoard(getServletContext(), boardnamesubject);
                                         if (i == 0) {
                                          out.println("<script>swal(\"Oops...\", \"Board Name should contain atleast 4 Letter!\", \"error\");</script>");
-                                        } else if (i == 3) {
+                                        }else if (i == 1) {
+                                            out.println("<script>swal(\"Good job!\", \"Record Added Sucessfully!\", \"success\");</script>");
+                                        }
+                                        else if (i == 3) {
                                             out.println("<script>swal(\"Oops...\", \"Subject Name Should contain atleast 5 Letter!\", \"error\");</script>");
                                         } else if (i == 2) {
                                             out.println("<script>swal(\"Oops...\", \"Board Name already exist!\", \"error\");</script>");

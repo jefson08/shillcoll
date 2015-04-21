@@ -300,7 +300,7 @@
     </context-param>
     <context-param>
         <param-name>DBURL</param-name>
-        <param-value>jdbc:postgresql://localhost:5432/SHGDB</param-value>
+        <param-value>jdbc:postgresql://localhost:5432/shgdb</param-value>
     </context-param>
     <listener>
         <description>ServletContextListener</description>

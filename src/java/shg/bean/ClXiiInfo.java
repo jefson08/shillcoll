@@ -15,7 +15,6 @@ import shg.valid.Validator;
 public class ClXiiInfo {
 
     private String txtBoardRoll;
-    private String txtDegRoll;
     private String cmbBoardID;
     private String txtYrPass;
     private String cmbStream;
@@ -40,16 +39,10 @@ public class ClXiiInfo {
     /**
      * @return the txtDegRoll
      */
-    public String getTxtDegRoll() {
-        return txtDegRoll;
-    }
 
     /**
      * @param txtDegRoll the txtDegRoll to set
      */
-    public void setTxtDegRoll(String txtDegRoll) {
-        this.txtDegRoll = txtDegRoll;
-    }
 
     /**
      * @return the cmbBoardID

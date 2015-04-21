@@ -42,19 +42,6 @@ public class ClXiiInfoDAO {
 
         try {
             //System.out.println("DEg Roll" +C);
-            if(boaSub.getTxtDegRoll()!= null){
-            sql = "select * from clxii WHERE degroll = ? ORDER BY degroll ASC";
-            pst = con.prepareStatement(sql);
-            pst.setString(1, boaSub.getTxtDegRoll());
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                String bName = rs.getString("degroll");
-                if (bName.equals(boaSub.getTxtDegRoll())) {
-                    msg = 2;
-                    break;
-                }
-            }
-        }
             sql = "select * from clxii WHERE boardroll = ? ORDER BY boardid ASC";
             pst = con.prepareStatement(sql);
             pst.setString(1, boaSub.getTxtBoardRoll());
@@ -86,12 +73,11 @@ public class ClXiiInfoDAO {
                     + "    VALUES (?, ?, ?, ?, ?,?)";
             pst = con.prepareStatement(sql);
             pst.setString(1, boaSub.getTxtBoardRoll());
-            pst.setString(2, boaSub.getTxtDegRoll());
-            pst.setString(3, boaSub.getCmbBoardID().toUpperCase());
-            pst.setInt(4, Integer.parseInt(boaSub.getTxtYrPass().toUpperCase()));
-            pst.setString(5, boaSub.getCmbStream().toUpperCase());
-             pst.setInt(6, Integer.parseInt(boaSub.getTxtTotalMarks().toUpperCase()));
-//            System.out.println(pst);
+            pst.setString(2, boaSub.getCmbBoardID().toUpperCase());
+            pst.setInt(3, Integer.parseInt(boaSub.getTxtYrPass().toUpperCase()));
+            pst.setString(4, boaSub.getCmbStream().toUpperCase());
+             pst.setInt(5, Integer.parseInt(boaSub.getTxtTotalMarks().toUpperCase()));
+             //rollno here
             msg = pst.executeUpdate();
                 
             if (msg <= 0) {

@@ -71,14 +71,6 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Degree Roll </td>
-                                                <td><input type="text" name="txtDegRoll" id="txtDegRoll" value="${param.txtDegRoll}" size="50" />
-                                                    <c:if test="${param.submitted and !clxiiinfo.txtDegRollValid}" var="v2">
-                                                        Degree Roll is either be Blank OR invalid 
-                                                    </c:if>
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td>Year Pass*</td>
                                                 <td><input type="text" name="txtYrPass" id="txtYrPass" value="${param.txtYrPass}" size="4" />
                                                     <c:if test="${param.submitted and !clxiiinfo.txtYrPassValid}" var="v3">

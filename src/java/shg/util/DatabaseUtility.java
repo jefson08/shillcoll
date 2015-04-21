@@ -441,7 +441,7 @@ public class DatabaseUtility {
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
            
-            sql="SELECT "+ valueField + ", " + optionField + " FROM " + tablename + " WHERE "+ dependsOnField + " = ?";
+            sql="SELECT DISTINCT "+ valueField + ", " + optionField + " FROM " + tablename + " WHERE "+ dependsOnField + " = ?";
             pst = con.prepareStatement(sql);
             pst.setString(1, dependsOnVal);
             rs = pst.executeQuery();
