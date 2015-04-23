@@ -70,7 +70,7 @@ public class SelectAllSubjName extends HttpServlet {
                 output += "<td>"+Stream+"</td></tr>";
             }
             sql = " SELECT \n"
-                    + "  clxiisubj.subjectname\n"
+                    + "  clxiisubj.subjectid, clxiisubj.subjectname\n"
                     + "FROM \n"
                     + "  boardname, \n"
                     + "  clxiisubj\n"
@@ -99,7 +99,7 @@ public class SelectAllSubjName extends HttpServlet {
 
             while (rs.next()) {
                 output += "<tr id=" + count + "><td>Subject *</td>";
-                output += "<td>" + rs.getString("subjectname")+ "</td> <td><input type='text' name=\"txtSubject\" id=\"txtSubject\" value=\""+rs.getString("subjectname")+"\" hidden /></td>";
+                output += "<td>" + rs.getString("subjectname")+ "</td> <td><input type='text' name=\"txtSubject\" id=\"txtSubject\" value=\""+rs.getString("subjectid")+"\" hidden /></td>";
                 output += "<td>Marks*</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks\" value=\"\" size=\"3\"/>"
                         + "<img src=\"../images/remove.png\" alt=\"Remove\" imgno=" + count + " id=\"DelIcon\"/></td></tr>";
                 count = count + 1;

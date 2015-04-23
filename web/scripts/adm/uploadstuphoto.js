@@ -11,7 +11,6 @@ $(document).ready(function() {
         $('form[name=uploadphoto]').ajaxForm({
             url: '../showUploadImage',
             beforeSubmit: function() {
-                
                 $('#processing').css({visibility: 'visible'});
                 return true;
             },

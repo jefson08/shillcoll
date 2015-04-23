@@ -272,7 +272,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" style="text-align: center"><input type="submit" value="Save" name="cmdSave" /> </td>
+                                                <td colspan="3" style="text-align: center"><input type="submit" value="Next" name="cmdNext" /> </td>
                                             </tr>
                                         </tbody>
                                     </table>

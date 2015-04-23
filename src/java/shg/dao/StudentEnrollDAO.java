@@ -33,7 +33,7 @@ public class StudentEnrollDAO {
 
 //    public int insertStudent(ServletContext context, StudentEnroll StuEnroll) {
     public int insertStudent(ServletContext context, StudentEnroll StuEnroll, ClXiiInfo boaSub) {
-        System.out.println("-----StudentEnroll----"+StuEnroll.getTxtStuName());
+//        System.out.println("-----StudentEnroll----"+StuEnroll.getTxtStuName());
        try {
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
@@ -80,16 +80,17 @@ public class StudentEnrollDAO {
             if (affectedRows <= 0) {
                 throw new SQLException("Student Enrollment Failed. ");
             }
-            affectedRows = new ClXiiInfoDAO().insertBoard(boaSub, con);
+            affectedRows = new ClXiiInfoDAO().insertBoard(boaSub, rollno, con);
 //            System.out.println("-----affecttt "+affectedRows);
-            if (affectedRows <= 0) {
+            if (affectedRows <= 0 || affectedRows==2 || affectedRows==3) {
                 throw new SQLException("Addition of Board Subjects Failed. ");
             }
 //            System.out.println("b4 commit");
             con.commit();
+            StuEnroll.setRollno(rollno);
         } catch (Exception e) {
             try {
-                System.out.println("Roll backkk");
+//                System.out.println("Roll backkk");
                 con.rollback();
                 
             } catch (SQLException ex) {
@@ -115,7 +116,7 @@ public class StudentEnrollDAO {
         ResultSet rs = null;
         StringBuffer s1;
         String slno_str;
-        System.out.println("coursecodecoursecode  "+coursecode);
+//        System.out.println("coursecodecoursecode  "+coursecode);
         try {
             String sql = "SELECT slno,coursecode FROM studentdetails WHERE coursecode='" + coursecode + "'"
                     + " AND enrollyear='" + Utility.currentYear() + "' ORDER BY slno DESC LIMIT 1";

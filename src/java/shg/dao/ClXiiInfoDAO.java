@@ -29,7 +29,7 @@ public class ClXiiInfoDAO {
     private int affectedRows;
     private int msg=0;
 //    public int insertBoard(ServletContext context, ClXiiInfo boaSub, Connection con) throws SQLException
-    public int insertBoard(ClXiiInfo boaSub, Connection con) 
+    public int insertBoard(ClXiiInfo boaSub, String rollno, Connection con) 
     {
         
 //        try {
@@ -69,14 +69,15 @@ public class ClXiiInfoDAO {
             if(msg!=2 && msg!=3)
             {
 //            con.setAutoCommit(false);
-            sql = "INSERT INTO clxii(boardroll,degroll,boardid,yearpass,stream,totalmark)"
+            sql = "INSERT INTO clxii(rollno, boardroll,boardid,yearpass,stream,totalmark)"
                     + "    VALUES (?, ?, ?, ?, ?,?)";
             pst = con.prepareStatement(sql);
-            pst.setString(1, boaSub.getTxtBoardRoll());
-            pst.setString(2, boaSub.getCmbBoardID().toUpperCase());
-            pst.setInt(3, Integer.parseInt(boaSub.getTxtYrPass().toUpperCase()));
-            pst.setString(4, boaSub.getCmbStream().toUpperCase());
-             pst.setInt(5, Integer.parseInt(boaSub.getTxtTotalMarks().toUpperCase()));
+            pst.setString(1, rollno);
+            pst.setString(2, boaSub.getTxtBoardRoll());
+            pst.setString(3, boaSub.getCmbBoardID().toUpperCase());
+            pst.setInt(4, Integer.parseInt(boaSub.getTxtYrPass().toUpperCase()));
+            pst.setString(5, boaSub.getCmbStream().toUpperCase());
+             pst.setInt(6, Integer.parseInt(boaSub.getTxtTotalMarks().toUpperCase()));
              //rollno here
             msg = pst.executeUpdate();
                 
