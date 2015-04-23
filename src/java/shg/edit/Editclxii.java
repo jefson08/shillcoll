@@ -66,7 +66,7 @@ public class Editclxii extends HttpServlet {
         try {
             String boaid="";
             String boaname="";
-            sql = "SELECT boardid FROM clxii WHERE boardroll = ? OR degroll = ?";
+            sql = "SELECT boardid FROM clxii WHERE boardroll = ? OR rollno = ?";
             pst = con.prepareStatement(sql);
             pst.setString(1, srchby);
             pst.setString(2, srchby);
@@ -87,7 +87,7 @@ public class Editclxii extends HttpServlet {
             }
             sql = "SELECT \n"
                     + "  clxii.boardroll, \n"
-                    + "  clxii.degroll, \n"
+                   
                     + "  clxii.boardid, \n"
                     + "  clxii.yearpass, \n"
                     + "  clxii.stream, \n"
@@ -98,7 +98,7 @@ public class Editclxii extends HttpServlet {
                     + "  clxii, \n"
                     + "  clxiistudsub\n"
                     + "WHERE \n"
-                    + "  clxii.boardroll = clxiistudsub.boardroll AND clxii.boardroll = ? OR clxii.degroll = ?";
+                    + "  clxii.boardroll = clxiistudsub.boardroll AND clxii.boardroll = ? OR clxii.rollno = ?";
             pst = con.prepareStatement(sql);
             pst.setString(1, srchby);
             pst.setString(2, srchby);
@@ -106,7 +106,7 @@ public class Editclxii extends HttpServlet {
             if (rs.next()) {
                 //System.out.println("Sucess");
                 output+= "<tr><td>Board Roll *</td><td>" + rs.getString("boardroll") + "</td><td><input type=\"text\" name=\"txtBoardRoll\" id=\"txtBoardRoll\" value=\"" + rs.getString("boardroll") + "\" size=\"10\" hidden /></td></tr>";
-                output+= "<tr><td>Degree Roll *</td><td><input type=\"text\" name=\"txtDegRoll\" id=\"txtDegRoll\" value=\"" + rs.getString("degroll") + "\" size=\"10\" /></td></tr>";
+                //output+= "<tr><td>Degree Roll *</td><td><input type=\"text\" name=\"txtDegRoll\" id=\"txtDegRoll\" value=\"" + rs.getString("degroll") + "\" size=\"10\" /></td></tr>";
                 output+= "<tr><td>Year Pass *</td><td><input type=\"text\" name=\"txtYrPass\" id=\"txtYrPass\" value=\"" + rs.getString("yearpass") + "\" size=\"4\" /></td></tr>";
                 output+="<tr><td>Board Name </td><td>"+boaname+"</td><td><input type=\"text\" name=\"cmbBoardID\" id=\"cmbBoardID\" value=\""+boaid+"\" hidden / ></td></tr>";
                 output+="<tr><td>Stream </td><td>"+rs.getString("stream")+"</td><td><input type=\"text\" name=\"cmbStream\" id=\"cmbStream\" value=\""+rs.getString("stream")+"\" hidden/ ></td></tr>";

@@ -3,6 +3,7 @@
     Created on : Apr 20, 2015, 11:41:13 AM
     Author     : B Mukhim
 --%>
+<%@page  autoFlush="true" buffer="32kb" %>
 <jsp:useBean id="stuEnroll" class="shg.bean.StudentEnroll" scope="session" ></jsp:useBean>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,13 +19,18 @@
     <body>
         <form name='uploadphoto' enctype="multipart/form-data" method="post" action="uploadstuphoto.jsp">
             <table>
-                
+                <tr>
+                    <td colspan="3"><h3>Record Successfully Added</h3></td>
+                </tr>
                 <tr>
                     <td>Student's Name</td>
                     <td> : </td>
                     <td>
                         <b>${stuEnroll.txtStuName}</b>
                     </td>
+                </tr>
+                <tr>
+                    <td colspan="3">His/Her College Rollno is : <b>${stuEnroll.rollno}</b></td>
                 </tr>
                 <tr>
                     <td>Student' Passport Photo *</td>
@@ -41,7 +47,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input type="submit" name="upload" value="Next"</td>
+                    <td colspan="3">
+                        <input type="submit" name="upload" value="Upload Photo" />
+                        <input type="button" name="cancel" value="Skip" />
+                    </td>
                     
                 </tr>
             </table>
