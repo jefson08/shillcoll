@@ -122,7 +122,10 @@
                                             //out.println("i =  "+i);
                                             if (i == 0) {
                                                 out.println("<script>swal(\"Oops...\", \"Subject Name Should contain atleast 5 Letter!\", \"error\");</script>");
-                                            } else if (i == 5) {
+                                            }else if (i == 1) {
+                                                out.println("<script>swal(\"Good job!\", \"Record Updated!\", \"success\");</script>");
+                                            } 
+                                            else if (i == 5) {
                                                 out.println("<script>swal(\"Oops...\", \"Subject Repeat!\", \"error\");</script>");
                                             }
                                         %>

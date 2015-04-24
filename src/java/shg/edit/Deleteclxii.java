@@ -57,7 +57,16 @@ public class Deleteclxii extends HttpServlet {
         }
 
         try {
-            sql = "DELETE FROM clxii WHERE boardroll = ? OR degroll= ?";
+            String boardroll=null;
+            sql = " SELECT boardroll FROM clxii WHERE boardroll = ? OR rollno= ?";
+            pst = con.prepareStatement(sql);
+            pst.setString(1,srchby);
+            pst.setString(2,srchby);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                boardroll=rs.getString("boardroll");
+            }
+            sql = "DELETE FROM clxii WHERE boardroll = ? OR rollno= ?";
             pst = con.prepareStatement(sql);
             pst.setString(1, srchby);
             pst.setString(2, srchby);
@@ -67,7 +76,7 @@ public class Deleteclxii extends HttpServlet {
             }
             sql = "DELETE FROM clxiistudsub WHERE boardroll = ?";
             pst = con.prepareStatement(sql);
-            pst.setString(1,srchby);
+            pst.setString(1,boardroll);
             affectedRows = pst.executeUpdate();
             if (affectedRows > 0) {
                 System.out.println("A user was deleted successfully!");

@@ -25,7 +25,7 @@ public class EditClXiiInfoDAO {
     private String sql = "";
     private ConnectionPool connectionPool = null;
     private int affectedRows;
-    private int msg = 0;
+    private int msg = 1;
 
     public int insertBoard(ServletContext context, EditClXiiInfo boaSub) {
         try {
@@ -51,20 +51,20 @@ public class EditClXiiInfoDAO {
                 }
             }
             if (msg != 3) {
-                sql = "DELETE FROM clxii WHERE boardroll = ? OR degroll= ?";
+                sql = "DELETE FROM clxii WHERE boardroll = ? OR rollno= ?";
                 pst = con.prepareStatement(sql);
                 pst.setString(1, boaSub.getTxtBoardRoll());
-                pst.setString(2, boaSub.getTxtDegRoll());
+                pst.setString(2, boaSub.getRollno());
                 affectedRows = pst.executeUpdate();
                 if (affectedRows > 0) {
                     System.out.println("A user was deleted successfully!");
                 }
                 con.setAutoCommit(false);
-                sql = "INSERT INTO clxii(boardroll,degroll,boardid,yearpass,stream,totalmark)"
+                sql = "INSERT INTO clxii(rollno,boardroll,boardid,yearpass,stream,totalmark)"
                         + "    VALUES (?, ?, ?, ?, ?,?)";
                 pst = con.prepareStatement(sql);
-                pst.setString(1, boaSub.getTxtBoardRoll());
-                pst.setString(2, boaSub.getTxtDegRoll());
+                pst.setString(1, boaSub.getRollno());
+                pst.setString(2, boaSub.getTxtBoardRoll());
                 pst.setString(3, boaSub.getCmbBoardID().toUpperCase());
                 pst.setInt(4, Integer.parseInt(boaSub.getTxtYrPass().toUpperCase()));
                 pst.setString(5, boaSub.getCmbStream().toUpperCase());
@@ -87,7 +87,7 @@ public class EditClXiiInfoDAO {
                 int count = 0;
                 for (String item1 : item) {
                     con.setAutoCommit(false);
-                    sql = "INSERT INTO clxiistudsub(boardroll,subject,mark)"
+                    sql = "INSERT INTO clxiistudsub(boardroll,subjectid,mark)"
                             + "    VALUES (?, ?, ?)";
                     pst = con.prepareStatement(sql);
                     pst.setString(1, boaSub.getTxtBoardRoll());
@@ -110,21 +110,21 @@ public class EditClXiiInfoDAO {
             System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
             return -1;
         } finally {
-                 try {
-                    if (con != null) {
-                        connectionPool.free(con);
-                        con.close();
-                    }
-                    if (rs != null) {
-                        rs.close();
-                    }
-                    if (pst != null) {
-                        pst.close();
-                    }
-                } catch(SQLException gc) {
-                    System.out.println("Error in Garbage Collection :"+gc);
-
+            try {
+                if (con != null) {
+                    connectionPool.free(con);
+                    con.close();
                 }
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (SQLException gc) {
+                System.out.println("Error in Garbage Collection :" + gc);
+
+            }
         }
 
         return msg;

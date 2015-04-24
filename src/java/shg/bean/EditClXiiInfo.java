@@ -12,16 +12,29 @@ import shg.valid.Validator;
  * @author Don Corleone
  */
 public class EditClXiiInfo {
-
+    private String rollno;
     private String txtSearchBy;
     private String txtBoardRoll;
-    private String txtDegRoll;
     private String cmbBoardID;
     private String txtYrPass;
     private String cmbStream;
     private String[] txtSubject;
     private String[] txtMarks;
     private String txtTotalMarks;
+    
+        /**
+     * @return the rollno
+     */
+    public String getRollno() {
+        return rollno;
+    }
+
+    /**
+     * @param rollno the rollno to set
+     */
+    public void setRollno(String rollno) {
+        this.rollno = rollno;
+    }
     /**
      * @return the txtSearchBy
      */
@@ -53,20 +66,6 @@ public class EditClXiiInfo {
      */
     public void setTxtBoardRoll(String txtBoardRoll) {
         this.txtBoardRoll = txtBoardRoll;
-    }
-
-    /**
-     * @return the txtDegRoll
-     */
-    public String getTxtDegRoll() {
-        return txtDegRoll;
-    }
-
-    /**
-     * @param txtDegRoll the txtDegRoll to set
-     */
-    public void setTxtDegRoll(String txtDegRoll) {
-        this.txtDegRoll = txtDegRoll;
     }
 
     /**
@@ -142,10 +141,6 @@ public class EditClXiiInfo {
     public boolean isTxtBoardRollValid() {
         //System.out.println("Board Roll"+getTxtBoardRoll());
         return !((Validator.isNullValue(getTxtBoardRoll())));
-    }
-
-    public boolean isTxtDegRollValid() {
-        return !((Validator.isNullValue(getTxtDegRoll())));
     }
 
     public boolean isCmbBoardIDValid() {

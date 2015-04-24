@@ -71,7 +71,7 @@ $(document).ready(function () {
         });
         //alert(count);
         var str = '<tr id=' + count + '><td>Subject  *</td>';
-        str += '<td><input type="text" name="txtSubName" value="" size="50"/><img src="../images/remove.png" alt="Remove" imgno=' + count + ' id="DelIcon"/></td></tr>';
+        str += '<td><input type="text" name="txtSubName" value="" size="40"/></td><td><img src="../images/remove.png" alt="Remove" imgno=' + count + ' id="DelIcon"/></td></tr>';
         $('#subjectName > tbody:last').append(str);
     })
     $("#DelIcon").live("click", function () {
