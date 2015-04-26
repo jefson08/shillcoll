@@ -90,7 +90,7 @@ public class ClXiiInfoDAO {
             int count=0;
             for (String item1 : item) {
                 //con.setAutoCommit(false);
-                sql = "INSERT INTO clxiistudsub(boardroll,subject,mark)"
+                sql = "INSERT INTO clxiistudsub(boardroll,subjectid,mark)"
                         + "    VALUES (?, ?, ?)";
                 pst = con.prepareStatement(sql);
                 pst.setString(1, boaSub.getTxtBoardRoll());

@@ -339,6 +339,9 @@ public class StudentEnroll {
                 return false;
             }
         }
+        else{
+            txtPPhno="";
+        }
         return true;
     }
 
@@ -348,6 +351,9 @@ public class StudentEnroll {
                     || !(Validator.isText(getTxtPOccup()))) {
                 return false;
             }
+        }
+        else{
+            txtPOccup="";
         }
         return true;
     }
@@ -372,6 +378,9 @@ public class StudentEnroll {
                 return false;
             }
         }
+        else{
+            txtMobile="";
+        }
         return true;
     }
 
@@ -382,6 +391,9 @@ public class StudentEnroll {
                 return false;
             }
         }
+        else{
+            txtEmail="";
+        }
         return true;
     }
     
@@ -390,6 +402,9 @@ public class StudentEnroll {
             if (!Validator.isNumeric(getTxtIncome())) {
                 return false;
             }
+        }
+        else{
+            txtIncome="0";
         }
         return true;
     }

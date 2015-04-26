@@ -36,6 +36,7 @@ public class showUploadImage extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+         
         UploadListener listener = new UploadListener(request, 30);
         // Create a factory for disk-based file items
         FileItemFactory factory = new MonitoredDiskFileItemFactory(listener);
@@ -47,7 +48,7 @@ public class showUploadImage extends HttpServlet {
         File savedFile = null;
         FileItem item = null;
         FileInputStream fis = null;
-        System.out.println("showUploadImage   showUploadImage   showUploadImage");
+        
         try {
             // process uploads ..
             items = upload.parseRequest(request);
@@ -62,6 +63,7 @@ public class showUploadImage extends HttpServlet {
         
         Iterator itr = items.iterator();
         // Loop through all the elements in the form 
+        
         try {
             while (itr.hasNext()) {
                 item = (FileItem) itr.next();
@@ -69,7 +71,7 @@ public class showUploadImage extends HttpServlet {
                 if (!(item.isFormField())) {
                     
                     itemName=item.getName();
-//                    System.out.println("item "+ itemName);
+//                    System.out.println("item NAME --- "+ item.getFieldName());
                     if (itemName != null && itemName.trim().length() > 0 && item.getFieldName().equals("photo")) {
                         
                         savedFile=uploadFile.saveUploadFile(item,getServletContext());       /*   CHECK CONTENT OF THE IMAGE  */
@@ -85,9 +87,11 @@ public class showUploadImage extends HttpServlet {
                         String imag=savedFile.toString();
                         imag=imag.substring(imag.lastIndexOf('\\',imag.length())+1, imag.length());
                         //out.print("<img src='../temp/"+imag+"' width='190' height='200'></img>");
+//                        System.out.println("1../temp/"+imag+"");
                         out.print("1../temp/"+imag+"");
                         return;
                     }
+//                    System.out.println("HURRRRAYYYY "+ itemName);
                 } 
             }
         }catch(Exception e){
