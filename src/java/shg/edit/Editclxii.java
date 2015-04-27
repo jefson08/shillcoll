@@ -30,7 +30,6 @@ public class Editclxii extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //System.out.println("Inseide server");
         Connection con = null;
         ServletContext context = null;
         ConnectionPool connectionPool = null;
@@ -40,17 +39,15 @@ public class Editclxii extends HttpServlet {
         StringBuffer sb = new StringBuffer();
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
-
         String srchby = request.getParameter("txtSearchBy");
         String Count = request.getParameter("Count");
         int count = Integer.parseInt(Count);
-        System.out.println("Search by:" + srchby);
+        //System.out.println("Search by:" + srchby);
         boardid = getBoardID(srchby);
         //int limit = Integer.parseInt(request.getParameter("limit"));
         //int offset = Integer.parseInt(request.getParameter("offset"));
-
         if (Validator.isNullValue(srchby) && Validator.isNullValue(srchby)) {
-            out.print("<b>Error : Enter search Value</b>");
+            out.print("Error: Enter search Value");
             return;
         }
 
@@ -64,15 +61,15 @@ public class Editclxii extends HttpServlet {
         }
 
         try {
-            String boaid="";
-            String boaname="";
+            String boaid = "";
+            String boaname = "";
             sql = "SELECT boardid FROM clxii WHERE boardroll = ? OR rollno = ?";
             pst = con.prepareStatement(sql);
             pst.setString(1, srchby);
             pst.setString(2, srchby);
             rs = pst.executeQuery();
             if (rs.next()) {
-                boaid=rs.getString("boardid");
+                boaid = rs.getString("boardid");
             } else {
                 output = "Not Matching Record(s) Found";
             }
@@ -81,39 +78,57 @@ public class Editclxii extends HttpServlet {
             pst.setString(1, boaid);
             rs = pst.executeQuery();
             if (rs.next()) {
-                boaname=rs.getString("boardname");
+                boaname = rs.getString("boardname");
             } else {
                 output = "Not Matching Record(s) Found";
             }
-            sql = "SELECT \n"
+           /* sql = "SELECT \n"
                     + "  clxii.boardroll, \n"
-                   
                     + "  clxii.boardid, \n"
                     + "  clxii.yearpass, \n"
                     + "  clxii.stream, \n"
                     + "  clxii.totalmark, \n"
-                    + "  clxiistudsub.subject, \n"
+                    + "  clxiistudsub.subjectid, \n"
                     + "  clxiistudsub.mark\n"
                     + "FROM \n"
                     + "  clxii, \n"
                     + "  clxiistudsub\n"
                     + "WHERE \n"
-                    + "  clxii.boardroll = clxiistudsub.boardroll AND clxii.boardroll = ? OR clxii.rollno = ?";
+                    + "  clxii.boardroll = clxiistudsub.boardroll AND (clxii.boardroll = ? OR clxii.rollno = ?)"; */
+            sql = "SELECT DISTINCT \n"
+                    + "  clxii.boardroll, \n"
+                    + "  clxii.boardid, \n"
+                    + "  clxii.yearpass, \n"
+                    + "  clxii.stream, \n"
+                    + "  clxii.totalmark, \n"
+                    + "  clxiistudsub.subjectid, \n"
+                    + "  clxiistudsub.mark, \n"
+                    + "  clxii.rollno, \n"
+                    + "  clxiisubj.subjectname\n"
+                    + "FROM \n"
+                    + "  clxii, \n"
+                    + "  clxiistudsub, \n"
+                    + "  clxiisubj\n"
+                    + "WHERE \n"
+                    + "  clxii.boardroll = clxiistudsub.boardroll AND\n"
+                    + "  clxii.boardid = clxiisubj.boardid AND\n"
+                    + "  clxiistudsub.subjectid = clxiisubj.subjectid AND (clxii.boardroll = ? OR clxii.rollno = ?)";
             pst = con.prepareStatement(sql);
             pst.setString(1, srchby);
             pst.setString(2, srchby);
             rs = pst.executeQuery();
             if (rs.next()) {
                 //System.out.println("Sucess");
-                output+= "<tr><td>Board Roll *</td><td>" + rs.getString("boardroll") + "</td><td><input type=\"text\" name=\"txtBoardRoll\" id=\"txtBoardRoll\" value=\"" + rs.getString("boardroll") + "\" size=\"10\" hidden /></td></tr>";
-                //output+= "<tr><td>Degree Roll *</td><td><input type=\"text\" name=\"txtDegRoll\" id=\"txtDegRoll\" value=\"" + rs.getString("degroll") + "\" size=\"10\" /></td></tr>";
-                output+= "<tr><td>Year Pass *</td><td><input type=\"text\" name=\"txtYrPass\" id=\"txtYrPass\" value=\"" + rs.getString("yearpass") + "\" size=\"4\" /></td></tr>";
-                output+="<tr><td>Board Name </td><td>"+boaname+"</td><td><input type=\"text\" name=\"cmbBoardID\" id=\"cmbBoardID\" value=\""+boaid+"\" hidden / ></td></tr>";
-                output+="<tr><td>Stream </td><td>"+rs.getString("stream")+"</td><td><input type=\"text\" name=\"cmbStream\" id=\"cmbStream\" value=\""+rs.getString("stream")+"\" hidden/ ></td></tr>";
-                output+="<tr><td>Total Mark *</td><td><input type=\"text\" name=\"txtTotalMarks\" id=\"txtTotalMarks\" value=\"" + rs.getString("totalmark") + "\" size=\"4\" /></td></tr>";
+                output += "<tr><td>Board Roll *</td><td>" + rs.getString("boardroll") + "</td><td><input type=\"text\" name=\"txtBoardRoll\" id=\"txtBoardRoll\" value=\"" + rs.getString("boardroll") + "\" size=\"10\" hidden /></td></tr>";
+                output += "<tr><td>College Roll *</td><td>" + rs.getString("rollno") + "</td><td><input type=\"text\" name=\"rollno\" id=\"rollno\" value=\"" + rs.getString("rollno") + "\" size=\"10\" hidden /></td></tr>";
+                output += "<tr><td>Year Pass *</td><td><input type=\"text\" name=\"txtYrPass\" id=\"txtYrPass\" value=\"" + rs.getString("yearpass") + "\" size=\"4\" /></td></tr>";
+                output += "<tr><td>Board Name </td><td>" + boaname + "</td><td><input type=\"text\" name=\"cmbBoardID\" id=\"cmbBoardID\" value=\"" + boaid + "\" hidden / ></td></tr>";
+                output += "<tr><td>Stream </td><td>" + rs.getString("stream") + "</td><td><input type=\"text\" name=\"cmbStream\" id=\"cmbStream\" value=\"" + rs.getString("stream") + "\" hidden/ ></td></tr>";
+                output += "<tr><td>Total Mark *</td><td><input type=\"text\" name=\"txtTotalMarks\" id=\"txtTotalMarks\" value=\"" + rs.getString("totalmark") + "\" size=\"4\" /></td></tr>";
                 do {
-                    output+= "<tr id=" + count + "><td>Subject *</td><td><input type=\"text\" name=\"txtSubject\" id=\"txtSubject\" value=\"" + rs.getString("subject") + "\" size=\"50\" /></td></td>";
-                    output+= "<td>Marks *</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks\" value=\"" + rs.getString("mark") + "\" size=\"3\" /><img src=\"../images/remove.png\" alt=\"Remove\" imgno=" + count + " id=\"DelIcon\"/></td></tr>";
+
+                    output += "<tr id=" + count + "><td>Subject *</td><td>" + rs.getString("subjectname") + "</td><td><input type=\"text\" name=\"txtSubject\" id=\"txtSubject\" value=\"" + rs.getString("subjectid") + "\" size=\"50\" hidden /></td>";
+                    output += "<td>Marks *</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks\" value=\"" + rs.getString("mark") + "\" size=\"3\" /><img src=\"../images/remove.png\" alt=\"Remove\" imgno=" + count + " id=\"DelIcon\"/></td></tr>";
                     count++;
                 } while (rs.next());
             } else {

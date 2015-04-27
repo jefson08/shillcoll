@@ -58,7 +58,7 @@
                                     <table border="0" id="clxiiinfo">
                                         <tbody>
                                             <tr id="clear_search">
-                                                <td>Search by Board Or Degree Roll No *</td>
+                                                <td>Search by Board OR College Roll No*</td>
                                                 <td><input type="text" name="txtSearchBy" id="txtSearchBy" value="${param.txtSearchBy}" size="50" />
                                                     <c:if test="${param.submitted and !clxiiinfo.txtSearchByValid}" var="v1">
                                                         Roll No OR Board Roll is either be Blank OR invalid 
@@ -73,13 +73,6 @@
                                                 <td colspan="2" style="text-align: center">
                                                     <c:if test="${param.submitted and !clxiiinfo.txtBoardRollValid}" var="v2">
                                                         Board Roll is either be Blank OR invalid
-                                                    </c:if>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="text-align: center">
-                                                    <c:if test="${param.submitted and !clxiiinfo.txtDegRollValid}" var="v3">
-                                                        Degree Roll is either be Blank OR invalid
                                                     </c:if>
                                                 </td>
                                             </tr>
@@ -146,7 +139,10 @@
                                     <%
                                         int i;
                                         i = clxiiinfoDAO.insertBoard(getServletContext(), clxiiinfo);
-                                        if (i == 3) {
+                                         if (i == 1) {
+                                            out.println("<script>swal(\"Good job!\", \"Record Updated!\", \"success\");</script>");
+                                        }
+                                         else if (i == 3) {
                                             out.println("<script>swal(\"Oops...\", \"Subject Name Repitation!\", \"error\");</script>");
                                         }
                                     %> 

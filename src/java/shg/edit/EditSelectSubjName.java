@@ -65,7 +65,7 @@ public class EditSelectSubjName extends HttpServlet {
 
         try {
             sql = " SELECT \n"
-                    + "  clxiisubj.subjectname\n"
+                    + "  clxiisubj.subjectname, clxiisubj.subjectid\n"
                     + "FROM \n"
                     + "  boardname, \n"
                     + "  clxiisubj\n"
@@ -81,10 +81,10 @@ public class EditSelectSubjName extends HttpServlet {
                 output += "<td> <select name=\"txtSubject\" id=\"txtSubject\">\n"
                         + "<option value=\"-1\">-</option>";
                 do {
-                    output += "<option value=\" " + rs.getString("subjectname") + " \">" + rs.getString("subjectname") + "</option>";
+                    output += "<option value=\" " + rs.getString("subjectid") + " \">" + rs.getString("subjectname") + "</option>";
 
                 } while (rs.next());
-                output += "</select></td>";
+                output += "</select></td><td></td>";
                 output += "<td>Marks*</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks\" value=\"\" size=\"3\"/>"
                         + "<img src=\"../images/remove.png\" alt=\"Remove\" imgno="+count+" id=\"DelIcon\"/></td></tr>";
             } else {

@@ -130,6 +130,7 @@ public class ClXiiInfo {
                 return false;
             }
             if (!Validator.isNumeric(getTxtYrPass()) || !Validator.isValidLength(getTxtYrPass(), 4, 4)) {
+                System.out.println("Error Here");
                 return false;
             }
         } else {

@@ -39,16 +39,18 @@ $(document).ready(function () {
             },
             success: function (response) {
                 //$('#msg').html(response);
-                $("#waitbox").dialog("close"); 
-                $('#clear_search').hide();
-                document.getElementById("Delete").type = "button";
-                document.getElementById("Add").type = "button";
-                document.getElementById("cmdSave").type = "submit";
-                if (response==="Not Matching Record(s) Found") {
-                    //alert("Not Matching Record(s) Found");
-                    swal("Oops...", "Not Matching Record(s) Found!", "error");
-                    window.location.replace("../adm/editxii.jsp");                                     
-                } else {
+                $("#waitbox").dialog("close");
+                if (response === "Not Matching Record(s) Found") {
+                    //window.location.replace("../adm/editxii.jsp");
+                    swal("Oops...", response, "error");
+                }else if(response === "Error: Enter search Value"){
+                    swal("Oops...", response, "error");
+                } 
+                else {
+                    $('#clear_search').hide();
+                    document.getElementById("Delete").type = "button";
+                    document.getElementById("Add").type = "button";
+                    document.getElementById("cmdSave").type = "submit";
                     $('#clxiiinfo > tbody:last').append(response);
                     $('input[name="search"]').hide();
                 }
@@ -67,7 +69,7 @@ $(document).ready(function () {
             success: function (response) {
                 //$('#msg').html(response);
                 $('#clear_content').hide();
-               // $('#clxiiinfo > tbody:last').append(response);
+                // $('#clxiiinfo > tbody:last').append(response);
                 //$('input[name="search"]').hide();
                 swal("Oops...", response, "error");
                 window.location.replace("../adm/editxii.jsp");

@@ -27,11 +27,11 @@ public class ClXiiInfoDAO {
     private String sql = "";
     private ConnectionPool connectionPool = null;
     private int affectedRows;
-    private int msg=0;
+    private int msg = 0;
 //    public int insertBoard(ServletContext context, ClXiiInfo boaSub, Connection con) throws SQLException
-    public int insertBoard(ClXiiInfo boaSub, String rollno, Connection con) 
-    {
-        
+
+    public int insertBoard(ClXiiInfo boaSub, String rollno, Connection con) {
+
 //        try {
 //            connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
 //            con = connectionPool.getConnection();
@@ -39,7 +39,6 @@ public class ClXiiInfoDAO {
 //            System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
 //            return -1;
 //        }
-
         try {
             //System.out.println("DEg Roll" +C);
             sql = "select * from clxii WHERE boardroll = ? ORDER BY boardid ASC";
@@ -53,56 +52,55 @@ public class ClXiiInfoDAO {
                     break;
                 }
             }
-            String[] Subject=boaSub.getTxtSubject();
-            int len=Subject.length;
-            for(int i=0;i<len;i++){
-                for(int j=i;j<len-1;j++){
-                 if(Subject[i].trim().toUpperCase().equals(Subject[j + 1].trim().toUpperCase())){
-                     msg=3;
-                     break;
-                    }   
+            String[] Subject = boaSub.getTxtSubject();
+            int len = Subject.length;
+            for (int i = 0; i < len; i++) {
+                for (int j = i; j < len - 1; j++) {
+                    if (Subject[i].trim().toUpperCase().equals(Subject[j + 1].trim().toUpperCase())) {
+                        msg = 3;
+                        break;
+                    }
                 }
-                if(msg==3){
+                if (msg == 3) {
                     break;
                 }
             }
-            if(msg!=2 && msg!=3)
-            {
+            if (msg != 2 && msg != 3) {
 //            con.setAutoCommit(false);
-            sql = "INSERT INTO clxii(rollno, boardroll,boardid,yearpass,stream,totalmark)"
-                    + "    VALUES (?, ?, ?, ?, ?,?)";
-            pst = con.prepareStatement(sql);
-            pst.setString(1, rollno);
-            pst.setString(2, boaSub.getTxtBoardRoll());
-            pst.setString(3, boaSub.getCmbBoardID().toUpperCase());
-            pst.setInt(4, Integer.parseInt(boaSub.getTxtYrPass().toUpperCase()));
-            pst.setString(5, boaSub.getCmbStream().toUpperCase());
-             pst.setInt(6, Integer.parseInt(boaSub.getTxtTotalMarks().toUpperCase()));
-             //rollno here
-            msg = pst.executeUpdate();
-                
-            if (msg <= 0) {
-                throw new SQLException("Board Name Enrollment Failed. ");
-            }
-           
-            String[] item = boaSub.getTxtSubject();
-            String[] mark=boaSub.getTxtMarks();
-            int count=0;
-            for (String item1 : item) {
-                //con.setAutoCommit(false);
-                sql = "INSERT INTO clxiistudsub(boardroll,subjectid,mark)"
-                        + "    VALUES (?, ?, ?)";
+                sql = "INSERT INTO clxii(rollno, boardroll,boardid,yearpass,stream,totalmark)"
+                        + "    VALUES (?, ?, ?, ?, ?,?)";
                 pst = con.prepareStatement(sql);
-                pst.setString(1, boaSub.getTxtBoardRoll());
-                pst.setString(2, item1.toUpperCase());
-                pst.setInt(3,Integer.parseInt(mark[count++]));
-                affectedRows = pst.executeUpdate();
-                if (affectedRows <= 0) {
-                    throw new SQLException("Adding of Board Subject Failed. ");
+                pst.setString(1, rollno);
+                pst.setString(2, boaSub.getTxtBoardRoll());
+                pst.setString(3, boaSub.getCmbBoardID().toUpperCase());
+                pst.setInt(4, Integer.parseInt(boaSub.getTxtYrPass().toUpperCase()));
+                pst.setString(5, boaSub.getCmbStream().toUpperCase());
+                pst.setInt(6, Integer.parseInt(boaSub.getTxtTotalMarks().toUpperCase()));
+                //rollno here
+                msg = pst.executeUpdate();
+
+                if (msg <= 0) {
+                    throw new SQLException("Board Name Enrollment Failed. ");
                 }
+
+                String[] item = boaSub.getTxtSubject();
+                String[] mark = boaSub.getTxtMarks();
+                int count = 0;
+                for (String item1 : item) {
+                    //con.setAutoCommit(false);
+                    sql = "INSERT INTO clxiistudsub(boardroll,subjectid,mark)"
+                            + "    VALUES (?, ?, ?)";
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1, boaSub.getTxtBoardRoll());
+                    pst.setString(2, item1.toUpperCase());
+                    pst.setInt(3, Integer.parseInt(mark[count++]));
+                    affectedRows = pst.executeUpdate();
+                    if (affectedRows <= 0) {
+                        throw new SQLException("Adding of Board Subject Failed. ");
+                    }
 //                con.commit();
+                }
             }
-           }
         } catch (SQLException e) {
 //            try {
 //                con.rollback();
@@ -113,7 +111,7 @@ public class ClXiiInfoDAO {
             System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
             return -1;
 
-        } catch (NumberFormatException e) { 
+        } catch (NumberFormatException e) {
             //            try {
 //                con.rollback();
 //            } catch (Exception ex) {
@@ -141,7 +139,7 @@ public class ClXiiInfoDAO {
 //
 //                }
 //        }
-         
+
 //        finally {
 //                 try {
 //                    if (con != null) {
@@ -159,7 +157,6 @@ public class ClXiiInfoDAO {
 //
 //                }
 //        }
-        
         return msg;
     }
 
