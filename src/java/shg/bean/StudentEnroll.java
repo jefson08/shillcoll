@@ -19,7 +19,7 @@ public class StudentEnroll {
     private String txtStuName;
     private String txtDOB;
     private String radGender;
-    private String txtNationality;
+//    private String txtNationality;
     private String radCategory;
     private String txtFName;
     private String txtMName;
@@ -105,16 +105,16 @@ public class StudentEnroll {
     /**
      * @return the txtNationality
      */
-    public String getTxtNationality() {
-        return txtNationality;
-    }
+//    public String getTxtNationality() {
+//        return txtNationality;
+//    }
 
     /**
      * @param txtNationality the txtNationality to set
      */
-    public void setTxtNationality(String txtNationality) {
-        this.txtNationality = txtNationality;
-    }
+//    public void setTxtNationality(String txtNationality) {
+//        this.txtNationality = txtNationality;
+//    }
 
     /**
      * @return the radCategory
@@ -296,14 +296,14 @@ public class StudentEnroll {
         return true;
     }
 
-    public boolean isTxtNationalityValid() {
-        if ((Validator.isNullValue(getTxtNationality()))
-                || Validator.containsIllegalCharacters(getTxtNationality())
-                || !(Validator.isText(getTxtNationality()))) {
-            return false;
-        }
-        return true;
-    }
+//    public boolean isTxtNationalityValid() {
+//        if ((Validator.isNullValue(getTxtNationality()))
+//                || Validator.containsIllegalCharacters(getTxtNationality())
+//                || !(Validator.isText(getTxtNationality()))) {
+//            return false;
+//        }
+//        return true;
+//    }
 
     public boolean isRadCategoryValid() {
         if (Validator.isNullValue(getRadCategory())) {

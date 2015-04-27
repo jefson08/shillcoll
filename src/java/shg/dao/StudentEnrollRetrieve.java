@@ -54,7 +54,7 @@ public class StudentEnrollRetrieve {
                 se.setTxtStuName(rs.getString("studentname"));                
                 se.setTxtDOB(new shg.util.Utility().formatDateForDisplay(rs.getString("dob")));
                 se.setRadGender(rs.getString("gender"));
-                se.setTxtNationality(rs.getString("nationality"));
+                //se.setTxtNationality(rs.getString("nationality"));
                 se.setRadCategory(rs.getString("category"));
                 se.setTxtFName(rs.getString("fathersname"));
                 se.setTxtMName(rs.getString("mothersname"));

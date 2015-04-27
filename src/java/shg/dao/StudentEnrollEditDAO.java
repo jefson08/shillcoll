@@ -42,7 +42,7 @@ public class StudentEnrollEditDAO {
             con.setAutoCommit(false);
             sql = "UPDATE studentdetails "
                     + "   SET coursecode=?, combinationcode=?, studentname=?, "
-                    + "       dob=?, gender=?, nationality=?, category=?, fathersname=?, mothersname=?, "
+                    + "       dob=?, gender=?, category=?, fathersname=?, mothersname=?, "
                     + "       parentsphno=?, parentsoccupation=?, mailingaddress=?, peraddress=?, "
                     + "       mobileno=?, email=?, familyincome=?, nehurollno=?"
                     + " WHERE rollno=?";
@@ -53,7 +53,7 @@ public class StudentEnrollEditDAO {
             pst.setString(3, StuEnroll.getTxtStuName());
             pst.setDate(4, Date.valueOf(new Utility().formatStringAsDateForInsert(StuEnroll.getTxtDOB())));
             pst.setString(5, StuEnroll.getRadGender());
-            pst.setString(6, StuEnroll.getTxtNationality());
+           // pst.setString(6, StuEnroll.getTxtNationality());
             pst.setString(7, StuEnroll.getRadCategory());
             pst.setString(8, StuEnroll.getTxtFName());
             pst.setString(9, StuEnroll.getTxtMName());
