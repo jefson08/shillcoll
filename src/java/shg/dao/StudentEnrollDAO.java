@@ -80,6 +80,8 @@ public class StudentEnrollDAO {
             if (affectedRows <= 0) {
                 throw new SQLException("Student Enrollment Failed. ");
             }
+            
+            
             affectedRows = new ClXiiInfoDAO().insertBoard(boaSub, rollno, con);
 //            System.out.println("-----affecttt "+affectedRows);
             if (affectedRows <= 0 || affectedRows==2 || affectedRows==3) {

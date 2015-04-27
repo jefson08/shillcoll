@@ -67,6 +67,17 @@
                                     <table border="0">
                                         <tbody>
                                             <tr>
+                                                <td colspan='3' style="text-align: center">
+                                                    <label><input type="radio" id="radYear" name="radYearOrSem" value="y" />Annual</label>
+                                                    <label><input type="radio" id="radSem" name="radYearOrSem" value="s" />Semester</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                        
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td>Section *</td>
                                                 <td> : </td>
                                                 <td> 
