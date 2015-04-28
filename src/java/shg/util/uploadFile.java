@@ -76,7 +76,7 @@ public class uploadFile {
                     String ext= fileName.substring(fileName.lastIndexOf('.', fileName.length())+1);
                     fileName = new java.util.Random().nextInt(10000) + System.currentTimeMillis()+"."+ext;// + enclosureCode;
                     /*----------------------------*/
-                    
+//                    System.out.println(context.getRealPath("/"));
                     savedFile = new File(context.getRealPath("/") + "/temp/" + fileName);
 //                    System.out.println("Random "+fileName);
                     //Write the file from Memory to Disk

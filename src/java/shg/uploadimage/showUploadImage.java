@@ -85,7 +85,9 @@ public class showUploadImage extends HttpServlet {
                         fis = null;
                         fis = new FileInputStream(savedFile);
                         String imag=savedFile.toString();
-                        imag=imag.substring(imag.lastIndexOf('\\',imag.length())+1, imag.length());
+//                        System.out.println(imag);
+//                        imag=imag.substring(imag.lastIndexOf('\\',imag.length())+1, imag.length());
+                        imag=imag.substring(imag.lastIndexOf('/',imag.length())+1, imag.length());
                         //out.print("<img src='../temp/"+imag+"' width='190' height='200'></img>");
 //                        System.out.println("1../temp/"+imag+"");
                         out.print("1../temp/"+imag+"");
