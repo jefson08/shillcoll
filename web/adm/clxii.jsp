@@ -3,6 +3,10 @@
     Created on : Feb 20, 2015, 9:52:10 PM
     Author     : B Mukhim
 --%>
+<%if ("GET".equalsIgnoreCase(request.getMethod())) {
+        out.print("Invalid request -- Please try again");
+        return;
+    }%>
 <%@page  autoFlush="true" buffer="32kb" %>
 <%@page import="shg.util.shgUtil"%>
 <%

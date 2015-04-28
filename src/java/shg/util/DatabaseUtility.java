@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.TreeSet;
 import java.util.HashMap;
 import javax.servlet.ServletContext;
 /**
@@ -618,5 +619,78 @@ public class DatabaseUtility {
                 System.out.println(this.getClass() + "{" + this.getClass() + ".checkFieldExistence()}  Error while trying to check the existince of a field  " + gc.getMessage());
             }
         }
+    }
+    
+    public String getCategory(ServletContext context, String def){
+        String cat="";
+        Statement st;
+        ResultSet rs = null;
+        Connection con = null;
+        ConnectionPool connectionPool = null;
+
+        try {
+            connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
+            con = connectionPool.getConnection();
+        } catch (SQLException e) {
+            System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
+            return null;
+        }
+        
+        try {
+                String sql="select * from category";
+                st=con.createStatement();        int i=0;
+        
+                rs=st.executeQuery(sql);
+                while(rs.next()){
+                    i++;
+                    cat += "<label><input type=\"radio\" name=\"radCategory\" id=\"radCategory\" ";
+                    cat += "value=\""+rs.getString(1)+"\""; 
+                    cat += rs.getString(1).toLowerCase().equals(def.toLowerCase())?"checked />":" />";
+                            cat +=rs.getString(2)+"</label>";
+                   cat += i%2==0?"<br />":"";
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error while retreiving category");
+                        //Logger.getLogger(CourseCombinationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            connectionPool.free(con);
+        }
+//        System.out.println(cat);
+        return cat;
+    }
+    
+    public TreeSet<String> getFieldValue(ServletContext context, String table, String field){
+        TreeSet<String> cat=new TreeSet<String>();
+        Statement st;
+        ResultSet rs = null;
+        Connection con = null;
+        ConnectionPool connectionPool = null;
+        int i=0;
+        
+        try {
+            connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
+            con = connectionPool.getConnection();
+        } catch (SQLException e) {
+            System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
+            return null;
+        }
+        
+        try {
+                String sql="select "+field +" from "+ table;
+                st=con.createStatement();
+                rs=st.executeQuery(sql);
+                while(rs.next()){
+                    cat.add(rs.getString(1));
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error while retreiving category");
+                        //Logger.getLogger(CourseCombinationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            connectionPool.free(con);
+        }
+//        System.out.println(cat);
+        return cat;
     }
 }

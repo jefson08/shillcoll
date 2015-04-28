@@ -5,6 +5,9 @@
  */
 package shg.bean;
 
+import java.util.TreeSet;
+import javax.servlet.ServletContext;
+import shg.util.DatabaseUtility;
 import shg.valid.Validator;
 
 /**
@@ -31,6 +34,11 @@ public class StudentEnroll {
     private String txtEmail;
     private String txtIncome;
     private String txtnehuRollno;
+    private String radYearOrSem;
+    private String cmbSection;
+    private String cmbCountry;
+    private String cmbState;
+    private String cmbDistrict;
 
     /**
      * @return the cmbCourseName
@@ -296,20 +304,25 @@ public class StudentEnroll {
         return true;
     }
 
-//    public boolean isTxtNationalityValid() {
-//        if ((Validator.isNullValue(getTxtNationality()))
-//                || Validator.containsIllegalCharacters(getTxtNationality())
-//                || !(Validator.isText(getTxtNationality()))) {
-//            return false;
-//        }
-//        return true;
-//    }
+ public boolean isRadYearOrSemValid() {
+        if (Validator.isNullValue(getRadYearOrSem())) {
+            return false;
+        }
+        if (getRadYearOrSem().trim().length() == 0 || !(getRadYearOrSem().toLowerCase().equals("s") || getRadYearOrSem().toLowerCase().equals("y"))) {
+            return false;
+        }
+        return true;
+    }
 
-    public boolean isRadCategoryValid() {
+    public boolean chkRadCategoryValid(ServletContext context) {
+        DatabaseUtility db;
+        TreeSet t;
         if (Validator.isNullValue(getRadCategory())) {
             return false;
         }
-        if (getRadCategory().trim().length() == 0 || !(getRadCategory().toLowerCase().equals("sc") || getRadCategory().toLowerCase().equals("st"))) {
+        db=new DatabaseUtility();
+        t=db.getFieldValue(context, "category", "categoryid");
+        if (getRadCategory().trim().length() == 0 || !(t.contains(getRadCategory().trim()))) {
             return false;
         }
         return true;
@@ -451,5 +464,106 @@ public class StudentEnroll {
         this.txtnehuRollno = txtnehuRollno;
     }
 
+    /**
+     * @return the radYearOrSem
+     */
+    public String getRadYearOrSem() {
+        return radYearOrSem;
+    }
+
+    /**
+     * @param radYearOrSem the radYearOrSem to set
+     */
+    public void setRadYearOrSem(String radYearOrSem) {
+        this.radYearOrSem = radYearOrSem;
+    }
+
+    /**
+     * @return the cmbSection
+     */
+    public String getCmbSection() {
+        return cmbSection;
+    }
+
+    /**
+     * @param cmbSection the cmbSection to set
+     */
+    public void setCmbSection(String cmbSection) {
+        this.cmbSection = cmbSection;
+    }
+
+    public boolean chkCmbSectionValid(ServletContext context){
+        DatabaseUtility db;
+        TreeSet t;
+        if (Validator.isNullValue(getCmbSection())) {
+            return false;
+        }
+        db=new DatabaseUtility();
+        t=db.getFieldValue(context, "section", "sectioncode");
+        if (!t.contains(getCmbSection())) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @return the cmbCountry
+     */
+    public String getCmbCountry() {
+        return cmbCountry;
+    }
+
+    /**
+     * @param cmbCountry the cmbCountry to set
+     */
+    public void setCmbCountry(String cmbCountry) {
+        this.cmbCountry = cmbCountry;
+    }
+
+    /**
+     * @return the cmbState
+     */
+    public String getCmbState() {
+        return cmbState;
+    }
+
+    /**
+     * @param cmbState the cmbState to set
+     */
+    public void setCmbState(String cmbState) {
+        this.cmbState = cmbState;
+    }
+
+    /**
+     * @return the cmbDistrict
+     */
+    public String getCmbDistrict() {
+        return cmbDistrict;
+    }
+
+    /**
+     * @param cmbDistrict the cmbDistrict to set
+     */
+    public void setCmbDistrict(String cmbDistrict) {
+        this.cmbDistrict = cmbDistrict;
+    }
     
+    public boolean isCmbCountryValid(){
+        if (Validator.isNullValue(getCmbCountry()) || getCmbCountry().equals("-1")) {
+            return false;
+        }
+        return true;
+    }
+    public boolean isCmbStateValid(){
+        if (Validator.isNullValue(getCmbState()) || getCmbState().equals("-1")) {
+            return false;
+        }
+        return true;
+    }
+    public boolean isCmbDistrictValid(){
+        if (Validator.isNullValue(getCmbDistrict()) || getCmbDistrict().equals("-1")) {
+            return false;
+        }
+        return true;
+    }
 }

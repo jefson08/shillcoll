@@ -12,11 +12,32 @@ $(document).ready(function (){
     //PopulateCombo(document.stenroll.cmbCourseName,'../populateCourse');
     
     $("select[name='cmbCourseName']").change(function(){
-        if($(this).val() !== -1){
+        if($(this).val() != -1){
             PopulateDependentCombo(document.stenroll.cmbCourseName,document.stenroll.cmbCombination,'../populateCombination');
         }
         else{
             $('#cmbCombination').empty();            
+        }
+    })
+    
+    $("select[name='cmbCountry']").change(function(){
+        
+        if($(this).val() != -1){
+            PopulateDependentCombo(document.stenroll.cmbCountry,document.stenroll.cmbState,'../populateState');
+        }
+        else{
+            $('#cmbDistrict').empty();
+            $('#cmbState').empty();
+             
+        }
+    })
+    
+    $("select[name='cmbState']").change(function(){
+        if($(this).val() != -1){
+            PopulateDependentCombo(document.stenroll.cmbState,document.stenroll.cmbDistrict,'../populateDistrict');
+        }
+        else{
+            $('#cmbDistrict').empty();      
         }
     })
     

@@ -137,7 +137,7 @@ public class saveImageToDB {
                 throw new SQLException(result);
             }
             con.commit();
-            result = "Student's Photo Successfully updated";
+            result = "1";
         }
         catch (SQLException e){
              try {

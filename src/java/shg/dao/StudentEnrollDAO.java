@@ -30,6 +30,7 @@ public class StudentEnrollDAO {
     private ConnectionPool connectionPool = null;
     int slno;
     private int affectedRows;
+    String sy="";
 
 //    public int insertStudent(ServletContext context, StudentEnroll StuEnroll) {
     public int insertStudent(ServletContext context, StudentEnroll StuEnroll, ClXiiInfo boaSub) {
@@ -44,13 +45,13 @@ public class StudentEnrollDAO {
 
         try {
             con.setAutoCommit(false);
-            sql = "INSERT INTO studentdetails(rollno, coursecode, combinationcode, enrollyear, studentname, dob, "
+            sql = "INSERT INTO studentdetails(rollno, section, coursecode, combinationcode, enrollyear, studentname, dob, "
                     + "            gender,  category, fathersname, mothersname, parentsphno, "
-                    + "            parentsoccupation, mailingaddress, peraddress, mobileno, email, "
+                    + "            parentsoccupation, districtcode, statecode, coutrycode, mailingaddress, peraddress, mobileno, email, "
                     + "            familyincome, slno)"
-                    + "    VALUES (?, ?, ?, ?, ?, "
-                    + "            ?, ?, ?, ?, ?, ?, "
-                    + "            ?, ?, ?, ?, ?, ?, ?)";
+                    + "    VALUES (?, ?, ?, ?, ?, ?, ?, "
+                    + "            ?, ?, ?, ?, ?, ?, ?, "
+                    + "            ?, ?, ?, ?, ?, ?, ?, ?)";
             pst = con.prepareStatement(sql);
             String rollno=getNextRollno(StuEnroll.getCmbCourseName());
             if(rollno==null){
@@ -58,29 +59,51 @@ public class StudentEnrollDAO {
             }
             //System.out.println("roll "+rollno);
             pst.setString(1, rollno); // generate rollno
-            pst.setString(2, StuEnroll.getCmbCourseName());
-            pst.setString(3, StuEnroll.getCmbCombination());
-            pst.setString(4, ""+Utility.currentYear()); // current year
-            pst.setString(5, StuEnroll.getTxtStuName());
-            pst.setDate(6, Date.valueOf(new Utility().formatStringAsDateForInsert(StuEnroll.getTxtDOB())));
-            pst.setString(7, StuEnroll.getRadGender());
+            pst.setString(2, StuEnroll.getCmbSection());
+            pst.setString(3, StuEnroll.getCmbCourseName());
+            pst.setString(4, StuEnroll.getCmbCombination());
+            pst.setString(5, ""+Utility.currentYear()); // current year
+            pst.setString(6, StuEnroll.getTxtStuName());
+            pst.setDate(7, Date.valueOf(new Utility().formatStringAsDateForInsert(StuEnroll.getTxtDOB())));
+            pst.setString(8, StuEnroll.getRadGender());
 //            pst.setString(8, StuEnroll.getTxtNationality());
-            pst.setString(8, StuEnroll.getRadCategory());
-            pst.setString(9, StuEnroll.getTxtFName());
-            pst.setString(10, StuEnroll.getTxtMName());
-            pst.setString(11, StuEnroll.getTxtPPhno());
-            pst.setString(12, StuEnroll.getTxtPOccup());
-            pst.setString(13, StuEnroll.getTxtMAddress().trim());
-            pst.setString(14, StuEnroll.getTxtPAddress().trim());
-            pst.setString(15, StuEnroll.getTxtMobile());
-            pst.setString(16, StuEnroll.getTxtEmail());
-            pst.setDouble(17, Double.parseDouble(StuEnroll.getTxtIncome()));
-            pst.setInt(18, slno);
+            pst.setString(9, StuEnroll.getRadCategory());
+            pst.setString(10, StuEnroll.getTxtFName());
+            pst.setString(11, StuEnroll.getTxtMName());
+            pst.setString(12, StuEnroll.getTxtPPhno());
+            pst.setString(13, StuEnroll.getTxtPOccup());
+            pst.setString(14, StuEnroll.getCmbDistrict());
+            pst.setString(15, StuEnroll.getCmbState());
+            pst.setString(16, StuEnroll.getCmbCountry());
+            pst.setString(17, StuEnroll.getTxtMAddress().trim());
+            pst.setString(18, StuEnroll.getTxtPAddress().trim());
+            pst.setString(19, StuEnroll.getTxtMobile());
+            pst.setString(20, StuEnroll.getTxtEmail());
+            pst.setDouble(21, Double.parseDouble(StuEnroll.getTxtIncome()));
+            pst.setInt(22, slno);
             affectedRows = pst.executeUpdate();
             if (affectedRows <= 0) {
                 throw new SQLException("Student Enrollment Failed. ");
             }
             
+            if(StuEnroll.getRadYearOrSem().toLowerCase().equals("s")){
+                sy="s"+1;
+            }else if(StuEnroll.getRadYearOrSem().toLowerCase().equals("y")){
+                sy="y"+1;
+            }
+            
+            sql="INSERT INTO studentsclass(rollno, coursecode, yearorsemno, enrollyear) VALUES (?, ?, ?, ?)";
+            
+            pst=con.prepareStatement(sql);
+            pst.setString(1, rollno);
+            pst.setString(2, StuEnroll.getCmbCourseName());
+            pst.setString(3, sy);
+            pst.setString(4, ""+Utility.currentYear());
+            affectedRows = pst.executeUpdate();
+            if (affectedRows <= 0) {
+                System.out.println("Update to table studentsclass has failed");
+                throw new SQLException("Student Enrollment Failed. ");
+            }
             
             affectedRows = new ClXiiInfoDAO().insertBoard(boaSub, rollno, con);
 //            System.out.println("-----affecttt "+affectedRows);

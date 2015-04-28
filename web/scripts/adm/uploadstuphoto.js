@@ -8,7 +8,7 @@ $(document).ready(function() {
     $('#upload').click(function(){
         
         if($.trim($('#photo').val()) == ''){
-            alert('photo no selected');
+            swal("Error...", "No Photo Selected!", "error");
             return false;
         }
         $('form[name=uploadphoto]').submit();
