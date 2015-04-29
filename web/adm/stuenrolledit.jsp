@@ -71,18 +71,22 @@
                                     <input type="hidden" name="rollno" value="${stuEnroll.rollno}" />
                                     <table border="0">
                                         <tbody>
-                                            
+                                            <c:if test="${!(stuEnroll.radYearOrSem.equals('s') or stuEnroll.radYearOrSem.equals('y'))}">
+                                                <c:set var="disabled" value="style=\"pointer-events:none\"" scope="page"></c:set>
+                                            </c:if>
+                                            <c:if test="${(stuEnroll.radYearOrSem.equals('s') or stuEnroll.radYearOrSem.equals('y'))}">
+                                                <tr>
+                                                    <td colspan='3' style="text-align: center">
+                                                        <label><input type="radio" id="radYear" name="radYearOrSem" value="y" ${stuEnroll.radYearOrSem=='y'?'checked':''} ${disabled}/>Annual</label>
+                                                        <label><input type="radio" id="radSem" name="radYearOrSem" value="s" ${stuEnroll.radYearOrSem=='s'?'checked':''} ${disabled}/>Semester</label>
+                                                            <c:if test="${param.submitted and !stuEnroll.radYearOrSemValid}" var="v16">
+                                                            <span style="color: red">Option Year or Semester not Selected</span>
+                                                        </c:if>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
                                             <tr>
-                                                <td colspan='3' style="text-align: center">
-                                                    <label><input type="radio" id="radYear" name="radYearOrSem" value="y" ${stuEnroll.radYearOrSem=='y'?'checked':''} />Annual</label>
-                                                    <label><input type="radio" id="radSem" name="radYearOrSem" value="s" ${stuEnroll.radYearOrSem=='s'?'checked':''} />Semester</label>
-                                                        <c:if test="${param.submitted and !stuEnroll.radYearOrSemValid}" var="v16">
-                                                        <span style="color: red">Option Year or Semester not Selected</span>
-                                                    </c:if>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Roll No</td>
+                                                <td>Roll No </td>
                                                 <td> : </td>
                                                 <td><b>${stuEnroll.rollno}</b></td>
                                             </tr>
@@ -105,7 +109,7 @@
                                                 <td>Course Name *</td>
                                                 <td> : </td>
                                                 <td> 
-                                                    <select name="cmbCourseName" id="cmbCourseName">
+                                                    <select name="cmbCourseName" id="cmbCourseName" ${disabled}>
                                                         <option value="-1">-</option>
                                                         <c:set var="ccode" value="${stuEnroll.cmbCourseName}"></c:set>
                                                         <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'course','coursecode','coursename',ccode)}">                                
@@ -120,7 +124,7 @@
                                                 <td>Combination *</td>
                                                 <td> : </td>
                                                 <td>
-                                                    <select name="cmbCombination" id="cmbCombination">
+                                                    <select name="cmbCombination" id="cmbCombination" ${disabled}>
                                                         <option value="-1">-</option>
                                                         <c:set var="comb" value="${stuEnroll.cmbCombination}"></c:set>
                                                         <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'coursedetails','combinationcode','combinationcode', 'coursecode', ccode,comb)}">                                
@@ -162,7 +166,7 @@
                                                     </c:if>
                                                 </td>
                                             </tr>
-                                            
+
                                             <tr>
                                                 <td>Category *</td>
                                                 <td> : </td>
@@ -305,7 +309,7 @@
                                                     </c:if>
                                                 </td>
                                             </tr>
-                                            
+
                                             <tr>
                                                 <td colspan="3" style="text-align: center"><input type="submit" value="Save" name="cmdSave" /> </td>
                                             </tr>
