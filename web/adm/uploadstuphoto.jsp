@@ -6,7 +6,7 @@
 <%@page import="shg.util.shgUtil"%>
 <%if ("GET".equalsIgnoreCase(request.getMethod())) {
         out.print("Invalid request -- Please try again");
-       // return;
+        return;
     }%>
 <%@page  autoFlush="true" buffer="32kb" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
