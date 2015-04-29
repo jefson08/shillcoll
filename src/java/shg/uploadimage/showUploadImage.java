@@ -89,15 +89,14 @@ public class showUploadImage extends HttpServlet {
 //                        System.out.println(imag);
                         String os = System.getProperty ("os.name").toLowerCase();
 //                        imag=imag.substring(imag.lastIndexOf('\\',imag.length())+1, imag.length());
-                        if(os.equals("linux"))
+                        if(os.startsWith("linux"))
                         {
                             imag=imag.substring(imag.lastIndexOf('/',imag.length())+1, imag.length());
-                        }else if(os.equals("windows")){
+                        }else if(os.startsWith("windows")){
                             imag=imag.substring(imag.lastIndexOf('\\',imag.length())+1, imag.length());
                         }
                         //out.print("<img src='../temp/"+imag+"' width='190' height='200'></img>");
 //                        System.out.println("1../temp/"+imag+"");
-                        System.out.println(os);
                         out.print("1../temp/"+imag+"");
                         return;
                     }
