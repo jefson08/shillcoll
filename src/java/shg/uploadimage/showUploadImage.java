@@ -86,10 +86,17 @@ public class showUploadImage extends HttpServlet {
                         fis = new FileInputStream(savedFile);
                         String imag=savedFile.toString();
 //                        System.out.println(imag);
+                        String os = System.getProperty ("os.name").toLowerCase();
 //                        imag=imag.substring(imag.lastIndexOf('\\',imag.length())+1, imag.length());
-                        imag=imag.substring(imag.lastIndexOf('/',imag.length())+1, imag.length());
+                        if(os.equals("linux"))
+                        {
+                            imag=imag.substring(imag.lastIndexOf('/',imag.length())+1, imag.length());
+                        }else if(os.equals("windows")){
+                            imag=imag.substring(imag.lastIndexOf('\\',imag.length())+1, imag.length());
+                        }
                         //out.print("<img src='../temp/"+imag+"' width='190' height='200'></img>");
 //                        System.out.println("1../temp/"+imag+"");
+                        System.out.println(os);
                         out.print("1../temp/"+imag+"");
                         return;
                     }
