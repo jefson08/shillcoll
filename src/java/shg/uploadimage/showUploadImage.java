@@ -91,7 +91,7 @@ public class showUploadImage extends HttpServlet {
                         if(os.equals("linux"))
                         {
                             imag=imag.substring(imag.lastIndexOf('/',imag.length())+1, imag.length());
-                        }else if(os.equals("windows")){
+                        }else if(os.startsWith("windows")){
                             imag=imag.substring(imag.lastIndexOf('\\',imag.length())+1, imag.length());
                         }
                         //out.print("<img src='../temp/"+imag+"' width='190' height='200'></img>");
