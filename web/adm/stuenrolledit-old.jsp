@@ -3,7 +3,7 @@
     Created on : Feb 20, 2015, 9:52:10 PM
     Author     : B Mukhim
 --%>
-<%@page  autoFlush="true" buffer="32kb" %>
+
 <%@page import="shg.util.shgUtil"%>
 <%
     //response.setHeader("Pragma", "no-cache");
@@ -71,35 +71,10 @@
                                     <input type="hidden" name="rollno" value="${stuEnroll.rollno}" />
                                     <table border="0">
                                         <tbody>
-                                            
-                                            <tr>
-                                                <td colspan='3' style="text-align: center">
-                                                    <label><input type="radio" id="radYear" name="radYearOrSem" value="y" ${param.radYearOrSem=='y'?'checked':''} />Annual</label>
-                                                    <label><input type="radio" id="radSem" name="radYearOrSem" value="s" ${param.radYearOrSem=='s'?'checked':''} />Semester</label>
-                                                        <c:if test="${param.submitted and !stuEnroll.radYearOrSemValid}" var="v16">
-                                                        <span style="color: red">Option Year or Semester not Selected</span>
-                                                    </c:if>
-                                                </td>
-                                            </tr>
                                             <tr>
                                                 <td>Roll No</td>
                                                 <td> : </td>
                                                 <td><b>${stuEnroll.rollno}</b></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Section *</td>
-                                                <td> : </td>
-                                                <td> 
-                                                    <select name="cmbSection" id="cmbSection">
-                                                        <option value="-1">-</option>
-                                                        <c:set var="seccode" value="${param.cmbSection}"></c:set>
-                                                        <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'section','sectioncode','sectionname',seccode)}">                                
-                                                        </c:out>
-                                                    </select> 
-                                                    <c:if test="${param.submitted and !stuEnroll.chkCmbSectionValid(pageContext.request.servletContext)}" var="v17">
-                                                        <span style="color: red">Section Not Selected</span>
-                                                    </c:if>
-                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Course Name *</td>
@@ -162,7 +137,15 @@
                                                     </c:if>
                                                 </td>
                                             </tr>
-                                            
+                                            <tr>
+                                                <td>Nationality *</td>
+                                                <td> : </td>
+                                                <td><input type="text" name="txtNationality" id="txtNationality" value="${stuEnroll.txtNationality}" size="20" />
+                                                    <c:if test="${param.submitted and !stuEnroll.txtNationalityValid}" var="v6">
+                                                        Nationality is either blank or invalid
+                                                    </c:if>
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td>Category *</td>
                                                 <td> : </td>
@@ -209,50 +192,6 @@
                                                         Invalid Parent's Occupation
                                                     </c:if>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Country *</td>
-                                                <td> : </td>
-                                                <td><select name="cmbCountry" id="cmbCountry">
-                                                        <option value="-1">-</option>
-                                                        <c:set var="country" value="${param.cmbCountry}"></c:set>
-                                                        <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'country','countrycode','countryname',country)}">                                
-                                                        </c:out>
-                                                    </select>
-                                                    <c:if test="${param.submitted and !stuEnroll.cmbCountryValid}" var="v18">
-                                                        <span style="color: red">Country Not Selected</span>
-                                                    </c:if>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>State *</td>
-                                                <td> : </td>
-                                                <td><select name="cmbState" id="cmbState">
-                                                        <option value="-1">-</option>
-                                                        <c:set var="state" value="${param.cmbState}"></c:set>
-                                                        <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'state','statecode','statename', 'countrycode', country, state)}">                                
-                                                        </c:out>
-                                                    </select>
-                                                    <c:if test="${param.submitted and !stuEnroll.cmbStateValid}" var="v19">
-                                                        <span style="color: red">State Not Selected</span>
-                                                    </c:if>
-                                                </td>
-
-                                            </tr>
-                                            <tr>
-                                                <td>District *</td>
-                                                <td> : </td>
-                                                <td><select name="cmbDistrict" id="cmbDistrict">
-                                                        <option value="-1">-</option>
-                                                        <c:set var="dist" value="${param.cmbDistrict}"></c:set>
-                                                        <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'district','districtcode','districtname', 'statecode', state, dist)}">                                
-                                                        </c:out>
-                                                    </select>
-                                                    <c:if test="${param.submitted and !stuEnroll.cmbDistrictValid}" var="v20">
-                                                        <span style="color: red">District Not Selected</span>
-                                                    </c:if>
-                                                </td>
-
                                             </tr>
                                             <tr>
                                                 <td style="vertical-align: text-top">Mailing Address *</td>
@@ -306,7 +245,11 @@
                                                     </c:if>
                                                 </td>
                                             </tr>
-                                            
+                                            <tr>
+                                                <td>NEHU Rollno</td>
+                                                <td> : </td>
+                                                <td><input type="text" name="txtnehuRollno" id="txtnehuRollno" value="${stuEnroll.txtnehuRollno}" size="30" /></td>
+                                            </tr>
                                             <tr>
                                                 <td colspan="3" style="text-align: center"><input type="submit" value="Save" name="cmdSave" /> </td>
                                             </tr>
