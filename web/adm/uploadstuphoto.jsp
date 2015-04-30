@@ -7,7 +7,7 @@
 <%if ("GET".equalsIgnoreCase(request.getMethod())) {
         out.print("Invalid request -- Please try again");
         return;
-    }%>
+ }%>
 <%@page  autoFlush="true" buffer="32kb" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="stuEnroll" class="shg.bean.StudentEnroll" scope="session" ></jsp:useBean>
