@@ -33,6 +33,7 @@ $(document).ready(function() {
             mimeType: "multipart/form-data",
             beforeSend: function() {
                 //$('#processing').css({visibility: 'visible'});
+                $('#upload_target').attr('src','');
                 box1 = new ajaxLoader(".box-1");
                 return true;
             },
@@ -42,15 +43,16 @@ $(document).ready(function() {
                 if (box1)
                     box1.remove();
                 if (event == 0) {
-                    $('#processing').css({visibility: 'hidden'});
+                    //$('#processing').css({visibility: 'hidden'});
+                    swal("Error...", output);
                     $("#photo").attr("value", "");
                     //updateTips(output);
- }
+                }
                 else if (event == 1) {
                     $('form[name=uploadphoto]').prop('target', '');
                     var img = "<img src='" + output + "' width='160' height='170'></img>";
                     $("#upload_target").contents().find("html").html(img);
-                    $('#processing').css({visibility: 'hidden'});                    
+                    //$('#processing').css({visibility: 'hidden'});                    
                 }
             },
             error: function(xhr) {
