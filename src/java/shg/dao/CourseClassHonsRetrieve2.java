@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import shg.valid.Validator;
+import javax.servlet.annotation.WebServlet;
 
 /**
  *
