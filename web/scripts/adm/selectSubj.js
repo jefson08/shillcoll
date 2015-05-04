@@ -53,6 +53,13 @@ $(document).ready(function () {
     $('input[name=AddSub]').click(function () {
         var cmbboardID = document.getElementById('cmbBoardID').value;
         var cmbstream = document.getElementById('cmbStream').value;
+        //var subject = $('[name=txtSubject]').serialize(); //beter and shorter option
+        var subject = "";
+        $('[name=txtSubject]').each(function () {
+            if (this.value != undefined) {
+                subject += this.value + ',';
+            }
+        });
         var count;
         $("#marks").find("tr").each(function () {
             count = $(this).index();
@@ -61,10 +68,14 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "../SelectSubjName",
-            data: ({cmbBoardID: cmbboardID, cmbStream: cmbstream, Count: count}),
+            data: ({cmbBoardID: cmbboardID, cmbStream: cmbstream, Count: count, Subject: subject}),
             success: function (response) {
                 // $('#msg').html(response);
-                $('#marks > tbody:last').append(response);
+                if (response === "Error: Empty record tobe added") {
+                    swal("Oops...", "Subject are already listed.....", "error");
+                } else {
+                    $('#marks > tbody:last').append(response);
+                }
             },
             error: function (xhr) {
                 alert(xhr.status);
@@ -104,4 +115,5 @@ $(document).ready(function () {
      }
      });
      })*/
+
 });

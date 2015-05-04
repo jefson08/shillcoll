@@ -59,7 +59,7 @@
                                                 <td><input type="text" name="txtBoaName" id="txtBoaName" value="${param.txtBoaName}" size="50" /></td>
                                                 <td>
                                                     <c:if test="${param.submitted and !boardnamesubject.txtBoaNameValid}" var="v1">
-                                                        Board Name is either be Blank OR invalid                                 
+                                                        <span style="color: red"> Board Name is either be Blank OR invalid  </span>                               
                                                     </c:if>
                                                 </td>
                                             </tr>
@@ -70,14 +70,14 @@
                                                     <input type="radio" name="txtStream" id="txtStream" value="Arts" >Arts</td>
                                                 <td>
                                                     <c:if test="${param.submitted and !boardnamesubject.txtStreamValid}" var="v2">
-                                                        Stream Name is either be Blank OR invalid 
+                                                        <span style="color: red"> Stream Name is either be Blank OR invalid  </span>
                                                     </c:if>   
                                                 </td>
                                             </tr>
                                             <tr><td></td><td></td>
                                                 <td>
                                                     <c:if test="${param.submitted and !boardnamesubject.txtSubNameValid}" var="v3">
-                                                        Subject Name is either be Blank OR invalid
+                                                        <span style="color: red"> Subject Name is either be Blank OR invalid </span>
                                                     </c:if>
                                                 </td>
                                             </tr>
