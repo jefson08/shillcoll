@@ -7,7 +7,6 @@ package shg.uploadimage;
 import DBConnection.ConnectionPool;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.*;
 
 import javax.servlet.ServletContext;
@@ -31,6 +30,7 @@ public class showImageFromDB extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // PrintWriter out = response.getWriter();
@@ -40,7 +40,7 @@ public class showImageFromDB extends HttpServlet {
     ServletContext context = null;
     ConnectionPool connectionPool = null;
     Statement s=null;
-    String id=request.getParameter("id");
+    String rollno=request.getParameter("rollno");
     
     //Obtained connection object
     try {
@@ -53,7 +53,7 @@ public class showImageFromDB extends HttpServlet {
     }
     
     //String sql1="SELECT * FROM pwddocument where pwdid='"+id+"'";
-    String sql1="SELECT photo FROM pwdmaster where pwdid='"+id+"'";
+    String sql1="SELECT photo FROM studentdetails where rollno='"+rollno+"'";
     try {
         con.setAutoCommit(false);
         s=con.createStatement();
@@ -67,7 +67,7 @@ public class showImageFromDB extends HttpServlet {
             response.setContentType("image/gif");
             response.getOutputStream().write(barray);
         }
-    }catch(Exception e){
+    }catch(SQLException e){
         try {
                 con.rollback();
         } catch (Exception ex) {
@@ -75,8 +75,15 @@ public class showImageFromDB extends HttpServlet {
                 
         }
         System.out.println("Error while retreiving data from database"+e);
-        e.printStackTrace();
-    }finally {
+    } catch (IOException e) {
+      try {
+        con.rollback();
+      } catch (Exception ex) {
+        System.out.println("RollBack operation error.");
+        
+      }
+      System.out.println("Error while retreiving data from database"+e);
+      }finally {
         connectionPool.free(con);
         con = null;
         rs = null;

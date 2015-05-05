@@ -71,7 +71,7 @@
                                                             </c:out>
                                                         </select>
                                                         <c:if test="${param.submitted and !boardnamesubject.cmbBoardIDValid}" var="v1">
-                                                            Board Name is either be Blank OR invalid
+                                                            <span style="color: red">Board Name is either be Blank OR invalid </span>
                                                         </c:if>
                                                     </td>
                                                 </tr> 
@@ -84,7 +84,7 @@
                                                             </c:out>
                                                         </select>
                                                         <c:if test="${param.submitted and !boardnamesubject.txtStreamValid}" var="v2">
-                                                            Stream is either be Blank OR invalid
+                                                            <span style="color: red"> Stream is either be Blank OR invalid </span>
                                                         </c:if>
                                                     </td>
                                                 </tr>
@@ -94,7 +94,7 @@
                                                 <tr>
                                                     <td colspan="2" style="text-align: center">
                                                         <c:if test="${param.submitted and !boardnamesubject.txtSubNameValid}" var="v3">
-                                                            Subject Name is either be Blank OR invalid
+                                                            <span style="color: red"> Subject Name is either be Blank OR invalid </span>
                                                         </c:if>
                                                     </td>
                                                 </tr>  

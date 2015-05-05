@@ -31,13 +31,39 @@
         <link href="../style/master-css/menu-style.css" rel="stylesheet" />
         <link href="../scripts/jqueryui/ui.css" rel="stylesheet" />
         <link rel="stylesheet" href="../style/master-css/sweet-alert.css">
-        <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script>       
         <script type="text/javascript" src="../scripts/jqueryui/jquery-ui-1.8.16.custom.min.js"></script>
         <script type="text/javascript" src="../scripts/util/populateComboBox.js"></script> 
         <script type="text/javascript" src="../scripts/util/net.js"></script>
+        <script src="../scripts/jquery/jquery.js"></script>
+        <script src="../scripts/jquery/jquery.validate.js"></script>
+        <script src="../scripts/jquery/additional-methods.js"></script>
         <script type="text/javascript" src="../scripts/adm/selectSubj.js"></script>
         <script type="text/javascript" src="../scripts/jquery/sweet-alert.min.js"></script>
         <title>Class XII Details</title>
+        <style>
+            /*form.clxiiinfo {
+                width: 50em;
+            }*/
+            em.error {
+                background:url("../images/unchecked.gif") no-repeat 0px 0px;
+                padding-left: 16px;
+            }
+            em.success {
+                background:url("../images/checked.gif") no-repeat 0px 0px;
+                padding-left: 16px;
+            }
+            form.clxiiinfo label.error {
+                margin-left: auto;
+                width: 250px;
+            }
+            em.error {
+                color: red;
+            }
+            #warning {
+                display: none;
+            }
+        </style>
     </head>
     <body>
         <div id="header" ><%@include file="common-menu.jsp" %>
@@ -62,26 +88,29 @@
                         <div id="right-frame">
                             <div class="frame-header" >Student Details</div>
                             <div id="processing-area">
-                                <form name="clxiiinfo" method="Post" id="clxiiinfo" action="clxii.jsp">
+                                <h2 id="summary"></h2> <!-- Validation error message display -->
+                                <form name="clxiiinfo" method="Post" class="clxiiinfo" id="clxiiinfo" action="clxii.jsp" novalidate="novalidate">
                                     <input type="hidden" name="submitted1" value="true" />
                                     <table border="0" id="subjectName">
 
                                         <tbody>                
                                             <tr>
                                                 <td>Board Roll*</td>
-                                                <td><input type="text" name="txtBoardRoll" id="txtBoardRoll" value="${param.txtBoardRoll}" size="50" />
+                                                <td><input type="text" name="txtBoardRoll" id="txtBoardRoll" value="${param.txtBoardRoll}" size="10" />
                                                     <c:if test="${param.submitted1 and !clxiiinfo.txtBoardRollValid}" var="v1">
-                                                        Board Roll is either be Blank OR invalid 
+                                                        <span style="color: red">Board Roll is either be Blank OR invalid </span>
                                                     </c:if>
                                                 </td>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td>Year Pass*</td>
                                                 <td><input type="text" name="txtYrPass" id="txtYrPass" value="${param.txtYrPass}" size="4" />
                                                     <c:if test="${param.submitted1 and !clxiiinfo.txtYrPassValid}" var="v3">
-                                                        Year Pass is either be Blank OR invalid OR Year Pass Cannot be greater than current Year
+                                                        <span style="color: red">Year Pass is either be Blank OR invalid OR Year Pass Cannot be greater than current Year</span>
                                                     </c:if>
                                                 </td>
+                                                <td></td>
                                             </tr>                   
                                         </tbody>
                                     </table>
@@ -96,7 +125,7 @@
                                                         </c:out>
                                                     </select>
                                                     <c:if test="${param.submitted1 and !clxiiinfo.cmbBoardIDValid}" var="v4">
-                                                        Board Name is either be Blank OR invalid
+                                                        <span style="color: red">Board Name is either be Blank OR invalid</span>
                                                     </c:if>
                                                 </td>
                                             </tr>
@@ -109,7 +138,7 @@
                                                         </c:out>
                                                     </select>
                                                     <c:if test="${param.submitted1 and !clxiiinfo.cmbStreamValid}" var="v5">
-                                                        Stream is either be Blank OR invalid
+                                                        <span style="color: red">Stream is either be Blank OR invalid</span>
                                                     </c:if>
                                                 </td>
                                             </tr>
@@ -119,14 +148,14 @@
                                             <tr>
                                                 <td colspan="2" style="text-align: center">
                                                     <c:if test="${param.submitted1 and !clxiiinfo.txtSubjectValid}" var="v6">
-                                                        Subject Name is either be Blank OR invalid
+                                                        <span style="color: red"> Subject Name is either be Blank OR invalid </span>
                                                     </c:if>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="text-align: center">
                                                     <c:if test="${param.submitted1 and !clxiiinfo.txtMarksValid}" var="v7">
-                                                        Marks is either be Blank OR invalid AND Marks Can have maximum of 3 Digits
+                                                        <span style="color: red">Marks is either be Blank OR invalid AND Marks Can have maximum of 3 Digits</span>
                                                     </c:if>
                                                 </td>
                                             </tr>                                               
@@ -137,9 +166,10 @@
                                             <td>Total Mark*</td>
                                             <td><input type="text" name="txtTotalMarks" id="txtTotalMarks" value="${param.txtTotalMarks}" size="4" />
                                                 <c:if test="${param.submitted1 and !clxiiinfo.txtTotalMarksValid}" var="v3">
-                                                    Total Marks is either be Blank OR invalid OR Total Marks can have maximum of 4 Digits
+                                                    <span style="color: red">Total Marks is either be Blank OR invalid OR Total Marks can have maximum of 4 Digits</span>
                                                 </c:if>
                                             </td>
+                                            <td></td>
                                         </tr>  
                                         <tr>                                          
                                             <td style="text-align: right">
@@ -161,9 +191,9 @@
                                             out.println("<script>swal(\"Oops...\", \"Subject Repeat!\", \"error\");</script>");
                                         } else {
                                     %>
-                                            <jsp:forward page="uploadstuphoto.jsp"></jsp:forward>
+                                    <jsp:forward page="uploadstuphoto.jsp"></jsp:forward>
                                     <%
-                                            }
+                                        }
 
                                     %>
                                 </c:if>
@@ -174,10 +204,10 @@
                                 </div>
                             </div>
                         </div>
-
+                        <h3 id="warning">Your form contains tons of errors! Please try again.</h3> <!-- Error Message Display -->
                     </td>
                 </tr>
-            </table>
+            </table>           
         </div>
         <div id="footer"><%=application.getInitParameter("pageFooter")%></div>
     </body>
