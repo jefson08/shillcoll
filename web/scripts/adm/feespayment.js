@@ -6,9 +6,12 @@
 
 
 $(document).ready(function() {
-    //$('input[name=next]').attr('disabled', 'disabled');
+    $('#txtFees').datepick({showTrigger: '#calImg', dateFormat: 'dd-mm-yyyy', maxDate: new Date()});
+    $("#txtFees").mask("99-99-9999");
+    $('input[name=next]').attr('disabled', 'disabled');
 //$('input[name=sub]').change(function(){
-    $("#subjectcode").live("change", function() {
+
+    $("#stream").live("change", function() {
         var subval = $(this).attr("subval");
 //        alert(subval);
         if ($(this).is(":checked") == true) {
@@ -19,6 +22,15 @@ $(document).ready(function() {
         }
 
     });
+
+
+
+
+
+
+
+
+
 
     $("select[name='coursecode']").change(function() {
 // alert("hello=---"+$(this).attr("strm").val());
@@ -38,18 +50,22 @@ $(document).ready(function() {
 
     $("select[name='stream']").change(function() {
 
-        //  alert($("#stream").val());
-        PopulateDependentCombo(document.course.stream, document.course.cmbhon, '../populatesubject');
-
+       // alert($("#stream").val());
+        if ($(this).val() != -1) {
+            PopulateDependentComboId($("#stream").val(), document.fees.cmbhon, '../populateCourse1');
+        }
     });
 
+    $("select[name='cmbhon']").change(function() {
 
+         alert($("#cmbhon").val());
+        // 
+        if ($(this).val() != -1) {
+                 PopulateDependentComboId($("#cmbhon").val(), document.fees.cmbrollno, '../populateRollno');
+        }   
+    });
 
 });
-$('#frmcourse').load(function() {
-//    alert("adhavdjsad"); 
-//    $('input[name=next]').attr('disabled','disabled');
-//     
-});
+
 
  

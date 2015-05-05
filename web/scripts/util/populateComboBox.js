@@ -13,6 +13,7 @@ function PopulateCombo(oTarget,url){
     var loader1 = new net.ContentLoader(url,FillDropDown,null,"POST",strParams);
 }
 
+
 function PopulateDependentComboFromTwoCondition(oElem0,oElem1,oTarget,url){
     //University Combo 
     // function to populate a Dependent ComboBox from a Data  Source
@@ -38,6 +39,7 @@ function PopulateDependentComboId(oElem,oTarget,url){
     // The Name of the Target Combo Box to be populated
     // the URL of the Servlet
     var strValue = oElem.toString();
+  
     var strParams = 'q=' + strValue +"&f=" + oTarget.form.name +"&e=" + oTarget.name+"&s="+oElem.name;
     var loader1 = new net.ContentLoader(url,FillDropDown,null,"POST",strParams);
 }

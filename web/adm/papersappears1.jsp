@@ -4,6 +4,11 @@
     Author     : B Mukhim
 --%>
 
+<%@page import="java.sql.SQLException"%>
+<%@page import="DBConnection.ConnectionPool"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="shg.util.Utility" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,7 +16,7 @@
 <jsp:useBean id="dbutil" class="shg.util.DatabaseUtility"></jsp:useBean>
 <jsp:useBean id="exam" class="shg.bean.ExamPaperBean"></jsp:useBean>
 <jsp:useBean id="exampaper" class="shg.dao.ExamPapers"></jsp:useBean>
-<jsp:useBean id="subpaper" class="shg.util.SubjectAndPaper"></jsp:useBean>
+<jsp:useBean id="subpaper" class="shg.util.SubjectAndPaper1"></jsp:useBean>
 <jsp:setProperty name="exam" property="*"></jsp:setProperty>
 <%@page import="shg.util.shgUtil"%>
 
@@ -29,13 +34,12 @@
         <link href="../style/master-css/menu-style.css" rel="stylesheet" />
 
 
-        <title>Subject Combination</title>
+        <title>Papers Appears</title>
     </head>
     <body>
-        <%
-            String rollno = request.getParameter("sample");
-            System.out.println("Name" + rollno);
-        %>
+
+
+
 
         <h1></h1>
         <div id="header" ><%@include file="common-menu.jsp" %>
@@ -58,52 +62,78 @@
                     </td>
                     <td width="80%" valign="top" class="rightcontainer">
                         <div id="right-frame">
-                            <div class="frame-header" >Combination Details</div>
+                            <div class="frame-header" >Exam Appears</div>
                             <div id="processing-area">
 
 
 
                                 <form name="frmcourse" method="POST" action="" id="frmcourse">
+                                    <%
+                                        String rollno = request.getParameter("roll1");
+                                        String status = request.getParameter("status");
+                                        String yos = request.getParameter("yos");
+                                        String examid = "sampleexamid";
+                                        System.out.println("Name" + rollno);
+                                    %>  
                                     <input type="hidden" name="submitted" value="true" />
                                     <table border="0">
                                         <tbody>
                                             <tr>
                                                 <td>Rollno </td>
                                                 <td> : </td>
-                                                <td><input type="text" name="roll1" id="roll1" value="<%=rollno%>" size="20 " disabled />
+                                                <td><input type="text" name="roll1" id="roll1" value="<%=rollno%>" size="20 "  />
 
                                                 </td>
                                             </tr>
-
-
                                             <tr>
-                                                <td> Roll No </td>
+                                                <td>Status </td>
                                                 <td> : </td>
-                                                <td>
-                                                    <select name="rollno" id="rollno">
-                                                        <option value="-1"></option>
-                                                        <c:set var="ccode" value="${param.rollno}"></c:set>
-                                                        <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'studentdetails','rollno','rollno',ccode)}"> </c:out>                               
-
-                                                        </select>
-                                                    </td>
-                                                </tr>  
-                                                <tr>
-                                                    <td>Roll No *</td>
-                                                    <td> : </td>
-                                                    <td><input type="text" name="roll" id="roll" value="${param.rollno}" size="5" />
+                                                <td><input type="text" name="status" id="status" value="<%=status%>" size="10 "  />
 
                                                 </td>
                                             </tr>
 
+
                                             <tr>
-                                                <td> </td><td></td><td></td>
+                                                <td>Year / Semester </td>
+                                                <td> : </td>
+                                                <td><input type="text" name="yos" id="yos" value="<%=yos%>" size="5 "  />
+
+                                                </td>
                                             </tr>
+
+                                            <!--                                            <tr>
+                                                                                            <td> Roll No </td>
+                                                                                            <td> : </td>
+                                                                                            <td>
+                                                                                                <select name="rollno" id="rollno">
+                                                                                                    <option value="-1"></option>
+                                            --><!--
+                                            
+                                                                                                    </select>
+                                                                                                </td>
+                                                                                            </tr>  -->
+                                            <tr>
+                                                <td>
+                                                    <input type="button" value="generate Combination" name="generate" id="generate">
+
+                                                </td>
+                                            </tr>
+
                                             <tr>
                                                 <td colspan="3">
                                                     <c:if test="${param.submitted and !exam.isSubjectcodeValid(pageContext.request.servletContext)}" var="v3">
                                                         [No Papers Checked from Selected Subjects]
                                                     </c:if>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td> </td><td></td><td></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+
 
                                                 </td>
                                             </tr>
@@ -119,8 +149,8 @@
                                             </tr>
                                             <tr>
 
-                                                <td> <input type="submit" value="SUBMIT"> </td>
-                                                <td> <input type="button" value="NEXT" name="next" id="next"> </td>
+                                                <td> <input type="submit" value="SUBMIT" disabled="" name="subpaper" id="subpaper"> </td>
+
                                             </tr>
                                         </tbody>
                                     </table>
@@ -129,7 +159,7 @@
                             </div>
                             <div id="msg" >
 
-                                <c:if test="${param.submitted} and !v3">
+                                <c:if test="${param.submitted and !v3 }">
                                     <%
                                         exampaper.insertPapers(getServletContext(), exam);
                                     %>

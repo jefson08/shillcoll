@@ -63,7 +63,7 @@ public class ModifiedStudentCourse {
             affectedRows = pst.executeUpdate();
 
             if (affectedRows < 1) {
-                course.setMsg("Message ::  Saving Course Failed!");
+                course.setMsg("Message ::  Saving Course Failed! DUPLICATE RECORD");
                 throw new SQLException("course  Failed. ");
 
             }
@@ -79,7 +79,7 @@ public class ModifiedStudentCourse {
             } catch (SQLException ex) {
                 System.out.println("RollBack operation error.");
             }
-            course.setMsg("Saving Course Failed!");
+            course.setMsg("Message ::  Saving Course Failed! DUPLICATE RECORD");
             System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
             return -1;
         } finally {

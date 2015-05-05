@@ -222,6 +222,24 @@
     <!--Ransly-->
     <!--teibor-->
     <servlet>
+        <servlet-name>populateCourse1</servlet-name>
+        <servlet-class>shg.util.populateCourse1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>populateCourse1</servlet-name>
+        <url-pattern>/populateCourse1</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>populateRollno</servlet-name>
+        <servlet-class>shg.util.populateRollno</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>populateRollno</servlet-name>
+        <url-pattern>/populateRollno</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>GetSubject</servlet-name>
         <servlet-class>shg.dao.GetSubject</servlet-class>
     </servlet>
@@ -229,6 +247,16 @@
         <servlet-name>GetSubject</servlet-name>
         <url-pattern>/GetSubject</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GetSubject1</servlet-name>
+        <servlet-class>shg.dao.GetSubject1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetSubject1</servlet-name>
+        <url-pattern>/GetSubject1</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>populatesubject</servlet-name>
         <servlet-class>shg.util.populatesubject</servlet-class>
