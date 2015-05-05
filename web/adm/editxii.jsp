@@ -26,9 +26,35 @@
         <link rel="stylesheet" href="../style/master-css/sweet-alert.css">
         <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="../scripts/jqueryui/jquery-ui-1.8.16.custom.min.js"></script>
+        <script src="../scripts/jquery/jquery.js"></script>
+        <script src="../scripts/jquery/jquery.validate.js"></script>
+        <script src="../scripts/jquery/additional-methods.js"></script>
         <script type="text/javascript" src="../scripts/adm/Searchxii.js"></script>   
         <script type="text/javascript" src="../scripts/jquery/sweet-alert.min.js"></script>
         <title>Edit Class XII Details</title>
+        <style>
+            /*form.clxiiinfo {
+                width: 50em;
+            }*/
+            em.error {
+                background:url("../images/unchecked.gif") no-repeat 0px 0px;
+                padding-left: 16px;
+            }
+            em.success {
+                background:url("../images/checked.gif") no-repeat 0px 0px;
+                padding-left: 16px;
+            }
+            form.clxiiinfo label.error {
+                margin-left: auto;
+                width: 250px;
+            }
+            em.error {
+                color: red;
+            }
+            #warning {
+                display: none;
+            }
+        </style>
     </head>
     <body>
         <div id="header" ><%@include file="common-menu.jsp" %>
@@ -52,8 +78,8 @@
                     <td width="80%" valign="top" class="rightcontainer">
                         <div id="right-frame">
                             <div class="frame-header" >Student Details</div>
-                            <div id="processing-area">
-                                <form name="clxiiinfo" method="Post">
+                            <div id="processing-area"><h2 id="summary"></h2> <!-- Validation error message display -->
+                                <form name="clxiiinfo" class="clxiiinfo" id="clxiiinfo" method="Post">
                                     <input type="hidden" name="submitted" value="true" />
                                     <table border="0" id="clxiiinfo">
                                         <tbody>
@@ -116,7 +142,7 @@
                                                     <c:if test="${param.submitted and !clxiiinfo.txtTotalMarksValid}" var="v9">
                                                         <span style="color: red"> Total Marks is either be Blank OR invalid OR Total Marks can have maximum of 4 Digits </span>
                                                     </c:if>
-                                                </td>
+                                                </td>                                            
                                             </tr>
                                         </tbody>
                                     </table> 
@@ -139,10 +165,9 @@
                                     <%
                                         int i;
                                         i = clxiiinfoDAO.insertBoard(getServletContext(), clxiiinfo);
-                                         if (i == 1) {
+                                        if (i == 1) {
                                             out.println("<script>swal(\"Good job!\", \"Record Updated!\", \"success\");</script>");
-                                        }
-                                         else if (i == 3) {
+                                        } else if (i == 3) {
                                             out.println("<script>swal(\"Oops...\", \"Subject Name Repitation!\", \"error\");</script>");
                                         }
                                     %> 
@@ -154,7 +179,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <h3 id="warning">Your form contains tons of errors! Please try again.</h3> <!-- Error Message Display -->
                     </td>
                 </tr>
             </table>

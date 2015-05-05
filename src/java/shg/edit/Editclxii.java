@@ -126,7 +126,7 @@ public class Editclxii extends HttpServlet {
                 //System.out.println("Sucess");
                 output += "<tr><td>Board Roll *</td><td>" + rs.getString("boardroll") + "</td><td><input type=\"text\" name=\"txtBoardRoll\" id=\"txtBoardRoll\" value=\"" + rs.getString("boardroll") + "\" size=\"10\" hidden /></td></tr>";
                 output += "<tr><td>College Roll *</td><td>" + rs.getString("rollno") + "</td><td><input type=\"text\" name=\"rollno\" id=\"rollno\" value=\"" + rs.getString("rollno") + "\" size=\"10\" hidden /></td></tr>";
-                output += "<tr><td>Year Pass *</td><td><input type=\"text\" name=\"txtYrPass\" id=\"txtYrPass\" value=\"" + rs.getString("yearpass") + "\" size=\"4\" /></td></tr>";
+                output += "<tr><td>Year Pass *</td><td><input type=\"text\" name=\"txtYrPass\" id=\"txtYrPass\" value=\"" + rs.getString("yearpass") + "\" size=\"4\" /></td><td></td></tr>";
                 //output += "<tr><td>Board Name </td><td>" + boaname + "</td><td><input type=\"text\" name=\"cmbBoardID\" id=\"cmbBoardID\" value=\"" + boaid + "\" hidden / ></td></tr>";
                 output += "<tr><td>Board Name *</td>";
                 output += "<td> <select name=\"cmbBoardID\" id=\"cmbBoardID\" >";
@@ -143,12 +143,14 @@ public class Editclxii extends HttpServlet {
                  output += "</select></td>";
                       //  + "<option value=\"-1\">-</option>";
                 output += "<tr><td>Stream </td><td>" + rs.getString("stream") + "</td><td><input type=\"text\" name=\"cmbStream\" id=\"cmbStream\" value=\"" + rs.getString("stream") + "\" hidden/ ></td></tr>";
-                output += "<tr><td>Total Mark *</td><td><input type=\"text\" name=\"txtTotalMarks\" id=\"txtTotalMarks\" value=\"" + rs.getString("totalmark") + "\" size=\"4\" /></td></tr>";
+                output += "<tr><td>Total Mark *</td><td><input type=\"text\" name=\"txtTotalMarks\" id=\"txtTotalMarks\" value=\"" + rs.getString("totalmark") + "\" size=\"4\" /></td><td></td></tr>";
                 
                 output+="<tr><td colspan=3><table id=\"add_subject\"><tbody id=\"clear_subject\">";
+                int i=0;
                 do {
                     output += "<tr id=" + count + "><td>Subject * &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td><td>" + rs.getString("subjectname") + "</td><td><input type=\"text\" name=\"txtSubject\" id=\"txtSubject\" value=\"" + rs.getString("subjectid") + "\" size=\"50\" hidden /></td>";
-                    output += "<td>Marks *</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks\" value=\"" + rs.getString("mark") + "\" size=\"3\" /><img src=\"../images/remove.png\" alt=\"Remove\" imgno=" + count + " id=\"DelIcon\"/></td></tr>";
+                    output += "<td>Marks *</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks["+i+"]\" value=\"" + rs.getString("mark") + "\" size=\"3\" /><img src=\"../images/remove.png\" alt=\"Remove\" imgno=" + count + " id=\"DelIcon\"/></td><td></td></tr>";
+                    i++;
                     count++;
                 } while (rs.next());
                output+="</tbody></table></td></tr>";

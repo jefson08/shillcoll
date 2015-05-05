@@ -58,14 +58,14 @@ public class SelectAllSubjName extends HttpServlet {
         try {
             sql = " SELECT * FROM boardname WHERE boardid = ?";
             pst = con.prepareStatement(sql);
-            pst.setString(1,boardid.trim().toUpperCase());
+            pst.setString(1, boardid.trim().toUpperCase());
             rs = pst.executeQuery();
             if (rs.next()) {
                 output += "<tr><td>Board Name *</td>";
                 //System.out.println("BoardName is "+rs.getString("boardname"));
-                output += "<td>"+rs.getString("boardname")+"</td></tr>";
+                output += "<td>" + rs.getString("boardname") + "</td></tr>";
                 output += "<tr><td>Stream *</td>";
-                output += "<td>"+Stream+"</td></tr>";
+                output += "<td>" + Stream + "</td></tr>";
             }
             sql = " SELECT \n"
                     + "  clxiisubj.subjectid, clxiisubj.subjectname\n"
@@ -94,14 +94,17 @@ public class SelectAllSubjName extends HttpServlet {
              } else {
              output = "DATABASE RECORD:Not Matching Record(s) Found";
              }*/
-
+            int i=0;
             while (rs.next()) {
-                output += "<tr id=" + count + "><td>Subject *</td>";
-                output += "<td>" + rs.getString("subjectname")+ "</td> <td><input type='text' name=\"txtSubject\" id=\"txtSubject\" value=\""+rs.getString("subjectid")+"\" hidden /></td>";
-                output += "<td>Marks*</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks\" value=\"\" size=\"3\"/>"
-                        + "<img src=\"../images/remove.png\" alt=\"Remove\" imgno=" + count + " id=\"DelIcon\"/></td></tr>";
+                output += "<tr id=" + count + ">";
+                output += "<td>Subject *</td>";
+                output += "<td>" + rs.getString("subjectname") + "</td> <td><input type='text' name=\"txtSubject\" id=\"txtSubject\" value=\"" + rs.getString("subjectid") + "\" hidden /></td>";
+                output += "<td>Marks*</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks["+i+"]\" value=\"\" size=\"3\"/>"
+                        + "<img src=\"../images/remove.png\" alt=\"Remove\" imgno=" + count + " id=\"DelIcon\"/></td><td></td></tr>";
                 count = count + 1;
+                i++;
             }
+
             out.print(output);
         } catch (SQLException e) {
             try {

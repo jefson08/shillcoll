@@ -135,7 +135,7 @@ public class SelectSubjName extends HttpServlet {
         }
         if (Present == 1) {
             for (Map.Entry m : BoardDisplay.entrySet()) {
-                output += "<tr id=" + count + "><td>Subject *</td>";
+                output += "<tr id=" + count + "><td></td><td>Subject *</td>";
                 output += "<td>" + m.getValue().toString() + "</td> <td><input type='text' name=\"txtSubject\" id=\"txtSubject\" value=\"" + m.getKey().toString() + "\" hidden /></td>";
                 output += "<td>Marks*</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks\" value=\"\" size=\"3\"/>"
                         + "<img src=\"../images/remove.png\" alt=\"Remove\" imgno=" + count + " id=\"DelIcon\"/></td></tr>";
