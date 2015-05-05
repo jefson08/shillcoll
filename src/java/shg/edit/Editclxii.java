@@ -27,39 +27,39 @@ import shg.valid.Validator;
  *
  * @author B Mukhim
  */
-public class Editclxii extends HttpServlet {
+public class Editclxii {//extends HttpServlet {
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+   // @Override
+    public String getStudentBoardDetails(ServletContext context, String rollno, String Count)
+    {
         Connection con = null;
-        ServletContext context = null;
+        //ServletContext context = null;
         ConnectionPool connectionPool = null;
         ResultSet rs = null, rs2;
         PreparedStatement pst = null;
-        String sql = "", output = "", boardid = "";
+        String sql = "", output = null, boardid = "";
         StringBuffer sb = new StringBuffer();
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html");
-        String srchby = request.getParameter("txtSearchBy");
-        String Count = request.getParameter("Count");
+//        PrintWriter out = response.getWriter();
+//        response.setContentType("text/html");
+        String srchby = rollno;
+        //String Count = request.getParameter("Count");
         int count = Integer.parseInt(Count);
         //System.out.println("Serach Value by:" + srchby);
-        boardid = getBoardID(srchby);
+        boardid = srchby;
         //int limit = Integer.parseInt(request.getParameter("limit"));
         //int offset = Integer.parseInt(request.getParameter("offset"));
         if (Validator.isNullValue(srchby) && Validator.isNullValue(srchby)) {
-            out.print("Error: Enter search Value");
-            return;
+            //out.print("Error: Enter search Value");
+            return null;
         }
 
         try {
-            context = getServletContext();
+           // context = getServletContext();
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
         } catch (SQLException e) {
             System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
-            return;
+            return null;
         }
 
         try {
@@ -123,9 +123,13 @@ public class Editclxii extends HttpServlet {
             pst.setString(2, srchby);
             rs = pst.executeQuery();
             if (rs.next()) {
+              output="";
                 //System.out.println("Sucess");
-                output += "<tr><td>Board Roll *</td><td>" + rs.getString("boardroll") + "</td><td><input type=\"text\" name=\"txtBoardRoll\" id=\"txtBoardRoll\" value=\"" + rs.getString("boardroll") + "\" size=\"10\" hidden /></td></tr>";
-                output += "<tr><td>College Roll *</td><td>" + rs.getString("rollno") + "</td><td><input type=\"text\" name=\"rollno\" id=\"rollno\" value=\"" + rs.getString("rollno") + "\" size=\"10\" hidden /></td></tr>";
+              output += "<tr><td>College Roll *</td><td>" + rs.getString("rollno") + "</td><td><input type=\"text\" name=\"rollno\" id=\"rollno\" value=\"" + rs.getString("rollno") + "\" size=\"10\" hidden /></td></tr>";
+              output += "<tr><td>Board Roll *</td><td><input type=\"text\" name=\"txtBoardRoll\" id=\"txtBoardRoll\" value=\"" + rs.getString("boardroll") + "\" size=\"10\" /></td><td></td></tr>";
+              
+                
+                
                 output += "<tr><td>Year Pass *</td><td><input type=\"text\" name=\"txtYrPass\" id=\"txtYrPass\" value=\"" + rs.getString("yearpass") + "\" size=\"4\" /></td><td></td></tr>";
                 //output += "<tr><td>Board Name </td><td>" + boaname + "</td><td><input type=\"text\" name=\"cmbBoardID\" id=\"cmbBoardID\" value=\"" + boaid + "\" hidden / ></td></tr>";
                 output += "<tr><td>Board Name *</td>";
@@ -157,8 +161,8 @@ public class Editclxii extends HttpServlet {
             } else {
                 output = "Not Matching Record(s) Found";
             }
-
-            out.print(output);
+            
+            //out.print(output);
         } catch (SQLException e) {
             try {
                 con.rollback();
@@ -184,26 +188,9 @@ public class Editclxii extends HttpServlet {
 
             }
         }
-
+    return output;
     }
-
-    public String getBoardID(String boaName) {
-        String boaid = "";
-        try {
-            boaName = boaName.substring(0, 4);
-            boaid = boaName.trim().toUpperCase();
-        } catch (Exception e) {
-            System.out.println("Cannot Generate Board ID. " + e);
-            boaid = null;
-        } finally {
-
-        }
-        return boaid;
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
+
+
+

@@ -11,7 +11,7 @@
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="dbutil" class="shg.util.DatabaseUtility"></jsp:useBean>
-<jsp:useBean id="stuEnroll" class="shg.bean.StudentEnroll" ></jsp:useBean>
+<jsp:useBean id="stuEnroll" class="shg.bean.StudentEnroll" scope="session" ></jsp:useBean>
 <jsp:useBean id="stuEnrollEdit" class="shg.dao.StudentEnrollRetrieve" />
 <jsp:useBean id="stuEnrollEditDAO" class="shg.dao.StudentEnrollEditDAO" />
 

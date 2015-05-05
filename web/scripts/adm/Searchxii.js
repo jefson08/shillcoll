@@ -76,6 +76,7 @@ $(document).ready(function () {
             label.text("ok!").addClass("success");
         },
         rules: {
+          txtBoardRoll: "alphanumeric",
             txtYrPass: "year_pass",
             //txtMarks[]: "numeric",
             txtTotalMarks: "numeric"
@@ -111,45 +112,45 @@ $(document).ready(function () {
             return true;
         }
     }); // end of function  
-    $('input[name=search]').click(function () {
-        var txtsearchBy = document.getElementById('txtSearchBy').value;
-        $("#waitbox").dialog("open");
-        var count;
-        $("#clxiiinfo").find("tr").each(function () {
-            count = $(this).index();
-        });
-        $.ajax({
-            type: "POST",
-            url: "../Editclxii",
-            data: ({txtSearchBy: txtsearchBy, Count: count}),
-            beforeSubmit: function () {
-                // $('#processing').css({visibility: 'visible'});
-                //alert("before submit");
-                return true;
-            },
-            success: function (response) {
-                //$('#msg').html(response);
-                $("#waitbox").dialog("close");
-                if (response === "Not Matching Record(s) Found") {
-                    //window.location.replace("../adm/editxii.jsp");
-                    swal("Oops...", response, "error");
-                } else if (response === "Error: Enter search Value") {
-                    swal("Oops...", response, "error");
-                }
-                else {
-                    $('#clear_search').hide();
-                    document.getElementById("Delete").type = "button";
-                    document.getElementById("Add").type = "button";
-                    document.getElementById("cmdSave").type = "submit";
-                    $('#clxiiinfo > tbody:last').append(response);
-                    $('input[name="search"]').hide();
-                }
-            },
-            error: function (xhr) {
-                alert(xhr.status);
-            }
-        });
-    })
+//    $('input[name=search]').click(function () {
+//        var txtsearchBy = document.getElementById('txtSearchBy').value;
+//        $("#waitbox").dialog("open");
+//        var count;
+//        $("#clxiiinfo").find("tr").each(function () {
+//            count = $(this).index();
+//        });
+//        $.ajax({
+//            type: "POST",
+//            url: "../Editclxii",
+//            data: ({txtSearchBy: txtsearchBy, Count: count}),
+//            beforeSubmit: function () {
+//                // $('#processing').css({visibility: 'visible'});
+//                //alert("before submit");
+//                return true;
+//            },
+//            success: function (response) {
+//                //$('#msg').html(response);
+//                $("#waitbox").dialog("close");
+//                if (response === "Not Matching Record(s) Found") {
+//                    //window.location.replace("../adm/editxii.jsp");
+//                    swal("Oops...", response, "error");
+//                } else if (response === "Error: Enter search Value") {
+//                    swal("Oops...", response, "error");
+//                }
+//                else {
+//                    $('#clear_search').hide();
+//                    document.getElementById("Delete").type = "button";
+//                    document.getElementById("Add").type = "button";
+//                    document.getElementById("cmdSave").type = "submit";
+//                    $('#clxiiinfo > tbody:last').append(response);
+//                    $('input[name="search"]').hide();
+//                }
+//            },
+//            error: function (xhr) {
+//                alert(xhr.status);
+//            }
+//        });
+//    })
     
     $('#cmbBoardID').live('change',function () {
         $('#clear_subject').html("");

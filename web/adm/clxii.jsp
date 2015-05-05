@@ -5,7 +5,7 @@
 --%>
 <%if ("GET".equalsIgnoreCase(request.getMethod())) {
         out.print("Invalid request -- Please try again");
-        //return;
+        return;
     }%>
 <%@page  autoFlush="true" buffer="32kb" %>
 <%@page import="shg.util.shgUtil"%>
