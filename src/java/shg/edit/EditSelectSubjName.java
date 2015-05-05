@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Hashtable;
+import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,15 +36,18 @@ public class EditSelectSubjName extends HttpServlet {
         ConnectionPool connectionPool = null;
         ResultSet rs = null, rs2;
         PreparedStatement pst = null;
-        String sql = "",output = "", boardid = "";
+        String sql = "", output = "", boardid = "";
         StringBuffer sb = new StringBuffer();
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
 
         String srchby = request.getParameter("cmbBoardID");
         String Stream = request.getParameter("cmbStream");
-        System.out.println("Search by:" + srchby.trim().toUpperCase());
-        System.out.println("Stream by:" + Stream.trim().toUpperCase());
+        //System.out.println("Search by:" + srchby.trim().toUpperCase());
+        //System.out.println("Stream by:" + Stream.trim().toUpperCase());
+        String String_subj = request.getParameter("Subject");
+        String Subject[] = String_subj.split(",");
+
         boardid = getBoardID(srchby);
         String Count = request.getParameter("Count");
         int count = Integer.parseInt(Count);
@@ -53,7 +58,7 @@ public class EditSelectSubjName extends HttpServlet {
             out.print("<b>Error : Enter search Value</b>");
             return;
         }
-
+        Hashtable<String, String> Board = new Hashtable<String, String>();
         try {
             context = getServletContext();
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
@@ -77,21 +82,14 @@ public class EditSelectSubjName extends HttpServlet {
             pst.setString(2, "%" + Stream.trim().toUpperCase() + "%");
             rs = pst.executeQuery();
             if (rs.next()) {
-                output += "<tr id="+count+"><td>Subject *</td>";
-                output += "<td> <select name=\"txtSubject\" id=\"txtSubject\">\n"
-                        + "<option value=\"-1\">-</option>";
                 do {
-                    output += "<option value=\" " + rs.getString("subjectid") + " \">" + rs.getString("subjectname") + "</option>";
-
+                    Board.put(rs.getString("subjectid"), rs.getString("subjectname"));
                 } while (rs.next());
-                output += "</select></td><td></td>";
-                output += "<td>Marks*</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks\" value=\"\" size=\"3\"/>"
-                        + "<img src=\"../images/remove.png\" alt=\"Remove\" imgno="+count+" id=\"DelIcon\"/></td></tr>";
             } else {
                 output = "DATABASE RECORD:Not Matching Record(s) Found";
             }
 
-            out.print(output);
+            // out.print(output);
         } catch (SQLException e) {
             try {
                 con.rollback();
@@ -117,6 +115,36 @@ public class EditSelectSubjName extends HttpServlet {
 
             }
         }
+        Hashtable<String, String> BoardDisplay = new Hashtable<String, String>();
+        int flag;
+        int Present = 0;
+        for (Map.Entry m : Board.entrySet()) {
+            //System.out.println(m.getKey() + " " + m.getValue());
+            flag = 0;
+            for (String Subj : Subject) {
+                if (m.getKey().toString().equals(Subj)) {
+                    //System.out.println(m.getKey());
+                    flag = 1;
+                    break;
+                }
+            }
+            if (flag == 0) {
+                Present = 1;
+                BoardDisplay.put(m.getKey().toString(), m.getValue().toString());
+            }
+        }
+        if (Present == 1) {
+            for (Map.Entry m : BoardDisplay.entrySet()) {
+                output += "<tr id=" + count + "><td>Subject *</td>";
+                output += "<td>" + m.getValue().toString() + "</td> <td><input type='text' name=\"txtSubject\" id=\"txtSubject\" value=\"" + m.getKey().toString() + "\" hidden /></td>";
+                output += "<td>Marks*</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks\" value=\"\" size=\"3\"/>"
+                        + "<img src=\"../images/remove.png\" alt=\"Remove\" imgno=" + count + " id=\"DelIcon\"/></td></tr>";
+                count = count + 1;
+            }
+        } else {
+            output += "Error: Empty record tobe added";
+        }
+        out.print(output);
 
     }
 

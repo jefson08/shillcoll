@@ -38,8 +38,6 @@ public class SelectAllSubjName extends HttpServlet {
         String Stream = request.getParameter("cmbStream");
         String Count = request.getParameter("Count");
         int count = Integer.parseInt(Count);
-        System.out.println("Search by:" + srchby.trim().toUpperCase());
-        System.out.println("Stream by:" + Stream.trim().toUpperCase());
         boardid = getBoardID(srchby);
         //int limit = Integer.parseInt(request.getParameter("limit"));
         //int offset = Integer.parseInt(request.getParameter("offset"));

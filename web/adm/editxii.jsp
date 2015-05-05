@@ -61,7 +61,7 @@
                                                 <td>Search by Board OR College Roll No*</td>
                                                 <td><input type="text" name="txtSearchBy" id="txtSearchBy" value="${param.txtSearchBy}" size="50" />
                                                     <c:if test="${param.submitted and !clxiiinfo.txtSearchByValid}" var="v1">
-                                                        Roll No OR Board Roll is either be Blank OR invalid 
+                                                        <span style="color: red"> Roll No OR Board Roll is either be Blank OR invalid </span>
                                                     </c:if>
                                                 </td>
                                             </tr>
@@ -72,49 +72,49 @@
                                             <tr>
                                                 <td colspan="2" style="text-align: center">
                                                     <c:if test="${param.submitted and !clxiiinfo.txtBoardRollValid}" var="v2">
-                                                        Board Roll is either be Blank OR invalid
+                                                        <span style="color: red"> Board Roll is either be Blank OR invalid </span>
                                                     </c:if>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="text-align: center">
                                                     <c:if test="${param.submitted and !clxiiinfo.cmbBoardIDValid}" var="v4">
-                                                        Board Name is either be Blank OR invalid
+                                                        <span style="color: red">Board Name is either be Blank OR invalid </span>
                                                     </c:if>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="text-align: center">
                                                     <c:if test="${param.submitted and !clxiiinfo.txtYrPassValid}" var="v5">
-                                                        Year Pass is either be Blank OR invalid
+                                                        <span style="color: red">Year Pass is either be Blank OR invalid </span>
                                                     </c:if>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="text-align: center">
                                                     <c:if test="${param.submitted and !clxiiinfo.cmbStreamValid}" var="v6">
-                                                        Stream is either be Blank OR invalid
+                                                        <span style="color: red">Stream is either be Blank OR invalid </span>
                                                     </c:if>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="text-align: center">
                                                     <c:if test="${param.submitted and !clxiiinfo.txtSubjectValid}" var="v7">
-                                                        Subject Name is either be Blank OR invalid
+                                                        <span style="color: red"> Subject Name is either be Blank OR invalid </span>
                                                     </c:if>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="text-align: center">
                                                     <c:if test="${param.submitted and !clxiiinfo.txtMarksValid}" var="v8">
-                                                        Marks is either be Blank OR invalid
+                                                        <span style="color: red">Marks is either be Blank OR invalid </span>
                                                     </c:if>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="text-align: center">
                                                     <c:if test="${param.submitted and !clxiiinfo.txtTotalMarksValid}" var="v9">
-                                                        Total Marks is either be Blank OR invalid OR Total Marks can have maximum of 4 Digits
+                                                        <span style="color: red"> Total Marks is either be Blank OR invalid OR Total Marks can have maximum of 4 Digits </span>
                                                     </c:if>
                                                 </td>
                                             </tr>
