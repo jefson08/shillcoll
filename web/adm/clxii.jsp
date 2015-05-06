@@ -5,7 +5,7 @@
 --%>
 <%if ("GET".equalsIgnoreCase(request.getMethod())) {
         out.print("Invalid request -- Please try again");
-       // return;
+       return;
     }%>
 <%@page  autoFlush="true" buffer="32kb" %>
 <%@page import="shg.util.shgUtil"%>
@@ -42,29 +42,6 @@
         <script type="text/javascript" src="../scripts/adm/selectSubj.js"></script>
         <script type="text/javascript" src="../scripts/jquery/sweet-alert.min.js"></script>
         <title>Class XII Details</title>
-        <style>
-            /*form.clxiiinfo {
-                width: 50em;
-            }*/
-            em.error {
-                background:url("../images/unchecked.gif") no-repeat 0px 0px;
-                padding-left: 16px;
-            }
-            em.success {
-                background:url("../images/checked.gif") no-repeat 0px 0px;
-                padding-left: 16px;
-            }
-            form.clxiiinfo label.error {
-                margin-left: auto;
-                width: 250px;
-            }
-            em.error {
-                color: red;
-            }
-            #warning {
-                display: none;
-            }
-        </style>
     </head>
     <body>
         <div id="header" ><%@include file="common-menu.jsp" %>
