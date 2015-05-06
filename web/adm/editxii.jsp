@@ -11,16 +11,17 @@
 %>
 <%if ("GET".equalsIgnoreCase(request.getMethod())) {
         out.print("Invalid request -- Please try again");
-        //return;
+        return;
     }%>
     
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="clxiiinfo" class="shg.bean.EditClXiiInfo" ></jsp:useBean> 
 <jsp:useBean id="clxiiinfoDAO" class="shg.dao.EditClXiiInfoDAO" ></jsp:useBean>
-  <jsp:useBean id="stuEnroll" class="shg.bean.StudentEnroll" scope="session" ></jsp:useBean>
+<jsp:useBean id="stuEnroll" class="shg.bean.StudentEnroll" scope="session" ></jsp:useBean>
 <jsp:useBean id="dbutil" class="shg.util.DatabaseUtility"></jsp:useBean>
 <jsp:setProperty name="clxiiinfo" property="*"></jsp:setProperty>
 <jsp:useBean id="edtxii" class="shg.edit.Editclxii" ></jsp:useBean>
+<jsp:useBean id="stuEnrollEditDAO" class="shg.dao.StudentEnrollEditDAO" />
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
@@ -89,14 +90,14 @@
             <div id="right-frame">
               <div class="frame-header" >Student Details</div>
               <div id="processing-area"><h2 id="summary"></h2> <!-- Validation error message display -->
-                <form name="clxiiinfo" class="clxiiinfo" id="clxiiinfo" method="Post">
+                  <form name="clxiiinfo" class="clxiiinfo" id="clxiiinfo" method="Post" action="editxii.jsp">
                   <input type="hidden" name="submitted1" value="true" />
                   <table border="0" id="clxiiinfo">
                     <tbody>
                       
-                      <c:if test="${!param.submitted}">
+                      <c:if test="${!param.submitted1}">
                         <c:set var="rollno" value="${param.rollno}" />
-                        ${edtxii.getStudentBoardDetails(pageContext.request.servletContext, rollno, "1")}
+                        ${edtxii.getStudentBoardDetails(pageContext.request.servletContext, stuEnroll.rollno, "1")}
                       </c:if>
                     </tbody>
                   </table>
@@ -171,11 +172,14 @@
                 <c:if test="${param.submitted1 and !v1 and !v2 and !v3 and !v4 and !v5 and !v6 and !v7 and !v8 and !v9}">
                   <%
                     int i;
-                    i = clxiiinfoDAO.insertBoard(getServletContext(), clxiiinfo);
+                    //i = clxiiinfoDAO.insertBoard(getServletContext(), clxiiinfo);
+                    i=stuEnrollEditDAO.updateStudent(getServletContext(), stuEnroll, clxiiinfo);
                     if (i == 1) {
-                      out.println("<script>swal(\"Good job!\", \"Record Updated!\", \"success\");</script>");
+                      out.println("<script>swal(\"\", \"Record Updated!\", \"success\");</script>");
                     } else if (i == 3) {
-                      out.println("<script>swal(\"Oops...\", \"Subject Name Repitation!\", \"error\");</script>");
+                      out.println("<script>swal(\"Error...\", \"Subject Name Repitation!\", \"error\");</script>");
+                    }else {
+                      out.println("<script>swal(\"Error...\", \"Fail to update Student's information\", \"error\");</script>");
                     }
                   %> 
                 </c:if>

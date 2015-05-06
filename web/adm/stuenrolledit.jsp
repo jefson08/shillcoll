@@ -3,8 +3,15 @@
     Created on : Feb 20, 2015, 9:52:10 PM
     Author     : B Mukhim
 --%>
+<%
+    if ("GET".equalsIgnoreCase(request.getMethod())) {
+        out.print("Invalid request -- Please try again");
+        return;
+    }
+%>
 <%@page  autoFlush="true" buffer="32kb" %>
 <%@page import="shg.util.shgUtil"%>
+
 <%
     //response.setHeader("Pragma", "no-cache");
     //response.setHeader("Cache-Control", "no-store");
@@ -13,13 +20,13 @@
 <jsp:useBean id="dbutil" class="shg.util.DatabaseUtility"></jsp:useBean>
 <jsp:useBean id="stuEnroll" class="shg.bean.StudentEnroll" scope="session" ></jsp:useBean>
 <jsp:useBean id="stuEnrollEdit" class="shg.dao.StudentEnrollRetrieve" />
-<jsp:useBean id="stuEnrollEditDAO" class="shg.dao.StudentEnrollEditDAO" />
+
 
 <jsp:setProperty name="stuEnroll" property="*"></jsp:setProperty>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:if test="${!param.submitted}">
+<c:if test="${!param.submitted2}">
     <c:set var="rollno" value="${param.rollno}" />
     ${stuEnrollEdit.retrieveStudent(pageContext.request.servletContext, stuEnroll, rollno)}
 </c:if>
@@ -67,7 +74,7 @@
                             <div class="frame-header" >Student Details</div>
                             <div id="processing-area">
                                 <form name="stenroll" method="POST">
-                                    <input type="hidden" name="submitted" value="true" />
+                                    <input type="hidden" name="submitted2" value="true" />
                                     <input type="hidden" name="rollno" value="${stuEnroll.rollno}" />
                                     <table border="0">
                                         <tbody>
@@ -79,7 +86,7 @@
                                                     <td colspan='3' style="text-align: center">
                                                         <label><input type="radio" id="radYear" name="radYearOrSem" value="y" ${stuEnroll.radYearOrSem=='y'?'checked':''} ${disabled}/>Annual</label>
                                                         <label><input type="radio" id="radSem" name="radYearOrSem" value="s" ${stuEnroll.radYearOrSem=='s'?'checked':''} ${disabled}/>Semester</label>
-                                                            <c:if test="${param.submitted and !stuEnroll.radYearOrSemValid}" var="v16">
+                                                            <c:if test="${param.submitted2 and !stuEnroll.radYearOrSemValid}" var="v16">
                                                             <span style="color: red">Option Year or Semester not Selected</span>
                                                         </c:if>
                                                     </td>
@@ -100,7 +107,7 @@
                                                         <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'section','sectioncode','sectionname',seccode)}">                                
                                                         </c:out>
                                                     </select> 
-                                                    <c:if test="${param.submitted and !stuEnroll.chkCmbSectionValid(pageContext.request.servletContext)}" var="v17">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.chkCmbSectionValid(pageContext.request.servletContext)}" var="v17">
                                                         <span style="color: red">Section Not Selected</span>
                                                     </c:if>
                                                 </td>
@@ -115,7 +122,7 @@
                                                         <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'course','coursecode','coursename',ccode)}">                                
                                                         </c:out>
                                                     </select> 
-                                                    <c:if test="${param.submitted and !stuEnroll.cmbCourseNameValid}" var="v1">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.cmbCourseNameValid}" var="v1">
                                                         Course Name Not Selected
                                                     </c:if>
                                                 </td>
@@ -130,7 +137,7 @@
                                                         <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'coursedetails','combinationcode','combinationcode', 'coursecode', ccode,comb)}">                                
                                                         </c:out>
                                                     </select>
-                                                    <c:if test="${param.submitted and !stuEnroll.cmbCombinationValid}" var="v2">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.cmbCombinationValid}" var="v2">
                                                         Combination Not Selected
                                                     </c:if>
                                                 </td>
@@ -139,7 +146,7 @@
                                                 <td>Student's Name *</td>
                                                 <td> : </td>
                                                 <td><input type="text" name="txtStuName" id="txtStuName" value="${stuEnroll.txtStuName}" size="30" />
-                                                    <c:if test="${param.submitted and !stuEnroll.txtStuNameValid}" var="v3">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.txtStuNameValid}" var="v3">
                                                         Student's Name is either be Blank OR invalid 
                                                     </c:if>
                                                 </td>
@@ -150,7 +157,7 @@
                                                 <td><input type="text" name="txtDOB" id="txtDOB" value="${stuEnroll.txtDOB}" size="10" />
                                                     <div style="display: none;"> <img id="calImg" src="../scripts/jquerydatepicker/img/calendar.gif" alt="Popup" class="trigger"></div>
                                                     eg. dd-mm-yyyy
-                                                    <c:if test="${param.submitted and !stuEnroll.txtDOBValid}" var="v4">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.txtDOBValid}" var="v4">
                                                         Date of Birth is either be Blank OR invalid
                                                     </c:if>
                                                 </td>
@@ -161,7 +168,7 @@
                                                 <td>
                                                     <label><input type="radio" name="radGender" id="radGender" value="m" ${stuEnroll.radGender=='m'?'checked':''} /> Male</label>
                                                     <label><input type="radio" name="radGender" id="radGender" value="f" ${stuEnroll.radGender=='f'?'checked':''}/> Female</label>
-                                                        <c:if test="${param.submitted and !stuEnroll.radGenderValid}" var="v5">
+                                                        <c:if test="${param.submitted2 and !stuEnroll.radGenderValid}" var="v5">
                                                         Gender not selected
                                                     </c:if>
                                                 </td>
@@ -172,7 +179,7 @@
                                                 <td> : </td>
                                                 <td>
                                                     ${dbutil.getCategory(pageContext.request.servletContext, stuEnroll.radCategory)}
-                                                    <c:if test="${param.submitted and !stuEnroll.chkRadCategoryValid(pageContext.request.servletContext)}" var="v7">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.chkRadCategoryValid(pageContext.request.servletContext)}" var="v7">
                                                         <span style="color: red">Category not selected</span>
                                                     </c:if>
                                                 </td>
@@ -181,7 +188,7 @@
                                                 <td>Father's Name *</td>
                                                 <td> : </td>
                                                 <td><input type="text" name="txtFName" id="txtFName" value="${stuEnroll.txtFName}" size="30" />
-                                                    <c:if test="${param.submitted and !stuEnroll.txtFNameValid}" var="v8">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.txtFNameValid}" var="v8">
                                                         Father's name is either blank or invalid
                                                     </c:if>
                                                 </td>
@@ -190,7 +197,7 @@
                                                 <td>Mother's Name *</td>
                                                 <td> : </td>
                                                 <td><input type="text" name="txtMName" id="txtMName" value="${stuEnroll.txtMName}" size="30" />
-                                                    <c:if test="${param.submitted and !stuEnroll.txtMNameValid}" var="v9">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.txtMNameValid}" var="v9">
                                                         Mother's name is either blank or invalid
                                                     </c:if>
                                                 </td>
@@ -199,7 +206,7 @@
                                                 <td>Parent's Phone No.</td>
                                                 <td> : </td>
                                                 <td><input type="text" name="txtPPhno" id="txtPPhno" value="${stuEnroll.txtPPhno}" size="10" />
-                                                    <c:if test="${param.submitted and !stuEnroll.txtPPhnoValid}" var="v10">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.txtPPhnoValid}" var="v10">
                                                         Invalid Phone Number
                                                     </c:if>
                                                 </td>
@@ -208,7 +215,7 @@
                                                 <td>Parent's Occupation</td>
                                                 <td> : </td>
                                                 <td><input type="text" name="txtPOccup" id="txtPOccup" value="${stuEnroll.txtPOccup}" size="40" />
-                                                    <c:if test="${param.submitted and !stuEnroll.txtPOccupValid}" var="v11">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.txtPOccupValid}" var="v11">
                                                         Invalid Parent's Occupation
                                                     </c:if>
                                                 </td>
@@ -222,7 +229,7 @@
                                                         <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'country','countrycode','countryname',country)}">                                
                                                         </c:out>
                                                     </select>
-                                                    <c:if test="${param.submitted and !stuEnroll.cmbCountryValid}" var="v18">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.cmbCountryValid}" var="v18">
                                                         <span style="color: red">Country Not Selected</span>
                                                     </c:if>
                                                 </td>
@@ -236,7 +243,7 @@
                                                         <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'state','statecode','statename', 'countrycode', country, state)}">                                
                                                         </c:out>
                                                     </select>
-                                                    <c:if test="${param.submitted and !stuEnroll.cmbStateValid}" var="v19">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.cmbStateValid}" var="v19">
                                                         <span style="color: red">State Not Selected</span>
                                                     </c:if>
                                                 </td>
@@ -251,7 +258,7 @@
                                                         <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'district','districtcode','districtname', 'statecode', state, dist)}">                                
                                                         </c:out>
                                                     </select>
-                                                    <c:if test="${param.submitted and !stuEnroll.cmbDistrictValid}" var="v20">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.cmbDistrictValid}" var="v20">
                                                         <span style="color: red">District Not Selected</span>
                                                     </c:if>
                                                 </td>
@@ -263,7 +270,7 @@
                                                 <td><textarea name="txtMAddress" id="txtMAddress" rows="5" cols="30">
                                                         ${stuEnroll.txtMAddress}
                                                     </textarea>
-                                                    <c:if test="${param.submitted and !stuEnroll.txtMAddressValid}" var="v12">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.txtMAddressValid}" var="v12">
                                                         Mailing Address cannot be blank
                                                     </c:if>
                                                 </td>
@@ -277,7 +284,7 @@
                                                     <textarea name="txtPAddress" id="txtPAddress" rows="5" cols="30">
                                                         ${stuEnroll.txtPAddress}
                                                     </textarea>
-                                                    <c:if test="${param.submitted and !stuEnroll.txtPAddressValid}" var="allValid">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.txtPAddressValid}" var="allValid">
                                                         Permanent Address cannot be blank
                                                     </c:if>
                                                 </td>
@@ -286,7 +293,7 @@
                                                 <td>Mobile</td>
                                                 <td> : </td>
                                                 <td><input type="text" name="txtMobile" id="txtMobile" value="${stuEnroll.txtMobile}" size="10" />
-                                                    <c:if test="${param.submitted and !stuEnroll.txtMobileValid}" var="v13">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.txtMobileValid}" var="v13">
                                                         Invalid Mobile Number
                                                     </c:if>
                                                 </td>
@@ -295,7 +302,7 @@
                                                 <td>Email</td>
                                                 <td> : </td>
                                                 <td><input type="text" name="txtEmail" id="txtEmail" value="${stuEnroll.txtEmail}" size="30" />
-                                                    <c:if test="${param.submitted and !stuEnroll.txtEmailValid}" var="v14">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.txtEmailValid}" var="v14">
                                                         Invalid Email Address
                                                     </c:if>
                                                 </td>
@@ -304,7 +311,7 @@
                                                 <td>Family Income</td>
                                                 <td> : </td>
                                                 <td><input type="text" name="txtIncome" id="txtIncome" value="${stuEnroll.txtIncome}" size="30" />
-                                                    <c:if test="${param.submitted and !stuEnroll.txtIncomeValid}" var="v15">
+                                                    <c:if test="${param.submitted2 and !stuEnroll.txtIncomeValid}" var="v15">
                                                         Invalid Income Value
                                                     </c:if>
                                                 </td>
@@ -322,11 +329,14 @@
                     </td>
             </table>
         </div>
-        <c:if test="${param.submitted and !v1 and !v2 and !v3 and !v4 and !v5 and !v6 and !v7 and !v8 and !v9
+        <c:if test="${param.submitted2 and !v1 and !v2 and !v3 and !v4 and !v5 and !v6 and !v7 and !v8 and !v9
                       and !v10 and !v11 and !v12 and !v13 and !v14 and !v15}">
-            <%
-                stuEnrollEditDAO.updateStudent(getServletContext(), stuEnroll);
-            %>
+            <jsp:forward page="editxii.jsp" ></jsp:forward>
+                <!--stuEnrollEditDAO.updateStudent(getServletContext(), stuEnroll);-->
         </c:if>
+
+
+
+
     </body>
 </html>

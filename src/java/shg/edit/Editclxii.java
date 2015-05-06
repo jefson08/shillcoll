@@ -32,6 +32,7 @@ public class Editclxii {//extends HttpServlet {
    // @Override
     public String getStudentBoardDetails(ServletContext context, String rollno, String Count)
     {
+//        System.out.println("roll " +rollno);
         Connection con = null;
         //ServletContext context = null;
         ConnectionPool connectionPool = null;
@@ -117,10 +118,10 @@ public class Editclxii {//extends HttpServlet {
                     + "WHERE \n"
                     + "  clxii.boardroll = clxiistudsub.boardroll AND\n"
                     + "  clxii.boardid = clxiisubj.boardid AND\n"
-                    + "  clxiistudsub.subjectid = clxiisubj.subjectid AND (clxii.boardroll = ? OR clxii.rollno = ?)";
+                    + "  clxiistudsub.subjectid = clxiisubj.subjectid AND  clxii.rollno = ?";
             pst = con.prepareStatement(sql);
-            pst.setString(1, srchby);
-            pst.setString(2, srchby);
+            pst.setString(1, srchby.trim());
+            //pst.setString(2, srchby);
             rs = pst.executeQuery();
             if (rs.next()) {
               output="";

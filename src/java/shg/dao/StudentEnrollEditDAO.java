@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.ServletContext;
+import shg.bean.EditClXiiInfo;
 import shg.bean.StudentEnroll;
 import shg.util.Utility;
 
@@ -30,7 +31,7 @@ public class StudentEnrollEditDAO {
     private int affectedRows;
     private int num;
 
-    public int updateStudent(ServletContext context, StudentEnroll StuEnroll) {
+    public int updateStudent(ServletContext context, StudentEnroll StuEnroll, EditClXiiInfo clxiiinfo) {
         try {
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
@@ -95,6 +96,10 @@ public class StudentEnrollEditDAO {
                 if (affectedRows <= 0) {
                     throw new SQLException("2--Student Enrollment Failed. ");
                 }
+            }
+            affectedRows = new EditClXiiInfoDAO().insertBoard(context, clxiiinfo);
+            if (affectedRows <= 0) {
+                throw new SQLException("2--Student Enrollment Failed. ");
             }
             con.commit();
         } catch (SQLException e) {
