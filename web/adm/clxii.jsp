@@ -5,7 +5,7 @@
 --%>
 <%if ("GET".equalsIgnoreCase(request.getMethod())) {
         out.print("Invalid request -- Please try again");
-        return;
+       // return;
     }%>
 <%@page  autoFlush="true" buffer="32kb" %>
 <%@page import="shg.util.shgUtil"%>
@@ -38,6 +38,7 @@
         <script src="../scripts/jquery/jquery.js"></script>
         <script src="../scripts/jquery/jquery.validate.js"></script>
         <script src="../scripts/jquery/additional-methods.js"></script>
+        <script src="../scripts/validate/validators.js"></script>
         <script type="text/javascript" src="../scripts/adm/selectSubj.js"></script>
         <script type="text/javascript" src="../scripts/jquery/sweet-alert.min.js"></script>
         <title>Class XII Details</title>

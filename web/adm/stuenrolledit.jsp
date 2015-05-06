@@ -267,9 +267,7 @@
                                             <tr>
                                                 <td style="vertical-align: text-top">Mailing Address *</td>
                                                 <td> : </td>
-                                                <td><textarea name="txtMAddress" id="txtMAddress" rows="5" cols="30">
-                                                        ${stuEnroll.txtMAddress}
-                                                    </textarea>
+                                                <td><textarea class="textarea" name="txtMAddress" id="txtMAddress" rows="5" cols="30">${stuEnroll.txtMAddress}</textarea>
                                                     <c:if test="${param.submitted2 and !stuEnroll.txtMAddressValid}" var="v12">
                                                         Mailing Address cannot be blank
                                                     </c:if>
@@ -281,9 +279,7 @@
                                                 <td><label>
                                                         <input name="copyaddress" type="checkbox" id="copyaddress" value="copy" ${param.copyaddress=='copy'?'checked':''} />
                                                         Same as Mailing Address</label><br />
-                                                    <textarea name="txtPAddress" id="txtPAddress" rows="5" cols="30">
-                                                        ${stuEnroll.txtPAddress}
-                                                    </textarea>
+                                                        <textarea class="textarea" name="txtPAddress" id="txtPAddress" rows="5" cols="30">${stuEnroll.txtPAddress}</textarea>
                                                     <c:if test="${param.submitted2 and !stuEnroll.txtPAddressValid}" var="allValid">
                                                         Permanent Address cannot be blank
                                                     </c:if>
@@ -318,7 +314,7 @@
                                             </tr>
 
                                             <tr>
-                                                <td colspan="3" style="text-align: center"><input type="submit" value="Save" name="cmdSave" /> </td>
+                                                <td colspan="3" style="text-align: center"><input type="submit" value="Next" name="cmdSave" /> </td>
                                             </tr>
                                         </tbody>
                                     </table>

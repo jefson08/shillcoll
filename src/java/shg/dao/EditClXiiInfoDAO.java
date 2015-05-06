@@ -57,8 +57,8 @@ public class EditClXiiInfoDAO {
                 pst.setString(1, boaSub.getTxtBoardRoll());
                 pst.setString(2, boaSub.getRollno());
                 affectedRows = pst.executeUpdate();
-                if (affectedRows > 0) {
-                    System.out.println("A user was deleted successfully!");
+                if (affectedRows <= 0) {
+                    throw new SQLException("1 . Board Name Enrollment Failed. ");
                 }
                 
                 sql = "INSERT INTO clxii(rollno,boardroll,boardid,yearpass,stream,totalmark)"
@@ -72,7 +72,7 @@ public class EditClXiiInfoDAO {
                 pst.setInt(6, Integer.parseInt(boaSub.getTxtTotalMarks().toUpperCase()));
                 affectedRows = pst.executeUpdate();
                 if (affectedRows <= 0) {
-                    throw new SQLException("Board Name Enrollment Failed. ");
+                    throw new SQLException("2. Board Name Enrollment Failed. ");
                 }
                 //con.commit();
 
@@ -84,7 +84,7 @@ public class EditClXiiInfoDAO {
 //                    System.out.println("A user was deleted successfully!");
 //                }
                 if (affectedRows <= 0) {
-                        throw new SQLException("Editing Board Details Failed. ");
+                        throw new SQLException("3. Editing Board Details Failed. ");
                     }
                 String[] item = boaSub.getTxtSubject();
                 String[] mark = boaSub.getTxtMarks();
@@ -98,9 +98,9 @@ public class EditClXiiInfoDAO {
                     pst.setString(2, item1.toUpperCase());
                     pst.setInt(3, Integer.parseInt(mark[count++]));
                     affectedRows = pst.executeUpdate();
-                    System.out.println(pst);
+//                    System.out.println(pst);
                     if (affectedRows <= 0) {
-                        throw new SQLException("Editing Board Details Failed. ");
+                        throw new SQLException("4. Editing Board Details Failed. ");
                     }
                     con.commit();
                 }

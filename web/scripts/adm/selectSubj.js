@@ -9,42 +9,6 @@
  * and open the template in the editor.
  */
 
-$.validator.addMethod("alphanumeric", function (value, element) {
-    if (value !== "") {
-        return this.optional(element) || /^[0-9a-zA-Z]+$/i.test(value);
-    }
-    else {
-        return false;
-    }
-}, 'Letters, numbers, and underscores only please');
-
-$.validator.addMethod("year_pass", function (value, element) {
-    if (/^\d+$/.test(value)) {
-        //alert(value);
-        var date = new Date();
-        var current_year = date.getFullYear();
-        var previous_year = current_year - 5;
-        if (value >= previous_year && value <= current_year) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    else {
-        return false;
-    }
-}, 'Numbers Should be equal to current year and greater than previous 5 year');
-
-$.validator.addMethod("numeric", function (value, element) {
-    if (value !== "") {
-        return this.optional(element) || /^\d+$/.test(value);
-    }
-    else {
-        return false;
-    }
-}, 'Numeric Only');
-
 $.validator.prototype.checkForm = function () {
                 //overriden in a specific page
                 this.prepareForm();
@@ -73,7 +37,7 @@ $(document).ready(function () {
             error.appendTo(element.parent("td").next("td"));
         },
         success: function (label) {
-            label.text("ok!").addClass("success");
+           // label.text("ok!").addClass("success");
         },
         rules: {
             txtBoardRoll: "alphanumeric",

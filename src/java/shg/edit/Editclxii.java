@@ -159,6 +159,20 @@ public class Editclxii {//extends HttpServlet {
                     count++;
                 } while (rs.next());
                output+="</tbody></table></td></tr>";
+               
+               output +="<table>\n" +
+"                    <tbody>\n" +
+"                      <tr>\n" +
+"                        <td style=\"text-align: right\">\n" +
+"                           </td>\n" +
+"                        <td style=\"text-align: right\">\n" +
+"                          <input type=\"button\" value=\"Delete\" name=\"Delete\" id=\"Delete\" /> </td>\n" +
+"                        <td style=\"text-align: right\">\n" +
+"                          <input type=\"button\" value=\"Add Subject\" name=\"Add\" id=\"Add\" /> </td>\n" +
+"                        <td colspan=\"3\" style=\"text-align: center\"><input type=\"submit\" value=\"Save\" name=\"cmdSave\" id=\"cmdSave\"/> </td>\n" +
+"                      </tr>\n" +
+"                    </tbody>\n" +
+"                  </table>";
             } else {
                 output = "Not Matching Record(s) Found";
             }

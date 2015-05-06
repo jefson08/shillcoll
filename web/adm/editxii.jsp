@@ -40,32 +40,10 @@
     <script src="../scripts/jquery/jquery.js"></script>
     <script src="../scripts/jquery/jquery.validate.js"></script>
     <script src="../scripts/jquery/additional-methods.js"></script>
+    <script src="../scripts/validate/validators.js"></script>
     <script type="text/javascript" src="../scripts/adm/Searchxii.js"></script>   
     <script type="text/javascript" src="../scripts/jquery/sweet-alert.min.js"></script>
     <title>Edit Class XII Details</title>
-    <style>
-      /*form.clxiiinfo {
-          width: 50em;
-      }*/
-      em.error {
-        background:url("../images/unchecked.gif") no-repeat 0px 0px;
-        padding-left: 16px;
-      }
-      em.success {
-        background:url("../images/checked.gif") no-repeat 0px 0px;
-        padding-left: 16px;
-      }
-      form.clxiiinfo label.error {
-        margin-left: auto;
-        width: 250px;
-      }
-      em.error {
-        color: red;
-      }
-      #warning {
-        display: none;
-      }
-    </style>
   </head>
   <body>
     <div id="header" ><%@include file="common-menu.jsp" %>
@@ -154,19 +132,7 @@
                       </tr>
                     </tbody>
                   </table> 
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td style="text-align: right">
-                           </td>
-                        <td style="text-align: right">
-                          <input type="button" value="Delete" name="Delete" id="Delete" /> </td>
-                        <td style="text-align: right">
-                          <input type="button" value="Add Subject" name="Add" id="Add" /> </td>
-                        <td colspan="3" style="text-align: center"><input type="submit" value="Save" name="cmdSave" id="cmdSave"/> </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  
                 </form>
 
                 <c:if test="${param.submitted1 and !v1 and !v2 and !v3 and !v4 and !v5 and !v6 and !v7 and !v8 and !v9}">
