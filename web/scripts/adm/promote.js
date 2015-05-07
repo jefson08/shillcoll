@@ -35,4 +35,11 @@ $(document).ready(function() {
             });
         }
     })
+    
+    $("select[name='cmbStream']").change(function() {
+
+        //  alert($("#stream").val());
+        PopulateDependentCombo(document.promote.cmbStream, document.promote.cmbCourse, '../populateCourse1');
+
+    });
 })

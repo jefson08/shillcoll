@@ -32,6 +32,13 @@ $.validator.addMethod("date", function (value, element) {
   }
 }, 'Please Enter Valid Date [dd-mm-yyyy]');
 
+$.validator.addMethod("nameTextBoxOptional", function (value, element) {
+  if (value !== "") {
+    return this.optional(element) || /^[a-zA-Z ]+$/i.test(value);
+  }
+  return true;
+}, 'Letter Only');
+
 $.validator.addMethod("nameTextBox", function (value, element) {
   if (value !== "") {
     return this.optional(element) || /^[a-zA-Z ]+$/i.test(value);
@@ -48,7 +55,16 @@ $.validator.addMethod("alphanumeric", function (value, element) {
   else {
     return false;
   }
-}, 'Letters, numbers, and underscores only please');
+}, 'Letters, numbers, and underscore only');
+
+$.validator.addMethod("alphaNumSpaceNewLine", function (value, element) {
+  if (value !== "") {
+    return this.optional(element) || /^[0-9a-zA-Z\n ]+$/i.test(value);
+  }
+  else {
+    return false;
+  }
+}, 'Letters, numbers, and underscore only');
 
 $.validator.addMethod("numeric", function (value, element) {
   if (value !== "") {
@@ -59,6 +75,12 @@ $.validator.addMethod("numeric", function (value, element) {
   }
 }, 'Numeric Only');
 
+$.validator.addMethod("float", function (value, element) {
+  if (value !== "") {
+    return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+  }
+  return true;
+}, 'Numeric Only');
 
 $.validator.addMethod("year_pass", function (value, element) {
   if (/^\d+$/.test(value)) {
