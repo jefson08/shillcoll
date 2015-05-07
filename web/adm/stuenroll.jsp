@@ -72,13 +72,13 @@
                     <tbody>
                       <tr>
                         <td colspan='3' style="text-align: center">
-                          <label><input type="radio" title="Please Select Semester or Year"  id="radYearOrSem" name="radYearOrSem" value="y" ${param.radYearOrSem=='y'?'checked':''} />Annual</label>
-                          <label><input type="radio" title="Please Select Semester or Year"   id="radYearOrSem" name="radYearOrSem" value="s" ${param.radYearOrSem=='s'?'checked':''} />Semester</label>
+                          <label><input type="radio" title="Select Semester or Year"  id="radYearOrSem" name="radYearOrSem" value="y" ${param.radYearOrSem=='y'?'checked':''} />Annual</label>
+                          <label><input type="radio" title="Select Semester or Year"   id="radYearOrSem" name="radYearOrSem" value="s" ${param.radYearOrSem=='s'?'checked':''} />Semester</label>
                             <c:if test="${param.submitted and !stuEnroll.radYearOrSemValid}" var="v16">
                             <span style="color: red">Option Year or Semester not Selected</span>
                           </c:if>
                         </td>
-                        <td><div id="radErr"></div></td>
+                        <td><div class="radSYR"></div></td>
                       </tr>
                       <tr>
                         <td colspan="3">
@@ -90,7 +90,7 @@
                         <td>Section *</td>
                         <td> : </td>
                         <td> 
-                          <select name="cmbSection" id="cmbSection" required title="Please select Section">
+                          <select name="cmbSection" id="cmbSection" required title=" Section Not Selected ">
                             <option value="-1">-</option>
                             <c:set var="seccode" value="${param.cmbSection}"></c:set>
                             <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'section','sectioncode','sectionname',seccode)}">                                
@@ -106,7 +106,7 @@
                         <td>Course Name *</td>
                         <td> : </td>
                         <td> 
-                          <select name="cmbCourseName" id="cmbCourseName" required="" title="Please Select Course Name">
+                          <select name="cmbCourseName" id="cmbCourseName" required="" title="Course Name not Selected">
                             <option value="-1">-</option>
                             <c:set var="ccode" value="${param.cmbCourseName}"></c:set>
                             <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'course','coursecode','coursename',ccode)}">                                
@@ -122,7 +122,7 @@
                         <td>Combination *</td>
                         <td> : </td>
                         <td>
-                          <select name="cmbCombination" id="cmbCombination" required="" title="Please Select Combination">
+                          <select name="cmbCombination" id="cmbCombination" required="" title="Combination not Selected">
                             <option value="-1">-</option>
                             <c:set var="comb" value="${param.cmbCombination}"></c:set>
                             <c:out escapeXml="false" value="${dbutil.populateDependentPopupFromTwoTableOneCondition(pageContext.request.servletContext,'combination' , 'coursedetails','combinationcode', 'combinationcode', 'combinationcode', 'combinationname',
@@ -161,13 +161,13 @@
                         <td>Gender *</td>
                         <td> : </td>
                         <td>
-                          <label><input type="radio" name="radGender" id="radGender" value="m" ${param.radGender=='m'?'checked':''} /> Male</label>
-                          <label><input type="radio" name="radGender" id="radGender" value="f" ${param.radGender=='f'?'checked':''}/> Female</label>
+                            <label><input type="radio" required="" title="Gender not Selected" name="radGender" id="radGender" value="m" ${param.radGender=='m'?'checked':''} /> Male</label>
+                          <label><input type="radio" required="" title="Gender not Selected" name="radGender" id="radGender" value="f" ${param.radGender=='f'?'checked':''}/> Female</label>
                             <c:if test="${param.submitted and !stuEnroll.radGenderValid}" var="v5">
                             <span style="color: red">Gender not selected</span>
                           </c:if>
                         </td>
-                        <td></td>
+                        <td><div class="radGEN"></div></td>
                       </tr>
                       <tr>
                         <td>Category *</td>
@@ -178,7 +178,7 @@
                             <span style="color: red">Category not selected</span>
                           </c:if>
                         </td>
-                        <td></td>
+                        <td><div class="radCAT"></div></td>
                       </tr>
                       <!--//newly added-->
 
@@ -227,7 +227,7 @@
                       <tr>
                         <td>Country *</td>
                         <td> : </td>
-                        <td><select name="cmbCountry" id="cmbCountry">
+                        <td><select name="cmbCountry" id="cmbCountry" required title=" Country Not Selected ">
                             <option value="-1">-</option>
                             <c:set var="country" value="${param.cmbCountry}"></c:set>
                             <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'country','countrycode','countryname',country)}">                                
@@ -242,7 +242,7 @@
                       <tr>
                         <td>State *</td>
                         <td> : </td>
-                        <td><select name="cmbState" id="cmbState">
+                        <td><select name="cmbState" id="cmbState" required title=" State Not Selected ">
                             <option value="-1">-</option>
                             <c:set var="state" value="${param.cmbState}"></c:set>
                             <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'state','statecode','statename', 'countrycode', country, state)}">                                
@@ -257,7 +257,7 @@
                       <tr>
                         <td>District *</td>
                         <td> : </td>
-                        <td><select name="cmbDistrict" id="cmbDistrict">
+                        <td><select name="cmbDistrict" id="cmbDistrict" required title=" District Not Selected ">
                             <option value="-1">-</option>
                             <c:set var="dist" value="${param.cmbDistrict}"></c:set>
                             <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'district','districtcode','districtname', 'statecode', state, dist)}">                                
@@ -273,7 +273,7 @@
                       <tr>
                         <td style="vertical-align: text-top">Mailing Address *</td>
                         <td> : </td>
-                        <td><textarea class="textarea" name="txtMAddress" id="txtMAddress" rows="5" cols="30">${param.txtMAddress}</textarea>
+                        <td><textarea title="Enter Address "required="" class="textarea" name="txtMAddress" id="txtMAddress" rows="5" cols="30">${param.txtMAddress}</textarea>
                           <c:if test="${param.submitted and !stuEnroll.txtMAddressValid}" var="v12">
                             <span style="color: red">Mailing Address cannot be blank</span>
                           </c:if>
@@ -286,7 +286,7 @@
                         <td><label>
                             <input name="copyaddress" type="checkbox" id="copyaddress" value="copy" ${param.copyaddress=='copy'?'checked':''} />
                             Same as Mailing Address</label><br />
-                          <textarea class="textarea" name="txtPAddress" id="txtPAddress" rows="5" cols="30">${param.txtPAddress}</textarea>
+                          <textarea title="Enter Address "required="" class="textarea" name="txtPAddress" id="txtPAddress" rows="5" cols="30">${param.txtPAddress}</textarea>
                           <c:if test="${param.submitted and !stuEnroll.txtPAddressValid}" var="allValid">
                             <span style="color: red">Permanent Address cannot be blank</span>
                           </c:if>
@@ -330,7 +330,7 @@
                     </tbody>
                   </table>
                 </form>
-                <h3 id="warning">Your form contains tons of errors! Please try again.</h3> <!-- Error Message Display -->
+                <h3 id="warning"></h3> <!-- Error Message Display -->
               </div>
             </div>
           </td>
