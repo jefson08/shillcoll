@@ -50,7 +50,7 @@ $.validator.addMethod("nameTextBox", function (value, element) {
 
 $.validator.addMethod("alphanumeric", function (value, element) {
   if (value !== "") {
-    return this.optional(element) || /^[0-9a-zA-Z ]+$/i.test(value);
+    return this.optional(element) || /^([a-zA-Z0-9 _-]+)$/i.test(value);
   }
   else {
     return false;

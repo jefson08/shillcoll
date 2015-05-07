@@ -25,8 +25,9 @@ public class editBoardNameSubjectDAO {
     private String sql = "";
     private ConnectionPool connectionPool = null;
     private int affectedRows;
-
+   
     public int insertBoard(ServletContext context, BoardNameSubject boaSub) {
+        // System.out.println("Inseide");
         int len1;
         int check = 1;
         int msg = 1;//1 is succed

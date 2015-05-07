@@ -22,7 +22,10 @@
         <link href="../style/master-css/master-layout.css" rel="stylesheet" />
         <link href="../style/master-css/menu-style.css" rel="stylesheet" />
         <link rel="stylesheet" href="../style/master-css/sweet-alert.css">
-        <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script>         
+        <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script> 
+        <script src="../scripts/jquery/jquery.validate.js"></script>
+        <script src="../scripts/jquery/additional-methods.js"></script>
+        <script src="../scripts/validate/validators.js"></script>
         <script type="text/javascript" src="../scripts/adm/boardNmSb.js"></script>   
         <script type="text/javascript" src="../scripts/jquery/sweet-alert.min.js"></script>
         <title>Board Name and Subjects</title>
@@ -50,7 +53,8 @@
                         <div id="right-frame">
                             <div class="frame-header" >Student Details</div>
                             <div id="processing-area">
-                                <form name="boardnamesubject" method="Post">
+                                <h2 id="summary"></h2>
+                                <form name="boardnamesubject" id="boardnamesubject" method="Post">
                                     <input type="hidden" name="submitted" value="true"/>                       
                                     <table border="0" id="subjectName">
                                         <tbody>                
@@ -62,12 +66,14 @@
                                                         <span style="color: red"> Board Name is either be Blank OR invalid  </span>                               
                                                     </c:if>
                                                 </td>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td>Stream *</td>
-                                                <td><input type="radio" name="txtStream" id="txtStream" value="Science" >Science
-                                                    <input type="radio" name="txtStream" id="txtStream" value="Commerce" >Commerce
-                                                    <input type="radio" name="txtStream" id="txtStream" value="Arts" >Arts</td>
+                                                <td><input type="radio" name="txtStream" title="Please Select Stream" id="txtStream" value="Science" >Science
+                                                    <input type="radio" name="txtStream" title="Please Select Stream" id="txtStream" value="Commerce" >Commerce
+                                                    <input type="radio" name="txtStream" title="Please Select Stream" id="txtStream" value="Arts" >Arts</td>
+                                                <td><div id="StreamErr"></div></td>
                                                 <td>
                                                     <c:if test="${param.submitted and !boardnamesubject.txtStreamValid}" var="v2">
                                                         <span style="color: red"> Stream Name is either be Blank OR invalid  </span>
@@ -83,34 +89,39 @@
                                             </tr>
                                             <tr id="1">
                                                 <td>Subject *</td>
-                                                <td><input type="text" name="txtSubName" id="txtSubName" value="${boardnamesubject.txtSubName[0]}" size="50" /></td>
+                                                <td><input type="text" name="txtSubName" id="txtSubName[0]" value="${boardnamesubject.txtSubName[0]}" size="50" /></td>
                                                 <td><img src="../images/remove.png" alt="Remove" imgno="1" id="DelIcon"/>
                                                     <img src="../images/add.png" alt="Add" imgno="1" id="ADDIcon"/></td>
+                                                <td></td>
                                             </tr>
                                             <tr id="2">
                                                 <td>Subject *</td>
-                                                <td><input type="text" name="txtSubName" id="txtSubName" value="${boardnamesubject.txtSubName[1]}" size="50" /></td>
+                                                <td><input type="text" name="txtSubName" id="txtSubName[1]" value="${boardnamesubject.txtSubName[1]}" size="50" /></td>
                                                 <td><img src="../images/remove.png" alt="Remove" imgno="2" id="DelIcon"/>
                                                     <img src="../images/add.png" alt="Add" imgno="2" id="ADDIcon"/></td>
+                                                <td></td>
                                             </tr>
                                             <tr id="3">
                                                 <td>Subject *</td>
-                                                <td><input type="text" name="txtSubName" id="txtSubName" value="${boardnamesubject.txtSubName[2]}" size="50" /></td>
+                                                <td><input type="text" name="txtSubName" id="txtSubName[2]" value="${boardnamesubject.txtSubName[2]}" size="50" /></td>
                                                 <td><img src="../images/remove.png" alt="Remove" imgno="3" id="DelIcon"/>
                                                     <img src="../images/add.png" alt="Add" imgno="3" id="ADDIcon"/></td>
+                                                <td></td>
                                             </tr>
                                             <tr id="4">
                                                 <td>Subject *</td>
-                                                <td><input type="text" name="txtSubName" id="txtSubName" value="${boardnamesubject.txtSubName[3]}" size="50" /></td>
+                                                <td><input type="text" name="txtSubName" id="txtSubName[3]" value="${boardnamesubject.txtSubName[3]}" size="50" /></td>
                                                 <td><img src="../images/remove.png" alt="Remove" imgno="4" id="DelIcon"/>
                                                     <img src="../images/add.png" alt="Add" imgno="4" id="ADDIcon"/></td>
+                                                <td></td>
                                             </tr>
                                             <c:forEach items="${boardnamesubject.txtSubName}" var="cur" begin="5" varStatus="status">
                                                 <tr id="${cur}">
                                                     <td>Subject *</td>
-                                                    <td><input type="text" name="txtSubName" value="${cur}" size="50" /></td>
+                                                    <td><input type="text" name="txtSubName" id="txtSubName[${cur}]" value="${cur}" size="50" /></td>
                                                     <td><img src="../images/remove.png" alt="Remove" imgno="${cur}" id="DelIcon"/>
                                                         <img src="../images/add.png" alt="Add" imgno="${cur}" id="ADDIcon"/></td>
+                                                    <td></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -121,21 +132,21 @@
                                         </tr>               
                                     </table>
                                 </form>
+                                <h3 id="warning">Your form contains tons of errors! Please try again.</h3> <!-- Error Message Display -->
                                 <c:if test="${param.submitted and !v1 and !v2 and !v3}">
                                     <%
                                         int i;
                                         i = boardnamesubjectDAO.insertBoard(getServletContext(), boardnamesubject);
                                         if (i == 0) {
-                                         out.println("<script>swal(\"Oops...\", \"Board Name should contain atleast 4 Letter!\", \"error\");</script>");
-                                        }else if (i == 1) {
+                                            out.println("<script>swal(\"Oops...\", \"Board Name should contain atleast 4 Letter!\", \"error\");</script>");
+                                        } else if (i == 1) {
                                             out.println("<script>swal(\"Good job!\", \"Record Added Sucessfully!\", \"success\");</script>");
-                                        }
-                                        else if (i == 3) {
+                                        } else if (i == 3) {
                                             out.println("<script>swal(\"Oops...\", \"Subject Name Should contain atleast 5 Letter!\", \"error\");</script>");
                                         } else if (i == 2) {
                                             out.println("<script>swal(\"Oops...\", \"Board Name already exist!\", \"error\");</script>");
                                         } else if (i == 5) {
-                                             out.println("<script>swal(\"Oops...\", \"Subject Repeat!\", \"error\");</script>");
+                                            out.println("<script>swal(\"Oops...\", \"Subject Repeat!\", \"error\");</script>");
                                         }
                                     %>
                                 </c:if>

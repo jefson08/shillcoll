@@ -41,9 +41,8 @@ $(document).ready(function () {
             //label.text("ok!").addClass("success");
         },
         rules: {
-          txtBoardRoll: "alphanumeric",
+            txtBoardRoll: "alphanumeric",
             txtYrPass: "year_pass",
-            //txtMarks[]: "numeric",
             txtTotalMarks: "numeric"
         },
         submitHandler: function (form) {
@@ -155,7 +154,7 @@ $(document).ready(function () {
     
     
     $('input[name=Delete]').click(function () {
-        var txtsearchBy = document.getElementById('txtSearchBy').value;
+        var txtsearchBy = document.getElementById('rollno').value;
         $.ajax({
             type: "POST",
             url: "../Deleteclxii",

@@ -28,7 +28,7 @@ public class Deleteclxii extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //System.out.println("Inseide server");
+        System.out.println("Inside server");
         Connection con = null;
         ServletContext context = null;
         ConnectionPool connectionPool = null;
@@ -58,7 +58,7 @@ public class Deleteclxii extends HttpServlet {
 
         try {
             String boardroll=null;
-            sql = " SELECT boardroll FROM clxii WHERE boardroll = ? OR rollno= ?";
+            sql = " SELECT boardroll FROM clxii WHERE (boardroll = ? OR rollno= ?)";
             pst = con.prepareStatement(sql);
             pst.setString(1,srchby);
             pst.setString(2,srchby);
@@ -66,7 +66,7 @@ public class Deleteclxii extends HttpServlet {
             if (rs.next()) {
                 boardroll=rs.getString("boardroll");
             }
-            sql = "DELETE FROM clxii WHERE boardroll = ? OR rollno= ?";
+            sql = "DELETE FROM clxii WHERE (boardroll = ? OR rollno= ?)";
             pst = con.prepareStatement(sql);
             pst.setString(1, srchby);
             pst.setString(2, srchby);
