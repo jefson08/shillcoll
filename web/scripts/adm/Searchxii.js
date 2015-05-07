@@ -11,23 +11,23 @@
 
 
 $.validator.prototype.checkForm = function () {
-                //overriden in a specific page
-                this.prepareForm();
-                for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
-                    if (this.findByName(elements[i].name).length != undefined && this.findByName(elements[i].name).length > 1) {
-                        for (var cnt = 0; cnt < this.findByName(elements[i].name).length; cnt++) {
-                            this.check(this.findByName(elements[i].name)[cnt]);
-                        }
-                    } else {
-                        this.check(elements[i]);
-                    }
-                }
-                return this.valid();
+    //overriden in a specific page
+    this.prepareForm();
+    for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
+        if (this.findByName(elements[i].name).length != undefined && this.findByName(elements[i].name).length > 1) {
+            for (var cnt = 0; cnt < this.findByName(elements[i].name).length; cnt++) {
+                this.check(this.findByName(elements[i].name)[cnt]);
             }
+        } else {
+            this.check(elements[i]);
+        }
+    }
+    return this.valid();
+}
 
 
 $(document).ready(function () {
-    
+
     var validator = $("#clxiiinfo").bind("invalid-form.validate", function () {
         $("#summary").html("Your form contains " + validator.numberOfInvalids() + " errors, see details below.");
     }).validate({
@@ -49,22 +49,22 @@ $(document).ready(function () {
             form.submit();
         }
     });
-    
-    
-    $('#cmdSave').click(function(){
-                $('[id^="txtMarks"]').each(function(){
-                    if ($(this).val().length>0){
-                       // alert($(this).val());
-                       $(this).rules('add', {
-                            number: true,
-                            required:true,
-                        });  
-                        
-                    }
-                })
-            })
-    
-    
+
+
+    $('#cmdSave').click(function () {
+        $('[id^="txtMarks"]').each(function () {
+            if ($(this).val().length > 0) {
+                // alert($(this).val());
+                $(this).rules('add', {
+                    number: true,
+                    required: true,
+                });
+
+            }
+        })
+    })
+
+
     $("input").bind("keydown", function (event) {
         // track enter key
         var keycode = (event.keyCode ? event.keyCode : (event.which ? event.which : event.charCode));
@@ -115,8 +115,15 @@ $(document).ready(function () {
 //            }
 //        });
 //    })
-    
-    $('#cmbBoardID').live('change',function () {
+
+    $("select[name='cmbBoardID']").change(function () {
+        $('#cmbStream').empty();
+        $('#clear_subject').html('');
+        PopulateDependentCombo(document.clxiiinfo.cmbBoardID, document.clxiiinfo.cmbStream, '../populateStream');
+
+    })
+
+    $('#cmbStream').live('change', function () {
         $('#clear_subject').html("");
         var cmbboardID = document.getElementById('cmbBoardID').value;
         var cmbStream = document.getElementById('cmbStream').value;
@@ -128,7 +135,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "../EditclxiiOnBoardChange",
-            data: ({cmbboardID:cmbboardID, Count: count, cmbStream:cmbStream}),
+            data: ({cmbboardID: cmbboardID, Count: count, cmbStream: cmbStream}),
             beforeSubmit: function () {
                 // $('#processing').css({visibility: 'visible'});
                 //alert("before submit");
@@ -150,9 +157,9 @@ $(document).ready(function () {
             }
         });
     })
-    
-    
-    
+
+
+
     $('input[name=Delete]').click(function () {
         var txtsearchBy = document.getElementById('rollno').value;
         $.ajax({

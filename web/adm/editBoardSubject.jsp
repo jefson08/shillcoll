@@ -62,7 +62,7 @@
                             <div id="processing-area">
                                 <h2 id="summary"></h2> <!-- Validation error message display -->
                                 <div class="box-1">
-                                    <form name="boardnamesubject" id="boardnamesubject" class="boardnamesubject" method="Post">
+                                    <form name="boardnamesubject" id="boardnamesubject" method="Post">
                                         <input type="hidden" name="submitted" value="true" />
                                         <table border="0" id="Clear">
                                             <tbody>

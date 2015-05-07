@@ -138,13 +138,13 @@
                                         int i;
                                         i = boardnamesubjectDAO.insertBoard(getServletContext(), boardnamesubject);
                                         if (i == 0) {
-                                            out.println("<script>swal(\"Oops...\", \"Board Name should contain atleast 4 Letter!\", \"error\");</script>");
+                                            out.println("<script>swal(\"Oops...\", \"Board Name should contain atleast 5 Letter!\", \"error\");</script>");
                                         } else if (i == 1) {
                                             out.println("<script>swal(\"Good job!\", \"Record Added Sucessfully!\", \"success\");</script>");
                                         } else if (i == 3) {
                                             out.println("<script>swal(\"Oops...\", \"Subject Name Should contain atleast 5 Letter!\", \"error\");</script>");
-                                        } else if (i == 2) {
-                                            out.println("<script>swal(\"Oops...\", \"Board Name already exist!\", \"error\");</script>");
+                                        } else if (i == 6) {
+                                            out.println("<script>swal(\"Oops...\", \"Stream already exist!\", \"error\");</script>");
                                         } else if (i == 5) {
                                             out.println("<script>swal(\"Oops...\", \"Subject Repeat!\", \"error\");</script>");
                                         }

@@ -27,10 +27,9 @@ public class SelectAllSubjName extends HttpServlet {
         Connection con = null;
         ServletContext context = null;
         ConnectionPool connectionPool = null;
-        ResultSet rs = null, rs2;
+        ResultSet rs = null;
         PreparedStatement pst = null;
         String sql = "", output = "", boardid = "";
-        StringBuffer sb = new StringBuffer();
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
 
@@ -39,6 +38,7 @@ public class SelectAllSubjName extends HttpServlet {
         String Count = request.getParameter("Count");
         int count = Integer.parseInt(Count);
         boardid = getBoardID(srchby);
+//        System.out.println("Inside Server");
         //int limit = Integer.parseInt(request.getParameter("limit"));
         //int offset = Integer.parseInt(request.getParameter("offset"));
 
@@ -56,17 +56,6 @@ public class SelectAllSubjName extends HttpServlet {
             return;
         }
         try {
-            sql = " SELECT * FROM boardname WHERE boardid = ?";
-            pst = con.prepareStatement(sql);
-            pst.setString(1, boardid.trim().toUpperCase());
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                output += "<tr><td>Board Name *</td>";
-                //System.out.println("BoardName is "+rs.getString("boardname"));
-                output += "<td>" + rs.getString("boardname") + "</td></tr>";
-                output += "<tr><td>Stream *</td>";
-                output += "<td>" + Stream + "</td></tr>";
-            }
             sql = " SELECT \n"
                     + "  clxiisubj.subjectid, clxiisubj.subjectname\n"
                     + "FROM \n"
@@ -79,32 +68,18 @@ public class SelectAllSubjName extends HttpServlet {
             pst.setString(1, "%" + boardid.trim().toUpperCase() + "%");
             pst.setString(2, "%" + Stream.trim().toUpperCase() + "%");
             rs = pst.executeQuery();
-//            System.out.println(pst);
-            /*if (rs.next()) {              
-             output += "<tr id="+count+"><td>Subject *</td>";
-             output += "<td> <select name=\"txtSubject\" id=\"txtSubject\">\n"
-             + "<option value=\"-1\">-</option>";
-             do {
-             output += "<option value=\" " + rs.getString("subjectname") + " \">" + rs.getString("subjectname") + "</option>";
-
-             } while (rs.next());
-             output += "</select></td>";
-             output += "<td>Marks*</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks\" value=\"\" size=\"3\"/>"
-             + "<img src=\"../images/remove.png\" alt=\"Remove\" imgno="+count+" id=\"DelIcon\"/></td></tr>";
-             } else {
-             output = "DATABASE RECORD:Not Matching Record(s) Found";
-             }*/
-            int i=0;
+            int i = 0;
             while (rs.next()) {
+//                System.out.println("SUBJECT"+rs.getString("subjectname"));
                 output += "<tr id=" + count + ">";
                 output += "<td>Subject *</td>";
                 output += "<td>" + rs.getString("subjectname") + "</td> <td><input type='text' name=\"txtSubject\" id=\"txtSubject\" value=\"" + rs.getString("subjectid") + "\" hidden /></td>";
-                output += "<td>Marks*</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks["+i+"]\" value=\"\" size=\"3\"/>"
+                output += "<td>Marks*</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks[" + i + "]\" value=\"\" size=\"3\"/>"
                         + "<img src=\"../images/remove.png\" alt=\"Remove\" imgno=" + count + " id=\"DelIcon\"/></td><td></td></tr>";
                 count = count + 1;
                 i++;
             }
-
+//            output += "</tbody></table></td></tr>";
             out.print(output);
         } catch (SQLException e) {
             try {
