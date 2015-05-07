@@ -58,11 +58,7 @@ $(document).ready(function () {
             txtEmail: {
                 email: true,
             },
-           // txtIncome: "float",
-            txtIncome: {
-                float: true,
-                required: false                
-            }
+            txtIncome: "float",            
         },
         submitHandler: function (form) {
             form.submit();
