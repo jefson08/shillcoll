@@ -33,6 +33,7 @@ public class editBoardNameSubjectDAO {
         int msg = 1;//1 is succed
         String[] Subj = boaSub.getTxtSubName();
         for (String item1 : Subj) {
+            System.out.println(item1);
             len1 = item1.length();
             if (len1 <= 4) {
                 check = 0;

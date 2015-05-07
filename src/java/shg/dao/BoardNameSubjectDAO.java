@@ -25,6 +25,7 @@ public class BoardNameSubjectDAO {
     private String sql = "";
     private ConnectionPool connectionPool = null;
     private int affectedRows;
+    private String Exist_boardid = null;
 
     public int insertBoard(ServletContext context, BoardNameSubject boaSub) {
         int len1;
@@ -78,8 +79,20 @@ public class BoardNameSubjectDAO {
                 while (rs.next()) {
                     String bName = rs.getString("boardname");
                     if (bName.equals(boaSub.getTxtBoaName().trim().toUpperCase())) {
+                        Exist_boardid = rs.getString("boardid");
                         msg = 2;
                         break;
+                    }
+                }
+
+                sql = "select stream from clxiisubj WHERE boardid = ?";
+                pst = con.prepareStatement(sql);
+                pst.setString(1, Exist_boardid);
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    String StreamName = rs.getString("stream");
+                    if (StreamName.equals(boaSub.getTxtStream().trim().toUpperCase())) {
+                        return 6;
                     }
                 }
                 rs = null;
@@ -122,6 +135,30 @@ public class BoardNameSubjectDAO {
                         }
                         con.commit();
                     }
+                } else {
+                    String[] item = boaSub.getTxtSubName();
+                    String SubjectId;
+                    for (String item1 : item) {
+                        con.setAutoCommit(false);
+                        sql = "INSERT INTO clxiisubj(boardid,subjectname,subjectid,stream)"
+                                + "    VALUES (?, ?, ?, ?)";
+                        pst = con.prepareStatement(sql);
+                        SubjectId = getSubjectID(item1, boaSub.getTxtBoaName(), boaSub.getTxtStream());
+                        if (SubjectId == null) {
+                            throw new Exception("Error while generating SubjectID");
+                        }
+                        //boaId = getBoardID(boaSub.getTxtBoaName());
+                        pst.setString(1, Exist_boardid);
+                        pst.setString(2, item1.toUpperCase());
+                        pst.setString(3, SubjectId);
+                        pst.setString(4, boaSub.getTxtStream().toUpperCase());
+                        affectedRows = pst.executeUpdate();
+                        if (affectedRows <= 0) {
+                            throw new SQLException("Subject Enrollment Failed. ");
+                        }
+                        con.commit();
+                    }
+                    msg=1; //Indicated sucessfull insertion
                 }
             } catch (Exception e) {
                 try {

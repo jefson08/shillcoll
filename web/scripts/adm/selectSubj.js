@@ -10,19 +10,19 @@
  */
 
 $.validator.prototype.checkForm = function () {
-                //overriden in a specific page
-                this.prepareForm();
-                for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
-                    if (this.findByName(elements[i].name).length != undefined && this.findByName(elements[i].name).length > 1) {
-                        for (var cnt = 0; cnt < this.findByName(elements[i].name).length; cnt++) {
-                            this.check(this.findByName(elements[i].name)[cnt]);
-                        }
-                    } else {
-                        this.check(elements[i]);
-                    }
-                }
-                return this.valid();
+    //overriden in a specific page
+    this.prepareForm();
+    for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
+        if (this.findByName(elements[i].name).length != undefined && this.findByName(elements[i].name).length > 1) {
+            for (var cnt = 0; cnt < this.findByName(elements[i].name).length; cnt++) {
+                this.check(this.findByName(elements[i].name)[cnt]);
             }
+        } else {
+            this.check(elements[i]);
+        }
+    }
+    return this.valid();
+}
 
 
 
@@ -37,7 +37,7 @@ $(document).ready(function () {
             error.appendTo(element.parent("td").next("td"));
         },
         success: function (label) {
-           // label.text("ok!").addClass("success");
+            // label.text("ok!").addClass("success");
         },
         rules: {
             txtBoardRoll: "alphanumeric",
@@ -49,34 +49,31 @@ $(document).ready(function () {
             form.submit();
         }
     });
-   
-    $('#cmdSave').click(function(){
-                $('[id^="txtMarks"]').each(function(){
-                    if ($(this).val().length>0){
-                       // alert($(this).val());
-                       $(this).rules('add', {
-                            number: true,
-                            required:true,
-                        });  
-                        
-                    }
-                })
-            })
-    
-    $("select[name='cmbBoardID']").change(function () {
-        if ($(this).val() !== -1) {
-            PopulateDependentCombo(document.clxiiinfo.cmbBoardID, document.clxiiinfo.cmbStream, '../populateStream');
-        }
-        else {
-            $('#cmbStream').empty();
-        }
+
+    $('#cmdSave').click(function () {
+        $('[id^="txtMarks"]').each(function () {
+            if ($(this).val().length > 0) {
+                // alert($(this).val());
+                $(this).rules('add', {
+                    number: true,
+                    required: true,
+                });
+
+            }
+        })
     })
 
-    $('#cmbStream').change(function () {
+    $("select[name='cmbBoardID']").change(function () {
+        $('#cmbStream').empty();
+        $('#clear_subject').html('');
+        PopulateDependentCombo(document.clxiiinfo.cmbBoardID, document.clxiiinfo.cmbStream, '../populateStream');
+
+    })
+
+    $('#cmbStream').live('change', function () {
         var cmbboardID = document.getElementById('cmbBoardID').value;
         var cmbstream = document.getElementById('cmbStream').value;
-        $('#Clear').hide();
-        //$('#marks').hide();   
+        $('#clear_subject').html('');
         document.getElementById("AddSub").type = "button";
         document.getElementById("cmdSave").type = "submit";
         $("#waitbox").dialog("open");
@@ -89,20 +86,50 @@ $(document).ready(function () {
             url: "../SelectAllSubjName",
             data: ({cmbBoardID: cmbboardID, cmbStream: cmbstream, Count: count}),
             beforeSubmit: function () {
-                // $('#processing').css({visibility: 'visible'});
-                //alert("before submit");
                 return true;
             },
             success: function (response) {
-                // $('#msg').html(response);
                 $("#waitbox").dialog("close")
-                $('#marks > tbody:last').append(response);
+                $('#add_subject > tbody:last').append(response);
             },
             error: function (xhr) {
                 alert(xhr.status);
             }
         });
     })
+
+
+    $('input[name=AddSub]').click(function () {
+        var cmbboardID = document.getElementById('cmbBoardID').value;
+        var cmbstream = document.getElementById('cmbStream').value;
+        var subject = "";
+        $('[name=txtSubject]').each(function () {
+            if (this.value != undefined) {
+                subject += this.value + ',';
+            }
+        });
+        var count;
+        $("#marks").find("tr").each(function () {
+            count = $(this).index();
+        });
+        $.ajax({
+            type: "POST",
+            url: "../SelectSubjName",
+            data: ({cmbBoardID: cmbboardID, cmbStream: cmbstream, Count: count, Subject: subject}),
+            success: function (response) {
+                // $('#msg').html(response);
+                if (response === "Error: Empty record tobe added") {
+                    swal("Oops...", "Subject are already listed.....", "error");
+                } else {
+                    $('#marks > tbody:last').append(response);
+                }
+            },
+            error: function (xhr) {
+                alert(xhr.status);
+            }
+        });
+    })
+
     $('input[name=AddSub]').click(function () {
         var cmbboardID = document.getElementById('cmbBoardID').value;
         var cmbstream = document.getElementById('cmbStream').value;
@@ -134,6 +161,8 @@ $(document).ready(function () {
             }
         });
     })
+
+
     $("#waitbox").dialog({
         autoOpen: false,
         open: function (event, ui) {
@@ -149,22 +178,7 @@ $(document).ready(function () {
     $("#DelIcon").live("click", function () {
 
         var del = $(this).attr("imgno");
-//     alert(del);
         $('#' + del).remove();
     });
-    /*    $('#txtSubject').on('change', function () {
-     alert("Hurray");
-     $.ajax({
-     type: "POST",
-     url: "../UpdateFlag",
-     data: "Subject=" + $("#txtSubject").val(),
-     success: function (response) {
-     $('#msg1').html(response);
-     },
-     error: function (xhr) {
-     alert(xhr.status);
-     }
-     });
-     })*/
 
 });
