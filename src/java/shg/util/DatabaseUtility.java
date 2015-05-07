@@ -412,7 +412,7 @@ public class DatabaseUtility {
                 System.out.println("Error in garbage collection :" + this.getClass() + "/populatePopup()-method " + gc);
             }
         }
-
+        System.out.println(opt);
         return opt;
     }
 

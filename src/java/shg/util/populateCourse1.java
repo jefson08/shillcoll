@@ -52,7 +52,7 @@ public class populateCourse1 extends HttpServlet {
                 return;
             }
            // st = con.createStatement();
-            sql = "select coursecode from course where stream = ? ORDER BY coursename ASC";
+            sql = "select coursecode, coursename from course where stream = ? ORDER BY coursename ASC";
 
             
              pst = con.prepareStatement(sql);
@@ -73,7 +73,7 @@ public class populateCourse1 extends HttpServlet {
             while (rs.next()) {
                 strXML = strXML + "<entry>";
 
-                strXML = strXML + "<optionText>" + rs.getString(1).toUpperCase() + "</optionText>";
+                strXML = strXML + "<optionText>" + rs.getString(2).toUpperCase() + "</optionText>";
                 strXML = strXML + "<optionValue>" + rs.getString(1).toUpperCase() + "</optionValue>";
                 strXML = strXML + "</entry>";
             }
