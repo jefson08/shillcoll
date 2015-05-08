@@ -101,7 +101,8 @@ public class getStuForPromote extends HttpServlet {
                         + " AND s.coursecode=c.coursecode"
                         + " AND lower(s.coursecode)=? AND lower(e.semoryear)=? "
                         + "AND lower(e.category) = 'r' "
-                        + " AND ? not in (SELECT max(yearorsemno) FROM studentsclass where rollno=s.rollno)";
+                        + " AND ? not in (SELECT max(yearorsemno) FROM studentsclass where rollno=s.rollno) "
+                        + " ORDER BY s.rollno";
                 pst = con.prepareStatement(sql);
                 pst.setString(1, ccode.trim());
                 pst.setString(2, sy.trim());
@@ -120,19 +121,22 @@ public class getStuForPromote extends HttpServlet {
                     output += "</tr>";
                     do {
                         output += "<tr>";
-                        output += "<td>" + rs.getString("rollno") + "<input type=\"hidden\" name=\"rollno\" value=\"" + rs.getString("rollno").trim() + "\"/></td>";
-                        output += "<td>" + rs.getString("nehurollno") + "<input type=\"hidden\" name=\"nehurollno\" value=\"" + rs.getString("nehurollno").trim() + "\"/></td>";
-                        output += "<td>" + rs.getString("regno") + "<input type=\"hidden\" name=\"regno\" value=\"" + rs.getString("regno").trim() + "\"/></td>";
-                        output += "<td>" + rs.getString("studentname") + "<input type=\"hidden\" name=\"studentname\" value=\"" + rs.getString("studentname").trim() + "\"/></td>";
-                        output += "<td>" + rs.getString("coursename") + "<input type=\"hidden\" name=\"coursecode\" value=\"" + rs.getString("coursecode").trim() + "\"/></td>";
-                        output += "<td>" + semyr.get(rs.getString("semoryear").trim().toLowerCase()) + "<input type=\"hidden\" name=\"semoryear\" value=\"" + rs.getString("semoryear").trim() + "\"/></td>";
+                        output += "<td>" + rs.getString("rollno") + "<input type=\"hidden\" name=\"rollno\" value=\"\" id=\"rollno" + rs.getString("rollno").trim() + "\"/></td>";
+                        output += "<td>" + rs.getString("nehurollno") + "</td>";
+                        output += "<td>" + rs.getString("regno") + "</td>";
+                        output += "<td>" + rs.getString("studentname") + "</td>";
+                        output += "<td>" + rs.getString("coursename") + "<input type=\"hidden\" name=\"coursecode\" value=\"\" id=\"course" + rs.getString("rollno").trim() + "\"/></td>";
+                        output += "<td>" + semyr.get(rs.getString("semoryear").trim().toLowerCase()) + "<input type=\"hidden\" name=\"semoryear\" value=\"\" id=\"smoryr" + rs.getString("rollno").trim() + "\"/></td>";
                         output += "<td>"
-                                + "<input type=\"checkbox\" name=\"promote\" id=\"promote\" rollno=\"" + rs.getString("rollno").trim() + "\" />"
-                                + "<input type=\"hidden\" name=\"txtPromote\" value=\"\" id=\"" + rs.getString("rollno").trim() + "\" />"
-                                + "</td>";
+                                + "<input type=\"checkbox\" name=\"promote[]\" id=\"promote\" rollno=\"" + rs.getString("rollno").trim() + "\" "
+                                + " course=\"" + rs.getString("coursecode").trim() + "\" "
+                                + " smoryr=\"" + rs.getString("semoryear").trim() + "\" "
+                                + "/>"
+                                
+                                + "<div id=\"err\"></div></td>";
                         output += "</tr>";
                     } while (rs.next());
-                    output += "<tr><td colspan=\"7\" style=\"text-align: center\"><input type=\"submit\" name=\"update\" value=\"Update\" /></td></tr>";
+                    output += "<tr><td colspan=\"7\" required title=\"sdsds\" style=\"text-align: center\"><input type=\"submit\" name=\"update\" value=\"Update\" /></td></tr>";
                     output += "</table></div>";
                 } else {
                     output = "No Matching Record Found";

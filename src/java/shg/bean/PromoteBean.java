@@ -11,52 +11,11 @@ package shg.bean;
  */
 public class PromoteBean {
     private String rollno[];
-    private String nehurollno[];
-    private String regno[];
+    
     private String coursecode[];
     private String semoryear[];
-    private String txtPromote[];
-
+   
     
-    public String[] getTxtPromote() {
-        return txtPromote;
-    }
-
-    /**
-     * @param txtPromote the txtPromote to set
-     */
-    public void setTxtPromote(String[] txtPromote) {
-        this.txtPromote = txtPromote;
-    }
-
-    /**
-     * @return the nehurollno
-     */
-    public String[] getNehurollno() {
-        return nehurollno;
-    }
-
-    /**
-     * @param nehurollno the nehurollno to set
-     */
-    public void setNehurollno(String[] nehurollno) {
-        this.nehurollno = nehurollno;
-    }
-
-    /**
-     * @return the regno
-     */
-    public String[] getRegno() {
-        return regno;
-    }
-
-    /**
-     * @param regno the regno to set
-     */
-    public void setRegno(String[] regno) {
-        this.regno = regno;
-    }
-
     /**
      * @return the coursecode
      */
@@ -84,6 +43,20 @@ public class PromoteBean {
     public void setSemoryear(String[] semoryear) {
         this.semoryear = semoryear;
     }
+
+  /**
+   * @return the rollno
+   */
+  public String[] getRollno() {
+    return rollno;
+  }
+
+  /**
+   * @param rollno the rollno to set
+   */
+  public void setRollno(String[] rollno) {
+    this.rollno = rollno;
+  }
 
    
 }
