@@ -87,9 +87,9 @@ public class StudentEnrollDAO {
             }
             
             if(StuEnroll.getRadYearOrSem().toLowerCase().equals("s")){
-                sy=1+"s";
+                sy="s"+1;
             }else if(StuEnroll.getRadYearOrSem().toLowerCase().equals("y")){
-                sy=1+"y";
+                sy="y"+1;
             }
             
             sql="INSERT INTO studentsclass(rollno, coursecode, yearorsemno, enrollyear) VALUES (?, ?, ?, ?)";

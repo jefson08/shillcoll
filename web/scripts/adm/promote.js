@@ -37,9 +37,38 @@ $(document).ready(function() {
     })
     
     $("select[name='cmbStream']").change(function() {
-
-        //  alert($("#stream").val());
         PopulateDependentCombo(document.promote.cmbStream, document.promote.cmbCourse, '../populateCourse1');
-
     });
+    
+    $('#search').click(function (){
+        
+        $.ajax({
+            type: "POST",
+            url: "../getStuForPromote",
+            data: ({cmbCourse: $('#cmbCourse').val(), cmbYearOrSemNo: $('#cmbYearOrSemNo').val()}),
+            beforeSubmit: function () {
+                // $('#processing').css({visibility: 'visible'});
+                //alert("before submit");
+                return true;
+            },
+            success: function (response) {
+                //$('#msg').html(response);;
+                $("#srchlist").html(response);
+                
+            },
+            error: function (xhr) {
+                alert(xhr.status);
+            }
+        });
+    })
+    $('#promote').live('click', function (){
+        var rollno = $(this).attr('rollno');
+        if($(this).is(':checked')){
+            $('#'+rollno).attr("value", rollno);
+        }
+        else{
+            $('#'+rollno).attr("value", '');
+        }
+        
+    })
 })

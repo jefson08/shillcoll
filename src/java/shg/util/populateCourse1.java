@@ -58,7 +58,7 @@ public class populateCourse1 extends HttpServlet {
              pst = con.prepareStatement(sql);
             pst.setString(1,stream);
             rs = pst.executeQuery();
-            System.out.println("SQL"+ pst);
+//            System.out.println("SQL"+ pst);
             strXML = strXML + "<?xml version='1.0' ?>";
             strXML = strXML + "<selectChoice>";
             strXML = strXML + "<selectElement>";
