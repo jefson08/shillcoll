@@ -29,16 +29,13 @@ public class editBoardNameSubjectDAO {
     public int insertBoard(ServletContext context, BoardNameSubject boaSub) {
         // System.out.println("Inseide");
         int len1;
-        int check = 1;
         int msg = 1;//1 is succed
         String[] Subj = boaSub.getTxtSubName();
         for (String item1 : Subj) {
             System.out.println(item1);
             len1 = item1.length();
-            if (len1 <= 4) {
-                check = 0;
-                msg = 0;
-                break;
+            if (len1 < 3) {
+                return 0;
             }
         }
         for (int i = 0; i < Subj.length; i++) {
@@ -53,7 +50,7 @@ public class editBoardNameSubjectDAO {
                 break;
             }
         }
-        if (check != 0 && msg != 5) {
+        if (msg != 5) {
             try {
                 connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
                 con = connectionPool.getConnection();
@@ -130,9 +127,11 @@ public class editBoardNameSubjectDAO {
         String Subid = "";
         try {
             Stream = Stream.substring(0, 2);
-            subjectname = subjectname.substring(0, 5);
-            boardid = boardid.substring(0, 3);
-            Subid = subjectname.trim().toUpperCase().concat(boardid.trim().toUpperCase()).concat(Stream.trim().toUpperCase());
+            subjectname = subjectname.substring(0, 2);
+            Subid = subjectname.trim().toUpperCase().concat(Stream.trim().toUpperCase()).concat(boardid.trim().toUpperCase());
+            if (Subid.length() > 10) {
+                Subid = Subid.substring(0, 10);
+            }
         } catch (Exception e) {
             System.out.println("Cannot Generate Subject ID. " + e);
             Subid = null;

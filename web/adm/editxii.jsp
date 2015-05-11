@@ -40,8 +40,8 @@
         <script src="../scripts/jquery/jquery.js"></script>
         <script type="text/javascript" src="../scripts/util/populateComboBox.js"></script> 
         <script type="text/javascript" src="../scripts/util/net.js"></script>
-        <script src="../scripts/jquery/jquery.validate.js"></script>
-        <script src="../scripts/jquery/additional-methods.js"></script>
+        <script src="../scripts/validate/jquery.validate.js"></script>
+        <script src="../scripts/validate/additional-methods.js"></script>
         <script src="../scripts/validate/validators.js"></script>
         <script type="text/javascript" src="../scripts/adm/Searchxii.js"></script>   
         <script type="text/javascript" src="../scripts/jquery/sweet-alert.min.js"></script>

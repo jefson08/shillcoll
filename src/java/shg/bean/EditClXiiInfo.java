@@ -176,7 +176,7 @@ public class EditClXiiInfo {
         if (item != null) {
             for (String item1 : item) {
                 //System.out.println("Subject"+item1);
-                if ((Validator.isNullValue(item1)) || Validator.containsIllegalCharacters(item1) || !(Validator.isText(item1))) {
+                if ((Validator.isNullValue(item1)) || Validator.containsIllegalCharacters(item1)) {
                     return false;
                 }
             }

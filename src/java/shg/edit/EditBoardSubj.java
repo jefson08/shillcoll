@@ -85,7 +85,7 @@ public class EditBoardSubj extends HttpServlet {
                 output += "<tr><td>Stream *</td><td>" + stream.toUpperCase() + "</td></tr>";
                 int i=0;
                 do {
-                    output += "<tr id="+i+"><td>Subject *</td><td>" + rs.getString("subjectname") + "</td><td align=\"left\"><img src=\"../images/remove.png\" alt=\"Remove\" imgno="+i+" id=\"DelIcon\"/></td><td><input type=\"text\" name=\"txtSubName\" id=\"txtSubName["+i+"]\" size=\"50\" value=\"" + rs.getString("subjectname") + "\" hidden /></td><td></td></tr>"; 
+                    output += "<tr id="+i+"><td>Subject *</td><td>" + rs.getString("subjectname") + "</td><td align=\"left\"><img src=\"../images/remove.png\" alt=\"Remove\" imgno="+i+" id=\"DelIcon\"/></td><td><input type=\"text\" name=\"txtSubName\" size=\"50\" value=\"" + rs.getString("subjectname") + "\" hidden /></td><td></td></tr>"; 
                     i++;
                 } while (rs.next());
             } else {

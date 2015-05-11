@@ -11,6 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="boardnamesubject" class="shg.bean.BoardNameSubject"></jsp:useBean>    
 <jsp:useBean id="boardnamesubjectDAO" class="shg.dao.BoardNameSubjectDAO"></jsp:useBean>
+<jsp:useBean id="dbutil" class="shg.util.DatabaseUtility"></jsp:useBean>
 <jsp:setProperty name="boardnamesubject" property="*"></jsp:setProperty>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -23,14 +24,33 @@
         <link href="../style/master-css/menu-style.css" rel="stylesheet" />
         <link rel="stylesheet" href="../style/master-css/sweet-alert.css">
         <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script> 
-        <script src="../scripts/jquery/jquery.validate.js"></script>
-        <script src="../scripts/jquery/additional-methods.js"></script>
+        <script type="text/javascript" src="../scripts/util/populateComboBox.js"></script> 
+        <script type="text/javascript" src="../scripts/util/net.js"></script>
+        <script src="../scripts/validate/jquery.validate.js"></script>
+        <script src="../scripts/validate/additional-methods.js"></script>
         <script src="../scripts/validate/validators.js"></script>
         <script type="text/javascript" src="../scripts/adm/boardNmSb.js"></script>   
         <script type="text/javascript" src="../scripts/jquery/sweet-alert.min.js"></script>
         <title>Board Name and Subjects</title>
     </head>
     <body>
+                                        <c:if test="${param.submitted and !v1 and !v2 and !v3}">
+                                    <%
+                                        int i;
+                                        i = boardnamesubjectDAO.insertBoard(getServletContext(), boardnamesubject);
+                                        if (i == 0) {
+                                            out.println("<script>swal(\"Oops...\", \"Board Name should contain atleast 3 Letter!\", \"error\");</script>");
+                                        } else if (i == 1) {
+                                            out.println("<script>swal(\"Good job!\", \"Record Added Sucessfully!\", \"success\");</script>");
+                                        } else if (i == 3) {
+                                            out.println("<script>swal(\"Oops...\", \"Subject Name Should contain atleast 3 Letter!\", \"error\");</script>");
+                                        } else if (i == 6) {
+                                            out.println("<script>swal(\"Oops...\", \"Board and Stream already exist!\", \"error\");</script>");
+                                        } else if (i == 5) {
+                                            out.println("<script>swal(\"Oops...\", \"Subject Repeat!\", \"error\");</script>");
+                                        }
+                                    %>
+                                </c:if>
         <div id="header" ><%@include file="common-menu.jsp" %>
             <span id="header-span"  style="position: relative;top: 40px;"><%=application.getInitParameter("displayName")%></span>
         </div>
@@ -57,19 +77,33 @@
                                 <form name="boardnamesubject" id="boardnamesubject" method="Post">
                                     <input type="hidden" name="submitted" value="true"/>                       
                                     <table border="0" id="subjectName">
-                                        <tbody>                
+                                        <tbody>  
+                                            <tr><td><input type="text" name="txtBoaName" id="txtBoaName" value="" hidden=""/></td></tr>
                                             <tr>
-                                                <td>Board Name *</td>
-                                                <td><input type="text" name="txtBoaName" id="txtBoaName" value="${param.txtBoaName}" size="50" /></td>
-                                                <td>
-                                                    <c:if test="${param.submitted and !boardnamesubject.txtBoaNameValid}" var="v1">
-                                                        <span style="color: red"> Board Name is either be Blank OR invalid  </span>                               
-                                                    </c:if>
-                                                </td>
-                                                <td></td>
-                                            </tr>
+                                                <td colspan="2">
+                                                    <table id="display_board">
+                                                        <tbody id="clear_board">
+                                                            <tr>
+                                                                <td>Board Name*</td>
+                                                                <td><select name="SelecttxtBoaName" id="SelecttxtBoaName" title="Please select Board OR click ICON to ADD Board" required="">
+                                                                        <option value="">-1</option>
+                                                                        <c:set var="txtBoaName" value="${param.txtBoaName}"></c:set>
+                                                                        <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'boardname','boardid','boardname',txtBoaName)}">                                
+                                                                        </c:out>
+                                                                    </select>
+                                                                    <img src="../images/add.png" alt="Add" id="ADDBoard"/>
+                                                                        <c:if test="${param.submitted and !boardnamesubject.txtBoaNameValid}" var="v1">
+                                                                        <span style="color: red">Board Name is either be Blank OR invalid</span>
+                                                                    </c:if>                                                  
+                                                                </td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>                                                            
+                                                </td>                              
+                                            </tr>                                   
                                             <tr>
-                                                <td>Stream *</td>
+                                                <td>Stream * &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
                                                 <td><input type="radio" name="txtStream" title="Please Select Stream" id="txtStream" value="Science" >Science
                                                     <input type="radio" name="txtStream" title="Please Select Stream" id="txtStream" value="Commerce" >Commerce
                                                     <input type="radio" name="txtStream" title="Please Select Stream" id="txtStream" value="Arts" >Arts</td>
@@ -132,24 +166,7 @@
                                         </tr>               
                                     </table>
                                 </form>
-                                <h3 id="warning">Your form contains tons of errors! Please try again.</h3> <!-- Error Message Display -->
-                                <c:if test="${param.submitted and !v1 and !v2 and !v3}">
-                                    <%
-                                        int i;
-                                        i = boardnamesubjectDAO.insertBoard(getServletContext(), boardnamesubject);
-                                        if (i == 0) {
-                                            out.println("<script>swal(\"Oops...\", \"Board Name should contain atleast 5 Letter!\", \"error\");</script>");
-                                        } else if (i == 1) {
-                                            out.println("<script>swal(\"Good job!\", \"Record Added Sucessfully!\", \"success\");</script>");
-                                        } else if (i == 3) {
-                                            out.println("<script>swal(\"Oops...\", \"Subject Name Should contain atleast 5 Letter!\", \"error\");</script>");
-                                        } else if (i == 6) {
-                                            out.println("<script>swal(\"Oops...\", \"Stream already exist!\", \"error\");</script>");
-                                        } else if (i == 5) {
-                                            out.println("<script>swal(\"Oops...\", \"Subject Repeat!\", \"error\");</script>");
-                                        }
-                                    %>
-                                </c:if>
+                                <h3 id="warning"></h3> <!-- Error Message Display -->
                             </div>
                         </div>
                     </td>

@@ -37,8 +37,9 @@ public class DeleteBoardSubj extends HttpServlet {
         String sql = "";
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
-
+        int affectedRows;
         String cmbBoardID = request.getParameter("cmbBoardID");
+        String stream = request.getParameter("stream");
         //int limit = Integer.parseInt(request.getParameter("limit"));
         //int offset = Integer.parseInt(request.getParameter("offset"));
 
@@ -57,16 +58,27 @@ public class DeleteBoardSubj extends HttpServlet {
         }
 
         try {
-            sql = "DELETE FROM boardname WHERE boardid = ?";
+            int count = 0;
+            sql = "SELECT DISTINCT stream FROM clxiisubj WHERE boardid=?";
             pst = con.prepareStatement(sql);
             pst.setString(1, cmbBoardID);
-            int affectedRows = pst.executeUpdate();
-            if (affectedRows > 0) {
-                System.out.println("A user was deleted successfully!");
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                count++;
             }
-            sql = "DELETE FROM clxiisubj WHERE boardid = ?";
+            if (count == 1) {
+                sql = "DELETE FROM boardname WHERE boardid = ?";
+                pst = con.prepareStatement(sql);
+                pst.setString(1, cmbBoardID);
+                affectedRows = pst.executeUpdate();
+                if (affectedRows > 0) {
+                    System.out.println("A user was deleted successfully!");
+                }
+            }
+            sql = "DELETE FROM clxiisubj WHERE boardid = ? AND stream=?";
             pst = con.prepareStatement(sql);
             pst.setString(1, cmbBoardID);
+            pst.setString(2, stream);
             affectedRows = pst.executeUpdate();
             if (affectedRows > 0) {
                 System.out.println("A user was deleted successfully!");

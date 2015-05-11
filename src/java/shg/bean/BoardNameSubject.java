@@ -13,7 +13,7 @@ import shg.valid.Validator;
  */
 public class BoardNameSubject {
 
-    private String cmbBoardID; 
+    private String cmbBoardID;
     private String txtBoaName;
     private String[] txtSubName;
     private String txtStream;
@@ -28,7 +28,7 @@ public class BoardNameSubject {
     public void setTxtSubName(String[] txtSubName) {
         this.txtSubName = txtSubName;
     }
-    
+
     /**
      * @return the cmbBoardID
      */
@@ -39,7 +39,7 @@ public class BoardNameSubject {
     /**
      * @param cmbBoardID the cmbBoardID to set
      */
-    public void setCmbBoardID(String cmbBoardID) {  
+    public void setCmbBoardID(String cmbBoardID) {
         this.cmbBoardID = cmbBoardID;
     }
 
@@ -61,6 +61,7 @@ public class BoardNameSubject {
         String[] item = getTxtSubName();
         if (item != null) {
             for (String item1 : item) {
+                System.out.println("Subject "+item1);
                 if ((Validator.isNullValue(item1)) || Validator.containsIllegalCharacters(item1) || !(Validator.isText(item1))) {
                     return false;
                 }
@@ -72,7 +73,16 @@ public class BoardNameSubject {
     }
 
     public boolean isTxtBoaNameValid() {
-        return !((Validator.isNullValue(getTxtBoaName())) || Validator.containsIllegalCharacters(getTxtBoaName()) || !(Validator.isText(getTxtBoaName())));
+        if (getTxtBoaName() != null) {
+            String pattern = "^[a-zA-Z0-9]*$";
+            if (getTxtBoaName().matches(pattern)) {
+                return true;
+            } else {
+                //System.out.println("Boardname:"+getTxtBoaName());
+                return !((Validator.isNullValue(getTxtBoaName())) || Validator.containsIllegalCharacters(getTxtBoaName()) || !(Validator.isText(getTxtBoaName())));
+            }
+        }
+        return false;
     }
 
     public boolean isCmbBoardIDValid() {
@@ -81,7 +91,6 @@ public class BoardNameSubject {
         }
         return true;
     }
-
 
     /**
      * @return the txtStream

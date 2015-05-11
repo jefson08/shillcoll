@@ -4,69 +4,87 @@
  * and open the template in the editor.
  */
 $.validator.prototype.checkForm = function () {
-                //overriden in a specific page
-                this.prepareForm();
-                for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
-                    if (this.findByName(elements[i].name).length !== undefined && this.findByName(elements[i].name).length > 1) {
-                        for (var cnt = 0; cnt < this.findByName(elements[i].name).length; cnt++) {
-                            this.check(this.findByName(elements[i].name)[cnt]);
-                        }
-                    } else {
-                        this.check(elements[i]);
-                    }
-                }
-                return this.valid();
+    //overriden in a specific page
+    this.prepareForm();
+    for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
+        if (this.findByName(elements[i].name).length !== undefined && this.findByName(elements[i].name).length > 1) {
+            for (var cnt = 0; cnt < this.findByName(elements[i].name).length; cnt++) {
+                this.check(this.findByName(elements[i].name)[cnt]);
             }
+        } else {
+            this.check(elements[i]);
+        }
+    }
+    return this.valid();
+}
 
 $(document).ready(function () {
-      var validator = $("#boardnamesubject").bind("invalid-form.validate", function () {
+    var validator = $("#boardnamesubject").bind("invalid-form.validate", function () {
         $("#summary").html("Your form contains " + validator.numberOfInvalids() + " errors, see details below.");
     }).validate({
         debug: true,
         errorElement: "em",
         errorContainer: $("#warning, #summary"),
         errorPlacement: function (error, element) {
-          if (element.attr("type") === "radio") {
+            if (element.attr("type") === "radio") {
                 error.insertAfter("#radErr");
-            } 
+            }
             error.appendTo(element.parent("td").next("td"));
         },
         success: function (label) {
             //label.text("ok!").addClass("success");
         },
         rules: {
-            txtBoaName: "nameTextBox",
+            TxtBoaName: "nameTextBox",
             txtStream: "required",
-            txtSubName:"nameTextBox"
+            txtSubName: "nameTextBox"
         },
         submitHandler: function (form) {
             form.submit();
         }
     });
-    
-    $('#cmdSave').click(function(){
-                $('[id^="txtSubName"]').each(function(){
-                    if ($(this).val().length>0){
-                       // alert($(this).val());
-                       $(this).rules('add', {
-                            nameTextBox: true,
-                            required:true,
-                        });  
-                        
-                    }
-                })
-            })
-    
+
+    $('#cmdSave').click(function () {
+        $('[id^="txtSubName"]').each(function () {
+            if ($(this).val().length > 0) {
+                // alert($(this).val());
+                $(this).rules('add', {
+                    nameTextBox: true,
+                    required: true,
+                });
+
+            }
+        })
+    })
+
+    $('#SelecttxtBoaName').live('change', function () {
+        //alert("HelloSlect");
+        $('#txtBoaName').attr("value", $('#SelecttxtBoaName').val());
+    })
+
+    $('#TxtBoaName').live('focusout', function () {
+        //alert("helloText");
+        $('#txtBoaName').attr("value", $('#TxtBoaName').val());
+    })
+
     var count = 3;
     $("#ADDIcon").live("click", function () {
         // alert("hurrayy");
         count++;
         var str = '<tr id=' + count + '><td>Subject *</td>';
-        str += '<td><input type="text" name="txtSubName" id=name="txtSubName['+count+']" value="" size="50"/></td>';
-        str+='<td><img src="../images/remove.png" alt="Remove" imgno='+count+' id="DelIcon"/>&nbsp;';
-        str+='<img src="../images/add.png" alt="Add" imgno='+count+' id="ADDIcon"/></td>';
+        str += '<td><input type="text" name="txtSubName" id=name="txtSubName[]" value="" size="50"/></td>';
+        str += '<td><img src="../images/remove.png" alt="Remove" imgno=' + count + ' id="DelIcon"/>&nbsp;';
+        str += '<img src="../images/add.png" alt="Add" imgno=' + count + ' id="ADDIcon"/></td>';
         str += '<td></td></tr>';
         $('#subjectName > tbody:last').append(str);
+    })
+
+    $("#ADDBoard").live("click", function () {
+        $('#clear_board').html('');
+        var str = '<tr><td>Board Name *</td>';
+        str += '<td><input type="text" name="TxtBoaName" id="TxtBoaName" value="" size="50"/></td><td></td></tr>';
+
+        $('#display_board > tbody:last').append(str);
     })
 
 
