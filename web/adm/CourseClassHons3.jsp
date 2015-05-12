@@ -79,7 +79,7 @@
                                                         </c:out>
                                                     </select> 
                                                     <c:if test="${param.submitted and !CCH.cmbSubjectNameValid}" var="v2">
-                                                        Subject Not Selected
+                                                        <span style="color:red" > Subject Not Selected</span>
                                                     </c:if>
                                                 </td>
                                             </tr>
@@ -95,7 +95,7 @@
                                                         </c:out>
                                                     </select> 
                                                     <c:if test="${param.submitted and !CCH.cmbSubjectNameValid}" var="v3">
-                                                        Subject Not Selected
+                                                        <span style="color:red" >Subject Not Selected</span>    
                                                     </c:if>
                                                 </td>
 
@@ -113,20 +113,20 @@
                                         <tr>
                                             <td colspan="4">
                                                 <c:if test="${param.submitted and !CCH.txtPaperIdValid}" var="v4"> 
-                                                    Paper ID is either blank or invalid!!!!
+                                                    <span style="color:red" >Paper ID is either blank or invalid!!!!</span>
                                                 </c:if>
                                             </td>
                                         </tr><tr>
                                             <td colspan="4">
                                                 <c:if test="${param.submitted and !CCH.txtPaperNameValid}" var="v5"> 
-                                                    Paper Name is either blank or invalid!!!!
+                                                    <span style="color:red" >Paper Name is either blank or invalid!!!!</span>
                                                 </c:if>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4">
                                                 <c:if test="${param.submitted and !CCH.cmbYearOrSemNoValid}" var="v6">
-                                                    Semester No. or Year No. Not Selected!!!
+                                                    <span style="color:red" > Semester No. or Year No. Not Selected!!!</span>
                                                 </c:if>
                                             </td>
                                         </tr>
