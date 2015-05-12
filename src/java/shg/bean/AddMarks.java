@@ -26,6 +26,7 @@ public class AddMarks {
 private String cmbYearOrSemNo;
 private String cmbNR;
 
+private String cmbPos;
     /**
      * @return the txtNehuRollNo
      */
@@ -164,6 +165,19 @@ private String cmbNR;
      */
     public void setCmbDiv(String cmbDiv) {
         this.cmbDiv = cmbDiv;
+    }
+     /**
+     * @return the cmbPos
+     */
+    public String getCmbPos() {
+        return cmbPos;
+    }
+
+    /**
+     * @param cmbPos the cmbPos to set
+     */
+    public void setCmbPos(String cmbPos) {
+        this.cmbPos = cmbPos;
     }
 
     /**

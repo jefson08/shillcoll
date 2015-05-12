@@ -163,6 +163,7 @@ public class GetExamPapers extends HttpServlet {
                     output += "</td>";
                 } else {
                     output += "<select name=\"cmbDiv\" id=\"cmbDiv\">";
+                    output += "<option value=\"-1\">-</option>";
                     output += "<option value=\"pass\" "+ div.trim().toLowerCase().equals("pass")+"?\"selected\":\"\">Passed</option>";
                     output += "<option value=\"fail\" "+ div.trim().toLowerCase().equals("fail")+"?\"selected\":\"\">Failed</option></select></td>";
                     output += "<td><b>Position &nbsp;&nbsp;</b>";
@@ -180,7 +181,7 @@ public class GetExamPapers extends HttpServlet {
                     output += "<option value=\"10\" "+ pos.trim().equals("10")+"?\"selected\":\"\">10th</option></select>";
                     output += "</td>";
                 }
-                output += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" name=\"cmdSave\" id=\"cmdSave\" value=\"Save\" /></td></tr>";
+                output += "<td><input type=\"submit\" name=\"cmdSave\" id=\"cmdSave\" value=\"Save\" /></td></tr>";
                 output += "</table></div>";
 
             } else {

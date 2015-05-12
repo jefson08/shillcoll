@@ -7,7 +7,7 @@
 $(document).ready(function() {
      var YearOrSem='s';
  $('input[name=cmdSearch]').click(function () {
-   
+   //$('#srchlist').hide();
         $('input[type=submit]').removeAttr('disabled');
         $('input[name=cmdAddMore]').removeAttr('disabled');
         var txtNehuRollNo = $('#txtNehuRollNo').val();

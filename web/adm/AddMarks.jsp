@@ -188,45 +188,82 @@
                                                     </tr>
                                                 </c:forEach>
                                                 <tr>
-                                                    <td colspan="5"><b>Division &nbsp;&nbsp;</b>
-                                                        <c:choose>
-                                                            <c:when test="${yearorsemno=='s6' or yearorsemno=='y3'}">
-                                                                <select name="cmbDiv" id="cmbDiv">
+                                                    <td><b>Division &nbsp;&nbsp;</b>
+                                                        <select name="cmbDiv" id="cmbDiv"> 
+                                                            <c:choose>
+                                                                <c:when test="${yearorsemno=='s6' or yearorsemno=='y3'}">
+                                                                    <option value="-1">-</option>
+                                                                    <option value="I"  ${AM.cmbDiv == 'I' ? 'selected' : ''}>I</option>
+                                                                    <option value="II" ${AM.cmbDiv == 'II' ? 'selected' : ''}>II</option>
+                                                                    <option value="III" ${AM.cmbDiv == 'III' ? 'selected' : ''}>III</option>
+                                                                    <option value="fail" ${AM.cmbDiv == 'fail' ? 'selected' : ''}>Failed</option>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                    <select name="cmbDiv" id="cmbDiv" disabled>
-                                                                    </c:otherwise>
-                                                                </c:choose>
+                                                                    <option value="-1">-</option>
+                                                                    <option value="pass" ${AM.cmbDiv == 'pass' ? 'selected' : ''}>Passed</option>
+                                                                    <option value="fail" ${AM.cmbDiv == 'fail' ? 'selected' : ''}>Failed</option>
+                                                                </c:otherwise>
+                                                            </c:choose>
 
-                                                                <option value="-1">-</option>
-                                                                <option value="I"  ${AM.cmbDiv[status.index] == 'I' ? 'selected' : ''}>I</option>
-                                                                <option value="II" ${AM.cmbDiv[status.index] == 'II' ? 'selected' : ''}>II</option>
-                                                                <option value="III" ${AM.cmbDiv[status.index] == 'III' ? 'selected' : ''}>III</option>
-                                                                <option value="fail" ${AM.cmbDiv[status.index] == 'fail' ? 'selected' : ''}>Failed</option>
-                                                            </select>
-                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <input type="submit" name="cmdSave" id="cmdSave" value="Save" /></td></tr>
-                                            </table></div>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${yearorsemno=='s6' or yearorsemno=='y3'}"><b>Position &nbsp;&nbsp;</b>
+                                                                <select name="cmbPos" id="cmbPos"> 
+                                                                    <option value="-1">-</option>
+                                                                    <option value="1" ${AM.cmbPos == '1' ? 'selected' : ''}>1st</option>
+                                                                    <option value="1" ${AM.cmbPos == '2' ? 'selected' : ''}>2nd</option>
+                                                                    <option value="1" ${AM.cmbPos == '3' ? 'selected' : ''}>3rd</option>
+                                                                    <option value="1" ${AM.cmbPos == '4' ? 'selected' : ''}>4th</option>
+                                                                    <option value="1" ${AM.cmbPos == '5' ? 'selected' : ''}>5th</option>
+                                                                    <option value="1" ${AM.cmbPos == '6' ? 'selected' : ''}>6th</option>
+                                                                    <option value="1" ${AM.cmbPos == '7' ? 'selected' : ''}>7th</option>
+                                                                    <option value="1" ${AM.cmbPos == '8' ? 'selected' : ''}>8th</option>
+                                                                    <option value="1" ${AM.cmbPos == '9' ? 'selected' : ''}>9th</option>
+                                                                    <option value="1" ${AM.cmbPos == '10' ? 'selected' : ''}>10th</option>
+                                                                </select>
+                                                            </c:when>
+                                                                <c:otherwise>
+                                                                    <select name="cmbPos" id="cmbPos" disabled> 
+                                                                        <option value="-1">-</option>
+                                                                    <option value="1" ${AM.cmbPos == '1' ? 'selected' : ''}>1st</option>
+                                                                    <option value="1" ${AM.cmbPos == '2' ? 'selected' : ''}>2nd</option>
+                                                                    <option value="1" ${AM.cmbPos == '3' ? 'selected' : ''}>3rd</option>
+                                                                    <option value="1" ${AM.cmbPos == '4' ? 'selected' : ''}>4th</option>
+                                                                    <option value="1" ${AM.cmbPos == '5' ? 'selected' : ''}>5th</option>
+                                                                    <option value="1" ${AM.cmbPos == '6' ? 'selected' : ''}>6th</option>
+                                                                    <option value="1" ${AM.cmbPos == '7' ? 'selected' : ''}>7th</option>
+                                                                    <option value="1" ${AM.cmbPos == '8' ? 'selected' : ''}>8th</option>
+                                                                    <option value="1" ${AM.cmbPos == '9' ? 'selected' : ''}>9th</option>
+                                                                    <option value="1" ${AM.cmbPos == '10' ? 'selected' : ''}>10th</option>
+                                                                </select>
+                                                                </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                                    
+                                                           <td>     <input type="submit" name="cmdSave" id="cmdSave" value="Save" /></td></tr>
+                                                    </table></div>
 
+                                            </div>
+                                            <h3 id="warning"></h3> 
+
+                                            <c:if test="${param.submitted}">
+                                                <%
+
+                                                    int res = AMDAO.UpdateMarks(getServletContext(), AM);
+                                                    if (res == 1) {
+                                                        System.out.println("operation Successful");
+                                                    } else {
+                                                        System.out.println("operation Unuccessful");
+                                                    }
+                                                %>
+                                            </c:if>
+
+
+                                        </form>
                                     </div>
-                                    <h3 id="warning"></h3> 
-
-                                    <c:if test="${param.submitted}">
-                                        <%
-
-                                            int res = AMDAO.UpdateMarks(getServletContext(), AM);
-                                            if (res == 1) {
-                                                System.out.println("operation Successful");
-                                            } else {
-                                                System.out.println("operation Unuccessful");
-                                            }
-                                        %>
-                                    </c:if>
-
-
-                                </form>
-                            </div>
-                            <div id="msg" >
+                                    <div id="msg" >
 
 
 
@@ -234,8 +271,8 @@
 
 
 <!--<div id="footer"><%=application.getInitParameter("pageFooter")%></div>-->
-                            </div>
+                                    </div>
 
-                            </body>
+                                    </body>
 
-                            </html>
+                                    </html>
