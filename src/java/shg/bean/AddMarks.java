@@ -25,24 +25,6 @@ public class AddMarks {
     private String cmbDiv;
 private String cmbYearOrSemNo;
 private String cmbNR;
-    public boolean isCmbNRValid()
-    {
-         if (Validator.isNullValue(getCmbNR()) || getCmbNR().equals("-1")) {
-            System.out.println(getCmbNR());
-            return false;
-        }
-        return true;
-    }
-
-    
-   
-    public boolean isCmbYearOrSemNoValid() {
-        if (Validator.isNullValue(getCmbYearOrSemNo()) || getCmbYearOrSemNo().equals("-1")) {
-            System.out.println(getCmbYearOrSemNo());
-            return false;
-        }
-        return true;
-    }
 
     /**
      * @return the txtNehuRollNo
@@ -210,6 +192,51 @@ private String cmbNR;
      */
     public void setCmbNR(String cmbNR) {
         this.cmbNR = cmbNR;
+    }
+public boolean isTxtMarksThValid()
+{
+      int itemsCount, i;
+        String items[] = getTxtMarksTh();
+        itemsCount = getTxtMarksTh().length;
+        for(i=0; i< itemsCount; i++){
+         
+            if ((Validator.isNullValue(items[i]))) {
+                return false;
+            }
+        }
+        return true;
+    }
+public boolean isTxtMarksPrValid()
+{
+      int itemsCount, i;
+        String items[] = getTxtMarksPr();
+        itemsCount = getTxtMarksPr().length;
+        for(i=0; i< itemsCount; i++){
+         
+            if (!(items[i].trim().equals("-1")) && (Validator.isNullValue(items[i]))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isCmbNRValid()
+    {
+         if (Validator.isNullValue(getCmbNR()) || getCmbNR().equals("-1")) {
+            System.out.println(getCmbNR());
+            return false;
+        }
+        return true;
+    }
+
+    
+   
+    public boolean isCmbYearOrSemNoValid() {
+        if (Validator.isNullValue(getCmbYearOrSemNo()) || getCmbYearOrSemNo().equals("-1")) {
+            System.out.println(getCmbYearOrSemNo());
+            return false;
+        }
+        return true;
     }
 
    

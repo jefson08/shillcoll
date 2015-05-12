@@ -168,10 +168,8 @@ public class CourseClassHons {
         int itemsCount, i;
         String items[] = getTxtPaperId();
         itemsCount = getTxtPaperId().length;
-        //t len=getPaperid().length;
-        //String id[]=getPaperid();
         for(i=0; i< itemsCount; i++){
-           // if(Validator.isNullValue((items[i]))){
+         
             if ((Validator.isNullValue(items[i]))) {
                 return false;
             }

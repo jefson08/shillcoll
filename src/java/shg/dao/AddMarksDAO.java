@@ -26,12 +26,12 @@ public class AddMarksDAO {
     private ConnectionPool connectionPool = null;
     private int affectedRows;
     private int itemscount;
-    public int UpdateMarks(ServletContext context, AddMarks AM) {
+    public int UpdateMarks(ServletContext context, AddMarks AM,StringBuilder ERRMsg) {
          String papercodes[]=AM.getTxtPaperCode();
          String subjectcodes[]=AM.getTxtSubjectCode();
          String marksth[]=AM.getTxtMarksTh();
          String markspr[]=AM.getTxtMarksPr();
-         System.out.println("hello");
+         int rowcount=0;
          try {
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
@@ -69,6 +69,7 @@ public class AddMarksDAO {
             if (affectedRows <= 0) {
                 throw new SQLException("Insert failed.. ");
             }
+         
           /*  if(AM.getCmbYearOrSemNo().trim().equals("s6") || AM.getCmbYearOrSemNo().trim().equals("y3"))
             {
             //insert into result

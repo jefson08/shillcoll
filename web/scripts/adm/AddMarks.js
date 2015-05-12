@@ -58,10 +58,12 @@ $(document).ready(function() {
      if (($(this).attr('value')=='s6') || ($(this).attr('value')=='y3'))
      { 
          $('select[name=cmbDiv]').removeAttr('disabled');
+          $('select[name=cmbPos]').removeAttr('disabled');
      }
      else
      {
         $('select[name=cmbDiv]').attr('disabled','disabled'); 
+        $('select[name=cmbPos]').attr('disabled','disabled'); 
      }
      })
    });
