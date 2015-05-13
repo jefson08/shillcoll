@@ -146,12 +146,17 @@
                                                 </td>
                                                 <td>
                                                     <c:if test="${param.submitted and !AM.isTxtMarksThValid()}" var="v4">
-                                                        <span style="color:red" >Invalid Category</span>
+                                                        <span style="color:red" >Invalid Marks</span>
                                                     </c:if>
                                                 </td>
                                                 <td>
                                                     <c:if test="${param.submitted and !AM.isTxtMarksPrValid()}" var="v5">
-                                                        <span style="color:red" >Invalid Category</span>
+                                                        <span style="color:red" >Invalid Marks</span>
+                                                    </c:if>
+                                                </td>
+                                                 <td>
+                                                    <c:if test="${param.submitted and !AM.isCmbDivValid()}" var="v5">
+                                                        <span style="color:red" >Division not selected</span>
                                                     </c:if>
                                                 </td>
                                             </tr>
@@ -213,30 +218,30 @@
                                                                 <select name="cmbPos" id="cmbPos"> 
                                                                     <option value="-1">-</option>
                                                                     <option value="1" ${AM.cmbPos == '1' ? 'selected' : ''}>1st</option>
-                                                                    <option value="1" ${AM.cmbPos == '2' ? 'selected' : ''}>2nd</option>
-                                                                    <option value="1" ${AM.cmbPos == '3' ? 'selected' : ''}>3rd</option>
-                                                                    <option value="1" ${AM.cmbPos == '4' ? 'selected' : ''}>4th</option>
-                                                                    <option value="1" ${AM.cmbPos == '5' ? 'selected' : ''}>5th</option>
-                                                                    <option value="1" ${AM.cmbPos == '6' ? 'selected' : ''}>6th</option>
-                                                                    <option value="1" ${AM.cmbPos == '7' ? 'selected' : ''}>7th</option>
-                                                                    <option value="1" ${AM.cmbPos == '8' ? 'selected' : ''}>8th</option>
-                                                                    <option value="1" ${AM.cmbPos == '9' ? 'selected' : ''}>9th</option>
-                                                                    <option value="1" ${AM.cmbPos == '10' ? 'selected' : ''}>10th</option>
+                                                                    <option value="2" ${AM.cmbPos == '2' ? 'selected' : ''}>2nd</option>
+                                                                    <option value="3" ${AM.cmbPos == '3' ? 'selected' : ''}>3rd</option>
+                                                                    <option value="4" ${AM.cmbPos == '4' ? 'selected' : ''}>4th</option>
+                                                                    <option value="5" ${AM.cmbPos == '5' ? 'selected' : ''}>5th</option>
+                                                                    <option value="6" ${AM.cmbPos == '6' ? 'selected' : ''}>6th</option>
+                                                                    <option value="7" ${AM.cmbPos == '7' ? 'selected' : ''}>7th</option>
+                                                                    <option value="8" ${AM.cmbPos == '8' ? 'selected' : ''}>8th</option>
+                                                                    <option value="9" ${AM.cmbPos == '9' ? 'selected' : ''}>9th</option>
+                                                                    <option value="10" ${AM.cmbPos == '10' ? 'selected' : ''}>10th</option>
                                                                 </select>
                                                             </c:when>
                                                                 <c:otherwise>
                                                                     <select name="cmbPos" id="cmbPos" disabled> 
                                                                         <option value="-1">-</option>
                                                                     <option value="1" ${AM.cmbPos == '1' ? 'selected' : ''}>1st</option>
-                                                                    <option value="1" ${AM.cmbPos == '2' ? 'selected' : ''}>2nd</option>
-                                                                    <option value="1" ${AM.cmbPos == '3' ? 'selected' : ''}>3rd</option>
-                                                                    <option value="1" ${AM.cmbPos == '4' ? 'selected' : ''}>4th</option>
-                                                                    <option value="1" ${AM.cmbPos == '5' ? 'selected' : ''}>5th</option>
-                                                                    <option value="1" ${AM.cmbPos == '6' ? 'selected' : ''}>6th</option>
-                                                                    <option value="1" ${AM.cmbPos == '7' ? 'selected' : ''}>7th</option>
-                                                                    <option value="1" ${AM.cmbPos == '8' ? 'selected' : ''}>8th</option>
-                                                                    <option value="1" ${AM.cmbPos == '9' ? 'selected' : ''}>9th</option>
-                                                                    <option value="1" ${AM.cmbPos == '10' ? 'selected' : ''}>10th</option>
+                                                                    <option value="2" ${AM.cmbPos == '2' ? 'selected' : ''}>2nd</option>
+                                                                    <option value="3" ${AM.cmbPos == '3' ? 'selected' : ''}>3rd</option>
+                                                                    <option value="4" ${AM.cmbPos == '4' ? 'selected' : ''}>4th</option>
+                                                                    <option value="5" ${AM.cmbPos == '5' ? 'selected' : ''}>5th</option>
+                                                                    <option value="6" ${AM.cmbPos == '6' ? 'selected' : ''}>6th</option>
+                                                                    <option value="7" ${AM.cmbPos == '7' ? 'selected' : ''}>7th</option>
+                                                                    <option value="8" ${AM.cmbPos == '8' ? 'selected' : ''}>8th</option>
+                                                                    <option value="9" ${AM.cmbPos == '9' ? 'selected' : ''}>9th</option>
+                                                                    <option value="10" ${AM.cmbPos == '10' ? 'selected' : ''}>10th</option>
                                                                 </select>
                                                                 </c:otherwise>
                                                         </c:choose>

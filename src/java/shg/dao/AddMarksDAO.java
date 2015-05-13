@@ -22,7 +22,7 @@ public class AddMarksDAO {
     private Connection con = null;
     private ResultSet rs = null;
     private PreparedStatement pst = null;
-    private String sql = "";
+    private String sql = "",pos;
     private ConnectionPool connectionPool = null;
     private int affectedRows;
     private int itemscount;
@@ -50,7 +50,7 @@ public class AddMarksDAO {
             pst.setString(2, AM.getTxtNehuRollNo().toLowerCase());
 
             affectedRows = pst.executeUpdate();
-            System.out.println("aff rows" + affectedRows);
+            
             for (int i = 0; i < itemscount; i++) {
                 sql = "INSERT INTO papersappear(examid,nehurollno,rollno,subjectcode,papercode,marksth,markspr) "
                         + "    VALUES (?, ?,?,?,?,?,?) ";
@@ -70,14 +70,14 @@ public class AddMarksDAO {
                     throw new SQLException("Insert failed.. ");
                 }
             }
-            sql = "select * from result where lower(examid)=? and lower(nehurollno)=? and lower(yearorsem)=?";
+            sql = "select * from result where lower(examid)=? and lower(nehurollno)=? and lower(yearorsemno)=?";
             pst = con.prepareStatement(sql);
             pst.setString(1, AM.getTxtExamID().trim().toLowerCase());
             pst.setString(2, AM.getTxtNehuRollNo().trim().toLowerCase());
             pst.setString(3, AM.getCmbYearOrSemNo().trim().toLowerCase());
             rs = pst.executeQuery();
             if (rs.next()) {
-                sql = "delete from result where lower(examid)=? and lower(nehurollno)=? and lower(yearorsem)=?";
+                sql = "delete from result where lower(examid)=? and lower(nehurollno)=? and lower(yearorsemno)=?";
                 pst = con.prepareStatement(sql);
                 pst.setString(1, AM.getTxtExamID().trim().toLowerCase());
                 pst.setString(2, AM.getTxtNehuRollNo().trim().toLowerCase());
@@ -86,15 +86,26 @@ public class AddMarksDAO {
                  if (affectedRows <= 0) {
                     throw new SQLException("Operation failed.. ");
                 }
-                sql = "insert into result (nehurollno,yearorsemno,pos,examid,division) values(?,?,?,?,?,?)";
+            }
+                sql = "insert into result (nehurollno,yearorsemno,pos,examid,division) values(?,?,?,?,?)";
                 pst = con.prepareStatement(sql);
-               
-                 pst.setString(2, AM.getTxtNehuRollNo().trim());
-                 pst.setString(3, AM.getCmbYearOrSemNo().trim());
-                 pst.setString(4, AM.getCmbPos().trim());
-                 pst.setString(5, AM.getTxtExamID().trim());
-                 pst.setString(3, AM.getCmbDiv().trim());
+              
+                 pst.setString(1, AM.getTxtNehuRollNo().trim());
+                 pst.setString(2, AM.getCmbYearOrSemNo().trim());
+                 if(AM.getCmbPos()==null)
+                 {
+                     pos="-1";
+                             
+                 }
+                 else
+                 {
+                     pos=AM.getCmbPos().trim();
+                 }
+                 pst.setString(3,pos );
+                 pst.setString(4, AM.getTxtExamID().trim());
+                 pst.setString(5, AM.getCmbDiv().trim());
                  affectedRows = pst.executeUpdate();
+                 System.out.println("aff rows" + affectedRows);
                  if (affectedRows <= 0) {
                     throw new SQLException("Operation failed.. ");
                 }
@@ -102,7 +113,7 @@ public class AddMarksDAO {
                  {
                  //insert into result
                  }*/
-            }
+            
             con.commit();
 
         } catch (Exception e) {

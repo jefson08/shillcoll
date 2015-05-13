@@ -126,7 +126,7 @@ public class GetExamPapers extends HttpServlet {
                 // {
                 //    output += "<select name=\"cmbDiv\" id=\"cmbDiv\" disabled>";
                 //  }
-                sql = "select * from result where lower(examid)=? and lower(nehurollno)=? and lower(yearorsem)=?";
+                sql = "select * from result where lower(examid)=? and lower(nehurollno)=? and lower(yearorsemno)=?";
                 pst = con.prepareStatement(sql);
                 pst.setString(1, examid);
                 pst.setString(2, nehurollno.toLowerCase());
@@ -147,7 +147,7 @@ public class GetExamPapers extends HttpServlet {
                     output += "<option value=\"III\" "+ div.trim().toUpperCase().equals("III")+"?\"selected\":\"\">III</option>";
                     output += "<option value=\"fail\" "+ div.trim().toUpperCase().equals("fail")+"?\"selected\":\"\">Failed</option></select>";
                     output += "</td>";
-                    output += "<td><b>Division &nbsp;&nbsp;</b>";
+                    output += "<td><b>Position &nbsp;&nbsp;</b>";
                     output += "<select name=\"cmbPos\" id=\"cmbPos\">";
                     output += "<option value=\"-1\">-</option>";
                     output += "<option value=\"1\" "+ pos.trim().equals("1")+"?\"selected\":\"\">1st</option>";

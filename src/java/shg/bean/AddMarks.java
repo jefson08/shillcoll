@@ -23,10 +23,11 @@ public class AddMarks {
      private String [] txtSubjectName;
     private String txtExamID;
     private String cmbDiv;
+    private String cmbPos;
 private String cmbYearOrSemNo;
 private String cmbNR;
 
-private String cmbPos;
+
     /**
      * @return the txtNehuRollNo
      */
@@ -252,6 +253,20 @@ public boolean isTxtMarksPrValid()
         }
         return true;
     }
-
+public boolean isTxtNehuRollNoValid(){
+     if (Validator.isNullValue(getTxtNehuRollNo()) || getTxtNehuRollNo().equals("-1")) {
+            System.out.println(getTxtNehuRollNo());
+            return false;
+        }
+        return true;
+}
+   public boolean isCmbDivValid()
+   {
+      if (Validator.isNullValue(getCmbDiv()) || getCmbDiv().equals("-1")) {
+            System.out.println(getCmbDiv());
+            return false;
+        }
+        return true;
+} 
    
 }
