@@ -94,7 +94,7 @@ public class getStuForPromote extends HttpServlet {
                         + "  e.semoryear "
                         + "FROM "
                         + "  studentdetails AS s, "
-                        + "  exam AS e,"
+                        + "  examinfo AS e,"
                         + " course AS c "
                         + "WHERE "
                         + "  s.rollno = e.rollno "

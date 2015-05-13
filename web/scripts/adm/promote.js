@@ -43,7 +43,7 @@ $(document).ready(function () {
         minlength: 1
       }
     },
-    messages:{
+    messages: {
       "promote[]": "You must select at least one!"
     },
     submitHandler: function (form) {
@@ -85,18 +85,19 @@ $(document).ready(function () {
   });
 
   $('#search').click(function () {
-
+    var box1;
     $.ajax({
       type: "POST",
       url: "../getStuForPromote",
       data: ({cmbCourse: $('#cmbCourse').val(), cmbYearOrSemNo: $('#cmbYearOrSemNo').val()}),
-      beforeSubmit: function () {
-        // $('#processing').css({visibility: 'visible'});
-        //alert("before submit");
+      beforeSend: function () {
+        box1 = new ajaxLoader(".box-1");
         return true;
       },
       success: function (response) {
         //$('#msg').html(response);;
+        if (box1)
+          box1.remove();
         $("#srchlist").html(response);
 
       },
