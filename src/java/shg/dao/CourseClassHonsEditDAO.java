@@ -33,7 +33,7 @@ public class CourseClassHonsEditDAO {
     // int slno;
     private int affectedRows;
 
-    public int updateToAllPapers(ServletContext context, CourseClassHons CCH,StringBuilder ErrMsg){
+    public int updateToAllPapers(ServletContext context, CourseClassHons CCH){
   
         String PaperIds[] = CCH.getTxtPaperId();
         String PaperNames[] = CCH.getTxtPaperName();
@@ -48,34 +48,23 @@ public class CourseClassHonsEditDAO {
           for (int i = 0; i < ItemsCount - 1; i++) {
             for (int j = i + 1; j < ItemsCount; j++) {
                 if (PaperIds[i].equals(PaperIds[j])) {
-                    return 4;//duplicate paper id in textfields
+                    return 2;//duplicate paper id in textfields
                 } else if (PaperNames[i].equals(PaperNames[j])) {
-                    return 5;//duplicate paper name in textfields
+                    return 3;//duplicate paper name in textfields
                 }
             }
         }
         try {
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
-           sql1 = "SELECT papercode,papername from papers WHERE coursecode=? and subjectcode=?";
+           sql1 = "SELECT papercode,papername from papers WHERE lower(coursecode)=? and lower(subjectcode)=?";
 
             pst = con.prepareStatement(sql1);
-            pst.setString(1, CCode);
-            pst.setString(2, SubjectId);
+            pst.setString(1, CCode.trim().toLowerCase());
+            pst.setString(2, SubjectId.trim().toLowerCase());
 
             rs = pst.executeQuery();
 
-            while (rs.next()) {
-                if (Arrays.asList(PaperIds).contains(rs.getString("papercode"))) {
-                   ErrMsg.append("Paper Code:  " + rs.getString("papercode") + " already exists for this subject");
-                   return 2;// 2 for duplicate paper code
-                }
-                if (Arrays.asList(PaperNames).contains(rs.getString("papername"))) {
-                    System.out.println("Paper Name " + rs.getString("papername") + "already exists for this subject");
-                    ErrMsg.append("Paper Name: " +rs.getString("papername") + "already exists for this subject");
-                    return 3; // 3 for duplicate paper name
-                }
-            }
         } catch (Exception e) {
             System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
             return -1;
