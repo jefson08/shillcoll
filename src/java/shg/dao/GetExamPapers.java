@@ -43,7 +43,7 @@ public class GetExamPapers extends HttpServlet {
         ConnectionPool connectionPool = null;
         ResultSet rs = null;
         int rowcount = 0;
-        String div="",pos="";
+        String div="",pos="",h;
         PreparedStatement pst = null;
         String sql = "", output = "", practical, cat, yorsno, exists;
         String examid;
@@ -79,7 +79,7 @@ public class GetExamPapers extends HttpServlet {
 
             sql = "SELECT E.rollno,E.examid,S.subjectcode,S.subjectname,PA.marksth,PA.markspr,P.papercode,P.papername,P.practical from papersappear PA inner join subjects S on lower(PA.subjectcode)= lower(S.subjectcode)";
             sql += " inner join papers  P on lower(PA.papercode)=lower(P.papercode) Inner join examinfo  E on lower(PA.examid)=lower(E.examid) where lower(PA.nehurollno)=? and";
-            sql += " lower(E.category)=?";
+            sql += " lower(E.category)=? and lower(E.nehurollno)=lower(PA.nehurollno)";
             //sql += "P.papercode= PA.papercode and  and E.examid=PA.examid and PA.subjectcode=S.subjectcode Group By subjectcode";
             pst = con.prepareStatement(sql);
             //CCH.getCmbSubjectName());//subjectid);
@@ -88,7 +88,7 @@ public class GetExamPapers extends HttpServlet {
             rs = pst.executeQuery();
             if (rs.next()) {
                 examid = rs.getString("examid");
-                // System.out.println(rs.getString("examid"));
+                 System.out.println(rs.getString("examid"));
                 output = "<div class=\"CSSTableGenerator\"><table>";
                 output += "<tr><td>Subject</td>";
                 output += "<td>Paper Id</td>";
@@ -128,58 +128,86 @@ public class GetExamPapers extends HttpServlet {
                 //  }
                 sql = "select * from result where lower(examid)=? and lower(nehurollno)=? and lower(yearorsemno)=?";
                 pst = con.prepareStatement(sql);
-                pst.setString(1, examid);
+                pst.setString(1, examid.trim().toLowerCase());
                 pst.setString(2, nehurollno.toLowerCase());
                 pst.setString(3, yorsno.toLowerCase());
                 rs = pst.executeQuery();
                 while (rs.next()) {
-                    div=rs.getString("division");
-                    pos=rs.getString("position");
-                    
-                    rowcount = rs.getInt(1);
+                    div=rs.getString("division").trim().toUpperCase();
+                    System.out.println("yors="+yorsno);
+                    pos=rs.getString("pos").trim();
+                     
+                    //rowcount = rs.getInt(1);
                 }
 
                 if ((yorsno.trim().equals("s6")) || (yorsno.trim().equals("y3"))) {
                     output += "<select name=\"cmbDiv\" id=\"cmbDiv\">";
                     output += "<option value=\"-1\">-</option>";
-                    output += "<option value=\"I\" "+ div.trim().toUpperCase().equals("I")+"?\"selected\":\"\">I</option>";
-                    output += "<option value=\"II\" "+ div.trim().toUpperCase().equals("II")+"?\"selected\":\"\">II</option>";
-                    output += "<option value=\"III\" "+ div.trim().toUpperCase().equals("III")+"?\"selected\":\"\">III</option>";
-                    output += "<option value=\"fail\" "+ div.trim().toUpperCase().equals("fail")+"?\"selected\":\"\">Failed</option></select>";
+                   h = div.equals("I") ? "selected" : "";
+                   output += "<option value=\"I\" "+ h+ ">I</option>";
+                     h =div.equals("II") ? "selected" : "";
+                    output += "<option value=\"II\" "+ h+">II</option>";
+                      h = div.equals("III") ? "selected" : "";
+                    output += "<option value=\"III\" "+ h+">III</option></select>";
+                      
                     output += "</td>";
                     output += "<td><b>Position &nbsp;&nbsp;</b>";
                     output += "<select name=\"cmbPos\" id=\"cmbPos\">";
                     output += "<option value=\"-1\">-</option>";
-                    output += "<option value=\"1\" "+ pos.trim().equals("1")+"?\"selected\":\"\">1st</option>";
-                    output += "<option value=\"2\" "+ pos.trim().equals("2")+"?\"selected\":\"\">2nd</option>";
-                    output += "<option value=\"3\" "+ pos.trim().equals("3")+"?\"selected\":\"\">3rd</option>";
-                    output += "<option value=\"4\" "+ pos.trim().equals("4")+"?\"selected\":\"\">4th</option>";
-                    output += "<option value=\"5\" "+ pos.trim().equals("5")+"?\"selected\":\"\">5th</option>";
-                    output += "<option value=\"6\" "+ pos.trim().equals("6")+"?\"selected\":\"\">6th</option>";
-                    output += "<option value=\"7\" "+ pos.trim().equals("7")+"?\"selected\":\"\">7th</option>";
-                    output += "<option value=\"8\" "+ pos.trim().equals("8")+"?\"selected\":\"\">8th</option>";
-                    output += "<option value=\"9\" "+ pos.trim().equals("9")+"?\"selected\":\"\">9th</option>";
-                    output += "<option value=\"10\" "+ pos.trim().equals("10")+"?\"selected\":\"\">10th</option></select>";
+                    h = pos.equals("1") ? "selected" : "";
+                    output += "<option value=\"1\" "+ h+">1st</option>";
+                     h = pos.equals("2") ? "selected" : "";
+                    output += "<option value=\"2\" "+h+">2nd</option>";
+                     h = pos.equals("3") ? "selected" : "";
+                    output += "<option value=\"3\" "+ h+">3rd</option>";
+                     h = pos.equals("4") ? "selected" : "";
+                    output += "<option value=\"4\" "+ h+">4th</option>";
+                     h = pos.equals("5") ? "selected" : "";
+                    output += "<option value=\"5\" "+ h+">5th</option>";
+                     h = pos.equals("6") ? "selected" : "";
+                    output += "<option value=\"6\" "+h+">6th</option>";
+                     h = pos.equals("7") ? "selected" : "";
+                    output += "<option value=\"7\" "+h+">7th</option>";
+                     h = pos.equals("8") ? "selected" : "";
+                    output += "<option value=\"8\" "+ h+">8th</option>";
+                     h = pos.equals("9") ? "selected" : "";
+                    output += "<option value=\"9\" "+ h+">9th</option>";
+                     h = pos.equals("10") ? "selected" : "";
+                    output += "<option value=\"10\" "+ h+">10th</option></select>";
                     output += "</td>";
                 } else {
                     output += "<select name=\"cmbDiv\" id=\"cmbDiv\">";
                     output += "<option value=\"-1\">-</option>";
-                    output += "<option value=\"pass\" "+ div.trim().toLowerCase().equals("pass")+"?\"selected\":\"\">Passed</option>";
-                    output += "<option value=\"fail\" "+ div.trim().toLowerCase().equals("fail")+"?\"selected\":\"\">Failed</option></select></td>";
+                    h = div.equals("PASS") ? "selected" : "";
+                      output += "<option value=\"PASS\" "+ h+">Passed</option>";
+                        h = div.equals("FAIL") ? "selected" : "";
+                    output += "<option value=\"FAIL\" "+ h+">Failed</option></select></td>";
+                  
                     output += "<td><b>Position &nbsp;&nbsp;</b>";
                     output += "<select name=\"cmbPos\" id=\"cmbPos\" disabled>";
                     output += "<option value=\"-1\">-</option>";
-                    output += "<option value=\"1\" "+ pos.trim().equals("1")+"?\"selected\":\"\">1st</option>";
-                    output += "<option value=\"2\" "+ pos.trim().equals("2")+"?\"selected\":\"\">2nd</option>";
-                    output += "<option value=\"3\" "+ pos.trim().equals("3")+"?\"selected\":\"\">3rd</option>";
-                    output += "<option value=\"4\" "+ pos.trim().equals("4")+"?\"selected\":\"\">4th</option>";
-                    output += "<option value=\"5\" "+ pos.trim().equals("5")+"?\"selected\":\"\">5th</option>";
-                    output += "<option value=\"6\" "+ pos.trim().equals("6")+"?\"selected\":\"\">6th</option>";
-                    output += "<option value=\"7\" "+ pos.trim().equals("7")+"?\"selected\":\"\">7th</option>";
-                    output += "<option value=\"8\" "+ pos.trim().equals("8")+"?\"selected\":\"\">8th</option>";
-                    output += "<option value=\"9\" "+ pos.trim().equals("9")+"?\"selected\":\"\">9th</option>";
-                    output += "<option value=\"10\" "+ pos.trim().equals("10")+"?\"selected\":\"\">10th</option></select>";
+                     h = pos.equals("1") ? "selected" : "";
+                    output += "<option value=\"1\" "+ h+">1st</option>";
+                     h = pos.equals("2") ? "selected" : "";
+                    output += "<option value=\"2\" "+h+">2nd</option>";
+                     h = pos.equals("3") ? "selected" : "";
+                    output += "<option value=\"3\" "+ h+">3rd</option>";
+                     h = pos.equals("4") ? "selected" : "";
+                    output += "<option value=\"4\" "+ h+">4th</option>";
+                     h = pos.equals("5") ? "selected" : "";
+                    output += "<option value=\"5\" "+ h+">5th</option>";
+                     h = pos.equals("6") ? "selected" : "";
+                    output += "<option value=\"6\" "+h+">6th</option>";
+                     h = pos.equals("7") ? "selected" : "";
+                    output += "<option value=\"7\" "+h+">7th</option>";
+                     h = pos.equals("8") ? "selected" : "";
+                    output += "<option value=\"8\" "+ h+">8th</option>";
+                     h = pos.equals("9") ? "selected" : "";
+                    output += "<option value=\"9\" "+ h+">9th</option>";
+                     h = pos.equals("10") ? "selected" : "";
+                    output += "<option value=\"10\" "+ h+">10th</option></select>";
                     output += "</td>";
+                    
                 }
                 output += "<td><input type=\"submit\" name=\"cmdSave\" id=\"cmdSave\" value=\"Save\" /></td></tr>";
                 output += "</table></div>";

@@ -64,11 +64,11 @@ public class CourseClassHonsDAO {
 
         try {
             con.setAutoCommit(false);
-            sql = "SELECT papercode,papername from papers WHERE coursecode=? and subjectcode=?";
+            sql = "SELECT papercode,papername from papers WHERE lower(coursecode)=? and lower(subjectcode)=?";
 
             pst = con.prepareStatement(sql);
-            pst.setString(1, CCode);
-            pst.setString(2, SubjectId);
+            pst.setString(1, CCode.trim().toLowerCase());
+            pst.setString(2, SubjectId.trim().toLowerCase());
 
             rs = pst.executeQuery();
 
