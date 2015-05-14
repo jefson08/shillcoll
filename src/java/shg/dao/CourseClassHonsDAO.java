@@ -33,7 +33,7 @@ public class CourseClassHonsDAO {
 
     public int insertToAllPapers(ServletContext context, CourseClassHons CCH,StringBuilder ErrMsg) {
        
-        String CCode = CCH.getCmbCourseName();
+        //String CCode = CCH.getCmbCourseName();
         String SubjectId = CCH.getCmbSubjectName();
         String PaperIds[] = CCH.getTxtPaperId();
         String PaperNames[] = CCH.getTxtPaperName();
@@ -64,11 +64,11 @@ public class CourseClassHonsDAO {
 
         try {
             con.setAutoCommit(false);
-            sql = "SELECT papercode,papername from papers WHERE lower(coursecode)=? and lower(subjectcode)=?";
+            sql = "SELECT papercode,papername from papers WHERE lower(subjectcode)=?";
 
             pst = con.prepareStatement(sql);
-            pst.setString(1, CCode.trim().toLowerCase());
-            pst.setString(2, SubjectId.trim().toLowerCase());
+            //pst.setString(1, CCode.trim().toLowerCase());
+            pst.setString(1, SubjectId.trim().toLowerCase());
 
             rs = pst.executeQuery();
 
@@ -97,16 +97,16 @@ public class CourseClassHonsDAO {
                 }
                 System.out.println("subid=" + CCH.getCmbSubjectName());
 
-                sql = "INSERT INTO papers(papercode, papername, coursecode, subjectcode, honsorpass, yearorsemno) "
-                        + "    VALUES (?, ?, ?, ?, ?, ? ) ";
+                sql = "INSERT INTO papers(papercode, papername, subjectcode, honsorpass, yearorsemno) "
+                        + "    VALUES (?, ?, ?, ?, ?) ";
 
                 pst = con.prepareStatement(sql);
                 pst.setString(1, PaperIds[i]);
                 pst.setString(2, PaperNames[i]);
-                pst.setString(3, CCH.getCmbCourseName());
-                pst.setString(4, CCH.getCmbSubjectName());
-                pst.setBoolean(5, cat);
-                pst.setString(6, YearOrSemNos[i]);
+               // pst.setString(3, CCH.getCmbCourseName());
+                pst.setString(3, CCH.getCmbSubjectName());
+                pst.setBoolean(4, cat);
+                pst.setString(5, YearOrSemNos[i]);
                 System.out.println("pst=" + pst);
                 affectedRows = pst.executeUpdate();
                 if (affectedRows <= 0) {

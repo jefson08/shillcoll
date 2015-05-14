@@ -118,14 +118,7 @@ public class GetExamPapers extends HttpServlet {
                 } while (rs.next());
                 output += "</tr><tr>";
                 output += "<td><b>Division &nbsp;&nbsp;</b>";
-               // if((yorsno.trim().equals("s6")) || (yorsno.trim().equals("y3")))
-                // {
-
-                // }
-                // else
-                // {
-                //    output += "<select name=\"cmbDiv\" id=\"cmbDiv\" disabled>";
-                //  }
+               
                 sql = "select * from result where lower(examid)=? and lower(nehurollno)=? and lower(yearorsemno)=?";
                 pst = con.prepareStatement(sql);
                 pst.setString(1, examid.trim().toLowerCase());
