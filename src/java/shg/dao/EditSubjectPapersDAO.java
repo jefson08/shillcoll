@@ -6,24 +6,23 @@
 package shg.dao;
 
 import DBConnection.ConnectionPool;
-import java.sql.SQLException;
-import javax.servlet.ServletContext;
-import shg.bean.CourseClassHons;
-
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Arrays;
-
-
-import shg.util.Utility;
+import java.sql.SQLException;
+import javax.servlet.ServletContext;
+import shg.bean.AddSubjectPapers;
 
 /**
  *
- * @author shillong
+ * @author Shgcomp
  */
-public class CourseClassHonsEditDAO {
+public class EditSubjectPapersDAO {
+    /*
+     * To change this license header, choose License Headers in Project Properties.
+     * To change this template file, choose Tools | Templates
+     * and open the template in the editor.
+     */
 
     private Connection con = null;
     private ResultSet rs = null;
@@ -33,19 +32,20 @@ public class CourseClassHonsEditDAO {
     // int slno;
     private int affectedRows;
 
-    public int updateToAllPapers(ServletContext context, CourseClassHons CCH){
-  
-        String PaperIds[] = CCH.getTxtPaperId();
-        String PaperNames[] = CCH.getTxtPaperName();
-        String YearOrSemNos[] = CCH.getCmbYearOrSemNo();
-        boolean ChkCategories[] = CCH.getChkCategory();
-        String CCode=CCH.getCmbCourseName();
-        String SubjectId=CCH.getCmbSubjectName();
-        boolean cat;
-        int ItemsCount = CCH.getChkCategory().length;//PaperIds.length;
+    public int updateToAllPapers(ServletContext context, AddSubjectPapers ASP) {
+
+        String PaperIds[] = ASP.getTxtPaperId();
+        String PaperNames[] = ASP.getTxtPaperName();
+        String YearOrSemNos[] = ASP.getCmbYearOrSemNo();
+        boolean ChkCategories[] = ASP.getChkCategory();
+        boolean ChkPracts[] = ASP.getChkPract();
+        //String CCode=ASP.getCmbCourseName();
+        String SubjectId = ASP.getCmbSubjectName();
+        boolean cat, pract;
+        int ItemsCount = ASP.getChkCategory().length;//PaperIds.length;
         System.out.println("itemscount=" + ItemsCount);
-       // System.out.println("id=" + PaperIds[3]);
-          for (int i = 0; i < ItemsCount - 1; i++) {
+        // System.out.println("id=" + PaperIds[3]);
+        for (int i = 0; i < ItemsCount - 1; i++) {
             for (int j = i + 1; j < ItemsCount; j++) {
                 if (PaperIds[i].equals(PaperIds[j])) {
                     return 2;//duplicate paper id in textfields
@@ -57,11 +57,11 @@ public class CourseClassHonsEditDAO {
         try {
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
-           sql1 = "SELECT papercode,papername from papers WHERE lower(coursecode)=? and lower(subjectcode)=?";
+            sql1 = "SELECT papercode,papername from papers WHERE lower(subjectcode)=?";
 
             pst = con.prepareStatement(sql1);
-            pst.setString(1, CCode.trim().toLowerCase());
-            pst.setString(2, SubjectId.trim().toLowerCase());
+            //pst.setString(1, CCode.trim().toLowerCase());
+            pst.setString(1, SubjectId.trim().toLowerCase());
 
             rs = pst.executeQuery();
 
@@ -78,7 +78,7 @@ public class CourseClassHonsEditDAO {
             affectedRows = pst.executeUpdate();
             if (affectedRows <= 0) {
 
-                //System.out.println("subid="+CCH.getCmbSubjectName());   
+                //System.out.println("subid="+ASP.getCmbSubjectName());   
                 throw new SQLException("Delete failed.. ");
             }
             for (int i = 0; i < ItemsCount; i++) {
@@ -87,23 +87,27 @@ public class CourseClassHonsEditDAO {
                 } else {
                     cat = false;
                 }
-
-                sql1 = "INSERT INTO papers(papercode, papername, coursecode, subjectcode, honsorpass, yearorsemno) "
+                if (ChkPracts[i]) {
+                    pract = true;
+                } else {
+                    pract = false;
+                }
+                sql1 = "INSERT INTO papers(papercode, papername,practical, subjectcode, honsorpass, yearorsemno) "
                         + "    VALUES (?, ?, ?, ?, ?, ? ) ";
 
                 pst = con.prepareStatement(sql1);
                 pst.setString(1, PaperIds[i]);
                 pst.setString(2, PaperNames[i]);
-                pst.setString(3, CCode);
+                pst.setBoolean(3,pract);
                 pst.setString(4, SubjectId);
                 pst.setBoolean(5, cat);
                 pst.setString(6, YearOrSemNos[i]);
 
                 affectedRows = pst.executeUpdate();
-                System.out.println("id=" + PaperIds[i] + " Nam=" + PaperNames[i] + " cat=" + cat + " yors=" + YearOrSemNos[i] + " Sid=" + SubjectId + " ccode=" + CCode);
+                System.out.println("id=" + PaperIds[i] + " Nam=" + PaperNames[i] + " cat=" + cat + " yors=" + YearOrSemNos[i] + " Sid=" + SubjectId );
                 if (affectedRows <= 0) {
 
-                    //System.out.println("subid="+CCH.getCmbSubjectName());   
+                    //System.out.println("subid="+ASP.getCmbSubjectName());   
                     throw new SQLException("Update failed.. ");
                 }
                 con.commit();
@@ -127,5 +131,5 @@ public class CourseClassHonsEditDAO {
             connectionPool = null;
         }
         return 1;
-   }
+    }
 }
