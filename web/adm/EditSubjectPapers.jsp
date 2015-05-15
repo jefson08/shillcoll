@@ -9,10 +9,10 @@
 <%@page import="shg.util.shgUtil"%>
 <jsp:useBean id="dbutil" class="shg.util.DatabaseUtility"></jsp:useBean>
 <%!//DatabaseUtility dbutil = new DatabaseUtility();%>
-<jsp:useBean id="CCH" class="shg.bean.CourseClassHons" ></jsp:useBean>
-<jsp:useBean id="CCHEditDAO" class="shg.dao.CourseClassHonsEditDAO" ></jsp:useBean>
-<jsp:setProperty name="CCH" property="*"></jsp:setProperty>
-<jsp:useBean id="CCHEdit" class="shg.dao.CourseClassHonsRetrieve2" />
+<jsp:useBean id="ASP" class="shg.bean.AddSubjectPapers" ></jsp:useBean>
+<jsp:useBean id="ESPDAO" class="shg.dao.EditSubjectPapersDAO" ></jsp:useBean>
+<jsp:setProperty name="ASP" property="*"></jsp:setProperty>
+<%--<jsp:useBean id="CCHEdit" class="shg.dao.CourseClassHonsRetrieve2" />--%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -27,11 +27,11 @@
         <link href="../style/master-css/menu-style.css" rel="stylesheet" />
         <link href="../style/master-css/html-elements.css" rel="stylesheet" />
         <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script>
-        <script type="text/javascript" src="../scripts/adm/CourseClassHonsEdit.js"></script>
+        <script type="text/javascript" src="../scripts/adm/EditSubjectPapers.js"></script>
         <script type="text/javascript" src="../scripts/jquery/jquery.maskedinput-1.3.js"></script>
         <script type="text/javascript" src="../scripts/util/net.js"></script>
         <script type="text/javascript" src="../scripts/util/populateComboBox.js"></script>
-        <title>Edit Or Delete Papers of a Course</title>
+        <title>Edit Or Delete Papers of a Subject</title>
     </head>
     <body>
         <div id="header" ><%@include file="common-menu.jsp" %>
@@ -68,7 +68,7 @@
                                                     <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'subjects','subjectcode','subjectname',subjectid)}">       
                                                     </c:out>
                                                 </select> 
-                                                <c:if test="${param.submitted and !CCH.cmbSubjectNameValid}" var="v2">
+                                                <c:if test="${param.submitted and !ASP.cmbSubjectNameValid}" var="v2">
                                                     <span style="color:red">Subject Not Selected</span>
                                                 </c:if>
                                             </td>
@@ -78,50 +78,50 @@
                                         <tbody>
                                             <tr>
                                                 <td colspan="4">
-                                                    <c:if test="${param.submitted and !CCH.txtPaperIdValid}" var="v3"> 
+                                                    <c:if test="${param.submitted and !ASP.txtPaperIdValid}" var="v3"> 
                                                         <span style="color:red"> Paper ID is either blank or invalid!!</span>
                                                     </c:if>
                                                 </td>
                                             </tr><tr>
                                                 <td colspan="4">
-                                                    <c:if test="${param.submitted and !CCH.txtPaperNameValid}" var="v4"> 
+                                                    <c:if test="${param.submitted and !ASP.txtPaperNameValid}" var="v4"> 
                                                         <span style="color:red"> Paper Name is either blank or invalid!!</span>
                                                     </c:if>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="4">
-                                                    <c:if test="${param.submitted and !CCH.cmbYearOrSemNoValid}" var="v5">
+                                                    <c:if test="${param.submitted and !ASP.cmbYearOrSemNoValid}" var="v5">
                                                         <span style="color:red">Semester No. or Year No. Not Selected!! </span>
                                                     </c:if>
                                                 </td>
                                             </tr>
-                                            <c:forEach items="${CCH.txtPaperId}" var="cur" begin="0" varStatus="status">
+                                            <c:forEach items="${ASP.txtPaperId}" var="cur" begin="0" varStatus="status">
                                                 <tr id="${status.index}">
                                                     <td>Paper Id</td>
                                                     <td><input type="text" name="txtPaperId" value="${cur}" /></td>
                                                     <td>Paper Name</td>
-                                                    <td><input type="text" name="txtPaperName" value="${CCH.txtPaperName[status.index]}" /></td>
+                                                    <td><input type="text" name="txtPaperName" value="${ASP.txtPaperName[status.index]}" /></td>
                                                     <td>Semester Number</td>
                                                     <td>
                                                         <select name="cmbYearOrSemNo" id="cmbYearOrSemNo">
-                                                            <c:set var="yors" value="${CCH.cmbYearOrSemNo[status.index]}"></c:set>
+                                                            <c:set var="yors" value="${ASP.cmbYearOrSemNo[status.index]}"></c:set>
                                                             <c:choose>
                                                                 <c:when test="${fn:startsWith(yors,'s')}">
                                                                     <option value="-1">-</option>
-                                                                    <option value="1" ${CCH.cmbYearOrSemNo[status.index] == 's1' ? 'selected' : ''}>1</option>
-                                                                    <option value="2" ${CCH.cmbYearOrSemNo[status.index] == 's2' ? 'selected' : ''}>2</option>
-                                                                    <option value="3" ${CCH.cmbYearOrSemNo[status.index] == 's3' ? 'selected' : ''}>3</option>
-                                                                    <option value="4" ${CCH.cmbYearOrSemNo[status.index] == 's4' ? 'selected' : ''}>4</option>
-                                                                    <option value="5" ${CCH.cmbYearOrSemNo[status.index] == 's5' ? 'selected' : ''}>5</option>
-                                                                    <option value="6" ${CCH.cmbYearOrSemNo[status.index] == 's6' ? 'selected' : ''}>6</option>
+                                                                    <option value="1" ${ASP.cmbYearOrSemNo[status.index] == 's1' ? 'selected' : ''}>1</option>
+                                                                    <option value="2" ${ASP.cmbYearOrSemNo[status.index] == 's2' ? 'selected' : ''}>2</option>
+                                                                    <option value="3" ${ASP.cmbYearOrSemNo[status.index] == 's3' ? 'selected' : ''}>3</option>
+                                                                    <option value="4" ${ASP.cmbYearOrSemNo[status.index] == 's4' ? 'selected' : ''}>4</option>
+                                                                    <option value="5" ${ASP.cmbYearOrSemNo[status.index] == 's5' ? 'selected' : ''}>5</option>
+                                                                    <option value="6" ${ASP.cmbYearOrSemNo[status.index] == 's6' ? 'selected' : ''}>6</option>
                                                                     <c:set var="yearOrSemNo" value="${param.cmbYearOrSemNo}"></c:set>
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <option value="-1">-</option>
-                                                                    <option value="1" ${CCH.cmbYearOrSemNo[status.index] == 'y1' ? 'selected' : ''}>1</option>
-                                                                    <option value="2" ${CCH.cmbYearOrSemNo[status.index] == 'y2' ? 'selected' : ''}>2</option>
-                                                                    <option value="3" ${CCH.cmbYearOrSemNo[status.index] == 'y3' ? 'selected' : ''}>3</option>
+                                                                    <option value="1" ${ASP.cmbYearOrSemNo[status.index] == 'y1' ? 'selected' : ''}>1</option>
+                                                                    <option value="2" ${ASP.cmbYearOrSemNo[status.index] == 'y2' ? 'selected' : ''}>2</option>
+                                                                    <option value="3" ${ASP.cmbYearOrSemNo[status.index] == 'y3' ? 'selected' : ''}>3</option>
                                                                     <c:set var="yearOrSemNo" value="${param.cmbYearOrSemNo}"></c:set>  
                                                                 </c:otherwise>
                                                             </c:choose>
@@ -129,21 +129,21 @@
                                                     </td>
                                                     <td>
                                                         <label><input name="chkCategorydummy" type="checkbox" id="chkCategorydummy" chkStat="${status.index+1}" 
-                                                                      ${((param.submitted and (paramValues.chkCategory[status.index])) and (CCH.chkCategory[status.index]=='true'))?'checked':''} />
+                                                                      ${(( (paramValues.chkCategory[status.index])) and (ASP.chkCategory[status.index]=='true'))?'checked':''} />
                                                             Honours</label>
-                                                        <input type ="hidden"  name="chkCategory" id="chkCategory" chkVal="${status.index+1}" value= "${param.submitted?paramValues.chkCategory[status.index]:'false'}"/>
+                                                        <input type ="hidden"  name="chkCategory" id="chkCategory" chkVal="${status.index+1}" value= "${ASP.chkCategory[status.index]}"/>
                                                     </td>
                                                     <td>
-                                                        <label>  <input name ="chkPractdummy" type = "checkbox" id ="chkPractdummy" chkPStat = "${status.index+1}"
-                                                                        ${((param.submitted and (paramValues.chkPract[status.index])) and (CCH.chkPract[status.index]=='true'))?'checked':''} />
+                                                        <label>  <input name ="chkPractdummy" type = "checkbox" id ="chkPractdummy" chkPstat = "${status.index+1}"
+                                                                        ${((paramValues.chkPract[status.index]) and (ASP.chkPract[status.index]=='true'))?'checked':''} />
                                                             Practical</label>   </td>
-                                                        <input type = "hidden" name = "chkPract" id = "chkPract" chkPVal = "${status.index+1}"  value ="${param.submitted?paramValues.chkPract[status.index]:'false'}"/>
+                                                        <input type = "hidden" name = "chkPract" id = "chkPract" chkPval = "${status.index+1}"  value ="${ASP.chkPract[status.index]}"/>
                                                    
 
                                                     <td>   <img src="../images/remove.png" name="delIcon"  id="delIcon" val="${status.index}" /> </td>
                                                 </tr>
                                             </c:forEach> 
-                                        <input type ="hidden" name="nextrow" id="nextrow" value="${status.index+1}" />
+                                                <tr><td colspan="8>"<input type ="hidden" name="nextrow" id="nextrow" value="${status.index+1}" /></td></tr>
                                         </tbody> 
                                     </table>
                                     <table>
@@ -161,7 +161,7 @@
                                 <div id="CCHDiv">
                                 <c:if test="${param.submitted and !v1 and !v2 and !v3 and !v4 and !v5}">
                                     <% 
-                                        int res = CCHEditDAO.updateToAllPapers(getServletContext(), CCH);
+                                        int res = ESPDAO.updateToAllPapers(getServletContext(), ASP);
                                         if (res == 1) {
 
                                             out.println("Update operation successful");

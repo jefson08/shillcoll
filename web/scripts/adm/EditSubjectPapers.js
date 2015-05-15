@@ -9,12 +9,33 @@ $(document).ready(function() {
    
     
     
-    $("#chkCategorydummy").live("click", function() {
+    $('input[name=chkCategorydummy]').live("click",function() {
+       //alert("jjj");
+          
 
-        var chkval = $(this).is(':checked');
+                var chkval = $(this).is(':checked');
         var cval = $(this).attr("chkStat");
+     alert(chkval+" hello "+cval);
         $('input[name=chkCategory]').each(function(i, obj) {
             var v = $(this).attr('chkVal');
+            if (cval == v) {
+                $(this).val('true');
+              }
+
+            });
+//$("#chkCategorydummy").each(function(){
+    
+
+        })
+
+        
+   
+    $("#chkPractdummy").live("click", function() {
+
+        var chkval = $(this).is(':checked');
+        var cval = $(this).attr("chkPstat");
+        $('input[name=chkPract]').each(function(i, obj) {
+            var v = $(this).attr('chkPval');
             if (cval == v) {
                 $(this).val(chkval);
             }
@@ -76,7 +97,7 @@ $("#delIcon").live("click",function(){
         
         $.ajax({
             type: "POST",
-            url: "../CourseClassHonsRetrieve2",
+            url: "../SubjectPapersRetrieve",
             data: ({cmbSubjectName: cmbSubjectName}),
             success: function (response) {
                 // $('#msg').html(response);
