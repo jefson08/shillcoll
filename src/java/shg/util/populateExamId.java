@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author B Mukhim
  */
-public class populateCourse1 extends HttpServlet {
+public class populateExamId extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -38,8 +38,8 @@ public class populateCourse1 extends HttpServlet {
         response.setContentType("text/xml");
         String strForm = request.getParameter("f");
         String strElem = request.getParameter("e");
-        String stream = request.getParameter("q").toString().trim();
-
+        String examid = request.getParameter("q").toString().trim();
+System.out.println("Exam ID "+examid);
         String strXML = "";
         try {
             try {
@@ -52,11 +52,11 @@ public class populateCourse1 extends HttpServlet {
                 return;
             }
            // st = con.createStatement();
-            sql = "select coursecode,coursename from course where stream = ? ORDER BY coursename ASC";
+            sql = "select examid from papersappear where rollno = ? ORDER BY examid ASC";
 
             
              pst = con.prepareStatement(sql);
-            pst.setString(1,stream);
+            pst.setString(1,examid);
             rs = pst.executeQuery();
             System.out.println("SQL"+ pst);
             strXML = strXML + "<?xml version='1.0' ?>";
@@ -73,7 +73,7 @@ public class populateCourse1 extends HttpServlet {
             while (rs.next()) {
                 strXML = strXML + "<entry>";
 
-                strXML = strXML + "<optionText>" + rs.getString(2).toUpperCase() + "</optionText>";
+                strXML = strXML + "<optionText>" + rs.getString(1).toUpperCase() + "</optionText>";
                 strXML = strXML + "<optionValue>" + rs.getString(1).toUpperCase() + "</optionValue>";
                 strXML = strXML + "</entry>";
             }

@@ -79,7 +79,7 @@ public class ModifiedStudentCourse {
             } catch (SQLException ex) {
                 System.out.println("RollBack operation error.");
             }
-            course.setMsg("Message ::  Saving Course Failed! DUPLICATE RECORD");
+            course.setMsg3("Message ::  Saving Course Failed! DUPLICATE RECORD");
             System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
             return -1;
         } finally {

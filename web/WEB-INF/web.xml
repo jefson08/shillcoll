@@ -222,6 +222,15 @@
     <!--Ransly-->
     <!--teibor-->
     <servlet>
+        <servlet-name>populateExamId</servlet-name>
+        <servlet-class>shg.util.populateExamId</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>populateExamId</servlet-name>
+        <url-pattern>/populateExamId</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>populateCourse1</servlet-name>
         <servlet-class>shg.util.populateCourse1</servlet-class>
     </servlet>
@@ -246,6 +255,15 @@
     <servlet-mapping>
         <servlet-name>GetSubject</servlet-name>
         <url-pattern>/GetSubject</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GetSubject2</servlet-name>
+        <servlet-class>shg.dao.GetSubject2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetSubject2</servlet-name>
+        <url-pattern>/GetSubject2</url-pattern>
     </servlet-mapping>
     
     <servlet>

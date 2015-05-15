@@ -72,6 +72,9 @@
                                                         <c:set var="ccode" value="${param.coursecode}"></c:set>
                                                         <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'course','coursecode','coursename',ccode)}"> </c:out>                               
                                                         </select>
+                                                        <c:if test="${param.submitted and !comb.coursecodeValid}" var="v2">
+                                                        <span style="color: red">Course Not Selected </span>
+                                                    </c:if> 
                                                     </td>
                                                 </tr>       
                                                 <tr>
@@ -109,10 +112,10 @@
                                             <tr>
                                                 <td> </td><td></td><td></td>
                                             </tr>
-                                            <tr>
-                                                <td colspan="3">
+                                            <tr><td> </td><td> </td>
+                                                <td>
                                                     <c:if test="${param.submitted and !comb.isSubjectcodeValid(pageContext.request.servletContext)}" var="v3">
-                                                        [No Papers Checked from Selected Subjects]
+                                                        <span style="color: red">    [No Papers Checked from Selected Subjects]</span>
                                                     </c:if>
 
                                                 </td>
@@ -120,7 +123,7 @@
                                             <tr>
                                                 <td></td><td></td>
                                                 <td>       
-                                                    <div id="divsub" style="background: yellow;" >
+                                                    <div id="divsub" style="background: " >
 
                                                         <c:if test="${param.submitted}">
                                                             <c:out escapeXml="false" value="${subpaper.getSubjectAndPaper(pageContext.request.servletContext, param.coursecode, paramValues.subjectcode , paramValues.papercode)}">
@@ -146,13 +149,15 @@
                                 <c:if test="${param.submitted and !v3 and !v4}">
                                     <% int res = combdao.insertCourseCombination(getServletContext(), comb);
                                         if (res == 1) {
-                                            out.println("Records added sucessfully");
+                                            out.println("Records Added Sucessfully");
                                         } else {
-                                            out.println("Records Already Exist");
+                                            out.println("Records Added Failed: DUPLICATE");
                                         }
                                     %>
 
                                 </c:if>
+
+
                                 <br><br>
                                 <div id="msg1"> <label align="center"><jsp:getProperty property="msg1" name="comb"/></label>
 

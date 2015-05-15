@@ -5,9 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="fees" class="shg.bean.FeespaymentBean" ></jsp:useBean>
-<jsp:useBean id="feespay" class="shg.dao.FeespaymentDAO" ></jsp:useBean>
-<jsp:setProperty name="fees" property="*"></jsp:setProperty>
+<jsp:useBean id="edit" class="shg.bean.EditPapersBean" ></jsp:useBean>
+<jsp:useBean id="editpaper" class="shg.dao.UpdatePapers" ></jsp:useBean>
+<jsp:setProperty name="edit" property="*"></jsp:setProperty>
 <jsp:useBean id="dbutil" class="shg.util.DatabaseUtility"></jsp:useBean>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -27,7 +27,7 @@
         <script type="text/javascript" src="../scripts/util/populateComboBox.js"></script>
         <script type="text/javascript" src="../scripts/util/net.js"></script>
         <script type="text/javascript" src="../scripts/adm/feespayment.js"></script>
-        <title>Fees Payment</title>
+        <title>Edit Papers Exam</title>
     </head>
     <body>
         <div id="header" ><%@include file="common-menu.jsp" %>
@@ -58,7 +58,7 @@
                                     <input type="hidden" name="submitted" value="true" />
                                     <table border="0">
                                         <tbody>
-                                          <tr>
+                                            <tr>
                                                 <td> Stream</td>
                                                 <td>:</td>
                                                 <td>
@@ -67,9 +67,7 @@
                                                         <c:set var="scode" value="${param.stream}"></c:set>
                                                         <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'streams','streamcode','streamname',scode)}"> </c:out>                               
                                                         </select>
-                                                    <c:if test="${param.submitted and !course.streamValid}" var="v1">
-                                                        <span style="color: red">Stream Not Selected</span>
-                                                    </c:if> 
+                                                  
                                                 </td>
                                             </tr>
                                             <tr>
@@ -80,10 +78,7 @@
                                                         <option value="-1">-</option>
                                                         <c:set var="ccode" value="${param.cmbhon}"></c:set>
                                                         <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'course','coursecode','coursename','streamcode',scode1,ccode)}"> </c:out>                               
-                                                        </select>
-                                                    <c:if test="${param.submitted and !fees.cmbhonValid}" var="v2">
-                                                        <span style="color: red">Course Not Selected</span>
-                                                    </c:if> 
+                                                   
                                                 </td>
                                             </tr>
                                             <tr>
@@ -93,42 +88,56 @@
                                                     <select name="cmbrollno" id="cmbrollno">
                                                         <option value="-1">-</option>
                                                         <c:set var="roll" value="${param.cmbrollno}"></c:set>
-                                                      
-                                                        <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'studentdetails','rollno','rollno','cmbhon',ccode,roll)}"> </c:out>                               
+
+                                                        <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'studentdetails','rollno','rollno','cmbrollno',roll,roll)}"> </c:out>                               
                                                         </select>
-                                                    <c:if test="${param.submitted and !fees.cmbrollnoValid}" var="v3">
-                                                        <span style="color: red">Roll No Not Selected</span>
-                                                    </c:if> 
+                                                   
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Date of Payment *</td>
+                                                <td>Exam ID  </td>
                                                 <td> : </td>
-                                                <td><input type="text" name="txtFees" id="txtFees" value="${stuEnroll.txtDOB}" size="10" />
-                                                    <div style="display: none;"> <img id="calImg" src="../scripts/jquerydatepicker/img/calendar.gif" alt="Popup" class="trigger"></div>
-                                                    eg. dd-mm-yyyy
-                                                    <c:if test="${param.submitted and !stuEnroll.txtDOBValid}" var="v4">
-                                                        <span style="color: red"> Date of Birth is either be Blank OR invalid</span>
-                                                    </c:if>
-                                                </td>
-                                            </tr>
+                                                <td>
+                                                    <select name="cmbexamid" id="cmbexamid">
+                                                        <option value="-1">-</option>
 
-                                                
 
-                                            <tr>
-                                                <td colspan="3" style="text-align: center">
-                                                    <input type="submit" value="Save" name="cmdSave"  /> 
+                                                        <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'papersappear','examid','examid','cmbhon',ccode,roll)}"> </c:out>                               
+                                                        </select>
 
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </form>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <input type="button" value="generate Combination" name="generate1" id="generate1">
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td><td></td>
+                                                    <td>       
+                                                        <div id="combination" style="background: " >
+
+
+
+                                                        </div>                
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3" style="text-align: center">
+                                                        <input type="submit" value="Update" name="cmdSave"  /> 
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
 
 
                                 <c:if test="${param.submitted and !v1 and !v2 and !v3 and !v4}">
                                     <%
-                                      feespay.insert(getServletContext(), fees);
-                                       %>
+                                        editpaper.insert(getServletContext(), edit);
+                                    %>
                                 </c:if>
 
 

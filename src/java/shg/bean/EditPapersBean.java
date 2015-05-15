@@ -11,12 +11,30 @@ import shg.valid.Validator;
  *
  * @author teibor
  */
-public class FeespaymentBean {
+public class EditPapersBean {
 
     private String stream;
     private String cmbhon;
     private String cmbrollno;
-    private String txtFees;
+    private String cmbexamid;
+    private String subjectcode[];
+    private String papercode[];
+
+    public String[] getSubjectcode() {
+        return subjectcode;
+    }
+
+    public void setSubjectcode(String[] subjectcode) {
+        this.subjectcode = subjectcode;
+    }
+
+    public String[] getPapercode() {
+        return papercode;
+    }
+
+    public void setPapercode(String[] papercode) {
+        this.papercode = papercode;
+    }
 
     public String getStream() {
         return stream;
@@ -34,12 +52,6 @@ public class FeespaymentBean {
         this.cmbhon = cmbhon;
     }
 
-   
-
-    public String getTxtFees() {
-        return txtFees;
-    }
-
     public String getCmbrollno() {
         return cmbrollno;
     }
@@ -48,26 +60,12 @@ public class FeespaymentBean {
         this.cmbrollno = cmbrollno;
     }
 
-    public void setTxtFees(String txtFees) {
-        this.txtFees = txtFees;
+    public String getCmbexamid() {
+        return cmbexamid;
     }
-    
-     public boolean isStreamValid() {
-        if (Validator.isNullValue(getStream()) || getStream().equals("-1")) {
-            return false;
-        }
-        return true;
+
+    public void setCmbexamid(String cmbexamid) {
+        this.cmbexamid = cmbexamid;
     }
-     public boolean isCmbhonValid() {
-        if (Validator.isNullValue(getCmbhon()) || getCmbhon().equals("-1")) {
-            return false;
-        }
-        return true;
-    }
-   public boolean isCmbrollnoValid() {
-        if (Validator.isNullValue(getCmbrollno()) || getCmbrollno().equals("-1")) {
-            return false;
-        }
-        return true;
-    }
+
 }

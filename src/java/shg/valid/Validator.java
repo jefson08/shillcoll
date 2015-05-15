@@ -10,9 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-
 public class Validator {
-    
+
     public static boolean isEmpty(String value) {
 
         try {
@@ -43,6 +42,38 @@ public class Validator {
                     || value.indexOf(';') != -1
                     || value.indexOf('\'') != -1
                     || value.indexOf('\"') != -1) {
+                System.out.println("Invalid input detected " + value);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Exception thrown by " + new Validator().getClass() + " at " + new java.util.Date() + " Error Description " + e);
+            return true;
+        }
+    }
+
+    public static boolean containsIllegalCharacters1(String value) {
+        if (value == null) {
+            return false;
+        }
+
+        try {
+            if (value.indexOf('$') != -1
+                    || value.indexOf('%') != -1
+                    || value.indexOf('<') != -1
+                    || value.indexOf('>') != -1
+                    || value.indexOf('+') != -1
+                    || value.indexOf('^') != -1
+                    || value.indexOf('\\') != -1
+                    || value.indexOf(';') != -1
+                    || value.indexOf('&') != -1
+                    || value.indexOf('@') != -1
+                    || value.indexOf(')') != -1
+                    || value.indexOf('(') != -1
+                    || value.indexOf('#') != -1
+                    || value.indexOf('!') != -1
+                    || value.indexOf('"') != -1) {
                 System.out.println("Invalid input detected " + value);
                 return true;
             } else {

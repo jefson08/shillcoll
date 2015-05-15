@@ -43,13 +43,30 @@ $(document).ready(function() {
 
     });
 
+    $("input[name='reset']").click(function() {
+//        document.getElementById('subpaper').disabled = false;
+        document.getElementById('stream').value = "";
+        document.getElementById('txtcoursename').value = "";
+        document.getElementById('txtnoofseat').value = "";
+        document.getElementById('cmbhon').value = "";
+//        document.getElementById()
 
+//        var v2 = document.getElementById('status').value;
+//        var v3 = document.getElementById('yos').value;
+        // alert("hello");
+//        $.ajax({
+//            type: "POST",
+//            url: "../GetSubject1",
+//            data: ({v1: v1, v2: v2, v3: v3}),
+//            success: function(response) {
+//                $("#subject1").html(response);
+//            },
+//            error: function(xhr) {
+//                alert(xhr.status);
+//                alert("error");
+//            }
+//        });
+    });
 
+    
 });
-$('#frmcourse').load(function() {
-//    alert("adhavdjsad"); 
-//    $('input[name=next]').attr('disabled','disabled');
-//     
-});
-
- 

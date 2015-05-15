@@ -1,0 +1,23 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 12, 2015, 12:09:46 AM
+    Author     : teibor
+*/
+
+  div#question { margin-bottom:5px; }
+
+  div#question a { 	display: block;	margin-left:20px;
+  	                text-decoration: none;color:black;
+  }
+
+  div#question a:hover { background: none; }
+
+  div#question a span { display: none;  }
+
+  div#question a:hover span { display: inline; padding: 25px;
+	                          width:250px;
+  }
