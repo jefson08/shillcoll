@@ -101,7 +101,7 @@ $("#delIcon").live("click",function(){
             data: ({cmbSubjectName: cmbSubjectName}),
             success: function (response) {
                 // $('#msg').html(response);
-                $('#papers > tbody:last').html(response);
+                $('#srchlist').html(response);
             }
             })
        

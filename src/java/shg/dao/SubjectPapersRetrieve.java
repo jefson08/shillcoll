@@ -83,15 +83,21 @@ public class SubjectPapersRetrieve extends HttpServlet {
             rs = pst.executeQuery();
             if (rs.next()) {
              // output += "<table border=\"0\" id=\"papers\"><tbody>";
-                                        
+                output = "<div class=\"CSSTableGenerator\"><table>";
+                output += "<tr><td>Paper Code</td>";
+                output += "<td>Paper Name/td>";
+                output += "<td>Semester/Year</td>";
+                output += "<td>Honours</td>";
+                output += "<td>Practical</td> </tr>";
+                //output += "<td>Practical Marks</td>             
                 yors = rs.getString("yearorsemno").trim().toLowerCase().charAt(0);
                 do {
                     index++;
-                    output += "<tr id=\"" + index + "\"><td>Paper Id</td>";
+                    output += "<tr id=\"" + index + "\">";
                     output += "<td><input type=\"text\" name=\"txtPaperId\" id=\"txtPaperId\" value=\"" + rs.getString("papercode") + "\" /></td>";
-                    output += "<td>Paper Name</td>";
+                    //output += "<td>Paper Name</td>";
                     output += "<td><input type=\"text\" name=\"txtPaperName\" id=\"txtPaperName\" value=\"" + rs.getString("papername") + "\" /></td>";
-                    output += "<td>Year/Semester Number</td>";
+                   // output += "<td>Year/Semester Number</td>";
                     output += "<td>";
                     output += "<select name=\"cmbYearOrSemNo\" id=\"cmbYearOrSemNo\">";
                     output += "<option value=\"-1\">-</option>";
@@ -120,14 +126,14 @@ public class SubjectPapersRetrieve extends HttpServlet {
                     }
                     output += " </select></td>";
                     h = rs.getBoolean("honsorpass") ? "checked" : "";
-                     output += " <td><label>";
+                     output += " <td>";
                     output += "<input name =\"chkCategorydummy\" type = \"checkbox\" id = \"chkCategorydummy\" chkStat = \"" + index + "\" " + h + " />";
-                    output += "Honours</label>";
+                   // output += "";
                     output += "<input type = \"hidden\" name = \"chkCategory\" id = \"chkCategory\" chkVal = \"" + index + "\" value = \""+rs.getBoolean("honsorpass") +"\" />";
                     output += " </td>";
                     h = rs.getBoolean("practical") ? "checked" : "";
-                    output += "<td><label><input name =\"chkPractdummy\" type = \"checkbox\" id = \"chkPractdummy\" chkPstat = \"" + index + "\" " + h + " />";
-                    output += "Practical</label>";
+                    output += "<td><input name =\"chkPractdummy\" type = \"checkbox\" id = \"chkPractdummy\" chkPstat = \"" + index + "\" " + h + " />";
+                    //output += "";
                     output += "<input type = \"hidden\" name = \"chkPract\" id = \"chkPract\" chkPval = \"" + index + "\" value = \""+rs.getBoolean("practical")+ "\" />";
                     output += "</td>";
                      
@@ -136,7 +142,7 @@ public class SubjectPapersRetrieve extends HttpServlet {
  System.out.println(index);
                 } while (rs.next());
             }
-            output += "<tr><td colspan=8><input type =\"hidden\" name=\"nextrow\" id=\"nextrow\" value=\"" + index + "\"/></td></tr>";
+            output += "<tr><td colspan=8><input type =\"hidden\" name=\"nextrow\" id=\"nextrow\" value=\"" + index + "\"/></td></tr></table>";
            
             out.print(output);
         } catch (SQLException e) {
