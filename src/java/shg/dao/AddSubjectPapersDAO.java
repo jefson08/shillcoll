@@ -3,26 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package shg.dao;
 
 import DBConnection.ConnectionPool;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Arrays;
 import javax.servlet.ServletContext;
-import shg.bean.CourseClassHons;
-import shg.util.Utility;
+import shg.bean.AddSubjectPapers;
 
-  /**
+/**
  *
- * @author shillong
+ * @author Shgcomp
  */
-public class CourseClassHonsDAO {
- 
+public class AddSubjectPapersDAO {
     private Connection con = null;
     private ResultSet rs = null;
     private PreparedStatement pst = null;
@@ -31,15 +28,16 @@ public class CourseClassHonsDAO {
     int slno;
     private int affectedRows;
 
-    public int insertToAllPapers(ServletContext context, CourseClassHons CCH,StringBuilder ErrMsg) {
+    public int insertToAllPapers(ServletContext context, AddSubjectPapers ASP,StringBuilder ErrMsg) {
        
-        //String CCode = CCH.getCmbCourseName();
-        String SubjectId = CCH.getCmbSubjectName();
-        String PaperIds[] = CCH.getTxtPaperId();
-        String PaperNames[] = CCH.getTxtPaperName();
-        String YearOrSemNos[] = CCH.getCmbYearOrSemNo();
-        boolean ChkCategories[] = CCH.getChkCategory();
-        boolean cat;
+        //String CCode = ASP.getCmbCourseName();
+        String SubjectId = ASP.getCmbSubjectName();
+        String PaperIds[] = ASP.getTxtPaperId();
+        String PaperNames[] = ASP.getTxtPaperName();
+        String YearOrSemNos[] = ASP.getCmbYearOrSemNo();
+        boolean ChkCategories[] = ASP.getChkCategory();
+        boolean ChkPracts[]=ASP.getChkPract();
+        boolean cat,pract;
         int ItemsCount = PaperIds.length;
         //System.out.println(CCode+"  "+SubjectId); 
         for (int i = 0; i < ItemsCount - 1; i++) {
@@ -64,7 +62,7 @@ public class CourseClassHonsDAO {
 
         try {
             con.setAutoCommit(false);
-            sql = "SELECT papercode,papername from papers WHERE lower(subjectcode)=?";
+            sql = "SELECT papercode,papername from papers WHERE  lower(subjectcode)=?";
 
             pst = con.prepareStatement(sql);
             //pst.setString(1, CCode.trim().toLowerCase());
@@ -95,18 +93,24 @@ public class CourseClassHonsDAO {
                 } else {
                     cat = false;
                 }
-                System.out.println("subid=" + CCH.getCmbSubjectName());
+                if (ChkPracts[i] == true) {
+                    pract = true;
+                } else {
+                   pract = false;
+                }
+                System.out.println("subid=" + ASP.getCmbSubjectName());
 
-                sql = "INSERT INTO papers(papercode, papername, subjectcode, honsorpass, yearorsemno) "
-                        + "    VALUES (?, ?, ?, ?, ?) ";
+                sql = "INSERT INTO papers(papercode, papername,  subjectcode, honsorpass, yearorsemno,practical) "
+                        + "    VALUES (?, ?, ?, ?, ?,?) ";
 
                 pst = con.prepareStatement(sql);
                 pst.setString(1, PaperIds[i]);
                 pst.setString(2, PaperNames[i]);
-               // pst.setString(3, CCH.getCmbCourseName());
-                pst.setString(3, CCH.getCmbSubjectName());
+                //pst.setString(3, ASP.getCmbCourseName());
+                pst.setString(3, ASP.getCmbSubjectName());
                 pst.setBoolean(4, cat);
                 pst.setString(5, YearOrSemNos[i]);
+                pst.setBoolean(6,pract);
                 System.out.println("pst=" + pst);
                 affectedRows = pst.executeUpdate();
                 if (affectedRows <= 0) {

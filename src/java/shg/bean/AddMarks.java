@@ -23,26 +23,10 @@ public class AddMarks {
      private String [] txtSubjectName;
     private String txtExamID;
     private String cmbDiv;
+    private String cmbPos;
 private String cmbYearOrSemNo;
 private String cmbNR;
-    public boolean isCmbNRValid()
-    {
-         if (Validator.isNullValue(getCmbNR()) || getCmbNR().equals("-1")) {
-            System.out.println(getCmbNR());
-            return false;
-        }
-        return true;
-    }
 
-    
-   
-    public boolean isCmbYearOrSemNoValid() {
-        if (Validator.isNullValue(getCmbYearOrSemNo()) || getCmbYearOrSemNo().equals("-1")) {
-            System.out.println(getCmbYearOrSemNo());
-            return false;
-        }
-        return true;
-    }
 
     /**
      * @return the txtNehuRollNo
@@ -183,6 +167,19 @@ private String cmbNR;
     public void setCmbDiv(String cmbDiv) {
         this.cmbDiv = cmbDiv;
     }
+     /**
+     * @return the cmbPos
+     */
+    public String getCmbPos() {
+        return cmbPos;
+    }
+
+    /**
+     * @param cmbPos the cmbPos to set
+     */
+    public void setCmbPos(String cmbPos) {
+        this.cmbPos = cmbPos;
+    }
 
     /**
      * @return the cmbYearOrSemNo
@@ -211,6 +208,65 @@ private String cmbNR;
     public void setCmbNR(String cmbNR) {
         this.cmbNR = cmbNR;
     }
+public boolean isTxtMarksThValid()
+{
+      int itemsCount, i;
+        String items[] = getTxtMarksTh();
+        itemsCount = getTxtMarksTh().length;
+        for(i=0; i< itemsCount; i++){
+         
+            if ((Validator.isNullValue(items[i]))) {
+                return false;
+            }
+        }
+        return true;
+    }
+public boolean isTxtMarksPrValid()
+{
+      int itemsCount, i;
+        String items[] = getTxtMarksPr();
+        itemsCount = getTxtMarksPr().length;
+        for(i=0; i< itemsCount; i++){
+         
+            if (!(items[i].trim().equals("-1")) && (Validator.isNullValue(items[i]))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    public boolean isCmbNRValid()
+    {
+         if (Validator.isNullValue(getCmbNR()) || getCmbNR().equals("-1")) {
+            System.out.println(getCmbNR());
+            return false;
+        }
+        return true;
+    }
+
+    
+   
+    public boolean isCmbYearOrSemNoValid() {
+        if (Validator.isNullValue(getCmbYearOrSemNo()) || getCmbYearOrSemNo().equals("-1")) {
+            System.out.println(getCmbYearOrSemNo());
+            return false;
+        }
+        return true;
+    }
+public boolean isTxtNehuRollNoValid(){
+     if (Validator.isNullValue(getTxtNehuRollNo()) || getTxtNehuRollNo().equals("-1")) {
+            System.out.println(getTxtNehuRollNo());
+            return false;
+        }
+        return true;
+}
+   public boolean isCmbDivValid()
+   {
+      if (Validator.isNullValue(getCmbDiv()) || getCmbDiv().equals("-1")) {
+            System.out.println(getCmbDiv());
+            return false;
+        }
+        return true;
+} 
    
 }

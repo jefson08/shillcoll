@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 //PopulateCombo(document.CourseClassHons.cmbCourseName,'../populateCourse');
     var i = 3;
-    
+     var YearOrSem='s';
         
     $("#chkCategorydummy").live("click", function() {
 //alert($(this).attr("chkStat") +"--"+$(this).is(':checked'));
@@ -19,6 +19,18 @@ $(document).ready(function() {
         var cval = $(this).attr("chkStat");
         $('input[name=chkCategory]').each(function(i, obj) {
             var v = $(this).attr('chkVal');
+            if (cval == v) {
+                $(this).val(chkval);
+            }
+
+        })
+    })
+    $("#chkPractdummy").live("click", function() {
+//alert($(this).attr("chkStat") +"--"+$(this).is(':checked'));
+        var chkval = $(this).is(':checked');
+        var cval = $(this).attr("chkPstat");
+        $('input[name=chkPract]').each(function(i, obj) {
+            var v = $(this).attr('chkPval');
             if (cval == v) {
                 $(this).val(chkval);
             }
@@ -47,8 +59,41 @@ $(document).ready(function() {
         $('input[name=chkCategory]').each(function(i, obj) {
             var v = $(this).attr('false');
         })
+        $('input[name=chkPractdummy]').each(function() {
+            $(this).removeAttr('checked');
+        })
+        $('input[name=chkPract]').each(function(i, obj) {
+            var v = $(this).attr('false');
+        })
     })
-
+$('input[name=radYearOrSem]').change(function(){
+    
+      $('select[name=cmbYearOrSemNo]').find("option").remove();//first clear the combo box then populate
+    $('input[name=radYearOrSem]').each(function(){
+        if($(this).is(':checked'))
+            YearOrSem=($(this).attr('value'));
+    })
+    
+    if (YearOrSem=='y')
+    {
+            
+        $('select[name=cmbYearOrSemNo]').each(function(){
+            var that=this;
+            var myOptions = {'-1':'-', y1 : '1', y2: '2', y3: '3' };
+            $.each(myOptions, function(val, text) { 
+                                      $(that).append(new Option(text, val));})
+    });
+    }
+    else if(YearOrSem=='s')
+        {
+             $('select[name=cmbYearOrSemNo]').each(function(){
+            var that=this;
+            var myOptions = { '-1':'-', s1 : '1', s2: '2', s3: '3',s4: '4', s5: '5', s6: '6'};
+            $.each(myOptions, function(val, text) { 
+                                      $(that).append(new Option(text, val));})
+    });
+    }
+})
     
     $("select[name='cmbStream']").change(function() {
 
@@ -62,21 +107,34 @@ $(document).ready(function() {
     })
 
     $('input[name=cmdAddMore]').click(function() {
-//alert("hurrayy");
-        i++;
+  
+//alert(YearOrSem);
+  i++;
+   
         var str = '<tr><td>Paper Id</td>';
         str += '<td><input type="text" name="txtPaperId" value="" /></td>';
         str += '<td>Paper Name</td>';
         str += '<td><input type="text" name="txtPaperName" value="" /></td>';
+        
         str += '<td>Year/Semester Number</td><td><select name="cmbYearOrSemNo" id="cmbYearOrSemNo">';
+        if(YearOrSem=='s')
+        {
         str += '<option value="-1">-</option>';
-        str += '<option value="1">1</option>';
-        str += '<option value="2">2</option>';
-        str += '<option value="3">3</option>';
-        str += '<option value="4">4</option>';
-        str += '<option value="5">5</option>';
-        str += '<option value="6">6</option>';
+        str += '<option value="s1">1</option>';
+        str += '<option value="s2">2</option>';
+        str += '<option value="s3">3</option>';
+        str += '<option value="s4">4</option>';
+        str += '<option value="s5">5</option>';
+        str += '<option value="s6">6</option>';
         str += '<c:set var="yearOrSemNo" value="${param.cmbYearOrSem}"></c:set>';
+    }
+    else
+    {
+        str += '<option value="-1">-</option>';
+        str += '<option value="y1">1</option>';
+        str += '<option value="y2">2</option>';
+        str += '<option value="y3">3</option>';
+    }
         str += '</select></td>';
         str += '<td>';
         str += '<label>';
@@ -94,3 +152,4 @@ $(document).ready(function() {
 });
 
   
+

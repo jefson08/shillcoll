@@ -86,132 +86,191 @@
                                                 <th rowspan="2"><input type="button" value="Show Papers" id="cmdSearch" name="cmdSearch" style=" width: 100px; height: 45px" /></th>
                                             </tr>
                                             <tr>
-                                                <td> <input type="text" name="txtNehuRollNo" id="txtNehuRollNo" value="" size="20" /></td>
+                                                <td> <input type="text" name="txtNehuRollNo" id="txtNehuRollNo" value="${param.submitted?param.txtNehuRollNo:''}" size="20" /></td>
 
                                                 <td>
 
                                                     <select name="cmbNR" id="cmbNR" style="width: 120px">
                                                         <option value="-1">-</option>
-                                                        <option value="R">Regular</option>
-                                                        <option value="N">Non Regular</option>
-                                                        <option value="I">Improvement</option>
+                                                        <option value="R" ${param.cmbNR=='R'?'selected':''}>Regular</option>
+                                                        <option value="N" ${param.cmbNR=='N'?'selected':''}>Non Regular</option>
+                                                        <option value="I" ${param.cmbNR=='I'?'selected':''}>Improvement</option>
                                                         <c:set var="nr" value="${param.cmbNR}"></c:set>
 
                                                         </select>
-                                                    <c:if test="${param.submitted and !AM.cmbNRValid}" var="v1">
-                                                        <span style="color:red" >Invalid Category</span>
-                                                    </c:if>
-                                                </td>
+
+                                                    </td>
 
 
-                                                <td>
+                                                    <td>
 
-                                                    <select name="cmbYearOrSemNo" id="cmbYearOrSemNo" style="width: 120px">
+                                                        <select name="cmbYearOrSemNo" id="cmbYearOrSemNo" style="width: 120px">
                                                         <c:choose>
                                                             <c:when test="${param.submitted and yearorsem=='y'}">
                                                                 <option value="-1">-</option> 
 
-                                                                <option value="y1" ${paramValues.cmbYearOrSemNo=='y1'?'selected':''}>1</option>
-                                                                <option value="y2" ${paramValues.cmbYearOrSemNo=='y2'?'selected':''}>2</option>
-                                                                <option value="y3" ${paramValues.cmbYearOrSemNo=='y3'?'selected':''}>3</option>
+                                                                <option value="y1" ${param.cmbYearOrSemNo=='y1'?'selected':''}>1</option>
+                                                                <option value="y2" ${param.cmbYearOrSemNo=='y2'?'selected':''}>2</option>
+                                                                <option value="y3" ${param.cmbYearOrSemNo=='y3'?'selected':''}>3</option>
 
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <option value="-1">-</option> 
 
-                                                                <option value="s1" ${paramValues.cmbYearOrSemNo=='s1'?'selected':''}>1</option>
-                                                                <option value="s2" ${paramValues.cmbYearOrSemNo=='s2'?'selected':''}>2</option>
-                                                                <option value="s3" ${paramValues.cmbYearOrSemNo=='s3'?'selected':''}>3</option>
-                                                                <option value="s4" ${paramValues.cmbYearOrSemNo=='s4'?'selected':''}>4</option>
-                                                                <option value="s5" ${paramValues.cmbYearOrSemNo=='s5'?'selected':''}>5</option>
-                                                                <option value="s6" ${paramValues.cmbYearOrSemNo=='s6'?'selected':''}>6</option>
+                                                                <option value="s1" ${param.cmbYearOrSemNo=='s1'?'selected':''}>1</option>
+                                                                <option value="s2" ${param.cmbYearOrSemNo=='s2'?'selected':''}>2</option>
+                                                                <option value="s3" ${param.cmbYearOrSemNo=='s3'?'selected':''}>3</option>
+                                                                <option value="s4" ${param.cmbYearOrSemNo=='s4'?'selected':''}>4</option>
+                                                                <option value="s5" ${param.cmbYearOrSemNo=='s5'?'selected':''}>5</option>
+                                                                <option value="s6" ${param.cmbYearOrSemNo=='s6'?'selected':''}>6</option>
 
                                                             </c:otherwise> 
                                                         </c:choose>   
                                                         <c:set var="yearorsemno" value="${param.cmbYearOrSemNo}"></c:set>
                                                         </select> 
-                                                    <c:if test="${param.submitted and !AM.cmbYearOrSemNoValid}" var="v2">
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                    <c:if test="${param.submitted and !AM.txtNehuRollNoValid}" var="v1">
+                                                        <span style="color:red" >Enter Roll No.</span>
+                                                    </c:if>
+                                                </td><td>
+                                                    <c:if test="${param.submitted and !AM.cmbNRValid}" var="v2">
+                                                        <span style="color:red" >Invalid Category</span>
+                                                    </c:if>
+                                                </td>
+                                                <td>
+                                                    <c:if test="${param.submitted and !AM.cmbYearOrSemNoValid}" var="v3">
                                                         <span style="color:red" >Invalid Semester or Year</span>
                                                     </c:if>
                                                 </td>
-
-
+                                                <td>
+                                                    <c:if test="${param.submitted and !AM.isTxtMarksThValid()}" var="v4">
+                                                        <span style="color:red" >Invalid Marks</span>
+                                                    </c:if>
+                                                </td>
+                                                <td>
+                                                    <c:if test="${param.submitted and !AM.isTxtMarksPrValid()}" var="v5">
+                                                        <span style="color:red" >Invalid Marks</span>
+                                                    </c:if>
+                                                </td>
+                                                <td>
+                                                    <c:if test="${param.submitted and !AM.isCmbDivValid()}" var="v5">
+                                                        <span style="color:red" >Division not selected</span>
+                                                    </c:if>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <br>
-                                    <div id="srchlist">
-                                        <div class="CSSTableGenerator"><table>
-                                                <tr><td>Subject</td>
-                                                    <td>Paper Id</td>
-                                                    <td>Paper Name</td>
-                                                    <td>Theory Marks</td> 
-                                                    <td>Practical Marks</td> 
-                                                <input type="hidden" name="txtExamID" id="txtExamID" value="${AM.txtExamID}" />
-                                                <input type="hidden" name="txtRollNo" id="txtRollNo" value="${AM.txtRollNo}" />
-                                                <input type="hidden" name="txtNehuRollNo" id="txtNehuRollNo" value="${AM.txtNehuRollNo}" /></tr>
-                                                <c:forEach items="${AM.txtSubjectName}" var="cur" begin="0" varStatus="status">
-                                                    <tr><td><label><c:out value="${AM.txtSubjectName[status.index]}">   </c:out></label>
-                                                            <input type="hidden" name="txtSubjectCode" id="txtSubjectCode" value="${AM.txtSubjectCode[status.index]}" /></td>
-                                                        <td><label><c:out value="${AM.txtPaperCode[status.index]}"></c:out></label>
-                                                            <input type=hidden name=txtPaperCode id=txtPaperCode value="${AM.txtPaperCode[status.index]}" /></td>
-                                                        <td><label><c:out value="${AM.txtPaperName[status.index]}" > </c:out></label></td>
-                                                        <td><input type=text name=txtMarksTh id=txtMarksTh value="${AM.txtMarksTh[status.index]}" size=\"10\" /></td>
-                                                    <input type="Hidden" name="txtSubjectName" id="txtSubjectName" value="${AM.txtSubjectName[status.index]}"/>
-                                                    <c:choose>
-                                                        <c:when test="${AM.txtMarksPr=='-1'}">
-                                                            <td><input type="Hidden" name="txtMarksPr" id="txtMarksPr" value="-1"  /></td>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                            <td><input type="text" name="txtMarksPr" id="txtMarksPr" value="${AM.txtMarksPr[status.index]}" size=\"10\" /></td>
+                                    <br> <div id="srchlist">
+                                        <c:if test="${param.submitted}">
 
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    </tr>
-                                                </c:forEach>
-                                                <tr>
-                                                    <td colspan="5"><b>Division &nbsp;&nbsp;</b>
+                                            <div class="CSSTableGenerator"><table>
+                                                    <tr><td>Subject</td>
+                                                        <td>Paper Id</td>
+                                                        <td>Paper Name</td>
+                                                        <td>Theory Marks</td> 
+                                                        <td>Practical Marks</td> 
+                                                    <input type="hidden" name="txtExamID" id="txtExamID" value="${AM.txtExamID}" />
+                                                    <input type="hidden" name="txtRollNo" id="txtRollNo" value="${AM.txtRollNo}" />
+                                                    <input type="hidden" name="txtNehuRollNo" id="txtNehuRollNo" value="${AM.txtNehuRollNo}" /></tr>
+                                                    <c:forEach items="${AM.txtSubjectName}" var="cur" begin="0" varStatus="status">
+                                                        <tr><td><label><c:out value="${AM.txtSubjectName[status.index]}">   </c:out></label>
+                                                                <input type="hidden" name="txtSubjectCode" id="txtSubjectCode" value="${AM.txtSubjectCode[status.index]}" /></td>
+                                                            <td><label><c:out value="${AM.txtPaperCode[status.index]}"></c:out></label>
+                                                                <input type=hidden name=txtPaperCode id=txtPaperCode value="${AM.txtPaperCode[status.index]}" /></td>
+                                                            <td><label><c:out value="${AM.txtPaperName[status.index]}" > </c:out></label></td>
+                                                            <td><input type=text name=txtMarksTh id=txtMarksTh value="${AM.txtMarksTh[status.index]}" size=\"10\" /></td>
+                                                        <input type="Hidden" name="txtSubjectName" id="txtSubjectName" value="${AM.txtSubjectName[status.index]}"/>
                                                         <c:choose>
-                                                            <c:when test="${yearorsemno=='s6' or yearorsemno=='y3'}">
-                                                                <select name="cmbDiv" id="cmbDiv">
+                                                            <c:when test="${AM.txtMarksPr[status.index]=='-1'}">
+                                                                <td><input type="Hidden" name="txtMarksPr" id="txtMarksPr" value="-1"  /></td>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                            <select name="cmbDiv" id="cmbDiv" disabled>
+                                                                <td><input type="text" name="txtMarksPr" id="txtMarksPr" value="${AM.txtMarksPr[status.index]}" size=\"10\" /></td>
+
                                                             </c:otherwise>
-                                                            </c:choose>
+                                                        </c:choose>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    <tr>
+                                                        <td><b>Division &nbsp;&nbsp;</b>
+                                                            <select name="cmbDiv" id="cmbDiv"> 
+                                                                <c:choose>
+                                                                    <c:when test="${yearorsemno=='s6' or yearorsemno=='y3'}">
+                                                                        <option value="-1">-</option>
+                                                                        <option value="I"  ${AM.cmbDiv == 'I' ? 'selected' : ''}>I</option>
+                                                                        <option value="II" ${AM.cmbDiv == 'II' ? 'selected' : ''}>II</option>
+                                                                        <option value="III" ${AM.cmbDiv == 'III' ? 'selected' : ''}>III</option>
+                                                                        <option value="fail" ${AM.cmbDiv == 'fail' ? 'selected' : ''}>Failed</option>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <option value="-1">-</option>
+                                                                        <option value="PASS" ${AM.cmbDiv == 'PASS' ? 'selected' : ''}>Passed</option>
+                                                                        <option value="FAIL" ${AM.cmbDiv == 'FAIL' ? 'selected' : ''}>Failed</option>
+                                                                    </c:otherwise>
+                                                                </c:choose>
 
-                                                                <option value="-1">-</option>
-                                                                <option value="I"  ${AM.cmbDiv[status.index] == 'I' ? 'selected' : ''}>I</option>
-                                                                <option value="II" ${AM.cmbDiv[status.index] == 'II' ? 'selected' : ''}>II</option>
-                                                                <option value="III" ${AM.cmbDiv[status.index] == 'III' ? 'selected' : ''}>III</option>
-                                                               <option value="fail" ${AM.cmbDiv[status.index] == 'fail' ? 'selected' : ''}>Failed</option>
                                                             </select>
-                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                           <input type="submit" name="cmdSave" id="cmdSave" value="Save" /></td></tr>
+                                                        </td>
+                                                        <td>
+                                                            <c:choose>
+                                                                <c:when test="${yearorsemno=='s6' or yearorsemno=='y3'}"><b>Position &nbsp;&nbsp;</b>
+                                                                    <select name="cmbPos" id="cmbPos"> 
+                                                                        <option value="-1">-</option>
+                                                                        <option value="1" ${AM.cmbPos == '1' ? 'selected' : ''}>1st</option>
+                                                                        <option value="2" ${AM.cmbPos == '2' ? 'selected' : ''}>2nd</option>
+                                                                        <option value="3" ${AM.cmbPos == '3' ? 'selected' : ''}>3rd</option>
+                                                                        <option value="4" ${AM.cmbPos == '4' ? 'selected' : ''}>4th</option>
+                                                                        <option value="5" ${AM.cmbPos == '5' ? 'selected' : ''}>5th</option>
+                                                                        <option value="6" ${AM.cmbPos == '6' ? 'selected' : ''}>6th</option>
+                                                                        <option value="7" ${AM.cmbPos == '7' ? 'selected' : ''}>7th</option>
+                                                                        <option value="8" ${AM.cmbPos == '8' ? 'selected' : ''}>8th</option>
+                                                                        <option value="9" ${AM.cmbPos == '9' ? 'selected' : ''}>9th</option>
+                                                                        <option value="10" ${AM.cmbPos == '10' ? 'selected' : ''}>10th</option>
+                                                                    </select>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <select name="cmbPos" id="cmbPos" disabled> 
+                                                                        <option value="-1">-</option>
+                                                                        <option value="1" ${AM.cmbPos == '1' ? 'selected' : ''}>1st</option>
+                                                                        <option value="2" ${AM.cmbPos == '2' ? 'selected' : ''}>2nd</option>
+                                                                        <option value="3" ${AM.cmbPos == '3' ? 'selected' : ''}>3rd</option>
+                                                                        <option value="4" ${AM.cmbPos == '4' ? 'selected' : ''}>4th</option>
+                                                                        <option value="5" ${AM.cmbPos == '5' ? 'selected' : ''}>5th</option>
+                                                                        <option value="6" ${AM.cmbPos == '6' ? 'selected' : ''}>6th</option>
+                                                                        <option value="7" ${AM.cmbPos == '7' ? 'selected' : ''}>7th</option>
+                                                                        <option value="8" ${AM.cmbPos == '8' ? 'selected' : ''}>8th</option>
+                                                                        <option value="9" ${AM.cmbPos == '9' ? 'selected' : ''}>9th</option>
+                                                                        <option value="10" ${AM.cmbPos == '10' ? 'selected' : ''}>10th</option>
+                                                                    </select>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </td>
+
+                                                        <td>     <input type="submit" name="cmdSave" id="cmdSave" value="Save" /></td></tr>
                                                 </table></div>
- 
-                                </div>
-                                <h3 id="warning"></h3> 
+                                            </c:if>
+                                    </div>
 
-                                <c:if test="${param.submitted}">
-                                    <%
-                                    
-                                    int res=  AMDAO.UpdateMarks(getServletContext(), AM);
-                                    if (res==1)
-                                    { 
-                                        System.out.println("operation Successful");
-                                    }
-                                    else
-                                    {
-                                        System.out.println("operation Unuccessful");
-                                    }
-                                    %>
-                                </c:if>
+                                    <h3 id="warning"></h3> 
+
+                                    <c:if test="${param.submitted}">
+                                        <%
+
+                                            int res = AMDAO.UpdateMarks(getServletContext(), AM);
+                                            if (res == 1) {
+                                                System.out.println("operation Successful");
+                                            } else {
+                                                System.out.println("operation Unuccessful");
+                                            }
+                                        %>
+                                    </c:if>
 
 
-                            </form>
-                        </div>
-                        <div id="msg" >
+                                </form>
+                            </div>
+                            <div id="msg" >
 
 
 
@@ -219,8 +278,8 @@
 
 
 <!--<div id="footer"><%=application.getInitParameter("pageFooter")%></div>-->
-                        </div>
+                            </div>
 
-                        </body>
+                            </body>
 
-                        </html>
+                            </html>

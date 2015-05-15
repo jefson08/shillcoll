@@ -10,16 +10,79 @@ import shg.valid.Validator;
 
 /**
  *
- * @author shillong
+ * @author Shgcomp
  */
-public class CourseClassHons {
+public class AddSubjectPapers {
+ 
     private String cmbCourseName;
     private String cmbStream;
     private String cmbSubjectName;
     private boolean []chkCategory;
+    private boolean []chkPract;
     private String []cmbYearOrSemNo;
     private String [] txtPaperId;
     private String [] txtPaperName;
+
+    /**
+     * @return the cmbCourseName
+  */
+    public boolean isCmbCourseNameValid() {
+        if (Validator.isNullValue(getCmbCourseName()) || getCmbCourseName().equals("-1")) {
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean isCmbStreamValid() {
+        if (Validator.isNullValue(getCmbStream()) || getCmbStream().equals("-1")) {
+            return false;
+        }
+        return true;
+    }
+    public boolean isCmbSubjectNameValid() {
+        if (Validator.isNullValue(getCmbSubjectName()) || getCmbSubjectName().equals("-1")) {
+            return false;
+        }
+        return true;
+    }
+  
+    public boolean isCmbYearOrSemNoValid() {
+        int itemsCount, i;
+        String items[] = getCmbYearOrSemNo();
+        itemsCount = getTxtPaperName().length;
+        for (i = 0; i < itemsCount ; i++) {
+            if (Validator.isNullValue(items[i]) || items[i].equals("-1")) {
+                 return false;
+             }
+        }
+        return true;
+    }
+    public boolean isTxtPaperNameValid() {
+        int itemsCount, i;
+        String items[] = getTxtPaperName();
+        itemsCount = getTxtPaperName().length;
+         
+        for (i = 0; i < itemsCount ; i++) {
+            if ((Validator.isNullValue(items[i]))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isTxtPaperIdValid() {
+        
+        int itemsCount, i;
+        String items[] = getTxtPaperId();
+        itemsCount = getTxtPaperId().length;
+        for(i=0; i< itemsCount; i++){
+         
+            if ((Validator.isNullValue(items[i]))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * @return the cmbCourseName
@@ -78,6 +141,20 @@ public class CourseClassHons {
     }
 
     /**
+     * @return the chkPract
+     */
+    public boolean[] getChkPract() {
+        return chkPract;
+    }
+
+    /**
+     * @param chkPract the chkPract to set
+     */
+    public void setChkPract(boolean[] chkPract) {
+        this.chkPract = chkPract;
+    }
+
+    /**
      * @return the cmbYearOrSemNo
      */
     public String[] getCmbYearOrSemNo() {
@@ -118,62 +195,5 @@ public class CourseClassHons {
     public void setTxtPaperName(String[] txtPaperName) {
         this.txtPaperName = txtPaperName;
     }
-
-    public boolean isCmbCourseNameValid() {
-        if (Validator.isNullValue(getCmbCourseName()) || getCmbCourseName().equals("-1")) {
-            return false;
-        }
-        return true;
-    }
-    
-    public boolean isCmbStreamValid() {
-        if (Validator.isNullValue(getCmbStream()) || getCmbStream().equals("-1")) {
-            return false;
-        }
-        return true;
-    }
-    public boolean isCmbSubjectNameValid() {
-        if (Validator.isNullValue(getCmbSubjectName()) || getCmbSubjectName().equals("-1")) {
-            return false;
-        }
-        return true;
-    }
-  
-    public boolean isCmbYearOrSemNoValid() {
-        int itemsCount, i;
-        String items[] = cmbYearOrSemNo;
-        itemsCount = txtPaperName.length;
-        for (i = 0; i < itemsCount ; i++) {
-            if (Validator.isNullValue(items[i]) || items[i].equals("-1")) {
-                 return false;
-             }
-        }
-        return true;
-    }
-    public boolean isTxtPaperNameValid() {
-        int itemsCount, i;
-        String items[] = txtPaperName;
-        itemsCount = txtPaperName.length;
-         
-        for (i = 0; i < itemsCount ; i++) {
-            if ((Validator.isNullValue(items[i]))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isTxtPaperIdValid() {
-        
-        int itemsCount, i;
-        String items[] = getTxtPaperId();
-        itemsCount = getTxtPaperId().length;
-        for(i=0; i< itemsCount; i++){
-         
-            if ((Validator.isNullValue(items[i]))) {
-                return false;
-            }
-        }
-        return true;
-    }
 }
+
