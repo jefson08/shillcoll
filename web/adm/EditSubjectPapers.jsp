@@ -75,7 +75,7 @@
                       </td>
                     </tr>
                   </table>
-                  <table border="0" id="papers">
+                  <table border="0">
                     <tbody>
                       <tr>
                         <td colspan="4">
@@ -100,15 +100,17 @@
                     <br> <div id="srchlist">
                       <c:if test="${param.submitted}">
                         <div class="CSSTableGenerator">
-                          <table>
-                            <tr>
+                            <table id="papers"><tbody>
+                            <tr id="0">
                               <td>Paper Code</td>
                               <td>Paper Name</td>
                               <td>Semester/Year Number</td> 
+                              <td>Honours</td> 
                               <td>Practical</td> 
+                              <td>Delete</td> 
                             </tr>
                             <c:forEach items="${ASP.txtPaperId}" var="cur" begin="0" varStatus="status">
-                              <tr id="${status.index}">
+                              <tr id="${status.index+1}">
 
                                 <td><input type="text" name="txtPaperId" value="${cur}" /></td>
 
@@ -120,19 +122,19 @@
                                     <c:choose>
                                       <c:when test="${fn:startsWith(yors,'s')}">
                                         <option value="-1">-</option>
-                                        <option value="1" ${ASP.cmbYearOrSemNo[status.index] == 's1' ? 'selected' : ''}>1</option>
-                                        <option value="2" ${ASP.cmbYearOrSemNo[status.index] == 's2' ? 'selected' : ''}>2</option>
-                                        <option value="3" ${ASP.cmbYearOrSemNo[status.index] == 's3' ? 'selected' : ''}>3</option>
-                                        <option value="4" ${ASP.cmbYearOrSemNo[status.index] == 's4' ? 'selected' : ''}>4</option>
-                                        <option value="5" ${ASP.cmbYearOrSemNo[status.index] == 's5' ? 'selected' : ''}>5</option>
-                                        <option value="6" ${ASP.cmbYearOrSemNo[status.index] == 's6' ? 'selected' : ''}>6</option>
+                                        <option value="s1" ${ASP.cmbYearOrSemNo[status.index] == 's1' ? 'selected' : ''}>1</option>
+                                        <option value="s2" ${ASP.cmbYearOrSemNo[status.index] == 's2' ? 'selected' : ''}>2</option>
+                                        <option value="s3" ${ASP.cmbYearOrSemNo[status.index] == 's3' ? 'selected' : ''}>3</option>
+                                        <option value="s4" ${ASP.cmbYearOrSemNo[status.index] == 's4' ? 'selected' : ''}>4</option>
+                                        <option value="s5" ${ASP.cmbYearOrSemNo[status.index] == 's5' ? 'selected' : ''}>5</option>
+                                        <option value="s6" ${ASP.cmbYearOrSemNo[status.index] == 's6' ? 'selected' : ''}>6</option>
                                         <c:set var="yearOrSemNo" value="${param.cmbYearOrSemNo}"></c:set>
                                       </c:when>
                                       <c:otherwise>
                                         <option value="-1">-</option>
-                                        <option value="1" ${ASP.cmbYearOrSemNo[status.index] == 'y1' ? 'selected' : ''}>1</option>
-                                        <option value="2" ${ASP.cmbYearOrSemNo[status.index] == 'y2' ? 'selected' : ''}>2</option>
-                                        <option value="3" ${ASP.cmbYearOrSemNo[status.index] == 'y3' ? 'selected' : ''}>3</option>
+                                        <option value="y1" ${ASP.cmbYearOrSemNo[status.index] == 'y1' ? 'selected' : ''}>1</option>
+                                        <option value="y2" ${ASP.cmbYearOrSemNo[status.index] == 'y2' ? 'selected' : ''}>2</option>
+                                        <option value="y3" ${ASP.cmbYearOrSemNo[status.index] == 'y3' ? 'selected' : ''}>3</option>
                                         <c:set var="yearOrSemNo" value="${param.cmbYearOrSemNo}"></c:set>  
                                       </c:otherwise>
                                     </c:choose>
@@ -154,7 +156,7 @@
                                 <td>   <img src="../images/remove.png" name="delIcon"  id="delIcon" val="${status.index}" /> </td>
                               </tr>
                             </c:forEach> 
-                            <tr><td colspan="8>"<input type ="hidden" name="nextrow" id="nextrow" value="${status.index+1}" /></td></tr>
+                              <!--<tr><td colspan="6"><input type ="hidden" name="nextrow" id="nextrow" value="${status.index+1}" /></td></tr>-->
                             </tbody> 
                           </table>
                         </div>
@@ -166,7 +168,7 @@
                           <input type="button" value="Add more papers" name="cmdAddMore" id="cmdAddMore" disabled="false" />
                         </td>
                         <td  style="text-align: center">
-                          <input type="submit" name="cmdSave" value="Save" disabled="false"/>
+                          <input type="submit" name="cmdSave" value="Save" ${(param.submitted and !v1 and !v2 and !v3 and !v4 and !v5)?'disabled':''}/>
                         </td>
                       </tr>   
                     </table>  

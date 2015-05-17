@@ -83,16 +83,17 @@ public class SubjectPapersRetrieve extends HttpServlet {
             rs = pst.executeQuery();
             if (rs.next()) {
              // output += "<table border=\"0\" id=\"papers\"><tbody>";
-                output = "<div class=\"CSSTableGenerator\"><table>";
-                output += "<tr><td>Paper Code</td>";
+                output = "<div class=\"CSSTableGenerator\"><table id=\"papers\"><tbody>";
+                output += "<tr id=\"0\"><td>Paper Code</td>";
                 output += "<td>Paper Name/td>";
                 output += "<td>Semester/Year</td>";
                 output += "<td>Honours</td>";
-                output += "<td>Practical</td> </tr>";
-                //output += "<td>Practical Marks</td>             
+                output += "<td>Practical</td>";
+                output += "<td>Delete</td></tr>";             
                 yors = rs.getString("yearorsemno").trim().toLowerCase().charAt(0);
                 do {
                     index++;
+                    System.out.println("hello");
                     output += "<tr id=\"" + index + "\">";
                     output += "<td><input type=\"text\" name=\"txtPaperId\" id=\"txtPaperId\" value=\"" + rs.getString("papercode") + "\" /></td>";
                     //output += "<td>Paper Name</td>";
@@ -139,11 +140,15 @@ public class SubjectPapersRetrieve extends HttpServlet {
                      
                     output+="<td><img src=\"../images/remove.png\" id=\"delIcon\" val=\"" + index + "\"/></td>";
                     output += "</tr>";
- System.out.println(index);
+
                 } while (rs.next());
             }
-            output += "<tr><td colspan=8><input type =\"hidden\" name=\"nextrow\" id=\"nextrow\" value=\"" + index + "\"/></td></tr></table>";
-           
+             output +="</tbody></table></div>";
+//output += "<tr><td colspan=\"6\"><input type =\"input\" name=\"nextrow\" id=\"nextrow\" value=\"" + index + "\"/></td></tr></tbody></table></div>";
+            System.out.println("<tr><td colspan=\"6\"><input type =\"hidden\" name=\"nextrow\" id=\"nextrow\" value=\"" + index + "\"/>");
+           // output +="<tr><td colspan=\"6\">";
+           // output +="<input type=\"button\" value=\"Add more papers\" name=\"cmdAddMore\" id=\"cmdAddMore\" />";
+           //
             out.print(output);
         } catch (SQLException e) {
             try {
