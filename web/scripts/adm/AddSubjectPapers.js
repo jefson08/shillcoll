@@ -111,12 +111,12 @@ $('input[name=radYearOrSem]').change(function(){
 //alert(YearOrSem);
   i++;
    
-        var str = '<tr><td>Paper Id</td>';
+        var str = '<tr>';
         str += '<td><input type="text" name="txtPaperId" value="" /></td>';
-        str += '<td>Paper Name</td>';
+        //str += '<td>Paper Name</td>';
         str += '<td><input type="text" name="txtPaperName" value="" /></td>';
         
-        str += '<td>Year/Semester Number</td><td><select name="cmbYearOrSemNo" id="cmbYearOrSemNo">';
+        str += '<td><select name="cmbYearOrSemNo" id="cmbYearOrSemNo">';
         if(YearOrSem=='s')
         {
         str += '<option value="-1">-</option>';
@@ -137,12 +137,18 @@ $('input[name=radYearOrSem]').change(function(){
     }
         str += '</select></td>';
         str += '<td>';
-        str += '<label>';
+        
         str += '<input name ="chkCategorydummy" type ="checkbox" id ="chkCategorydummy" chkStat ="' + i;
-        str += '" ${param.submitted and (paramValues.chkCategory[' + i + '])?"checked":""} / > Honours';
-        str += '</label>';
+        str += '" ${param.submitted and (paramValues.chkCategory[' + i + '])?"checked":""} / > ';
+        
         str += '<input type = "hidden" name = "chkCategory" id = "chkCategory" chkVal = "' + i;
         str += '" value = "${param.submitted?paramValues.chkCategory[' + i + ']:false}" />';
+        str += '</td>';
+         str += '<td><input name ="chkPractdummy" type ="checkbox" id ="chkPractdummy" chkStat ="' + i;
+        str += '" ${param.submitted and (paramValues.chkPract[' + i + '])?"checked":""} / > ';
+        
+        str += '<input type = "hidden" name = "chkPract" id = "chkPract" chkVal = "' + i;
+        str += '" value = "${param.submitted?paramValues.chkPract[' + i + ']:false}" />';
         str += '</td>';
         $('#papers > tbody:last').append(str);
     })
