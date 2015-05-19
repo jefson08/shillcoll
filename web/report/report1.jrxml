@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e77e0399-24dc-4a7d-8d22-e6f4fde28cb8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     studentdetails."rollno" AS studentdetails_rollno,
+     studentdetails."section" AS studentdetails_section,
+     studentdetails."coursecode" AS studentdetails_coursecode,
+     studentdetails."combinationcode" AS studentdetails_combinationcode,
+     studentdetails."enrollyear" AS studentdetails_enrollyear,
+     studentdetails."studentname" AS studentdetails_studentname,
+     studentdetails."dob" AS studentdetails_dob,
+     studentdetails."gender" AS studentdetails_gender,
+     studentdetails."category" AS studentdetails_category,
+     studentdetails."fathersname" AS studentdetails_fathersname,
+     studentdetails."mothersname" AS studentdetails_mothersname,
+     studentdetails."parentsphno" AS studentdetails_parentsphno,
+     studentdetails."parentsoccupation" AS studentdetails_parentsoccupation,
+     studentdetails."districtcode" AS studentdetails_districtcode,
+     studentdetails."statecode" AS studentdetails_statecode,
+     studentdetails."coutrycode" AS studentdetails_coutrycode,
+     studentdetails."mailingaddress" AS studentdetails_mailingaddress,
+     studentdetails."peraddress" AS studentdetails_peraddress,
+     studentdetails."mobileno" AS studentdetails_mobileno,
+     studentdetails."email" AS studentdetails_email,
+     studentdetails."familyincome" AS studentdetails_familyincome,
+     studentdetails."slno" AS studentdetails_slno,
+     studentdetails."photo" AS studentdetails_photo
+FROM
+     "shgdb"."studentdetails" studentdetails]]>
+	</queryString>
+	<field name="studentdetails_rollno" class="java.lang.String"/>
+	<field name="studentdetails_studentname" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="293" y="33" width="100" height="20" uuid="e3769da4-4e44-4405-94f6-267ffa024ad9"/>
+				<text><![CDATA[Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="64" y="2" width="100" height="20" uuid="f63cb713-c8b3-4192-998c-eb59e0dace70"/>
+				<text><![CDATA[studentdetails_rollno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="238" y="2" width="100" height="20" uuid="fc64851e-9056-4f84-b8ef-bdbd41cde8ab"/>
+				<text><![CDATA[studentdetails_studentname]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="64" y="10" width="100" height="20" uuid="fcc60827-eca6-465d-ae94-8dc6a5e2bace"/>
+				<textFieldExpression><![CDATA[$F{studentdetails_rollno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="238" y="10" width="100" height="20" uuid="5a7c66f5-595a-402d-8804-e6aee7c768c5"/>
+				<textFieldExpression><![CDATA[$F{studentdetails_studentname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
