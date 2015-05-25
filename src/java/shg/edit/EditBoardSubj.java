@@ -41,8 +41,8 @@ public class EditBoardSubj extends HttpServlet {
         String srchby = request.getParameter("cmbBoardID");
         String stream = request.getParameter("cmbStream");
         //System.out.println(srchby);
-        System.out.println("Search by boardid:" + srchby);
-        System.out.println("Search by stream:" + stream);
+        //System.out.println("Search by boardid:" + srchby);
+        //System.out.println("Search by stream:" + stream);
         //boardid = getBoardID(srchby);
         //int limit = Integer.parseInt(request.getParameter("limit"));
         //int offset = Integer.parseInt(request.getParameter("offset"));
@@ -85,7 +85,7 @@ public class EditBoardSubj extends HttpServlet {
                 output += "<tr><td>Stream *</td><td>" + stream.toUpperCase() + "</td></tr>";
                 int i=0;
                 do {
-                    output += "<tr id="+i+"><td>Subject *</td><td>" + rs.getString("subjectname") + "</td><td align=\"left\"><img src=\"../images/remove.png\" alt=\"Remove\" imgno="+i+" id=\"DelIcon\"/></td><td><input type=\"text\" name=\"txtSubName\" size=\"50\" value=\"" + rs.getString("subjectname") + "\" hidden /></td></tr>"; 
+                    output += "<tr id="+i+"><td>Subject *</td><td>" + rs.getString("subjectname") + "</td><td align=\"left\"><img src=\"../images/remove.png\" alt=\"Remove\" imgno="+i+" id=\"DelIcon\"/></td><td><input type=\"text\" name=\"txtSubName\" size=\"50\" value=\"" + rs.getString("subjectname") + "\" hidden /></td><td></td></tr>"; 
                     i++;
                 } while (rs.next());
             } else {

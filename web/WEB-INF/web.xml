@@ -6,14 +6,14 @@
     </context-param>
     <context-param>
         <param-name>pageFooter</param-name>
-        <param-value></param-value>
+        <param-value/>
     </context-param>
     <!--donald-->
     <servlet>
         <servlet-name>populateStream</servlet-name>
         <servlet-class>shg.util.populateStream</servlet-class>
     </servlet>
-
+    
     <servlet-mapping>
         <servlet-name>populateStream</servlet-name>
         <url-pattern>/populateStream</url-pattern>
@@ -30,12 +30,10 @@
         <servlet-name>searchPrevXii</servlet-name>
         <servlet-class>shg.edit.searchPrevXii</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>searchPrevXii</servlet-name>
         <url-pattern>/searchPrevXii</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>EditBoardSubj</servlet-name>
         <servlet-class>shg.edit.EditBoardSubj</servlet-class>
@@ -64,7 +62,6 @@
         <servlet-name>Selectxiiinfo</servlet-name>
         <servlet-class>shg.edit.Selectxiiinfo</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>populateSubjects</servlet-name>
         <servlet-class>shg.util.populateSubjects</servlet-class>
@@ -72,6 +69,10 @@
     <servlet>
         <servlet-name>CourseClassHonsRetrieve2</servlet-name>
         <servlet-class>shg.dao.CourseClassHonsRetrieve2</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectPapersRetrieve</servlet-name>
+        <servlet-class>shg.dao.SubjectPapersRetrieve</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CourseClassHonsDAO2</servlet-name>
@@ -105,7 +106,6 @@
         <servlet-name>Selectxiiinfo</servlet-name>
         <url-pattern>/Selectxiiinfo</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>populateSubjects</servlet-name>
         <url-pattern>/populateSubjects</url-pattern>
@@ -115,10 +115,13 @@
         <url-pattern>/CourseClassHonsRetrieve2</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SubjectPapersRetrieve</servlet-name>
+        <url-pattern>/SubjectPapersRetrieve</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>CourseClassHonsDAO2</servlet-name>
         <url-pattern>/CourseClassHonsDAO2</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>populateCourse</servlet-name>
         <servlet-class>shg.util.populateCourse</servlet-class>
@@ -143,11 +146,7 @@
         <servlet-name>SearchStudent</servlet-name>
         <url-pattern>/SearchStudent</url-pattern>
     </servlet-mapping>
-    
-    
-    
     <!--Ransly-->
-    	
     <servlet>
         <servlet-name>populateUniRollNO</servlet-name>
         <servlet-class>shg.util.populateUniRollNO</servlet-class>
@@ -156,7 +155,6 @@
         <servlet-name>populateUniRollNO</servlet-name>
         <url-pattern>/populateUniRollNO</url-pattern>
     </servlet-mapping>
-   
     <servlet>
         <servlet-name>populateYearBatch</servlet-name>
         <servlet-class>shg.util.populateYearBatch</servlet-class>
@@ -173,7 +171,6 @@
         <servlet-name>populatePaperName</servlet-name>
         <url-pattern>/populatePaperName</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>populateSemester</servlet-name>
         <servlet-class>shg.util.populateSemester</servlet-class>
@@ -182,7 +179,6 @@
         <servlet-name>populateSemester</servlet-name>
         <url-pattern>/populateSemester</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>populateUniRollNoEdit</servlet-name>
         <servlet-class>shg.util.populateUniRollNoEdit</servlet-class>
@@ -191,7 +187,6 @@
         <servlet-name>populateUniRollNoEdit</servlet-name>
         <url-pattern>/populateUniRollNoEdit</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>populatePaperNameEdit</servlet-name>
         <servlet-class>shg.util.populatePaperNameEdit</servlet-class>
@@ -200,7 +195,6 @@
         <servlet-name>populatePaperNameEdit</servlet-name>
         <url-pattern>/populatePaperNameEdit</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>populateSemesterEdit</servlet-name>
         <servlet-class>shg.util.populateSemesterEdit</servlet-class>
@@ -209,7 +203,6 @@
         <servlet-name>populateSemesterEdit</servlet-name>
         <url-pattern>/populateSemesterEdit</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>srchimprovement</servlet-name>
         <servlet-class>shg.srch.srchimprovement</servlet-class>
@@ -218,7 +211,6 @@
         <servlet-name>srchimprovement</servlet-name>
         <url-pattern>/srchimprovement</url-pattern>
     </servlet-mapping>
-    
     <!--Ransly-->
     <!--teibor-->
     <servlet>
@@ -238,7 +230,6 @@
         <servlet-name>populateCourse1</servlet-name>
         <url-pattern>/populateCourse1</url-pattern>
     </servlet-mapping>
-
     <servlet>
         <servlet-name>populateRollno</servlet-name>
         <servlet-class>shg.util.populateRollno</servlet-class>
@@ -247,7 +238,6 @@
         <servlet-name>populateRollno</servlet-name>
         <url-pattern>/populateRollno</url-pattern>
     </servlet-mapping>
-
     <servlet>
         <servlet-name>GetSubject</servlet-name>
         <servlet-class>shg.dao.GetSubject</servlet-class>
@@ -256,7 +246,6 @@
         <servlet-name>GetSubject</servlet-name>
         <url-pattern>/GetSubject</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>GetSubject2</servlet-name>
         <servlet-class>shg.dao.GetSubject2</servlet-class>
@@ -274,7 +263,6 @@
         <servlet-name>GetSubject1</servlet-name>
         <url-pattern>/GetSubject1</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>populatesubject</servlet-name>
         <servlet-class>shg.util.populatesubject</servlet-class>
@@ -283,7 +271,6 @@
         <servlet-name>populatesubject</servlet-name>
         <url-pattern>/populatesubject</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>populatenewcourse</servlet-name>
         <servlet-class>shg.util.populatenewcourse</servlet-class>
@@ -293,18 +280,15 @@
         <url-pattern>/populatenewcourse</url-pattern>
     </servlet-mapping>
     <!--teibor-->
-    
     <!--uploadimage-->
     <servlet>
         <servlet-name>imageUpLoader</servlet-name>
         <servlet-class>imageUpLoader</servlet-class>
     </servlet>
-
     <servlet>
         <servlet-name>showUploadImage</servlet-name>
         <servlet-class>shg.uploadimage.showUploadImage</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>showImageFromDB</servlet-name>
         <servlet-class>shg.uploadimage.showImageFromDB</servlet-class>
@@ -321,8 +305,8 @@
         <servlet-name>showImageFromDB</servlet-name>
         <url-pattern>/showImageFromDB</url-pattern>
     </servlet-mapping>
- 
     <!--uploadimage-->
+    
     <session-config>
         <session-timeout>
             30

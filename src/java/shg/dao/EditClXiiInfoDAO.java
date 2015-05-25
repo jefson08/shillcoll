@@ -37,6 +37,7 @@ public class EditClXiiInfoDAO {
         }
 
         try {
+            con.setAutoCommit(false);
             String[] Subject = boaSub.getTxtSubject();
             int len = Subject.length;
             for (int i = 0; i < len; i++) {
@@ -51,15 +52,25 @@ public class EditClXiiInfoDAO {
                 }
             }
             if (msg != 3) {
-                sql = "DELETE FROM clxii WHERE boardroll = ? OR rollno= ?";
+                String Temp_roll = null;
+                sql = "SELECT boardroll FROM clxii WHERE rollno = ?";
+                pst = con.prepareStatement(sql);
+                pst.setString(1, boaSub.getRollno());
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                    Temp_roll = rs.getString("boardroll");
+                } else {
+                   // System.out.println("Not Matching Record(s) Found");
+                }
+                sql = "DELETE FROM clxii WHERE (boardroll = ? OR rollno= ?)";
                 pst = con.prepareStatement(sql);
                 pst.setString(1, boaSub.getTxtBoardRoll());
                 pst.setString(2, boaSub.getRollno());
                 affectedRows = pst.executeUpdate();
-                if (affectedRows > 0) {
-                    System.out.println("A user was deleted successfully!");
+                if (affectedRows <= 0) {
+                    throw new SQLException("1 . Board Name Enrollment Failed. ");
                 }
-                con.setAutoCommit(false);
+
                 sql = "INSERT INTO clxii(rollno,boardroll,boardid,yearpass,stream,totalmark)"
                         + "    VALUES (?, ?, ?, ?, ?,?)";
                 pst = con.prepareStatement(sql);
@@ -71,16 +82,19 @@ public class EditClXiiInfoDAO {
                 pst.setInt(6, Integer.parseInt(boaSub.getTxtTotalMarks().toUpperCase()));
                 affectedRows = pst.executeUpdate();
                 if (affectedRows <= 0) {
-                    throw new SQLException("Board Name Enrollment Failed. ");
+                    throw new SQLException("2. Board Name Enrollment Failed. ");
                 }
-                con.commit();
+                //con.commit();
 
                 sql = "DELETE FROM clxiistudsub WHERE boardroll LIKE ?";
                 pst = con.prepareStatement(sql);
-                pst.setString(1, boaSub.getTxtBoardRoll());
+                pst.setString(1,Temp_roll);
                 affectedRows = pst.executeUpdate();
-                if (affectedRows > 0) {
-                    System.out.println("A user was deleted successfully!");
+//                if (affectedRows > 0) {
+//                    System.out.println("A user was deleted successfully!");
+//                }
+                if (affectedRows <= 0) {
+                    throw new SQLException("3. Editing Board Details Failed. ");
                 }
                 String[] item = boaSub.getTxtSubject();
                 String[] mark = boaSub.getTxtMarks();
@@ -94,16 +108,26 @@ public class EditClXiiInfoDAO {
                     pst.setString(2, item1.toUpperCase());
                     pst.setInt(3, Integer.parseInt(mark[count++]));
                     affectedRows = pst.executeUpdate();
+//                    System.out.println(pst);
                     if (affectedRows <= 0) {
-                        throw new SQLException("Subject Enrollment Failed. ");
+                        throw new SQLException("4. Editing Board Details Failed. ");
                     }
                     con.commit();
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             try {
                 con.rollback();
-            } catch (Exception ex) {
+            } catch (SQLException ex) {
+                System.out.println("RollBack operation error.");
+
+            }
+            System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
+            return -1;
+        } catch (NumberFormatException e) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
                 System.out.println("RollBack operation error.");
 
             }

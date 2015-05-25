@@ -29,9 +29,9 @@ import shg.valid.Validator;
  */
 public class Editclxii {//extends HttpServlet {
 
-   // @Override
-    public String getStudentBoardDetails(ServletContext context, String rollno, String Count)
-    {
+    // @Override
+    public String getStudentBoardDetails(ServletContext context, String rollno, String Count) {
+//        System.out.println("roll " +rollno);
         Connection con = null;
         //ServletContext context = null;
         ConnectionPool connectionPool = null;
@@ -54,7 +54,7 @@ public class Editclxii {//extends HttpServlet {
         }
 
         try {
-           // context = getServletContext();
+            // context = getServletContext();
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
         } catch (SQLException e) {
@@ -117,51 +117,66 @@ public class Editclxii {//extends HttpServlet {
                     + "WHERE \n"
                     + "  clxii.boardroll = clxiistudsub.boardroll AND\n"
                     + "  clxii.boardid = clxiisubj.boardid AND\n"
-                    + "  clxiistudsub.subjectid = clxiisubj.subjectid AND (clxii.boardroll = ? OR clxii.rollno = ?)";
+                    + "  clxiistudsub.subjectid = clxiisubj.subjectid AND  clxii.rollno = ?";
             pst = con.prepareStatement(sql);
-            pst.setString(1, srchby);
-            pst.setString(2, srchby);
+            pst.setString(1, srchby.trim());
+            //pst.setString(2, srchby);
             rs = pst.executeQuery();
             if (rs.next()) {
-              output="";
+                output = "";
                 //System.out.println("Sucess");
-              output += "<tr><td>College Roll *</td><td>" + rs.getString("rollno") + "</td><td><input type=\"text\" name=\"rollno\" id=\"rollno\" value=\"" + rs.getString("rollno") + "\" size=\"10\" hidden /></td></tr>";
-              output += "<tr><td>Board Roll *</td><td><input type=\"text\" name=\"txtBoardRoll\" id=\"txtBoardRoll\" value=\"" + rs.getString("boardroll") + "\" size=\"10\" /></td><td></td></tr>";
-              
-                
-                
+                output += "<tr><td>College Roll *</td><td>" + rs.getString("rollno") + "</td><td><input type=\"text\" name=\"rollno\" id=\"rollno\" value=\"" + rs.getString("rollno") + "\" size=\"10\" hidden /></td></tr>";
+                output += "<tr><td>Board Roll *</td><td><input type=\"text\" name=\"txtBoardRoll\" id=\"txtBoardRoll\" value=\"" + rs.getString("boardroll") + "\" size=\"10\" /></td><td></td></tr>";
+
                 output += "<tr><td>Year Pass *</td><td><input type=\"text\" name=\"txtYrPass\" id=\"txtYrPass\" value=\"" + rs.getString("yearpass") + "\" size=\"4\" /></td><td></td></tr>";
                 //output += "<tr><td>Board Name </td><td>" + boaname + "</td><td><input type=\"text\" name=\"cmbBoardID\" id=\"cmbBoardID\" value=\"" + boaid + "\" hidden / ></td></tr>";
                 output += "<tr><td>Board Name *</td>";
-                output += "<td> <select name=\"cmbBoardID\" id=\"cmbBoardID\" >";
+                output += "<td> <select name=\"cmbBoardID\" id=\"cmbBoardID\" title=\"Please select Board\" required>";
                 for (Map.Entry m : BoardDisplay.entrySet()) {
-                    if(m.getValue().toString().equals(rs.getString("boardid"))){
-                        output+="<option value=\"" +m.getValue().toString() + "\">"+ m.getKey().toString() +"</option>";
+                    if (m.getValue().toString().equals(rs.getString("boardid"))) {
+                        output += "<option value=\"" + m.getValue().toString() + "\">" + m.getKey().toString() + "</option>";
                     }
                 }
                 for (Map.Entry m : BoardDisplay.entrySet()) {
-                    if(!(m.getValue().toString().equals(rs.getString("boardid")))){
-                        output+="<option value=\"" +m.getValue().toString() + "\">"+ m.getKey().toString() +"</option>";
+                    if (!(m.getValue().toString().equals(rs.getString("boardid")))) {
+                        output += "<option value=\"" + m.getValue().toString() + "\">" + m.getKey().toString() + "</option>";
                     }
                 }
-                 output += "</select></td>";
-                      //  + "<option value=\"-1\">-</option>";
-                output += "<tr><td>Stream </td><td>" + rs.getString("stream") + "</td><td><input type=\"text\" name=\"cmbStream\" id=\"cmbStream\" value=\"" + rs.getString("stream") + "\" hidden/ ></td></tr>";
-                output += "<tr><td>Total Mark *</td><td><input type=\"text\" name=\"txtTotalMarks\" id=\"txtTotalMarks\" value=\"" + rs.getString("totalmark") + "\" size=\"4\" /></td><td></td></tr>";
-                
-                output+="<tr><td colspan=3><table id=\"add_subject\"><tbody id=\"clear_subject\">";
-                int i=0;
+                output += "</select></td><td></td></tr>";
+                //  + "<option value=\"-1\">-</option>";
+//                output += "<tr><td>Stream </td><td>" + rs.getString("stream") + "</td><td><input type=\"text\" name=\"cmbStream\" id=\"cmbStream\" value=\"" + rs.getString("stream") + "\" hidden/ ></td></tr>";
+                output += "<tr><td>Stream </td>";
+                output += "<td> <select name=\"cmbStream\" id=\"cmbStream\" title=\"Please select Stream\" required>";
+                output += "<option value=\"" + rs.getString("stream") + "\">" + rs.getString("stream") + "</option>";
+                output += "</select></td><td></td></tr>";
+                 output += "<tr><td>Total Mark *</td><td><input type=\"text\" name=\"txtTotalMarks\" id=\"txtTotalMarks\" value=\"" + rs.getString("totalmark") + "\" size=\"4\" /></td><td></td></tr>";
+                output += "<tr><td colspan=3><table id=\"add_subject\"><tbody id=\"clear_subject\">";
+                int i = 0;
                 do {
                     output += "<tr id=" + count + "><td>Subject * &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td><td>" + rs.getString("subjectname") + "</td><td><input type=\"text\" name=\"txtSubject\" id=\"txtSubject\" value=\"" + rs.getString("subjectid") + "\" size=\"50\" hidden /></td>";
-                    output += "<td>Marks *</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks["+i+"]\" value=\"" + rs.getString("mark") + "\" size=\"3\" /><img src=\"../images/remove.png\" alt=\"Remove\" imgno=" + count + " id=\"DelIcon\"/></td><td></td></tr>";
+                    output += "<td>Marks *</td><td><input type=\"text\" name=\"txtMarks\" id=\"txtMarks[" + i + "]\" value=\"" + rs.getString("mark") + "\" size=\"3\" /><img src=\"../images/remove.png\" alt=\"Remove\" imgno=" + count + " id=\"DelIcon\"/></td><td></td></tr>";
                     i++;
                     count++;
                 } while (rs.next());
-               output+="</tbody></table></td></tr>";
+                output += "</tbody></table></td></tr>";
+
+                output += "<table>\n"
+                        + "                    <tbody>\n"
+                        + "                      <tr>\n"
+                        + "                        <td style=\"text-align: right\">\n"
+                        + "                           </td>\n"
+                        + "                        <td style=\"text-align: right\">\n"
+                        + "                          <input type=\"button\" value=\"Delete\" name=\"Delete\" id=\"Delete\" /> </td>\n"
+                        + "                        <td style=\"text-align: right\">\n"
+                        + "                          <input type=\"button\" value=\"Add Subject\" name=\"Add\" id=\"Add\" /> </td>\n"
+                        + "                        <td colspan=\"3\" style=\"text-align: center\"><input type=\"submit\" value=\"Save\" name=\"cmdSave\" id=\"cmdSave\"/> </td>\n"
+                        + "                      </tr>\n"
+                        + "                    </tbody>\n"
+                        + "                  </table>";
             } else {
                 output = "Not Matching Record(s) Found";
             }
-            
+
             //out.print(output);
         } catch (SQLException e) {
             try {
@@ -188,9 +203,6 @@ public class Editclxii {//extends HttpServlet {
 
             }
         }
-    return output;
+        return output;
     }
 }
-
-
-

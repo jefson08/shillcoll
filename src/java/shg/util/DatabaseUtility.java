@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.TreeSet;
 import java.util.HashMap;
 import javax.servlet.ServletContext;
+
 /**
  *
  * @author nic
@@ -20,17 +21,16 @@ import javax.servlet.ServletContext;
 public class DatabaseUtility {
 
     //Connection con;
-    
     public HashMap<String, String> getSubjectPaperMapping(String paper[], ServletContext context) throws SQLException {
         Statement st;
         ResultSet rs = null;
         StringBuffer pstr = new StringBuffer();
         String sql = "";
-        HashMap <String, String> mp= new HashMap<String, String>();
-        
+        HashMap<String, String> mp = new HashMap<String, String>();
+
         Connection con = null;
         ConnectionPool connectionPool = null;
-        
+
         try {
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
@@ -57,18 +57,13 @@ public class DatabaseUtility {
         } catch (SQLException ex) {
             throw ex;
             //Logger.getLogger(CourseCombinationDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
+        } finally {
             connectionPool.free(con);
         }
         return mp;
     }
 
-
-    
     //*************************NEWLY ADDED METHOD*********************************
-    
-    
     public String populateDependentPopupFromTwoTableOneCondition(ServletContext context, String tablename1, String tablename2, String ijField1, String ijField2, String valueField, String optionField, String dependsOnField, String dependsOnVal, String defValue) {
         PreparedStatement pst = null;
         Connection con = null;
@@ -79,11 +74,10 @@ public class DatabaseUtility {
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
 
-
             sql = "SELECT DISTINCT A." + valueField + ", A." + optionField + " FROM " + tablename1
                     + " A INNER JOIN " + tablename2 + " I ON A." + ijField1 + " = I." + ijField2
                     + " AND I." + dependsOnField + " = ? ";
-            
+
             pst = con.prepareStatement(sql);
             pst.setString(1, dependsOnVal);
 
@@ -140,8 +134,6 @@ public class DatabaseUtility {
             pst.setString(1, dependsOnVal);
             rs = pst.executeQuery();
 
-
-
             while (rs.next()) {
                 if (rs.getString(valueField).trim().equals(defValue)) {
 
@@ -190,8 +182,6 @@ public class DatabaseUtility {
                     + "  INNER JOIN " + tablename3 + " I ON A." + ijField3 + " = I." + ijField4
                     + " ORDER BY C." + valueField + " ASC ";
 
-           
-
             rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -237,7 +227,6 @@ public class DatabaseUtility {
             con = connectionPool.getConnection();
 
             //   sql="SELECT DISTINCT "+ valueField + ", " + optionField + " FROM " + tablename + " WHERE "+ dependsOnField + " = ?";
-
             sql = "SELECT DISTINCT B." + valueField + " FROM " + tablename1 + " B INNER JOIN " + tablename2 + " S ON B." + ijField1 + " = S." + ijField2
                     + " WHERE " + dependsOnField1 + " = ? AND " + dependsOnField2 + " = ? ";
 
@@ -292,7 +281,6 @@ public class DatabaseUtility {
             con = connectionPool.getConnection();
 
             //   sql="SELECT DISTINCT "+ valueField + ", " + optionField + " FROM " + tablename + " WHERE "+ dependsOnField + " = ?";
-
             sql = "SELECT DISTINCT B." + valueField + " FROM " + tablename1 + " B INNER JOIN " + tablename2 + " S ON B." + ijField1 + " = S." + ijField2
                     + " WHERE " + dependsOnField + " = ? ORDER BY B." + valueField + " ASC ";
 
@@ -346,7 +334,6 @@ public class DatabaseUtility {
             sql = "SELECT DISTINCT " + valueField + ", " + optionField + " FROM " + tablename + " WHERE " + dependsOnField1 + " = ? " + " AND " + dependsOnField2 + " = ? ";
 
 //            System.out.println(valueField+ " " + optionField+" " +dependsOnField1+" " + dependsOnField2+" " + dependsOnVal1+ " " +dependsOnVal2+" " +defValue);
-            
             pst = con.prepareStatement(sql);
             pst.setString(1, dependsOnVal1);
             pst.setString(2, dependsOnVal2);
@@ -384,29 +371,26 @@ public class DatabaseUtility {
     }
 
     //**************************END*******************************
-    
     public String populatePopup(ServletContext context, String tablename, String valueField, String optionField, String defValue) {
         Statement st = null;
-        Connection con=null;
-        String sql="", opt="";
+        Connection con = null;
+        String sql = "", opt = "";
         ResultSet rs = null;
         ConnectionPool connectionPool = null;
         try {
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
-           
-            
-            sql="SELECT "+ valueField + ", " + optionField + " FROM " + tablename;// + " WHERE "+ valueField + " = ?";
+
+            sql = "SELECT " + valueField + ", " + optionField + " FROM " + tablename;// + " WHERE "+ valueField + " = ?";
             st = con.createStatement();
             //pst.setString(1, defValue);
             rs = st.executeQuery(sql);
-            
+
             while (rs.next()) {
-                if(rs.getString(valueField).trim().equals(defValue)){
-                    opt += "<option value=\""+rs.getString(1) +"\" selected> "+rs.getString(2) +"</option>";  
-                }
-                else{
-                    opt += "<option value=\""+rs.getString(1) +"\"> "+rs.getString(2) +"</option>";  
+                if (rs.getString(valueField).trim().equals(defValue)) {
+                    opt += "<option value=\"" + rs.getString(1) + "\" selected> " + rs.getString(2) + "</option>";
+                } else {
+                    opt += "<option value=\"" + rs.getString(1) + "\"> " + rs.getString(2) + "</option>";
                 }
                 //recordCount = 1;
             }
@@ -428,31 +412,30 @@ public class DatabaseUtility {
                 System.out.println("Error in garbage collection :" + this.getClass() + "/populatePopup()-method " + gc);
             }
         }
-        
+        System.out.println(opt);
         return opt;
     }
 
     public String populateDependentPopup(ServletContext context, String tablename, String valueField, String optionField, String dependsOnField, String dependsOnVal, String defValue) {
         PreparedStatement pst = null;
-        Connection con=null;
-        String sql="", opt="";
+        Connection con = null;
+        String sql = "", opt = "";
         ResultSet rs = null;
         ConnectionPool connectionPool = null;
         try {
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
-           
-            sql="SELECT DISTINCT "+ valueField + ", " + optionField + " FROM " + tablename + " WHERE "+ dependsOnField + " = ?";
+
+            sql = "SELECT DISTINCT " + valueField + ", " + optionField + " FROM " + tablename + " WHERE " + dependsOnField + " = ?";
             pst = con.prepareStatement(sql);
             pst.setString(1, dependsOnVal);
             rs = pst.executeQuery();
-            
+
             while (rs.next()) {
-                if(rs.getString(valueField).trim().equals(defValue)){
-                    opt += "<option value=\""+rs.getString(1) +"\" selected> "+rs.getString(2) +"</option>";  
-                }
-                else{
-                    opt += "<option value=\""+rs.getString(1) +"\"> "+rs.getString(2) +"</option>";  
+                if (rs.getString(valueField).trim().equals(defValue)) {
+                    opt += "<option value=\"" + rs.getString(1) + "\" selected> " + rs.getString(2) + "</option>";
+                } else {
+                    opt += "<option value=\"" + rs.getString(1) + "\"> " + rs.getString(2) + "</option>";
                 }
                 //recordCount = 1;
             }
@@ -474,11 +457,10 @@ public class DatabaseUtility {
                 System.out.println("Error in garbage collection :" + this.getClass() + "/populatePopup()-method " + gc);
             }
         }
-        
+
         return opt;
     }
 
-    
     public int checkFieldExistence(ServletContext context, Connection con, String fieldname, String tablename, String whereClause) {
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -620,9 +602,9 @@ public class DatabaseUtility {
             }
         }
     }
-    
-    public String getCategory(ServletContext context, String def){
-        String cat="";
+
+    public String getCategory(ServletContext context, String def) {
+        String cat = "";
         Statement st;
         ResultSet rs = null;
         Connection con = null;
@@ -635,39 +617,40 @@ public class DatabaseUtility {
             System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
             return null;
         }
-        
+
         try {
-                String sql="select * from category";
-                st=con.createStatement();        int i=0;
-        
-                rs=st.executeQuery(sql);
-                while(rs.next()){
-                    i++;
-                    cat += "<label><input type=\"radio\" name=\"radCategory\" id=\"radCategory\" ";
-                    cat += "value=\""+rs.getString(1)+"\""; 
-                    cat += rs.getString(1).toLowerCase().equals(def.toLowerCase())?"checked />":" />";
-                            cat +=rs.getString(2)+"</label>";
-                   cat += i%2==0?"<br />":"";
-                }
-            } catch (SQLException ex) {
-                System.out.println("Error while retreiving category");
-                        //Logger.getLogger(CourseCombinationDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
+            String sql = "select * from category";
+            st = con.createStatement();
+            int i = 0;
+
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                i++;
+                cat += "<label><input type=\"radio\" name=\"radCategory\" id=\"radCategory\" ";
+                cat += "value=\"" + rs.getString(1) + "\" ";
+                cat += "required=\"\" title=\"Category not Selected\" ";
+                cat += rs.getString(1).toLowerCase().equals(def.toLowerCase()) ? " checked />" : " />";
+                cat += rs.getString(2) + "</label>";
+                cat += i % 2 == 0 ? "<br />" : "";
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error while retreiving category");
+            //Logger.getLogger(CourseCombinationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
             connectionPool.free(con);
         }
 //        System.out.println(cat);
         return cat;
     }
-    
-    public TreeSet<String> getFieldValue(ServletContext context, String table, String field){
-        TreeSet<String> cat=new TreeSet<String>();
+
+    public TreeSet<String> getFieldValue(ServletContext context, String table, String field) {
+        TreeSet<String> cat = new TreeSet<String>();
         Statement st;
         ResultSet rs = null;
         Connection con = null;
         ConnectionPool connectionPool = null;
-        int i=0;
-        
+        int i = 0;
+
         try {
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
             con = connectionPool.getConnection();
@@ -675,19 +658,18 @@ public class DatabaseUtility {
             System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
             return null;
         }
-        
+
         try {
-                String sql="select "+field +" from "+ table;
-                st=con.createStatement();
-                rs=st.executeQuery(sql);
-                while(rs.next()){
-                    cat.add(rs.getString(1));
-                }
-            } catch (SQLException ex) {
-                System.out.println("Error while retreiving category");
-                        //Logger.getLogger(CourseCombinationDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
+            String sql = "select " + field + " from " + table;
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                cat.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error while retreiving category");
+            //Logger.getLogger(CourseCombinationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
             connectionPool.free(con);
         }
 //        System.out.println(cat);

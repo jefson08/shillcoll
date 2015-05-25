@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package shg.dao;
 
 import DBConnection.ConnectionPool;
@@ -14,17 +15,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import shg.valid.Validator;
-import javax.servlet.annotation.WebServlet;
 
 /**
  *
  * @author Shgcomp
  */
-public class CourseClassHonsRetrieve2 extends HttpServlet {
+//@WebServlet(name = "SubjectPapersRetrieve", urlPatterns = {"/SubjectPapersRetrieve"})
+public class SubjectPapersRetrieve extends HttpServlet {
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -109,20 +116,26 @@ public class CourseClassHonsRetrieve2 extends HttpServlet {
                         h = rs.getString("yearorsemno").toLowerCase().equals("y3") ? "selected" : "";
                         output += "<option value=\"y3\"" + h + ">3</option>";
                     }
-                    output += " </select>";
-                    output += " </td><td><label>";
+                    output += " </select></td>";
                     h = rs.getBoolean("honsorpass") ? "checked" : "";
-                    System.out.println("cat=" + h);
-                    output += "<input name =\"chkCategorydummy\" type = \"checkbox\" id = \"chkCategorydummy\" chkstat = \"" + index + "\" " + h + " />";
+                     output += " <td><label>";
+                    output += "<input name =\"chkCategorydummy\" type = \"checkbox\" id = \"chkCategorydummy\" chkStat = \"" + index + "\" " + h + " />";
                     output += "Honours</label>";
                     output += "<input type = \"hidden\" name = \"chkCategory\" id = \"chkCategory\" chkVal = \"" + index + "\" value = \"${param.submitted?param.chkCategory:'false'}\" />";
-                    output += "<td>   <img src=\"../images/remove.png\" id=\"delIcon\" val=\"" + index + "\"/></td>";
+                    output += " </td>";
+                    h = rs.getBoolean("practical") ? "checked" : "";
+                    output += "<td><label><input name =\"chkPractdummy\" type = \"checkbox\" id = \"chkPractdummy\" chkPstat = \"" + index + "\" " + h + " />";
+                    output += "Practical</label>";
+                    output += "<input type = \"hidden\" name = \"chkPract\" id = \"chkPract\" chkPval = \"" + index + "\" value = \"${param.submitted?param.chkPract:'false'}\" />";
+                    output += "</td>";
+                     
+                    output+="<td><img src=\"../images/remove.png\" id=\"delIcon\" val=\"" + index + "\"/></td>";
                     output += "</tr>";
-
+ System.out.println(output);
                 } while (rs.next());
             }
             output += "<input type =\"hidden\" name=\"nextrow\" id=\"nextrow\" value=\"" + index + "\"/>";
-
+           
             out.print(output);
         } catch (SQLException e) {
             try {
@@ -158,3 +171,14 @@ public class CourseClassHonsRetrieve2 extends HttpServlet {
     }// </editor-fold>
 
 }
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+   

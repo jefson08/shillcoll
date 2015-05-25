@@ -52,13 +52,13 @@ public class populateCourse1 extends HttpServlet {
                 return;
             }
            // st = con.createStatement();
-            sql = "select coursecode,coursename from course where stream = ? ORDER BY coursename ASC";
+            sql = "select coursecode, coursename from course where stream = ? ORDER BY coursename ASC";
 
             
              pst = con.prepareStatement(sql);
             pst.setString(1,stream);
             rs = pst.executeQuery();
-            System.out.println("SQL"+ pst);
+//            System.out.println("SQL"+ pst);
             strXML = strXML + "<?xml version='1.0' ?>";
             strXML = strXML + "<selectChoice>";
             strXML = strXML + "<selectElement>";

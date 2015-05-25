@@ -1120,6 +1120,8 @@ $.extend( $.validator, {
 			if ( element.nodeName.toLowerCase() === "select" ) {
 				// could be an array for select-multiple or a string, both are fine this way
 				var val = $( element ).val();
+        if(val === "-1")
+          return false;
 				return val && val.length > 0;
 			}
 			if ( this.checkable( element ) ) {

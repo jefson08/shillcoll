@@ -50,6 +50,7 @@ public class populateStream extends HttpServlet {
                 System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
                 return;
             }
+            //System.out.println("Inside");
             sql = "SELECT DISTINCT stream FROM clxiisubj WHERE boardid = ?";
             pst = con.prepareStatement(sql);
             pst.setString(1, stream);

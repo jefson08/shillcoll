@@ -5,7 +5,7 @@
 --%>
 <%if ("GET".equalsIgnoreCase(request.getMethod())) {
         out.print("Invalid request -- Please try again");
-        return;
+        //return;
     }%>
 <%@page  autoFlush="true" buffer="32kb" %>
 <%@page import="shg.util.shgUtil"%>
@@ -36,34 +36,12 @@
         <script type="text/javascript" src="../scripts/util/populateComboBox.js"></script> 
         <script type="text/javascript" src="../scripts/util/net.js"></script>
         <script src="../scripts/jquery/jquery.js"></script>
-        <script src="../scripts/jquery/jquery.validate.js"></script>
-        <script src="../scripts/jquery/additional-methods.js"></script>
+        <script src="../scripts/validate/jquery.validate.js"></script>
+        <script src="../scripts/validate/additional-methods.js"></script>
+        <script src="../scripts/validate/validators.js"></script>
         <script type="text/javascript" src="../scripts/adm/selectSubj.js"></script>
         <script type="text/javascript" src="../scripts/jquery/sweet-alert.min.js"></script>
         <title>Class XII Details</title>
-        <style>
-            /*form.clxiiinfo {
-                width: 50em;
-            }*/
-            em.error {
-                background:url("../images/unchecked.gif") no-repeat 0px 0px;
-                padding-left: 16px;
-            }
-            em.success {
-                background:url("../images/checked.gif") no-repeat 0px 0px;
-                padding-left: 16px;
-            }
-            form.clxiiinfo label.error {
-                margin-left: auto;
-                width: 250px;
-            }
-            em.error {
-                color: red;
-            }
-            #warning {
-                display: none;
-            }
-        </style>
     </head>
     <body>
         <div id="header" ><%@include file="common-menu.jsp" %>
@@ -111,15 +89,11 @@
                                                     </c:if>
                                                 </td>
                                                 <td></td>
-                                            </tr>                   
-                                        </tbody>
-                                    </table>
-                                    <table id="Clear">
-                                        <tbody>
+                                            </tr>  
                                             <tr>
                                                 <td>Board* &nbsp; &nbsp; &nbsp; &nbsp; </td>
-                                                <td> <select name="cmbBoardID" id="cmbBoardID">
-                                                        <option value="-1">-</option>
+                                                <td> <select name="cmbBoardID" id="cmbBoardID" title="Please select Board" required>
+                                                        <option value="">-</option>
                                                         <c:set var="boaid" value="${param.cmbBoardID}"></c:set>
                                                         <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'boardname','boardid','boardname',boaid)}">                                
                                                         </c:out>
@@ -128,11 +102,12 @@
                                                         <span style="color: red">Board Name is either be Blank OR invalid</span>
                                                     </c:if>
                                                 </td>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td>Stream*</td>
-                                                <td> <select name="cmbStream" id="cmbStream">
-                                                        <option value="-1">-</option>
+                                                <td> <select name="cmbStream" id="cmbStream" title="Please select Stream" required>
+                                                        <option value="">-</option>
                                                         <c:set var="comb" value="${'-'}"></c:set>
                                                         <c:out escapeXml="false" value="${dbutil.populateDependentPopup(pageContext.request.servletContext,'clxiisubj','stream','stream', 'boardid',boaid,comb)}">                                
                                                         </c:out>
@@ -141,7 +116,13 @@
                                                         <span style="color: red">Stream is either be Blank OR invalid</span>
                                                     </c:if>
                                                 </td>
+                                                <td></td>
                                             </tr>
+                                        </tbody>
+                                    </table>
+                                    <table id="add_subject">
+                                        <tbody id="clear_subject">
+
                                         </tbody>
                                     </table>
                                     <table id="marks"><tbody>
@@ -178,7 +159,7 @@
                                         </tr>               
                                     </table>
                                 </form>
-
+                                <h3 id="warning"></h3> <!-- Error Message Display -->
                                 <c:if test="${param.submitted1 and !v1 and !v2 and !v3 and !v4 and !v5 and !v6 and !v7}">
                                     <%
                                         int i = stuEnrollDAO.insertStudent(getServletContext(), stuEnroll, clxiiinfo);
@@ -203,8 +184,7 @@
                                     </div><br>
                                 </div>
                             </div>
-                        </div>
-                        <h3 id="warning">Your form contains tons of errors! Please try again.</h3> <!-- Error Message Display -->
+                        </div>                        
                     </td>
                 </tr>
             </table>           
