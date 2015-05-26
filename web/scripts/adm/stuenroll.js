@@ -31,10 +31,6 @@ $(document).ready(function () {
         errorElement: "em",
         errorContainer: $("#warning, #summary"),
         errorPlacement: function (error, element) {
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
             if (element.attr("type") === "radio") {
                 if (element.attr("name") === "radYearOrSem")
                     error.appendTo(".radSYR");

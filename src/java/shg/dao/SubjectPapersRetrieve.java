@@ -82,62 +82,6 @@ public class SubjectPapersRetrieve extends HttpServlet {
             pst.setString(1, SubjectId.trim().toLowerCase());//CCH.getCmbSubjectName());//subjectid);
             rs = pst.executeQuery();
             if (rs.next()) {
-<<<<<<< HEAD
-                yors = rs.getString("yearorsemno").trim().toLowerCase().charAt(0);
-                do {
-                    index++;
-                    output += "<tr id=\"" + index + "\"><td>Paper Id</td>";
-                    output += "<td><input type=\"text\" name=\"txtPaperId\" id=\"txtPaperId\" value=\"" + rs.getString("papercode") + "\" /></td>";
-                    output += "<td>Paper Name</td>";
-                    output += "<td><input type=\"text\" name=\"txtPaperName\" id=\"txtPaperName\" value=\"" + rs.getString("papername") + "\" /></td>";
-                    output += "<td>Year/Semester Number</td>";
-                    output += "<td>";
-                    output += "<select name=\"cmbYearOrSemNo\" id=\"cmbYearOrSemNo\">";
-                    output += "<option value=\"-1\">-</option>";
-                    if (yors == 's') {
-                        h = rs.getString("yearorsemno").equals("s1") ? "selected" : "";
-                        output += "<option value=\"s1\"" + h + ">1</option>";
-                        h = rs.getString("yearorsemno").equals("s2") ? "selected" : "";
-                        output += "<option value=\"s2\"" + h + ">2</option>";
-                        h = rs.getString("yearorsemno").equals("s3") ? "selected" : "";
-                        output += "<option value=\"s3\"" + h + ">3</option>";
-                        h = rs.getString("yearorsemno").equals("s4") ? "selected" : "";
-                        output += "<option value=\"s4\"" + h + ">4</option>";
-                        h = rs.getString("yearorsemno").equals("s5") ? "selected" : "";
-                        output += "<option value=\"s5\"" + h + ">5</option>";
-                        h = rs.getString("yearorsemno").equals("s6") ? "selected" : "";
-                        output += "<option value=\"s6\"" + h + ">6</option>";
-                    }
-                    else
-                    {
-                        h = rs.getString("yearorsemno").toLowerCase().equals("y1") ? "selected" : "";
-                        output += "<option value=\"y1\"" + h + ">1</option>";
-                        h = rs.getString("yearorsemno").toLowerCase().equals("y2") ? "selected" : "";
-                        output += "<option value=\"y2\"" + h + ">2</option>";
-                        h = rs.getString("yearorsemno").toLowerCase().equals("y3") ? "selected" : "";
-                        output += "<option value=\"y3\"" + h + ">3</option>";
-                    }
-                    output += " </select></td>";
-                    h = rs.getBoolean("honsorpass") ? "checked" : "";
-                     output += " <td><label>";
-                    output += "<input name =\"chkCategorydummy\" type = \"checkbox\" id = \"chkCategorydummy\" chkStat = \"" + index + "\" " + h + " />";
-                    output += "Honours</label>";
-                    output += "<input type = \"hidden\" name = \"chkCategory\" id = \"chkCategory\" chkVal = \"" + index + "\" value = \"${param.submitted?param.chkCategory:'false'}\" />";
-                    output += " </td>";
-                    h = rs.getBoolean("practical") ? "checked" : "";
-                    output += "<td><label><input name =\"chkPractdummy\" type = \"checkbox\" id = \"chkPractdummy\" chkPstat = \"" + index + "\" " + h + " />";
-                    output += "Practical</label>";
-                    output += "<input type = \"hidden\" name = \"chkPract\" id = \"chkPract\" chkPval = \"" + index + "\" value = \"${param.submitted?param.chkPract:'false'}\" />";
-                    output += "</td>";
-                     
-                    output+="<td><img src=\"../images/remove.png\" id=\"delIcon\" val=\"" + index + "\"/></td>";
-                    output += "</tr>";
- System.out.println(output);
-                } while (rs.next());
-            }
-            output += "<input type =\"hidden\" name=\"nextrow\" id=\"nextrow\" value=\"" + index + "\"/>";
-           
-=======
              // output += "<table border=\"0\" id=\"papers\"><tbody>";
                 output = "<div class=\"CSSTableGenerator\"><table id=\"papers\"><tbody>";
                 output += "<tr id=\"0\"><td>Paper Code</td>";
@@ -205,7 +149,6 @@ public class SubjectPapersRetrieve extends HttpServlet {
            // output +="<tr><td colspan=\"6\">";
            // output +="<input type=\"button\" value=\"Add more papers\" name=\"cmdAddMore\" id=\"cmdAddMore\" />";
            //
->>>>>>> origin/master
             out.print(output);
         } catch (SQLException e) {
             try {

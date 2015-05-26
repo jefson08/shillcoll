@@ -413,7 +413,11 @@ public class DatabaseUtility {
             }
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         System.out.println(opt);
+=======
+        //System.out.println(opt);
+>>>>>>> origin/master
 =======
         //System.out.println(opt);
 >>>>>>> origin/master
