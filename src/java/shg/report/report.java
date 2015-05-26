@@ -33,7 +33,7 @@ import net.sf.jasperreports.engine.JasperRunManager;
 
 /**
  *
- * @author nic
+ * 
  */
 @WebServlet (name="report", urlPatterns={"/report"})
 public class report extends HttpServlet {
