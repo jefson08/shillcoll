@@ -47,6 +47,14 @@ $.validator.addMethod("nameTextBox", function (value, element) {
     return false;
   }
 }, 'Letter Only');
+$.validator.addMethod("combo", function (value, element) {
+  if (value == "-1") {
+    return true;
+  }
+  else {
+    return false;
+  }
+}, 'List not selected');
 
 $.validator.addMethod("alphanumeric", function (value, element) {
   if (value !== "") {

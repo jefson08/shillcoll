@@ -29,14 +29,13 @@
         <link href="../style/master-css/menu-style.css" rel="stylesheet" />
         <link rel="stylesheet" href="../style/TableCSSCode.css" type="text/css" charset="utf-8" />
         <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script>
-        <script type="text/javascript" src="../scripts/jquerydatepicker/jquery.datepick.js"></script>                
-        <script type="text/javascript" src="../scripts/adm/AddSubjectPapers.js"></script>
-        <script type="text/javascript" src="../scripts/jquery/jquery.maskedinput-1.3.js"></script>
+        
         <script type="text/javascript" src="../scripts/util/net.js"></script>
         <script type="text/javascript" src="../scripts/util/populateComboBox.js"></script>
-<script src="../scripts/validate/jquery.validate.js"></script>
-    <script src="../scripts/validate/additional-methods.js"></script>
-    <script src="../scripts/validate/validators.js"></script>
+        <script src="../scripts/validate/jquery.validate.js"></script>
+        <script src="../scripts/validate/additional-methods.js"></script>
+        <script src="../scripts/validate/validators.js"></script>
+           <script type="text/javascript" src="../scripts/adm/AddSubjectPapers.js"></script>
         <title>Add Papers to a Subject</title>
     </head>
     <body>
@@ -62,13 +61,14 @@
                         <div id="right-frame">
                             <div class="frame-header" >Subject Papers</div>
                             <div id="processing-area">
+                                <h2 id="summary"></h2>
                                 <form name="CourseClassHons" method="POST">
                                     <input type="hidden" name="submitted" value="true" />
                                     <table border="1" rules="none" frame="box" align="center">
                                         <tr><td width="150"><b>Select System :</b> </td>
 
-                                            <td width="150">    <input type="radio" id="radYear" name="radYearOrSem" value="y" />Annual</td>
-                                            <td width="150">   <input type="radio" id="radSem" name="radYearOrSem" value="s" ${!(param.submitted)?'checked':''} />Semester
+                                            <td width="150">    <input type="radio" id="radYear" name="radYearOrSem" value="y" ${(param.submitted and param.txtYearOrSem=='y')?'checked':''}/>Annual</td>
+                                            <td width="150">   <input type="radio" id="radSem" name="radYearOrSem" value="s" ${!param.submitted or((param.submitted and param.txtYearOrSem=='s'))?'checked':''} />Semester
                                                 <c:if test="${param.submitted and !empty(param.radYearOrSem)}">
 
                                                     <c:set var="yearorsem" value="${param.radYearOrSem}"></c:set>
@@ -76,14 +76,16 @@
                                                 <c:if test="${!(param.submitted)}" >
                                                     <c:set var="yearorsem" value="s" ></c:set>
                                                 </c:if>
-                                            </td></tr>
+                                            </td>
+                                            <td> <input type ="hidden" name="txtYearOrSem" value="${param.submitted?param.radYearOrSem:''}"/><td>
+                                        </tr>
                                     </table><br>
                                     <table border="0" align="center">
                                         <tbody>
 
                                             <tr>
                                                 <td><b>Stream * :</b>
-                                                    <select name="cmbStream" id="cmbStream" required="" title="Stream not Selected">
+                                                    <select name="cmbStream" id="cmbStream" required="" title="Stream1 not Selected">
                                                         <option value="-1">-</option>
                                                         <c:set var="streamcode" value="${param.cmbStream}"></c:set>
 
@@ -132,10 +134,10 @@
                                                     </c:if>
                                                 </td>
                                             </tr>
-                                            
+
                                     </table>
-                                                            <font face="verdana"> * Paper name and Paper ID as per the University's Syllabus</font>
-                                   <div class="CSSTableGenerator">
+                                    <font face="verdana"> * Paper name and Paper ID as per the University's Syllabus</font>
+                                    <div class="CSSTableGenerator">
                                         <table  id="papers">
                                             <tr>
                                                 <td>Paper Id</td>
@@ -339,7 +341,7 @@
 
                                     </table>                
                                 </form>
-
+                                <h3 id="warning"></h3>
                                 </body>
 
                                 <div id="CCHDiv">
