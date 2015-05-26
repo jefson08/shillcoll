@@ -9,6 +9,7 @@
 <jsp:useBean id="examInfo" class="shg.bean.examinfo_Bean" ></jsp:useBean>
 <jsp:setProperty name="examInfo" property="*"></jsp:setProperty>
 
+<%@page autoFlush="true" buffer="32kb" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -229,8 +230,9 @@
                                 </form>
 
                                 <c:if test="${param.submitted and !v1 and !v2 and !v3 and !v4 and !v5 and !v6}">
-                                    <jsp:forward page="stimprovement.jsp"></jsp:forward>
+                                    <jsp:forward page="papersExam.jsp"></jsp:forward>
                                 </c:if>
+                                                            
                                 <br></br>
                                 <br></br>
                                 <br></br> 

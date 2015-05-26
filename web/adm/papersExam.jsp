@@ -3,6 +3,7 @@
     Created on : Mar 5, 2015, 10:37:35 PM
     Author     : B Mukhim
 --%>
+<%@page autoFlush="true" buffer="32kb" %>
 
 <%@page import="java.sql.SQLException"%>
 <%@page import="DBConnection.ConnectionPool"%>
@@ -72,6 +73,7 @@
                                         String rollno = request.getParameter("roll1");
                                         String status = request.getParameter("status");
                                         String yos = request.getParameter("yos");
+                                        String nehuroll = request.getParameter("nehuroll");
                                         String examid = "sampleexamid";
                                         System.out.println("Name" + rollno);
                                     %>  
@@ -82,6 +84,13 @@
                                                 <td>Rollno </td>
                                                 <td> : </td>
                                                 <td><input type="text" name="roll1" id="roll1" value="<%=rollno%>" size="20 "  />
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nehu Rollno </td>
+                                                <td> : </td>
+                                                <td><input type="text" name="nehuroll" id="nehuroll" value="<%=nehuroll%>" size="20 "  />
 
                                                 </td>
                                             </tr>
@@ -115,7 +124,7 @@
                                                                                             </tr>  -->
                                             <tr>
                                                 <td>
-                                                    <input type="button" value="generate Combination" name="generate" id="generate">
+                                                    <input type="button" value="Show Combination" name="generate" id="generate">
 
                                                 </td>
                                             </tr>
@@ -123,7 +132,7 @@
                                             <tr>
                                                 <td colspan="3">
                                                     <c:if test="${param.submitted and !exam.isSubjectcodeValid(pageContext.request.servletContext)}" var="v3">
-                                                        [No Papers Checked from Selected Subjects]
+                                                        <span style="color: red">[No Papers Checked from Selected Subjects]</span>
                                                     </c:if>
 
                                                 </td>
@@ -157,6 +166,7 @@
 
                                 </form>
                             </div>
+
                             <div id="msg" >
 
                                 <c:if test="${param.submitted and !v3 }">
@@ -165,10 +175,20 @@
                                     %>
 
                                 </c:if>
-                                <br><br>
-
-<!--<div id="footer"><%=application.getInitParameter("pageFooter")%></div>-->
                             </div>
+                            <br><br>
+                            <div id="msg1">
+                                <label align="center"><jsp:getProperty property="msg1" name="exam"/></label>
+
+                            </div>
+                            <div id="msg3">
+                                <label align="center"><jsp:getProperty property="msg3" name="exam"/></label>
+                            </div>
+                            <span style="color: red">
+                                <div id="msg2">
+                                    <label align="center"><jsp:getProperty property="msg2" name="exam"/></label>
+                                </div>
+                            </span>
 
                             </body>
 

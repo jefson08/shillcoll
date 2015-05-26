@@ -58,8 +58,9 @@ public class SubjectAndPaper {
 //                    + "and sid.stream in (select stream from course where coursecode like ?)";
             String sql = "select sub.subjectcode, sub.subjectname,p.papercode, p.papername from subjects as sub, "
                     + "papers as p where p.subjectcode=sub.subjectcode and sub.streamcode in "
-                    + "(select stream from course where coursecode like ?)";
+                    + "(select stream from course where coursecode like ?) order by subjectcode";
             st = con.prepareStatement(sql);
+               System.out.print("ST"+st);
             st.setString(1, course);
 
             rs = st.executeQuery();
@@ -91,7 +92,7 @@ public class SubjectAndPaper {
                     papercode = rs.getString(3);
                     papername = rs.getString(4);
                     String pchecked = pcode_v.contains(papercode) ? "checked" : "";
-                    str += " ><label><input type=\"checkbox\" name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername + "<br></label>";
+                    str += " <<>><label><input type=\"checkbox\" name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername + "<br></label>";
 
                 } while (rs.next());
 

@@ -27,11 +27,27 @@
         <script type="text/javascript" src="../scripts/jquerydatepicker/jquery.datepick.js"></script>
         <script type="text/javascript" src="../scripts/jquery/jquery.maskedinput-1.3.js"></script>
         <script type="text/javascript" src="../scripts/util/populateComboBox.js"></script>
-        <script type="text/javascript" src="../scripts/util/net.js"></script>
-        <script type="text/javascript" src="../scripts/adm/stuenroll.js"></script>
+        <script type="text/javascript" src="../scripts/adm/course.js"></script>
         <link href="../style/master-css/style.css" rel="stylesheet" />
         <link href="../style/master-css/master-layout.css" rel="stylesheet" />
         <link href="../style/master-css/menu-style.css" rel="stylesheet" />
+
+        <style type="text/css">
+            div#question { margin-bottom:5px; }
+
+            div#question a { 	display: block;	margin-left:20px;
+                              text-decoration: none;color:black;
+            }
+
+            div#question a:hover { background: none; }
+
+            div#question a span { display: none;  }
+
+            div#question a:hover span { display: inline; padding: 25px;
+                                        width:250px;
+            }
+        </style>
+
 
         <title>New Subject</title>
     </head>
@@ -64,37 +80,57 @@
                                     <table border="0">
                                         <tbody>
                                             <tr>
-                                                <td> Stream</td>
+                                                <td> Stream *</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <select name="stream" id="stream">
-                                                        <option value="-1"></option>
-                                                        <c:set var="scode" value="${param.coursecode1}"></c:set>
-                                                        <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'streams','streamcode','streamname',scode)}"> </c:out>                               
-                                                        </select>
-                                                    <c:if test="${param.submitted and course.streamValid}" var="v4">
-                                                        Invalid Stream
-                                                    </c:if>
+                                                   <select name="stream" id="stream" title ="Please Select Stream">
+                                                            <option value="-1">-</option>
+                                                            <c:set var="scode" value="${param.stream}"></c:set>
+                                                            <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'streams','streamcode','streamname',scode)}"> </c:out>                               
+                                                            </select>
+                                                          
+                                                        <c:if test="${param.submitted and !sub.streamValid}" var="v1">
+                                                            <br><span style="color: red"> Invalid Stream: <br>Please Select Stream</span>
+                                                        </c:if>
+                                                </td>
+                                                <td>
+                                                     <div id="question">
+                                                        <a href="">[??] 
+                                                            <span style ="color: green"> Please Select Stream </span></a>
+                                                     </div>
                                                 </td>
                                             </tr>
-                             <tr>
+
+
+
+
+                                            <tr>
                                                 <td>Subject Name *</td>
                                                 <td> : </td>
-                                                <td><input type="text" name="txtsubjectname" id="txtsubjectname" value="${param.txtsubjectname}"  size="20" />
-                                                    <c:if test="${param.submitted and sub.txtsubjectnameValid}" var="v2">
-                                                        Invalid Subject Name/ Subject Name is blank
+                                                <td>
+                                                    <input type="text" name="txtsubjectname" id="txtsubjectname" value="${param.txtsubjectname}"  size="16" title="Please Select Stream"/>
+                                                    <c:if test="${param.submitted and !sub.txtsubjectnameValid}" var="v2">
+                                                        <br> <span style="color: red">Invalid Subject Name<br>/ Subject Name is blank</span>
                                                     </c:if>
+                                                </td>
+                                                <td>
+                                                    <div id="question">
+                                                        <a href="">[??]    
+                                                            <span style ="color: green"> Please Enter Subject Name| No Special Character Allowed </span></a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" style="text-align: center">
-                                                    <input type="submit" value="Save" name="cmdSave" /> </td>
+                                                <td></td><td></td>
+                                                <td>
+                                                    <input type="submit" value="Save" name="cmdSave" />
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </form>
 
-                                <c:if test="${param.submitted and !v4 and !v2}">
+                                <c:if test="${param.submitted and !v1 and !v2}">
                                     <%
                                         Subject.insert(getServletContext(), sub);
                                     %>

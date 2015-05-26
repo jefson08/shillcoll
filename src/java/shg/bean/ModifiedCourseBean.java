@@ -14,7 +14,16 @@ public class ModifiedCourseBean {
     private String cmbhon;
     private String msg1 = "";
     private String msg2 = "";
-    private String msg="";
+    private String msg = "";
+    private String msg3 = "";
+
+    public String getMsg3() {
+        return msg3;
+    }
+
+    public void setMsg3(String msg3) {
+        this.msg3 = msg3;
+    }
 
     public String getMsg() {
         return msg;
@@ -87,13 +96,14 @@ public class ModifiedCourseBean {
     }
 
     public boolean isTxtcoursenameValid() {
-        if (Validator.isNullValue(getTxtcoursename()) || getTxtcoursename().equals("-1")) {
+        if (Validator.isNullValue(getTxtcoursename()) || getTxtcoursename().equals("-1")||Validator.containsIllegalCharacters1(getTxtcoursename())) {
             return false;
         }
         return true;
     }
+
     public boolean isTxtnoofseatValid() {
-        if (Validator.isNullValue(getTxtnoofseat()) || getTxtnoofseat().equals("-1")) {
+        if (Validator.isNullValue(getTxtnoofseat())||(!Validator.isNumeric(getTxtnoofseat()))) {
             return false;
         }
         return true;
@@ -101,11 +111,4 @@ public class ModifiedCourseBean {
 
 }
 
-
-
-
-
-
-
-    
 /*}*/
