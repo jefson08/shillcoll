@@ -254,7 +254,6 @@
         <servlet-name>GetSubject2</servlet-name>
         <url-pattern>/GetSubject2</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>GetSubject1</servlet-name>
         <servlet-class>shg.dao.GetSubject1</servlet-class>
