@@ -9,6 +9,7 @@
 <jsp:useBean id="examInfo" class="shg.bean.examinfo_Bean" ></jsp:useBean>
 <jsp:setProperty name="examInfo" property="*"></jsp:setProperty>
 
+<%@page autoFlush="true" buffer="32kb" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

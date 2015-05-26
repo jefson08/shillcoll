@@ -3,6 +3,7 @@
     Created on : Mar 5, 2015, 10:37:35 PM
     Author     : B Mukhim
 --%>
+<%@page autoFlush="true" buffer="32kb" %>
 
 <%@page import="java.sql.SQLException"%>
 <%@page import="DBConnection.ConnectionPool"%>
