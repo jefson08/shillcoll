@@ -72,14 +72,15 @@ public class examinfo_generate_examid extends HttpServlet {
             ps = con.prepareStatement("SELECT coursecode,enrollyear FROM studentdetails  WHERE lower(rollno)= ? ");
             ps.setString(1, term.toLowerCase());
             rs = ps.executeQuery();
+            System.out.println(ps);
             while (rs.next()) {
                 cdata = rs.getString("coursecode");
                 edata = rs.getString("enrollyear");
             }
             slno = getMaxSerialNo(cdata.trim());
-            if (slno == -1) {
-                throw new SQLException("Serial Number is Invalid Less than Zero!");
-            }
+//            if (slno == -1) {
+//                throw new SQLException("Serial Number is Invalid Less than Zero!");
+//            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -96,7 +97,7 @@ public class examinfo_generate_examid extends HttpServlet {
         int sln = -1;
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("SELECT MAX(serial) FROM examinfo WHERE lower(rollno) LIKE ? ");
+            ps = con.prepareStatement("SELECT MAX(serial) FROM exam WHERE lower(rollno) LIKE ? ");
             ps.setString(1, term.toLowerCase() + "%");
             rs = ps.executeQuery();
             

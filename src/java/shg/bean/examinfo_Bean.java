@@ -194,9 +194,9 @@ public class examinfo_Bean {
         if (Validator.isNullValue(getNri())) {
             return false;
         }
-        if (getNri().trim().length() == 0 || !(getNri().toLowerCase().equals("r") || getNri().toLowerCase().equals("i") || getNri().toLowerCase().equals("n"))) {
-            return false;
-        }
+//        if (getNri().trim().length() == 0 || !(getNri().toLowerCase().equals("r") || getNri().toLowerCase().equals("i") || getNri().toLowerCase().equals("n"))) {
+//            return false;
+//        }
         return true;
     }
 }

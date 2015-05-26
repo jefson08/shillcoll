@@ -3,6 +3,7 @@
     Created on : Mar 5, 2015, 10:37:35 PM
     Author     : B Mukhim
 --%>
+<%@page import="shg.bean.examinfo_Bean"%>
 <%@page autoFlush="true" buffer="32kb" %>
 
 <%@page import="java.sql.SQLException"%>
@@ -19,6 +20,7 @@
 <jsp:useBean id="exampaper" class="shg.dao.ExamPapers"></jsp:useBean>
 <jsp:useBean id="subpaper" class="shg.util.SubjectAndPaper1"></jsp:useBean>
 <jsp:setProperty name="exam" property="*"></jsp:setProperty>
+<jsp:useBean id="examInfo" class="shg.bean.examinfo_Bean" scope ="session"></jsp:useBean>
 <%@page import="shg.util.shgUtil"%>
 
 <html>
@@ -68,16 +70,19 @@
 
 
 
-                                <form name="frmcourse" method="POST" action="" id="frmcourse">
+                                <form name="frmcourse" method="POST" action="papersExam.jsp" id="frmcourse">
                                     <%
-                                        String rollno = request.getParameter("roll1");
-                                        String status = request.getParameter("status");
-                                        String yos = request.getParameter("yos");
-                                        String nehuroll = request.getParameter("nehuroll");
-                                        String examid = "sampleexamid";
+                                        String rollno = examInfo.getRollno();
+                                        String status = examInfo.getNri();
+                                        String yos = examInfo.getSeye();
+                                        String nehuroll = examInfo.getTxtUnirollno();
+                                        String examid = examInfo.getExamId();
                                         System.out.println("Name" + rollno);
+                                        System.out.print("examid  ::"+examid);
+                                        //String examid=examInfo.getExamId();
                                     %>  
-                                    <input type="hidden" name="submitted" value="true" />
+                                    <input type="hidden" name="submitted1" value="true" />
+                                    <input type="text" name ="examid" id="examid" value="<%=examid%>" hidden>
                                     <table border="0">
                                         <tbody>
                                             <tr>
@@ -95,7 +100,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Status </td>
+                                                <td>Category </td>
                                                 <td> : </td>
                                                 <td><input type="text" name="status" id="status" value="<%=status%>" size="10 "  />
 
@@ -131,7 +136,7 @@
 
                                             <tr>
                                                 <td colspan="3">
-                                                    <c:if test="${param.submitted and !exam.isSubjectcodeValid(pageContext.request.servletContext)}" var="v3">
+                                                    <c:if test="${param.submitted1 and !exam.isSubjectcodeValid(pageContext.request.servletContext)}" var="v3">
                                                         <span style="color: red">[No Papers Checked from Selected Subjects]</span>
                                                     </c:if>
 
@@ -169,7 +174,7 @@
 
                             <div id="msg" >
 
-                                <c:if test="${param.submitted and !v3 }">
+                                <c:if test="${param.submitted1 and !v3 }">
                                     <%
                                         exampaper.insertPapers(getServletContext(), exam);
                                     %>
