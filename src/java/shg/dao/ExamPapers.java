@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import shg.bean.ExamPaperBean;
 import shg.util.DatabaseUtility;
+import shg.bean.examinfo_Bean;
 
 /**
  *
@@ -48,7 +49,7 @@ public class ExamPapers {
 try {
             // Statement s1 = con.prepareStatement(sql);
             con.setAutoCommit(false);
-            System.out.println("hello peter123");  
+           // System.out.println("hello peter123");  
             sub = exam.getSubjectcode();
       
             
@@ -67,7 +68,7 @@ try {
 //                System.out.println(t.getKey() +" ---- "+t.getValue());
                 String sql = "INSERT INTO papersappear VALUES (?, ?, ?, ?, ?, ?)";
                 pst = con.prepareStatement(sql);
-                pst.setString(1,"ExamID112231"+i);
+                pst.setString(1,exam.getExamid());
                 pst.setString(2, subcode);
                 pst.setString(3, papercode);
                 pst.setString(4, exam.getNehuroll());

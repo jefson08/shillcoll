@@ -27,6 +27,15 @@ public class ExamPaperBean {
     private String nehuroll;
     private String msg2="";
     private String msg3="";
+    private String examid;
+
+    public String getExamid() {
+        return examid;
+    }
+
+    public void setExamid(String examid) {
+        this.examid = examid;
+    }
 
     public String getMsg3() {
         return msg3;
