@@ -22,14 +22,16 @@ public class examinfo_Bean {
     private String errorssuccmsg = "";
     private String txtPmtDate;
     private String pmtstatus;
-    private String examId;
-    private int serial;
+    private static String examId;
+    private static int serial;
 
     public String getExamId() {
         return examId;
     }
 
     public void setExamId(String examId) {
+        
+        System.out.println("bean eid"+examId);
         this.examId = examId;
     }
 

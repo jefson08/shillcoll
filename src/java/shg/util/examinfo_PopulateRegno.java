@@ -77,7 +77,7 @@ public class examinfo_PopulateRegno extends HttpServlet {
         String sql = "";
         try {
 
-            sql = "SELECT regno FROM exam  WHERE lower(nehurollno) = ? ";
+            sql = "SELECT regno FROM examinfo  WHERE lower(nehurollno) = ? ";
 
             ps = con.prepareStatement(sql);
             ps.setString(1, rec.toLowerCase());

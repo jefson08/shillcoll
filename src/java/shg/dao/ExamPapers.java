@@ -78,20 +78,23 @@ try {
                 affectedRows=pst.executeUpdate();
               
             }
-            System.out.println("Successfully");
+           // System.out.println("Successfully");
+            
             if(affectedRows<=-1){
                 exam.setMsg2("Duplicate Records : Please Re-generate Combination");
                 throw new SQLException("Failed to insert new row --- ");
             }
 //            setMsg(" Course Save Successfully.");
+            
                exam.setMsg1("Records Saved Successfully");
-               exam.setMsg3("Show Papers");
+               
+               //exam.setMsg3("Show Papers");
 //            ccomb.setMsg(ccomb.getCoursecode()+"-"+combine2);
             con.commit();
 
         } catch (SQLException e) {  
             exam.setMsg2("Duplicate Records : Please Re-generate Combination");
-            exam.setMsg3("Show Papers");
+           // exam.setMsg3("Show Papers");
             System.out.println("Error 1234 -- " + e);
             //JOptionPane.showMessageDialog(null,"Record Exist");
             try {
@@ -114,5 +117,7 @@ try {
         return 1;
     }
 }
+
+
 
           

@@ -137,11 +137,15 @@ public class SubjectAndPaper1 {
                         papercode = rs.getString(6);
                         papername = rs.getString(7);
                         String pchecked = pcode_v.contains(papercode) ? "checked" : "";
-                        str += " <<>><label><input type=\"checkbox\" checked name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername + "<br></label>";
-
+                        str += " :  :   :<label><input type=\"checkbox\" checked name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername + "</label>";
+                        str += "    <span id=" + papercode + "  style=\"display:none\">"
+                                + " <input type=\"text\"size=\"5\" name=" + papercode + " />"
+                                + "</span><br>";
                     } while (rs.next());
 
                     str += "<br></span>";
+//                    str += "<label><input type=\"button\" name=\"genamount\" value=\"Generate Amount\" id=\"genamount\" />";
+//                    str += " <input type=\"text\"size=\"5\" name=\"amount\" id=\"amount\">";
 
                 } else {
                     str = null;
@@ -166,6 +170,7 @@ public class SubjectAndPaper1 {
                             + subcode + "\"" + checked + " /> " + sname + "        </label><br />";
                     str += scode_v.contains(subcode) ? "<span id=\"" + subcode + "\" style=\"display: inline;\">" : "<span id=\"" + subcode + "\" style=\"display: none;\">";
                     // System.out.println("msdhbfmhbvdshmfds"+sname);
+                    int sum = 0;
                     do {
 
                         if (!subcode.equals(rs.getString(3))) {
@@ -175,7 +180,8 @@ public class SubjectAndPaper1 {
                             checked = scode_v.contains(subcode) ? "checked" : "";
                             str += " <label>"
                                     + "       <input type=\"checkbox\"  name=\"subjectcode\" id=\"subjectcode\" subval=\"" + subcode + "\" value=\""
-                                    + subcode + "\"" + checked + " /> " + sname + "        </label><br />";
+                                    + subcode + "\"" + checked + " /> " + sname + "        </label> <br />";
+
                             str += scode_v.contains(subcode) ? "<span id=\"" + subcode + "\" style=\"display: inline;\">" : "<span id=\"" + subcode + "\" style=\"display: none;\">";
 
                         }
@@ -185,18 +191,30 @@ public class SubjectAndPaper1 {
                         if (top == true) {
                             String top1 = "PRACTICAL";
                             String pchecked = pcode_v.contains(papercode) ? "checked" : "";
-                            str += "    :      :    :<label><input type=\"checkbox\"  name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername +" "+ "[" + top1 + "]<br></label>";
+                            str += "    :      :    :<label><input type=\"checkbox\"  name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername + " " + "[" + top1 + "]</label>";
+                            str += "    <span id=" + papercode + "  style=\"display:none\">"
+                                    + " <input type=\"text\"size=\"5\" name=\"papercode1\" id=\"papercode1\"  value=\"200\"/>"
+                                    + "</span><br>";
+
                         } else {
                             String pchecked = pcode_v.contains(papercode) ? "checked" : "";
-                            str += " :      :    :<label><input type=\"checkbox\"  name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername +"<br></label>";
+                            str += " :      :    :<label><input type=\"checkbox\"  name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername + "</label>";
+                            str += "    <span id=" + papercode + "  style=\"display:none\">"
+                                    + " <input type=\"text\"size=\"5\" name=\"papercode1\" id=\"papercode1\" value=\"150\"/>"
+                                    + "</span><br>";
 
                         }
                     } while (rs.next());
-
+                    System.out.print("Sum" + sum);
                     str += "<br></span>";
+//                    str += "<label><input type=\"button\" name=\"genamount\" value=\"Generate Amount\" id=\"genamount\" />";
+
+//                    str += " <input type=\"text\"size=\"5\" name=\"amount\" id=\"amount\">";
+
                 } else {
                     str = null;
                 }
+
             }
 
         } catch (SQLException e) {

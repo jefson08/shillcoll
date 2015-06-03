@@ -40,6 +40,15 @@
         <title>Papers Appears</title>
     </head>
     <body>
+        <%
+            Connection con = null;
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String sql;
+            ServletContext context = null;
+            ConnectionPool connectionPool = null;
+            // Statement s=con.createStatement();
+        %>
 
 
 
@@ -67,9 +76,6 @@
                         <div id="right-frame">
                             <div class="frame-header" >Exam Appears</div>
                             <div id="processing-area">
-
-
-
                                 <form name="frmcourse" method="POST" action="papersExam.jsp" id="frmcourse">
                                     <%
                                         String rollno = examInfo.getRollno();
@@ -77,32 +83,79 @@
                                         String yos = examInfo.getSeye();
                                         String nehuroll = examInfo.getTxtUnirollno();
                                         String examid = examInfo.getExamId();
-                                        System.out.println("Name" + rollno);
-                                        System.out.print("examid  ::"+examid);
+
+                                        System.out.print("examid  ::" + examid);
                                         //String examid=examInfo.getExamId();
-                                    %>  
+%>  
                                     <input type="hidden" name="submitted1" value="true" />
                                     <input type="text" name ="examid" id="examid" value="<%=examid%>" hidden>
-                                    <table border="0">
+
+
+                                    <table border="0" >
                                         <tbody>
                                             <tr>
                                                 <td>Rollno </td>
                                                 <td> : </td>
-                                                <td><input type="text" name="roll1" id="roll1" value="<%=rollno%>" size="20 "  />
+                                                <td><input type="text" name="roll1" id="roll1" value="<%=rollno%>" size="12 "  style="pointer-events:none"/>
+                                                </td>
+                                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                <td rowspan="10">
 
+                                                    <table border="3" style="width: 600" id="tab" name="tab">
+                                                        <tr>
+                                                            <th colspan="2">FEES SUMMARY</th>
+                                                        </tr>
+                                                        <tr bgcolor="yellow">
+                                                            <th width="500">Account Heads</th>
+                                                            <th width="100">Amount</th>
+
+                                                        </tr>
+                                                        <%
+                                                            try {
+                //            context = getServletContext();
+                                                                context = getServletContext();
+                                                                connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
+                                                                con = connectionPool.getConnection();
+                                                            } catch (SQLException e) {
+                //            response.sendRedirect("output.jsp?message=Connection not Established ");
+                                                                System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
+                                                                //return null;
+                                                            }
+
+                                                            String sql11 = "SELECT examfeeheads.accheadcode,examfeeheads.acchead, examsubheadamt.amount \n"
+                                                                    + " FROM shgdb.examsubheadamt,shgdb.examfeeheads \n"
+                                                                    + "where examfeeheads.accheadcode = examsubheadamt.accheadcode ";
+                                                            pst = con.prepareStatement(sql11);
+                                                            System.out.println("Statements " + pst);
+                                                            rs = pst.executeQuery();
+                                                            while (rs.next()) {
+                                                        %>
+
+                                                        <tr>
+                                                            <td><%=rs.getString(2)%></td>
+                                                            <td align="right" class="num"><%=rs.getString(3)%></td>
+<!--                                                            <td><input type="checkbox" name="amount1" id="amount1"></td>-->
+                                                        </tr>
+                                                        
+                                                        <%}%>
+                                                        <tr>
+                                                            <!--<td><input type="button" name="sub" class="sub" value="add"></td>-->
+                                                        </tr>    
+
+                                                    </table> 
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Nehu Rollno </td>
                                                 <td> : </td>
-                                                <td><input type="text" name="nehuroll" id="nehuroll" value="<%=nehuroll%>" size="20 "  />
+                                                <td><input type="text" name="nehuroll" id="nehuroll" value="<%=nehuroll%>" size="12 " style="pointer-events:none"  />
 
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Category </td>
                                                 <td> : </td>
-                                                <td><input type="text" name="status" id="status" value="<%=status%>" size="10 "  />
+                                                <td><input type="text" name="status" id="status" value="<%=status%>" size="10 " style="pointer-events:none" />
 
                                                 </td>
                                             </tr>
@@ -111,29 +164,16 @@
                                             <tr>
                                                 <td>Year / Semester </td>
                                                 <td> : </td>
-                                                <td><input type="text" name="yos" id="yos" value="<%=yos%>" size="5 "  />
+                                                <td><input type="text" name="yos" id="yos" value="<%=yos%>" size="5 " style="pointer-events:none" />
 
                                                 </td>
                                             </tr>
-
-                                            <!--                                            <tr>
-                                                                                            <td> Roll No </td>
-                                                                                            <td> : </td>
-                                                                                            <td>
-                                                                                                <select name="rollno" id="rollno">
-                                                                                                    <option value="-1"></option>
-                                            --><!--
-                                            
-                                                                                                    </select>
-                                                                                                </td>
-                                                                                            </tr>  -->
                                             <tr>
                                                 <td>
                                                     <input type="button" value="Show Combination" name="generate" id="generate">
 
                                                 </td>
                                             </tr>
-
                                             <tr>
                                                 <td colspan="3">
                                                     <c:if test="${param.submitted1 and !exam.isSubjectcodeValid(pageContext.request.servletContext)}" var="v3">
@@ -146,18 +186,16 @@
                                                 <td> </td><td></td><td></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3">
-
-
+                                                <td>
                                                 </td>
                                             </tr>
+                                            <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+                                        </tbody></table>
+                                                <table><tbody>
                                             <tr>
                                                 <td></td><td></td>
                                                 <td>       
                                                     <div id="subject1" style="background: " >
-
-
-
                                                     </div>                
                                                 </td>
                                             </tr>
@@ -166,6 +204,7 @@
                                                 <td> <input type="submit" value="SUBMIT" disabled="" name="subpaper" id="subpaper"> </td>
 
                                             </tr>
+                                            </td>
                                         </tbody>
                                     </table>
 
@@ -175,8 +214,10 @@
                             <div id="msg" >
 
                                 <c:if test="${param.submitted1 and !v3 }">
-                                    <%
-                                        exampaper.insertPapers(getServletContext(), exam);
+
+
+                                    <%                                        exampaper.insertPapers(getServletContext(), exam);
+
                                     %>
 
                                 </c:if>
