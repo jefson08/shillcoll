@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="be36d536-3992-478e-b34b-569fa58a6e71">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<field name="papercode" class="java.lang.String"/>
+	<field name="papername" class="java.lang.String"/>
+	<field name="practical" class="java.lang.String"/>
+	<field name="subjectcode" class="java.lang.String"/>
+	<field name="subjectname" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="51" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="15" width="100" height="20" uuid="c749e784-e46f-4c0c-8229-2f13a4308da0"/>
+				<textFieldExpression><![CDATA[$F{subjectcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="203" y="15" width="100" height="20" uuid="047e8075-342a-48a3-ac2d-ccecd448257c"/>
+				<textFieldExpression><![CDATA[$F{subjectname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="2" width="100" height="20" uuid="2980280c-04a1-4db6-8b3c-385799f8bca1"/>
+				<text><![CDATA[Paper Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="203" y="2" width="100" height="20" uuid="f4919c8b-e8a5-4608-85c1-cff76ac40ed3"/>
+				<text><![CDATA[Paper Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="401" y="2" width="100" height="20" uuid="e98bbfaa-b6bc-4c72-86ff-51f9810ec5e7"/>
+				<text><![CDATA[Practical]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="18" y="36" width="100" height="20" uuid="9c315e45-55d7-46c9-9121-822da24b5aec"/>
+				<textFieldExpression><![CDATA[$F{papercode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="203" y="38" width="100" height="20" uuid="36ce3a81-5ac7-4646-9005-e6c26a729963"/>
+				<textFieldExpression><![CDATA[$F{papername}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="401" y="42" width="100" height="20" uuid="b9eaf3b7-8c96-4d2a-ab44-2a0f0b130cf7"/>
+				<textFieldExpression><![CDATA[$F{practical}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
