@@ -1,5 +1,5 @@
 <%-- 
-<%-- 
+    Document   : Add Papers
     Created on : Feb 20, 2015, 9:52:10 PM
     Author     : A Mitri
 --%>
@@ -24,11 +24,36 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+    <link href="../style/master-css/style.css" rel="stylesheet" />
+    <link href="../style/master-css/master-layout.css" rel="stylesheet" />
+    <link href="../style/master-css/menu-style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../style/TableCSSCode.css" type="text/css" charset="utf-8" />
+    <!--    <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" src="../scripts/jquerydatepicker/jquery.datepick.js"></script>                
+        <script type="text/javascript" src="../scripts/jquery/jquery.maskedinput-1.3.js"></script>
+        <script type="text/javascript" src="../scripts/util/net.js"></script>
+        <script type="text/javascript" src="../scripts/util/populateComboBox.js"></script>
+        <script src="../scripts/validate/jquery.validate.js"></script>
+        <script src="../scripts/validate/additional-methods.js"></script>
+        <script src="../scripts/validate/validators.js"></script>
+        <script src="../scripts/adm/stuenroll.js"></script>-->
 
-        <link href="../style/master-css/style.css" rel="stylesheet" />
-        <link href="../style/master-css/master-layout.css" rel="stylesheet" />
-        <link href="../style/master-css/menu-style.css" rel="stylesheet" />
-        <link rel="stylesheet" href="../style/TableCSSCode.css" type="text/css" charset="utf-8" />
+
+    <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="../scripts/jquerydatepicker/jquery.datepick.js"></script>
+    <script type="text/javascript" src="../scripts/jquery/jquery.maskedinput-1.3.js"></script>
+    <script type="text/javascript" src="../scripts/util/populateComboBox.js"></script>
+    <script type="text/javascript" src="../scripts/util/net.js"></script>
+    <script src="../scripts/validate/jquery.validate.js"></script>
+    <script src="../scripts/validate/additional-methods.js"></script>
+    <script src="../scripts/validate/validators.js"></script>
+    <script type="text/javascript" src="../scripts/adm/AddSubjectPapers.js"></script>
+    <title>Add Papers to a Subject</title>
+  </head>
+  <body>
+    <div id="header" ><%@include file="common-menu.jsp" %>
+      <span id="header-span"  style="position: relative;top: 40px;"><%=application.getInitParameter("displayName")%></span>
+    </div>
     <div class="master-layout">
       <table border="0" width="100%" cellpadding="0" cellspacing="0">
         <tr ><td width="18%" valign="top" class="leftcontainer">
