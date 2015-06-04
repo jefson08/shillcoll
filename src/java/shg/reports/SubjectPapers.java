@@ -20,6 +20,7 @@ import java.util.HashMap;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +35,7 @@ import net.sf.jasperreports.engine.JasperRunManager;
  *
  * @author Shgcomp
  */
+@WebServlet (name="SubjectPapers", urlPatterns = {"/SubjectPapers"})
 public class SubjectPapers extends HttpServlet {
 
     /**
@@ -61,7 +63,7 @@ public class SubjectPapers extends HttpServlet {
         
         
         HashMap jasperParameter = new HashMap();
-        // String subjectCode = request.getParameter("cmbSubjectName");
+         String subjectCode = request.getParameter("cmbSubjectName");
       //  System.out.println(subjectCode);
         ServletOutputStream servletOutputStream = response.getOutputStream();
         
@@ -83,9 +85,9 @@ public class SubjectPapers extends HttpServlet {
         
        
         try{
-            query = "select papercode,papername,practical from papers ";//where subjectcode=?";
+            query = "select papercode,papername,practical, subjectcode from papers where subjectcode=?";
              s = con.prepareStatement(query);
-               //s.setString(1, subjectCode);
+               s.setString(1, subjectCode);
                 rs = s.executeQuery();//+subjectCode;
            
             JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(rs);
