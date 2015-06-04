@@ -85,7 +85,7 @@ public class SubjectPapers extends HttpServlet {
         
        
         try{
-            query = "select papercode,papername,practical, subjectcode from papers where subjectcode=?";
+            query = "select p.papercode,p.papername,p.practical,p.subjectcode,s.subjectname from papers as p, subjects as s where p.subjectcode=? and p.subjectcode=s.subjectcode";
              s = con.prepareStatement(query);
                s.setString(1, subjectCode);
                 rs = s.executeQuery();//+subjectCode;
