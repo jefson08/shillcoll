@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sampleReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8ba73483-f475-40d6-bd63-0ba9e8fbe2b3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="rollno" class="java.lang.String"/>
+	<field name="nehurollno" class="java.lang.String"/>
+	<field name="studentname" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="33" y="15" width="100" height="20" uuid="bdb4c9cb-b673-4742-97a0-8d15c43ee761"/>
+				<text><![CDATA[rollno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="15" width="100" height="20" uuid="455b39eb-197f-4809-a053-b51221e1b050"/>
+				<text><![CDATA[Nehu Roll]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="15" width="100" height="20" uuid="4068aeb8-53f3-405d-a29d-8e227f0cef46"/>
+				<text><![CDATA[Student Name]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="361" y="2" width="100" height="20" uuid="ad291f68-2837-4046-a08f-598a0d59ee72"/>
+				<textFieldExpression><![CDATA[$F{studentname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="2" width="100" height="20" uuid="d5ee6c89-2b2c-4cdc-8d50-28663f8c1115"/>
+				<textFieldExpression><![CDATA[$F{nehurollno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="2" width="100" height="20" uuid="2407b2ec-d4cb-4bdc-b298-2419c1415f2d"/>
+				<textFieldExpression><![CDATA[$F{rollno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
