@@ -51,7 +51,7 @@ public class Subject {
             while (rs.next()) {
                 String s = rs.getString(2);
                 if (sub.getTxtsubjectname().equals(s)) {
-                    sub.setMsg("Message ::  Saving Course Failed!");
+                    sub.setMsg("Message ::  Saving Subject Failed: DUPLICATE ");
 
                     throw new SQLException("course  Failed. ");
 
@@ -89,11 +89,11 @@ public class Subject {
             pst.setInt(4, count);
             affectedRows = pst.executeUpdate();
             if (affectedRows <= 0) {
-                sub.setMsg("Message ::  Saving Course Failed!");
+                sub.setMsg("Message ::  Saving Subject Failed: DUPLICATE ");
 
                 throw new SQLException("SUBJECT  Failed. ");
             }
-            sub.setMsg("Message ::  Saving Course Succesfully!");
+            sub.setMsg("Message ::  Saving Subject Succesfully!");
 
             con.commit();
         } catch (Exception e) {

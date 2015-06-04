@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import shg.util.DatabaseUtility;
+import shg.valid.Validator;
 
 /**
  *
@@ -127,7 +128,12 @@ public class courseCombination {
     public void setPapercode(String[] papercode) {
         this.papercode = papercode;
     }
-    
+    public boolean isCoursecodeValid() {
+        if (Validator.isNullValue(getCoursecode()) || getCoursecode().equals("-1")) {
+            return false;
+        }
+        return true;
+    }
     public boolean isSubjectcodeValid(ServletContext context){
         try {
             if(getPapercode()==null){

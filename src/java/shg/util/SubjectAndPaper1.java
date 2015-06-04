@@ -20,7 +20,7 @@ import javax.servlet.ServletContext;
  */
 public class SubjectAndPaper1 {
 
-    public String getSubjectAndPaper(ServletContext context, String rollno, String stat,String yos, String scode[], String pcode[]) {
+    public String getSubjectAndPaper(ServletContext context, String rollno, String stat, String yos, String scode[], String pcode[]) {
 
         String str = "";
 
@@ -74,7 +74,8 @@ public class SubjectAndPaper1 {
                     + "  combpapers.papercode, \n"
                     + "  papers.papername, \n"
                     + "  papers.papercode, \n"
-                    + "  studentsclass.yearorsemno \n"
+                    + "  studentsclass.yearorsemno, \n"
+                    + "  papers.practical\n"
                     + "FROM \n"
                     + "  shgdb.studentdetails, \n"
                     + "  shgdb.subjects, \n"
@@ -90,29 +91,32 @@ public class SubjectAndPaper1 {
                     + "  subjects.subjectcode=papers.subjectcode AND  \n"
                     + "   studentdetails.rollno=studentsclass.rollno and \n"
                     + "  studentsclass.yearorsemno like ?"
-                    
                     + " and  combpapers.papercode = papers.papercode AND studentdetails.rollno =? order by subjects.subjectcode asc";
 
             st = con.prepareStatement(sql);
-            st.setString(1,yos);
-            
-            st.setString(2,rollno);
-            System.out.print("ST"+st);
+            st.setString(1, yos);
+            //System.out.println("Status"+);
+
+            st.setString(2, rollno);
+            //System.out.print("ST"+st);
             rs = st.executeQuery();
-            String stat1=stat.toUpperCase().trim();
+            String stat1 = stat.toUpperCase().trim();
             //System.out.println("vlllllllll "+stat1);
-            if (stat1.equals("REGULAR") ) {
+            if (stat1.equals("REGULAR")) {
                 if (rs.next()) {
-                    System.out.println("hello peter" + rs.getString(1));
+                    //System.out.println("Stat:"+rs.getString(10));
+
+                    // System.out.println("hello peter" + rs.getString(1));
                     String subcode = rs.getString(3);
                     String sname = rs.getString(5);
                     String papercode = "", papername = "";
+                    String top = rs.getString(10);
                     String checked = scode_v.contains(subcode) ? "checked" : "";
                     str = "<label>"
-                   //         +"<c:set var="\disabled\" value="\style=\"\pointer-events:none\"\" scope="\page\"></c::set> "
-                           + "ALL SUBJECTS AND PAPERS ARE AUTO SELECTED"
+                            //         +"<c:set var="\disabled\" value="\style=\"\pointer-events:none\"\" scope="\page\"></c::set> "
+                            + "ALL SUBJECTS AND PAPERS ARE AUTO SELECTED"
                             + "<BR>"
-                                 + "<BR>"
+                            + "<BR>"
                             + "        <input type=\"checkbox\" checked  name=\"subjectcode\" id=\"subjectcode\" subval=\"" + subcode + "\" value=\""
                             + subcode + "\"" + checked + " /> " + sname + "        </label><br />";
                     str += scode_v.contains(subcode) ? "<span id=\"" + subcode + "\" style=\"display: inline;\">" : "<span id=\"" + subcode + "\" style=\"display: none;\">";
@@ -126,36 +130,47 @@ public class SubjectAndPaper1 {
                             checked = scode_v.contains(subcode) ? "checked" : "";
                             str += " <label>"
                                     + "       <input type=\"checkbox\" checked  name=\"subjectcode\" id=\"subjectcode\" subval=\"" + subcode + "\" value=\""
-                                    + subcode + "\"" + checked + " /> " + sname + "        </label><br />";
+                                    + subcode + "\"" + checked + " /> " + sname + "        </label> <br />";
                             str += scode_v.contains(subcode) ? "<span id=\"" + subcode + "\" style=\"display: inline;\">" : "<span id=\"" + subcode + "\" style=\"display: none;\">";
 
                         }
                         papercode = rs.getString(6);
                         papername = rs.getString(7);
                         String pchecked = pcode_v.contains(papercode) ? "checked" : "";
-                        str += " ><label><input type=\"checkbox\" checked name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername + "<br></label>";
-
+                        str += " :  :   :<label><input type=\"checkbox\" checked name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername + "</label>";
+                        str += "    <span id=" + papercode + "  style=\"display:none\">"
+                                + " <input type=\"text\"size=\"5\" name=" + papercode + " />"
+                                + "</span><br>";
                     } while (rs.next());
 
                     str += "<br></span>";
-                    
-                }else
-                  str=null;
+//                    str += "<label><input type=\"button\" name=\"genamount\" value=\"Generate Amount\" id=\"genamount\" />";
+//                    str += " <input type=\"text\"size=\"5\" name=\"amount\" id=\"amount\">";
+
+                } else {
+                    str = null;
+                }
             } else {
                 if (rs.next()) {
-                    System.out.println("hello peter" + rs.getString(1));
+                    boolean top = rs.getBoolean(10);
+                    if (top) {
+                        System.out.println(top + "  ppooopp");
+                    }
+
+                    //System.out.println("hello peter" + rs.getString(1));
                     String subcode = rs.getString(3);
                     String sname = rs.getString(5);
                     String papercode = "", papername = "";
                     String checked = scode_v.contains(subcode) ? "checked" : "";
                     str = "<label>"
-                             + "PLEASE CHOOSE THE SUBJECTS AND PAPERS "
+                            + "PLEASE CHOOSE THE SUBJECTS AND PAPERS "
                             + "<BR>"
-                             + "<BR>"
+                            + "<BR>"
                             + "        <input type=\"checkbox\"  name=\"subjectcode\" id=\"subjectcode\" subval=\"" + subcode + "\" value=\""
                             + subcode + "\"" + checked + " /> " + sname + "        </label><br />";
                     str += scode_v.contains(subcode) ? "<span id=\"" + subcode + "\" style=\"display: inline;\">" : "<span id=\"" + subcode + "\" style=\"display: none;\">";
                     // System.out.println("msdhbfmhbvdshmfds"+sname);
+                    int sum = 0;
                     do {
 
                         if (!subcode.equals(rs.getString(3))) {
@@ -165,23 +180,43 @@ public class SubjectAndPaper1 {
                             checked = scode_v.contains(subcode) ? "checked" : "";
                             str += " <label>"
                                     + "       <input type=\"checkbox\"  name=\"subjectcode\" id=\"subjectcode\" subval=\"" + subcode + "\" value=\""
-                                    + subcode + "\"" + checked + " /> " + sname + "        </label><br />";
+                                    + subcode + "\"" + checked + " /> " + sname + "        </label> <br />";
+
                             str += scode_v.contains(subcode) ? "<span id=\"" + subcode + "\" style=\"display: inline;\">" : "<span id=\"" + subcode + "\" style=\"display: none;\">";
 
                         }
                         papercode = rs.getString(6);
                         papername = rs.getString(7);
-                        String pchecked = pcode_v.contains(papercode) ? "checked" : "";
-                        str += " ><label><input type=\"checkbox\"  name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername + "<br></label>";
+                        top = rs.getBoolean(10);
+                        if (top == true) {
+                            String top1 = "PRACTICAL";
+                            String pchecked = pcode_v.contains(papercode) ? "checked" : "";
+                            str += "    :      :    :<label><input type=\"checkbox\"  name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername + " " + "[" + top1 + "]</label>";
+                            str += "    <span id=" + papercode + "  style=\"display:none\">"
+                                    + " <input type=\"text\"size=\"5\" name=\"papercode1\" id=\"papercode1\"  value=\"200\"/>"
+                                    + "</span><br>";
 
+                        } else {
+                            String pchecked = pcode_v.contains(papercode) ? "checked" : "";
+                            str += " :      :    :<label><input type=\"checkbox\"  name=\"papercode\" id=\"papercode\" value=\"" + papercode + "\" " + pchecked + " /> " + papername + "</label>";
+                            str += "    <span id=" + papercode + "  style=\"display:none\">"
+                                    + " <input type=\"text\"size=\"5\" name=\"papercode1\" id=\"papercode1\" value=\"150\"/>"
+                                    + "</span><br>";
+
+                        }
                     } while (rs.next());
-
+                    System.out.print("Sum" + sum);
                     str += "<br></span>";
+//                    str += "<label><input type=\"button\" name=\"genamount\" value=\"Generate Amount\" id=\"genamount\" />";
+
+//                    str += " <input type=\"text\"size=\"5\" name=\"amount\" id=\"amount\">";
+
+                } else {
+                    str = null;
                 }
-                else
-                        str=null;
+
             }
-            
+
         } catch (SQLException e) {
             //connectionPool.free(con);
 

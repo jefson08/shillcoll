@@ -39,7 +39,7 @@ public class GetSubject extends HttpServlet {
         String course = request.getParameter("course");
         str = new SubjectAndPaper().getSubjectAndPaper(getServletContext(), course, null, null);
         if (str == null) {
-            str = "The server has encountered an unsuspected Error";
+            str = "No Combination available from the Selected Course";
             System.out.println("Error at " + this.getClass());
         }
         out.print(str);

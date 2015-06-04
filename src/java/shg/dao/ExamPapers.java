@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import shg.bean.ExamPaperBean;
 import shg.util.DatabaseUtility;
+import shg.bean.examinfo_Bean;
 
 /**
  *
@@ -48,7 +49,7 @@ public class ExamPapers {
 try {
             // Statement s1 = con.prepareStatement(sql);
             con.setAutoCommit(false);
-            System.out.println("hello peter123");  
+           // System.out.println("hello peter123");  
             sub = exam.getSubjectcode();
       
             
@@ -59,30 +60,41 @@ try {
             Map hp = new DatabaseUtility().getSubjectPaperMapping(exam.getPapercode(), context);
             
             Iterator itr=hp.entrySet().iterator();
+            int i=1001;
             while (itr.hasNext()){
                 Map.Entry <String,String> t= (Map.Entry)itr.next();
                 String papercode=t.getKey();
                 String subcode=t.getValue();
 //                System.out.println(t.getKey() +" ---- "+t.getValue());
-                String sql = "INSERT INTO papersappear VALUES (?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO papersappear VALUES (?, ?, ?, ?, ?, ?)";
                 pst = con.prepareStatement(sql);
-                pst.setString(1,"ExamID");
+                pst.setString(1,exam.getExamid());
                 pst.setString(2, subcode);
                 pst.setString(3, papercode);
-                pst.setString(4, exam.getRoll1());
-                pst.setInt(5, 12);
+                pst.setString(4, exam.getNehuroll());
+                pst.setInt(5, 0);
+                pst.setString(6, exam.getRoll1() );
+               
                 affectedRows=pst.executeUpdate();
               
             }
+           // System.out.println("Successfully");
+            
             if(affectedRows<=-1){
+                exam.setMsg2("Duplicate Records : Please Re-generate Combination");
                 throw new SQLException("Failed to insert new row --- ");
             }
 //            setMsg(" Course Save Successfully.");
-              exam.setMsg("Records Successfully Added :");
+            
+               exam.setMsg1("Records Saved Successfully");
+               
+               //exam.setMsg3("Show Papers");
 //            ccomb.setMsg(ccomb.getCoursecode()+"-"+combine2);
             con.commit();
 
         } catch (SQLException e) {  
+            exam.setMsg2("Duplicate Records : Please Re-generate Combination");
+           // exam.setMsg3("Show Papers");
             System.out.println("Error 1234 -- " + e);
             //JOptionPane.showMessageDialog(null,"Record Exist");
             try {
@@ -105,5 +117,7 @@ try {
         return 1;
     }
 }
+
+
 
           

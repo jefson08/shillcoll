@@ -62,14 +62,14 @@ public class SubjectBean {
     }
 
     public boolean isTxtsubjectnameValid() {
-        if (!Validator.isEmpty(getTxtsubjectname())) {
+        if (Validator.isEmpty(getTxtsubjectname())||Validator.containsIllegalCharacters1(getTxtsubjectname())||(Validator.isNumeric(getTxtsubjectname()))) {
             return false;
         }
         return true;
     }
 
     public boolean isStreamValid() {
-        if (Validator.isEmpty(getStream())) {
+        if (Validator.isNullValue(getStream())|| getStream().equals("-1")) {
             return false;
         }
         return true;

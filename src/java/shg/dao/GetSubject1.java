@@ -43,7 +43,7 @@ public class GetSubject1 extends HttpServlet {
        // System.out.println("teobnor   "+yos);
         String str = new SubjectAndPaper1().getSubjectAndPaper(getServletContext(), rollno, stat,yos, null, null);
         if (str == null) {
-            str = "NO MATCH COMBINATION FOUND FROM THE SELECTED ROLL NO... ABORT!";
+            str = "NO MATCH COMBINATION FOUND FROM THE SELECTED ROLL NO... !!!";
             System.out.println("Error at " + this.getClass());
         }
         out.print(str);

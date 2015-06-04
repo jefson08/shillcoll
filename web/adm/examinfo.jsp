@@ -6,9 +6,10 @@
 <%@page import="shg.util.shgUtil"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<jsp:useBean id="examInfo" class="shg.bean.examinfo_Bean" ></jsp:useBean>
+<jsp:useBean id="examInfo" class="shg.bean.examinfo_Bean" scope ="session"></jsp:useBean>
 <jsp:setProperty name="examInfo" property="*"></jsp:setProperty>
 
+<%@page autoFlush="true" buffer="32kb" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -159,12 +160,12 @@
                                                                <c:set var="sy" value="${param.seye}"/>
                                                                value="<c:out escapeXml="false" value="${sy}"/>">      
                                                         <datalist id="semyr" name="semyr">
-                                                            <option value="1s"/>
-                                                            <option value="2s"/>
-                                                            <option value="3s"/>
-                                                            <option value="4s"/>
-                                                            <option value="5s"/>
-                                                            <option value="6s"/>
+                                                            <option value="s1"/>
+                                                            <option value="s2"/>
+                                                            <option value="s3"/>
+                                                            <option value="s4"/>
+                                                            <option value="s5"/>
+                                                            <option value="s6"/>
                                                             <option value="1y"/>
                                                             <option value="2y"/>
                                                             <option value="3y"/>
@@ -180,9 +181,9 @@
                                                     <td width="200" height="29">Category*</td>
                                                     <td width="10">:</td>
                                                     <td width="400">
-                                                        <label><input type="radio" name="nri" id="nri" value="r" ${param.nri=='r'?'checked':''} /> Regular</label>
-                                                        <label><input type="radio" name="nri" id="nri" value="n" ${param.nri=='n'?'checked':''}/> Non-Regular</label>
-                                                        <label><input type="radio" name="nri" id="nri" value="i" ${param.nri=='i'?'checked':''}/> Improvement</label>
+                                                        <label><input type="radio" name="nri" id="nri" value="Regular" /> Regular</label>
+                                                        <label><input type="radio" name="nri" id="nri" value="Non Regular" /> Non-Regular</label>
+                                                        <label><input type="radio" name="nri" id="nri" value="Improvement" /> Improvement</label>
                                                             <c:if test="${param.submitted and !examInfo.nriValid}" var="v6">
                                                             <br><span style="color: red">Category not selected</span>
                                                         </c:if>
@@ -229,8 +230,9 @@
                                 </form>
 
                                 <c:if test="${param.submitted and !v1 and !v2 and !v3 and !v4 and !v5 and !v6}">
-                                    <jsp:forward page="stimprovement.jsp"></jsp:forward>
+                                    <jsp:forward page="papersExam.jsp"></jsp:forward>
                                 </c:if>
+                                                            
                                 <br></br>
                                 <br></br>
                                 <br></br> 
