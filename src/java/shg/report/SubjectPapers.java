@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package shg.reports;
+package shg.report;
 
 import DBConnection.ConnectionPool;
 import java.io.IOException;
@@ -55,7 +55,7 @@ public class SubjectPapers extends HttpServlet {
     private String query = "";
     
    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         PrintWriter out = null;
@@ -67,7 +67,7 @@ public class SubjectPapers extends HttpServlet {
       //  System.out.println(subjectCode);
         ServletOutputStream servletOutputStream = response.getOutputStream();
         
-        InputStream reportStream = getServletConfig().getServletContext().getResourceAsStream("/Reports/SubjectPapers.jasper");
+        InputStream reportStream = getServletConfig().getServletContext().getResourceAsStream("/report/SubjectPapers.jasper");
         
         try {
             context = getServletContext();

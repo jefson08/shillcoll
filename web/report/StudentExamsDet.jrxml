@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StudentExamsDet" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="924c45fa-f01a-4f7f-beb3-d9857883b064">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<group name="Group1">
 		<groupHeader>
 			<band height="33">
@@ -76,7 +79,7 @@
 		<groupHeader>
 			<band height="32">
 				<textField>
-					<reportElement x="100" y="0" width="455" height="32" forecolor="#006699" uuid="5c2c2a28-e96f-4eaa-ad54-eff9b29d6e41"/>
+					<reportElement x="0" y="0" width="455" height="32" forecolor="#006699" uuid="5c2c2a28-e96f-4eaa-ad54-eff9b29d6e41"/>
 					<textElement>
 						<font size="16" isBold="true"/>
 					</textElement>
