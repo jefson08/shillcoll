@@ -3,21 +3,6 @@
  * and open the template in the editor.
  */
 $.validator.prototype.checkForm = function () {
-<<<<<<< HEAD
-    //overriden in a specific page
-    this.prepareForm();
-    for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
-        if (this.findByName(elements[i].name).length != undefined && this.findByName(elements[i].name).length > 1) {
-            for (var cnt = 0; cnt < this.findByName(elements[i].name).length; cnt++) {
-                this.check(this.findByName(elements[i].name)[cnt]);
-            }
-        } else {
-            this.check(elements[i]);
-        }
-    }
-    return this.valid();
-}
-=======
   //overriden in a specific page
   this.prepareForm();
   for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
@@ -38,64 +23,7 @@ $(document).ready(function () {
 // });
 // $("#txtPPhno").mask("9999999999");
 // $("#txtMobile").mask("9999999999");
->>>>>>> origin/master
 
-<<<<<<< HEAD
-$(document).ready(function() {
-var validator = $("#CourseClassHons").bind("invalid-form.validate", function () {
-        $("#summary").html("Your form contains " + validator.numberOfInvalids() + " errors, see details below.");
-    }).validate({
-        debug: true,
-        errorElement: "em",
-        errorContainer: $("#warning, #summary"),
-        errorPlacement: function (error, element) {
-
-            if (element.attr("type") === "radio") {
-                if (element.attr("name") === "radYearOrSem")
-                    error.appendTo(".radSYR");
-                if (element.attr("name") === "radGender")
-                    error.appendTo(".radGEN");
-                if (element.attr("name") === "radCategory")
-                    error.appendTo(".radCAT");
-            }
-            else
-                error.appendTo(element.parent("td").next("td"));
-        },
-        success: function (label) {
-            //label.text("ok!").addClass("success");
-        },
-        rules: {
-            cmbStream: "combo",
-            radYearOrSem: "required",
-            txtDOB: "date",
-            txtFName: "nameTextBox",
-            txtMName: "nameTextBox",
-            txtPOccup: "nameTextBoxOptional",
-            txtMAddress: "alphaNumSpaceNewLine",
-            txtPAddress: "alphaNumSpaceNewLine",
-            txtEmail: {
-                email: true,
-            },
-            txtIncome: "float",            
-        },
-        submitHandler: function (form) {
-            form.submit();
-        }
-    });
-
-    var i = 3;
-     var YearOrSem='s';
-        
-    $("#chkCategorydummy").live("click", function() {
-//alert($(this).attr("chkStat") +"--"+$(this).is(':checked'));
-        var chkval = $(this).is(':checked');
-        var cval = $(this).attr("chkStat");
-        $('input[name=chkCategory]').each(function(i, obj) {
-            var v = $(this).attr('chkVal');
-            if (cval == v) {
-                $(this).val(chkval);
-            }
-=======
   var validator = $("#CourseClassHons").bind("invalid-form.validate", function () {
     $("#summary").html("Your form contains " + validator.numberOfInvalids() + " errors, see details below.");
   }).validate({
@@ -141,7 +69,6 @@ var validator = $("#CourseClassHons").bind("invalid-form.validate", function () 
 //PopulateCombo(document.CourseClassHons.cmbCourseName,'../populateCourse');
   var i = 3;
   var YearOrSem = 's';
->>>>>>> origin/master
 
   $("#chkCategorydummy").live("click", function () {
 //alert($(this).attr("chkStat") +"--"+$(this).is(':checked'));
