@@ -30,9 +30,8 @@ public class SearchExamInfo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        System.out.println("Inside server");
-        
+
+        //  System.out.println("Inside server");
         Connection con = null;
         ServletContext context = null;
         ConnectionPool connectionPool = null;
@@ -42,7 +41,7 @@ public class SearchExamInfo extends HttpServlet {
         StringBuffer sb = new StringBuffer();
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
-        
+
         String txtsrchval = request.getParameter("txtexaminfosearch");
 
         int limit = Integer.parseInt(request.getParameter("limit"));
@@ -110,18 +109,26 @@ public class SearchExamInfo extends HttpServlet {
                 output += "<div class=\"CSSTableGenerator\"><table><tr><td> Name </td> <td>NEHU Roll Number</td><td>Registration Number</td><td>Batch</td><td>Semester/Year</td><td>Exam Date</td></tr>";
 
                 do {
-                    output += "<tr><td>" + rs.getString("studentname") + "</td>" + "<td><a class=\"editStu\" rollno=\"" + rs.getString("rollno") + "\" style=\"text-decoration:underline\">"
+                    output += "<tr><td>" + rs.getString("studentname") + "</td>" 
+                            + "<td><a class=\"editStu\" rollno=\"" + rs.getString("rollno")
+                            + "\"" + "txtBatch=\"" + rs.getString("batch") 
+                            + "\"" + "txtNehurollno=\"" + rs.getString("nehurollno") 
+                            + "\"" + "txtRegno=\"" + rs.getString("regno") 
+                            + "\" style=\"text-decoration:underline\">"
+                            
                             + rs.getString("nehurollno") + "</a></td><td>" + rs.getString("regno")
                             + "</td><td>" + rs.getString("batch")
                             + "</td><td>" + rs.getString("semoryear")
                             + "</td><td>" + rs.getString("exammonth") + "-" + rs.getString("examyear");
-
                     output += "</td></tr>";
-                    
+
                 } while (rs.next());
                 output += "</table>";
                 output += "</div>";
                 output += "<input type=\"hidden\" name=\"rollno\" id=\"rollno\" />";
+                output += "<input type=\"hidden\" name=\"txtBatch\" id=\"txtBatch\" />";
+                output += "<input type=\"hidden\" name=\"txtNehurollno\" id=\"txtNehurollno\" />";
+                output += "<input type=\"hidden\" name=\"txtRegno\" id=\"txtRegno\" />";
                 output += "</form>";
             } else {
                 output = "Not Matching Record(s) Found";

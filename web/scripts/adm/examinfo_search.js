@@ -5,7 +5,7 @@
  */
 
 $(document).ready(function () {
-    var rollno;
+
 
     // populate college roll number 
     document.getElementById('txtexaminfosearch').addEventListener('input', function () {
@@ -32,7 +32,7 @@ $(document).ready(function () {
         });
     });
 
-     $('input[name=cmdsrch]').click(function () {
+    $('input[name=cmdsrch]').click(function () {
         $("#offset").attr("value", "0");
         $('form[name=srchstuexaminfo]').ajaxForm({
             url: '../SearchExamInfo',
@@ -48,9 +48,19 @@ $(document).ready(function () {
         });
     });
 
+
     $(".editStu").live("click", function () {
-        rollno = $(this).attr("rollno");
+        var rollno = $(this).attr("rollno");
+        var batch = $(this).attr('txtBatch');
+        var nehuroll = $(this).attr('txtNehurollno');
+        var regno = $(this).attr('txtRegno');
+
+
         $('#rollno').attr("value", rollno);
+        $('#txtBatch').attr("value", batch);
+        $('#txtNehurollno').attr("value", nehuroll);
+        $('#txtRegno').attr("value", regno);
+
         $("#editstudent").submit();
 
     });

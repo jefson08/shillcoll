@@ -37,7 +37,6 @@
         <script src="../scripts/validate/validators.js"></script>
 
         <script type="text/javascript" src="../scripts/adm/examinfo_edit_autocompleter.js"></script>
-
         <title>University Examination Information</title>
     </head>
 
@@ -119,7 +118,7 @@
                                                                <c:set var="unino" value="${param.txtNehurollno}"></c:set> 
                                                                value="<c:out escapeXml="false" value="${unino}"> </c:out>">
 
-                                                    <c:if test="${param.submitted and !examInfo.txtNehurollnoEditValid}" var="v3">
+                                                        <c:if test="${param.submitted and !examInfo.txtNehurollnoEditValid}" var="v3">
                                                             <span style="color: red"> Roll Number Invalid </span>
                                                         </c:if>
                                                     </td>
@@ -135,7 +134,7 @@
                                                                <c:set var="no" value="${param.txtRegno}"></c:set> 
                                                                value="<c:out escapeXml="false" value="${no}"> </c:out>">
 
-                                                    <c:if test="${param.submitted and !examInfo.txtRegnoEditValid}" var="v4">
+                                                        <c:if test="${param.submitted and !examInfo.txtRegnoEditValid}" var="v4">
                                                             <span style="color: red">   Registration Number Invalid </span>
                                                         </c:if>
                                                     </td>
