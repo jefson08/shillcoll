@@ -26,8 +26,8 @@ public class AddMarks {
     private String cmbPos;
 private String cmbYearOrSemNo;
 private String cmbNR;
-private String cmbExamMonth;
-private String cmbExamYear;
+private String txtExamMonth;
+private String txtExamYear;
 
  /**
      * @return the txtNehuRollNo
@@ -214,29 +214,29 @@ private String cmbExamYear;
     /**
      * @return the cmbExamMonth
      */
-    public String getCmbExamMonth() {
-        return cmbExamMonth;
+    public String getTxtExamMonth() {
+        return txtExamMonth;
     }
 
     /**
-     * @param cmbExamMonth the cmbExamMonth to set
+     * @param txtExamMonth the cmbExamMonth to set
      */
-    public void setCmbExamMonth(String cmbExamMonth) {
-        this.cmbExamMonth = cmbExamMonth;
+    public void setTxtExamMonth(String txtExamMonth) {
+        this.txtExamMonth = txtExamMonth;
     }
 
     /**
      * @return the cmbExamYear
      */
-    public String getCmbExamYear() {
-        return cmbExamYear;
+    public String getTxtExamYear() {
+        return txtExamYear;
     }
 
     /**
      * @param cmbExamYear the cmbExamYear to set
      */
-    public void setCmbExamYear(String cmbExamYear) {
-        this.cmbExamYear = cmbExamYear;
+    public void setTxtExamYear(String txtExamYear) {
+        this.txtExamYear = txtExamYear;
     }
    
 
@@ -277,17 +277,17 @@ public boolean isTxtMarksPrValid()
         return true;
     }
 
-    public boolean isCmbExamMonthValid()
+    public boolean isTxtExamMonthValid()
     {
-         if (Validator.isNullValue(getCmbExamMonth()) || getCmbExamMonth().equals("-1")) {
+         if (Validator.isNullValue(getTxtExamMonth()) || getTxtExamMonth().equals("-1")) {
            // System.out.println(getCmbNR());
             return false;
         }
         return true;
     }
-   public boolean isCmbExamYearValid()
+   public boolean isTxtExamYearValid()
     {
-         if (Validator.isNullValue(getCmbExamYear()) || getCmbExamYear().equals("-1")) {
+         if (Validator.isNullValue(getTxtExamYear()) || getTxtExamYear().equals("-1")) {
            // System.out.println(getCmbNR());
             return false;
         }

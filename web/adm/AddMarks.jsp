@@ -88,8 +88,16 @@
                                                 <th rowspan="2"><input type="button" value="Show Papers" id="cmdSearch" name="cmdSearch" style=" width: 100px; height: 45px" /></th>
                                             </tr>
                                             <tr>
-                                                <td> <input type="text" name="txtNehuRollNo" id="txtNehuRollNo" value="${param.submitted?param.txtNehuRollNo:''}" size="20" /></td>
+                                                <!--<td> <input type="text" name="txtNehuRollNo" id="txtNehuRollNo" value="${param.submitted?param.txtNehuRollNo:''}" size="20" /></td>-->
+                                                <td>
+                                                     <input type="text" list="nehurollno" id="txtNehuRollNo" name="txtNehuRollNo" size="20" autocomplete="off" placeholder=" Roll Number"
+                                                               <c:set var="rol" value="${param.txtNehuRollNo}"/>
+                                                               value="<c:out escapeXml="false" value="${rol}"/>">
+                                                        <datalist id="nehurollno" name="nehurollno"> 
+                                                        </datalist>
 
+                                                        
+                                                </td>
                                                 <td>
 
                                                     <select name="cmbNR" id="cmbNR" style="width: 120px">
@@ -131,22 +139,31 @@
                                                         <c:set var="yearorsemno" value="${param.cmbYearOrSemNo}"></c:set>
                                                         </select> 
                                                     </td>
-                                                    <td> <select name="cmbExamMonth" id="cmbExamMonth" style="width: 120px">
-                                                            <option value="-1">-</option> 
-                                                            <option value="1" ${param.cmbExamMonth=='1'?'selected':''}>1</option>
-                                                        <option value="2" ${param.cmbExamMonth=='2'?'selected':''}>2</option>
-                                                        <option value="3" ${param.cmbExamMonth=='3'?'selected':''}>3</option>
-                                                        <option value="4" ${param.cmbExamMonth=='4'?'selected':''}>4</option>
-                                                        <option value="5" ${param.cmbExamMonth=='5'?'selected':''}>5</option>
-                                                        <option value="6" ${param.cmbExamMonth=='6'?'selected':''}>6</option>
-                                                        <option value="7" ${param.cmbExamMonth=='7'?'selected':''}>7</option>
-                                                        <option value="8" ${param.cmbExamMonth=='8'?'selected':''}>8</option>
-                                                        <option value="9" ${param.cmbExamMonth=='9'?'selected':''}>9</option>
-                                                        <option value="10" ${param.cmbExamMonth=='10'?'selected':''}>10</option>
-                                                        <option value="11" ${param.cmbExamMonth=='11'?'selected':''}>11</option>
-                                                        <option value="12" ${param.cmbExamMonth=='12'?'selected':''}>12</option>
-                                                    </select>
+                                                    <td>
+                                                               <input type="text" list="emonth" id="txtExamMonth" name="txtExamMonth" size="10" autocomplete="off" placeholder="Month"
+                                                               <c:set var="em" value="${param.txtExamMonth}"/>
+                                                               value="<c:out escapeXml="false" value="${em}"/>">
+                                                        <datalist id="emonth" name="emonth">
+                                                            <option value="January"></option>
+                                                            <option value="February"></option>
+                                                            <option value="March"></option>
+                                                            <option value="April"></option>
+                                                            <option value="May"></option>
+                                                            <option value="June"></option>
+                                                            <option value="July"></option>
+                                                            <option value="August"></option>
+                                                            <option value="September"></option>
+                                                            <option value="October"></option>
+                                                            <option value="November"></option>
+                                                            <option value="December"></option>
+                                                        </datalist>
+                                                       
                                                 </td>
+                                                <td><input type="text" list="eyear" id="txtExamYear" name="txtExamYear" size="10" autocomplete="off" placeholder="Year"
+                                                               <c:set var="ey" value="${param.txtExamYear}"/>
+                                                               value="<c:out escapeXml="false" value="${ey}"/>">
+                                                        <datalist id="eyear" name="eyear"> 
+                                                        </datalist></td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -179,12 +196,12 @@
                                                     </c:if>
                                                 </td>
                                                 <td>
-                                                    <c:if test="${param.submitted and !AM.cmbExamMonthValid}" var="v3">
+                                                    <c:if test="${param.submitted and !AM.txtExamMonthValid}" var="v3">
                                                         <span style="color:red" >Invalid Exam Month</span>
                                                     </c:if>
                                                 </td>
                                                 <td>
-                                                    <c:if test="${param.submitted and !AM.cmbExamYearValid}" var="v3">
+                                                    <c:if test="${param.submitted and !AM.txtExamYearValid}" var="v3">
                                                         <span style="color:red" >Invalid Exam Year</span>
                                                     </c:if>
                                                 </td>

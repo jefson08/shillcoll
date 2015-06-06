@@ -13,7 +13,10 @@
         <servlet-name>populateStream</servlet-name>
         <servlet-class>shg.util.populateStream</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>Marks_PopulateRollNo</servlet-name>
+        <servlet-class>shg.util.Marks_PopulateRollNo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>populateStream</servlet-name>
         <url-pattern>/populateStream</url-pattern>
@@ -217,7 +220,6 @@
         <servlet-name>populateExamId</servlet-name>
         <servlet-class>shg.util.populateExamId</servlet-class>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>populateExamId</servlet-name>
         <url-pattern>/populateExamId</url-pattern>
@@ -305,7 +307,10 @@
         <url-pattern>/showImageFromDB</url-pattern>
     </servlet-mapping>
     <!--uploadimage-->
-    
+    <servlet-mapping>
+        <servlet-name>Marks_PopulateRollNo</servlet-name>
+        <url-pattern>/Marks_PopulateRollNo</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
