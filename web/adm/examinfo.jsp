@@ -1,15 +1,15 @@
 <%-- 
     Document   : examinfo
     Created on : May 4, 2015, 11:23:20 AM
-    Author     : Rans
+    Author     : Ransly
 --%>
 <%@page import="shg.util.shgUtil"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<jsp:useBean id="examInfo" class="shg.bean.examinfo_Bean" scope ="session"></jsp:useBean>
+<jsp:useBean id="examInfo" class="shg.bean.examinfo_Bean" ></jsp:useBean>
+<jsp:useBean id="examInfoDAO" class="shg.dao.examinfoDAO" ></jsp:useBean>
 <jsp:setProperty name="examInfo" property="*"></jsp:setProperty>
 
-<%@page autoFlush="true" buffer="32kb" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -21,6 +21,9 @@
         <link href="../style/master-css/master-layout.css" rel="stylesheet" />
         <link href="../style/master-css/menu-style.css" rel="stylesheet" /> 
 
+        <link href="../style/loader.css" rel="stylesheet" />
+        <script type="text/javascript" src="../scripts/jquery/script.js"></script>
+
         <link rel="stylesheet" href="../scripts/jquerydatepicker/css/jquery.datepick.css" type="text/css" charset="utf-8" />
 
         <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script>
@@ -28,10 +31,10 @@
         <script type="text/javascript" src="../scripts/jquery/jquery.maskedinput-1.3.js"></script>
         <script type="text/javascript" src="../scripts/util/net.js"></script>
 
-        <script type="text/javascript" src="../scripts/spinner/spin.js"></script>
-        <script type="text/javascript" src="../scripts/spinner/spin.min.js"></script>
+        <script src="../scripts/validate/jquery.validate.js"></script>
+        <script src="../scripts/validate/additional-methods.js"></script>
+        <script src="../scripts/validate/validators.js"></script>
 
-        <!--        <script type="text/javascript" src="../scripts/jqueryui/jquery-ui-1.8.16.custom.min.js"></script>-->
         <script type="text/javascript" src="../scripts/adm/examinfo_autocompleter.js"></script>
 
         <title>University Examination Information</title>
@@ -61,19 +64,21 @@
                         <div id="right-frame">
                             <div class="frame-header" >University Examination Information</div>
                             <div id="processing-area">
-                                <form  name="exampayment" id="exampayment" method="POST">
+                                <form  name="examinformation" id="examinformation" method="POST">
                                     <br><br>
                                     <input type="hidden" name="submitted" value="true" />
-
                                     <div class="master-layout">
                                         <table width="100%" border="0" cellspacing="1" cellpadding="0" align="center">
                                             <tbody>
                                                 <tr>
-                                                    <td colspan='4' style="text-align: center">
+                                                    <td width="16">&nbsp;</td>
+                                                    <td width="200" height="29"> Select System*</td>
+                                                    <td width="10">:</td>
+                                                    <td width="400">
                                                         <label><input type="radio" title="Select Semester or Year"  id="radYear" name="radYearOrSem" value="y" ${param.radYearOrSem=='y'?'checked':''} />Annual</label>
                                                         <label><input type="radio" title="Select Semester or Year"   id="radSem" name="radYearOrSem" value="s" ${param.radYearOrSem=='s'?'checked':''} />Semester</label>
                                                             <c:if test="${param.submitted and !examInfo.radYearOrSemValid}" var="v9">
-                                                            <span style="color: red">Option Year or Semester not Selected</span>
+                                                            <span style="color: red">Year or Semester not Selected</span>
                                                         </c:if>
                                                     </td>
                                                     <td><div class="radSYR"></div></td>
@@ -122,15 +127,15 @@
                                                     <td width="10">:</td>
                                                     <td width="400">
 
-                                                        <input type="text" name="txtUnirollno" size="20" id="txtUnirollno" 
-                                                               <c:set var="unino" value="${param.txtUnirollno}"></c:set> 
+                                                        <input type="text" name="txtNehurollno" size="20" id="txtNehurollno" 
+                                                               <c:set var="unino" value="${param.txtNehurollno}"></c:set> 
                                                                value="<c:out escapeXml="false" value="${unino}"> </c:out>">
 
-                                                        <c:if test="${param.submitted and !examInfo.txtUnirollnoValid}" var="v3">
+                                                        <c:if test="${param.submitted and !examInfo.txtNehurollnoValid}" var="v3">
                                                             <span style="color: red"> Roll Number Invalid </span>
                                                         </c:if>
-
                                                     </td>
+                                                    <td></td>
                                                 </tr>
 
                                                 <tr>
@@ -138,7 +143,6 @@
                                                     <td width="200" height="29">Registration Number*</td>
                                                     <td width="10">:</td>
                                                     <td width="400">
-
                                                         <input type="text" name="txtRegno" size="20" id="txtRegno" 
                                                                <c:set var="no" value="${param.txtRegno}"></c:set> 
                                                                value="<c:out escapeXml="false" value="${no}"> </c:out>">
@@ -146,8 +150,8 @@
                                                         <c:if test="${param.submitted and !examInfo.txtRegnoValid}" var="v4">
                                                             <span style="color: red">   Registration Number Invalid </span>
                                                         </c:if>
-
                                                     </td>
+                                                    <td></td>
                                                 </tr>
 
                                                 <tr>
@@ -160,15 +164,7 @@
                                                                <c:set var="sy" value="${param.seye}"/>
                                                                value="<c:out escapeXml="false" value="${sy}"/>">      
                                                         <datalist id="semyr" name="semyr">
-                                                            <option value="s1"/>
-                                                            <option value="s2"/>
-                                                            <option value="s3"/>
-                                                            <option value="s4"/>
-                                                            <option value="s5"/>
-                                                            <option value="s6"/>
-                                                            <option value="1y"/>
-                                                            <option value="2y"/>
-                                                            <option value="3y"/>
+
                                                         </datalist>
 
                                                         <c:if test="${param.submitted and !examInfo.seyeValid}" var="v5">
@@ -181,37 +177,64 @@
                                                     <td width="200" height="29">Category*</td>
                                                     <td width="10">:</td>
                                                     <td width="400">
-                                                        <label><input type="radio" name="nri" id="nri" value="Regular" /> Regular</label>
-                                                        <label><input type="radio" name="nri" id="nri" value="Non Regular" /> Non-Regular</label>
-                                                        <label><input type="radio" name="nri" id="nri" value="Improvement" /> Improvement</label>
+                                                        <label><input type="radio" name="nri" id="nri" value="r" ${param.nri=='r'?'checked':''} /> Regular</label>
+                                                        <label><input type="radio" name="nri" id="nri" value="n" ${param.nri=='n'?'checked':''}/> Non-Regular</label>
+                                                        <label><input type="radio" name="nri" id="nri" value="i" ${param.nri=='i'?'checked':''}/> Improvement</label>
                                                             <c:if test="${param.submitted and !examInfo.nriValid}" var="v6">
                                                             <br><span style="color: red">Category not selected</span>
                                                         </c:if>
                                                     </td>
+                                                    <td><div class="radCAT"></div></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td width="16">&nbsp;</td>
-                                                    <td width="200">Date of Payment*</td>
+                                                    <td width="200" height="29">Date of Examination*</td>
+                                                    <td width="10"> : </td>
+                                                    <td width="400">
+                                                        <input type="text" list="emonth" id="exmonth" name="exmonth" size="10" autocomplete="off" placeholder="Month"
+                                                               <c:set var="em" value="${param.exmonth}"/>
+                                                               value="<c:out escapeXml="false" value="${em}"/>">
+                                                        <datalist id="emonth" name="emonth">
+                                                            <option value="January"></option>
+                                                            <option value="February"></option>
+                                                            <option value="March"></option>
+                                                            <option value="April"></option>
+                                                            <option value="May"></option>
+                                                            <option value="June"></option>
+                                                            <option value="July"></option>
+                                                            <option value="August"></option>
+                                                            <option value="September"></option>
+                                                            <option value="October"></option>
+                                                            <option value="November"></option>
+                                                            <option value="December"></option>
+                                                        </datalist>
+
+                                                        <c:if test="${param.submitted and !examInfo.exmonthValid}" var="v7">
+                                                            <span style="color: red"> Examination Month Invalid</span>
+                                                        </c:if>
+
+                                                        <input type="text" list="eyear" id="exyear" name="exyear" size="10" autocomplete="off" placeholder="Year"
+                                                               <c:set var="ey" value="${param.exyear}"/>
+                                                               value="<c:out escapeXml="false" value="${ey}"/>">
+                                                        <datalist id="eyear" name="eyear"> 
+                                                        </datalist>
+
+                                                        <c:if test="${param.submitted and !examInfo.exyearValid}" var="v8">
+                                                            <span style="color: red"> Examination Year Invalid</span>
+                                                        </c:if>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td width="16">&nbsp;</td>
+                                                    <td width="200" height="29">Date of Payment*</td>
                                                     <td width="10"> : </td>
                                                     <td width="400"><input class="datepick" type="text" name="txtPmtDate" id="txtPmtDate" value="${param.txtPmtDate}" size="10" />
                                                         <div style="display: none;"> <img id="calImg" src="../scripts/jquerydatepicker/img/calendar.gif" alt="Popup" class="trigger"></div>
                                                         eg. dd-mm-yyyy
-                                                        <c:if test="${param.submitted and !examInfo.txtPmtDateValid}" var="v7">
+                                                        <c:if test="${param.submitted and !examInfo.txtPmtDateValid}" var="v9">
                                                             <span style="color: red"> Date of Payment is either Blank OR invalid</span>
-                                                        </c:if>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td width="16">&nbsp;</td>
-                                                    <td width="200" height="29">Payment Status*</td>
-                                                    <td width="10">:</td>
-                                                    <td width="400">
-                                                        <label><input type="radio" name="pmtstatus" id="pmtstatus" value="y" ${param.pmtstatus=='y'?'checked':''} /> Paid</label>
-                                                        <label><input type="radio" name="pmtstatus" id="pmtstatus" value="n" ${param.pmtstatus=='n'?'checked':''}/> Unpaid</label>
-                                                            <c:if test="${param.submitted and !examInfo.pmtStatusValid}" var="v8">
-                                                            <br><span style="color: red">Category not selected</span>
                                                         </c:if>
                                                     </td>
                                                 </tr>
@@ -229,10 +252,13 @@
                                     </div>
                                 </form>
 
-                                <c:if test="${param.submitted and !v1 and !v2 and !v3 and !v4 and !v5 and !v6}">
-                                    <jsp:forward page="papersExam.jsp"></jsp:forward>
+                                <c:if test="${param.submitted and !v1 and !v2 and !v3 and !v4 and !v5 and !v6 and !v7 and !v8 and !v9}">
+
+                                    <%
+                                        examInfoDAO.insertExamInfo(getServletContext(), examInfo);
+                                    %>
+                                    <%--<jsp:forward page="stimprovement.jsp"></jsp:forward>--%>
                                 </c:if>
-                                                            
                                 <br></br>
                                 <br></br>
                                 <br></br> 

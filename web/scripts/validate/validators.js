@@ -107,3 +107,30 @@ $.validator.addMethod("year_pass", function (value, element) {
     return false;
   }
 }, 'Numbers Should be equal to current year and greater than previous 5 year');
+
+$.validator.addMethod("txtalphanumeric", function (value, element) {
+  if (value !== "") {
+    return this.optional(element) || /^([a-zA-Z0-9-/]+)$/i.test(value);
+  }
+  else {
+    return false;
+  }
+}, 'Letters, numbers, - / only');
+
+$.validator.addMethod("afnumeric", function (value, element) {
+  if (value !== "") {
+    return this.optional(element) || /^((af)||[0-9]+)$/i.test(value);
+  }
+  else {
+    return false;
+  }
+}, 'AF or Numeric Only');
+
+$.validator.addMethod("afnumericedit", function (value, element) {
+  if (value !== "") {
+    return this.optional(element) || /^((af)||[0-9]+)$/i.test(value);
+  }
+  else {
+    return false;
+  }
+}, 'Numeric Only');

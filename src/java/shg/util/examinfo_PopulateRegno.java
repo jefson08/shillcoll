@@ -33,10 +33,10 @@ public class examinfo_PopulateRegno extends HttpServlet {
         PrintWriter out = response.getWriter();
         String roll = request.getParameter("term");
 
-        if (Validator.isNullValue(roll) && Validator.isNullValue(roll)) {
-            out.print("<b>Error : Enter Roll Number</b>");
-            return;
-        }
+//        if (Validator.isNullValue(roll) && Validator.isNullValue(roll)) {
+//            out.print("<b>Error : Enter Roll Number</b>");
+//            return;
+//        }
 
         try {
             try {
