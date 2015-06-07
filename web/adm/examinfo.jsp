@@ -77,7 +77,7 @@
                                                     <td width="400">
                                                         <label><input type="radio" title="Select Semester or Year"  id="radYear" name="radYearOrSem" value="y" ${param.radYearOrSem=='y'?'checked':''} />Annual</label>
                                                         <label><input type="radio" title="Select Semester or Year"   id="radSem" name="radYearOrSem" value="s" ${param.radYearOrSem=='s'?'checked':''} />Semester</label>
-                                                            <c:if test="${param.submitted and !examInfo.radYearOrSemValid}" var="v9">
+                                                            <c:if test="${param.submitted and !examInfo.radYearOrSemValid}" var="v0">
                                                             <span style="color: red">Year or Semester not Selected</span>
                                                         </c:if>
                                                     </td>
@@ -150,8 +150,14 @@
                                                         <c:if test="${param.submitted and !examInfo.txtRegnoValid}" var="v4">
                                                             <span style="color: red">   Registration Number Invalid </span>
                                                         </c:if>
+                                                   
+                                                        Of  
+                                                        <input type="text" list="Regnoyear" id="Regyear" name="Regyear" size="10" autocomplete="off" placeholder="Year"
+                                                               <c:set var="ry" value="${param.Regyear}"/>
+                                                               value="<c:out escapeXml="false" value="${ry}"/>">
+                                                        <datalist id="Regnoyear" name="Regnoyear"> 
+                                                        </datalist>
                                                     </td>
-                                                    <td></td>
                                                 </tr>
 
                                                 <tr>
@@ -225,7 +231,7 @@
                                                         </c:if>
                                                     </td>
                                                 </tr>
-                                                
+
                                                 <tr>
                                                     <td width="16">&nbsp;</td>
                                                     <td width="200" height="29">Date of Payment*</td>
@@ -252,7 +258,7 @@
                                     </div>
                                 </form>
 
-                                <c:if test="${param.submitted and !v1 and !v2 and !v3 and !v4 and !v5 and !v6 and !v7 and !v8 and !v9}">
+                                <c:if test="${param.submitted and !v0 and !v1 and !v2 and !v3 and !v4 and !v5 and !v6 and !v7 and !v8 and !v9}">
 
                                     <%
                                         examInfoDAO.insertExamInfo(getServletContext(), examInfo);

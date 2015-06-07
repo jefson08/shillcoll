@@ -137,6 +137,12 @@
                                                         <c:if test="${param.submitted and !examInfo.txtRegnoEditValid}" var="v4">
                                                             <span style="color: red">   Registration Number Invalid </span>
                                                         </c:if>
+                                                        Of  
+                                                        <input type="text" list="Regnoyear" id="Regyear" name="Regyear" size="10" autocomplete="off" placeholder="Year"
+                                                               <c:set var="ry" value="${param.Regyear}"/>
+                                                               value="<c:out escapeXml="false" value="${ry}"/>">
+                                                        <datalist id="Regnoyear" name="Regnoyear"> 
+                                                        </datalist>
                                                     </td>
                                                     <td></td>
                                                 </tr>

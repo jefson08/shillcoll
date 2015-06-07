@@ -41,18 +41,25 @@ public class examinfoDAO {
 
         try {
             con.setAutoCommit(false);
+            //resetting values since declared as static
+            examinfo.setExamId(null);
+        
 
-            //            System.out.println("rollno::" + examinfo.getRollno());
+            String exid = generateExamid(examinfo.getRollno());
+
+//            System.out.println("ExamID::" + examinfo.getExamId());
+//            System.out.println("SLNO::" + examinfo.getSerial());
+//            System.out.println("rollno::" + examinfo.getRollno());
 //            System.out.println("nehuroll::" + examinfo.getTxtNehurollno());
 //            System.out.println("regno::" + examinfo.getTxtRegno());
 //            System.out.println("Category::" + examinfo.getNri());
 //            System.out.println("semoryear::" + examinfo.getSeye());
 //            System.out.println("pdate::" + examinfo.getTxtPmtDate());
 //            System.out.println("batch::" + examinfo.getTxtBatch());
-            // System.out.println("pstatus::" + examinfo.getExmonth());
-            sql = "INSERT INTO examinfo (examid,serial,rollno,nehurollno,regno,category,semoryear,dop,batch,pmtstatus,exammonth,examyear) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+//            System.out.println("ExMonth::" + examinfo.getExmonth());
+//            System.out.println("ExYear::" + examinfo.getExyear());
 
-            String exid = generateExamid(examinfo.getRollno());
+            sql = "INSERT INTO examinfo (examid,serial,rollno,nehurollno,regno,category,semoryear,dop,batch,pmtstatus,exammonth,examyear) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
             pst = con.prepareStatement(sql);
 
@@ -75,6 +82,11 @@ public class examinfoDAO {
             }
             con.commit();
             examinfo.setErrorssuccmsg("Message :: Exam Information Added Succesfully");
+
+            //resetting values since declared as static
+            examinfo.setExmonth("");
+            examinfo.setExyear("");
+
         } catch (Exception e) {
             try {
                 con.rollback();
@@ -110,15 +122,15 @@ public class examinfoDAO {
                 cdata = rs.getString("coursecode");
             }
             slno = getMaxSerialNo(cdata.trim());
-                        
+
             //get previous examid and check for duplicate entry
             String peid = getPreviousExamId(term);
             exid = term + obj.getExmonth() + obj.getExyear() + obj.getSeye() + slno;
-            
-            if(peid.equalsIgnoreCase(exid)){
+
+            if (peid.equalsIgnoreCase(exid)) {
                 throw new SQLException("Duplicate Entry !!");
             }
-           
+
             slno = slno + 1;
             exid = term + obj.getExmonth() + obj.getExyear() + obj.getSeye() + slno;
 
@@ -135,12 +147,14 @@ public class examinfoDAO {
     public int getMaxSerialNo(String term) {
         int sln = 0;
         PreparedStatement ps = null;
+
         try {
             ps = con.prepareStatement("SELECT MAX(serial) FROM examinfo WHERE lower(rollno) LIKE ? ");
             ps.setString(1, term.toLowerCase() + "%");
             rs = ps.executeQuery();
+
             while (rs.next()) {
-                sln = rs.getInt("max");
+                sln = rs.getInt("MAX");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
