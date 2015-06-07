@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="shg.util.Utility" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <jsp:useBean id="dbutil" class="shg.util.DatabaseUtility"></jsp:useBean>
 <jsp:useBean id="AM" class="shg.bean.AddMarks"></jsp:useBean>
@@ -14,7 +14,7 @@
 
 <jsp:setProperty name="AM" property="*"></jsp:setProperty>
 <%@page import="shg.util.shgUtil"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

@@ -226,14 +226,14 @@ private String txtExamYear;
     }
 
     /**
-     * @return the cmbExamYear
+     * @return the txtExamYear
      */
     public String getTxtExamYear() {
         return txtExamYear;
     }
 
     /**
-     * @param cmbExamYear the cmbExamYear to set
+     * @param txtExamYear the cmbExamYear to set
      */
     public void setTxtExamYear(String txtExamYear) {
         this.txtExamYear = txtExamYear;
