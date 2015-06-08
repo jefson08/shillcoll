@@ -8,16 +8,19 @@ $(document).ready(function() {
      var YearOrSem='s';
  $('input[name=cmdSearch]').click(function () {
    //$('#srchlist').hide();
+  
         $('input[type=submit]').removeAttr('disabled');
-        $('input[name=cmdAddMore]').removeAttr('disabled');
+        
         var txtNehuRollNo = $('#txtNehuRollNo').val();
         var cmbNR=$('#cmbNR').val();
         var cmbYearOrSemNo=$('#cmbYearOrSemNo').val(); 
+       var txtExamMonth=$('#txtExamMonth').val();
+       var txtExamYear=$('#txtExamYear').val();
        
         $.ajax({
             type: "POST",
             url: "../GetExamPapers",
-            data: ({txtNehuRollNo: txtNehuRollNo, cmbNR: cmbNR, cmbYearOrSemNo:cmbYearOrSemNo}),
+            data: ({txtNehuRollNo: txtNehuRollNo, cmbNR: cmbNR, cmbYearOrSemNo:cmbYearOrSemNo, txtExamYear: txtExamYear, txtExamMonth: txtExamMonth}),
             success: function (response) {
                 // $('#msg').html(response);
                  $('#srchlist').html(response);

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Result" language="groovy" pageWidth="842" pageHeight="1190" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="64955fb1-f3b4-4432-9e86-c9e3a7554c82">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="examyear" class="java.lang.String"/>
+	<field name="studentname" class="java.lang.String"/>
+	<field name="nehurollno" class="java.lang.String"/>
+	<field name="division" class="java.lang.String"/>
+	<field name="pos" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="147" splitType="Stretch">
+			<staticText>
+				<reportElement x="188" y="12" width="384" height="60" uuid="f04be2f5-4b16-4584-b62b-ba0779440bc1"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Book Antiqua" size="48" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Shillong College]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="72" width="353" height="54" uuid="e8df5cc5-e904-4cda-8baf-09a5dfb04d4b"/>
+				<textElement>
+					<font fontName="Book Antiqua" size="36"/>
+				</textElement>
+				<text><![CDATA[University Marksheet Register]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="54" y="0" width="100" height="20" uuid="26c56e4b-34f8-47a8-a7b0-2780d7fb8f9f"/>
+				<text><![CDATA[examyear]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" uuid="a4dd6bde-469c-4a37-b359-53a9ef365715"/>
+				<text><![CDATA[studentname]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="0" width="100" height="20" uuid="04e421a3-f8d7-458f-921c-db3dd11c89d4"/>
+				<text><![CDATA[nehurollno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="474" y="2" width="100" height="20" uuid="0a8154a9-ebf1-4076-8e81-b3700c0d9db3"/>
+				<text><![CDATA[division]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="593" y="2" width="100" height="20" uuid="dd3cb3c8-f9fa-4c21-8662-62fed2cb0a23"/>
+				<text><![CDATA[pos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="54" y="0" width="100" height="20" uuid="b04db4e6-2a8f-4bf6-97dc-48f998180bea"/>
+				<textFieldExpression><![CDATA[$F{examyear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="ea313ca7-ffcc-4b52-adc3-d06b6f1369ff"/>
+				<textFieldExpression><![CDATA[$F{studentname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="0" width="100" height="20" uuid="08de646a-9f35-4850-93ed-8c6fb86a3fa4"/>
+				<textFieldExpression><![CDATA[$F{nehurollno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="0" width="100" height="20" uuid="a8a9e1ec-f8c5-4f55-9473-55fddea86ec1"/>
+				<textFieldExpression><![CDATA[$F{division}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="593" y="0" width="100" height="20" uuid="90ae7ddf-5391-4f75-bd7c-c88976bf22de"/>
+				<textFieldExpression><![CDATA[$F{pos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

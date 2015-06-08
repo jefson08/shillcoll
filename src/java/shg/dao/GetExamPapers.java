@@ -46,7 +46,7 @@ public class GetExamPapers extends HttpServlet {
         String div="",pos="",h;
         PreparedStatement pst = null;
         String sql = "", output = "", practical, cat, yorsno, exists;
-        String examid;
+        String examid,exammonth,examyear;
         //StringBuffer sb = new StringBuffer();
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
@@ -54,9 +54,12 @@ public class GetExamPapers extends HttpServlet {
         //String CCode = request.getParameter("cmbCourseName");
         String nehurollno = request.getParameter("txtNehuRollNo");
         //System.out.println("CCode:" + CCode);
-        System.out.println("Roll:" + nehurollno);
+        
         cat = request.getParameter("cmbNR");
         yorsno = request.getParameter("cmbYearOrSemNo");
+        exammonth=request.getParameter("txtExamMonth");
+        System.out.println("month:" + exammonth);
+        examyear=request.getParameter("txtExamYear");
         if (Validator.isNullValue(nehurollno)) {
             out.print("<b>Error : Enter the Roll Number</b>");
             return;
@@ -65,7 +68,14 @@ public class GetExamPapers extends HttpServlet {
             out.print("<b>Error : Select the Year/Semester Number</b>");
             return;
         }
-
+if (Validator.isNullValue(exammonth)) {
+            out.print("<b>Error : Enter the exam month </b>");
+            return;
+        }
+if (Validator.isNullValue(examyear)) {
+            out.print("<b>Error : Enter the exam year </b>");
+            return;
+        }
         try {
             context = getServletContext();
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
@@ -79,12 +89,14 @@ public class GetExamPapers extends HttpServlet {
 
             sql = "SELECT E.rollno,E.examid,S.subjectcode,S.subjectname,PA.marksth,PA.markspr,P.papercode,P.papername,P.practical from papersappear PA inner join subjects S on lower(PA.subjectcode)= lower(S.subjectcode)";
             sql += " inner join papers  P on lower(PA.papercode)=lower(P.papercode) Inner join examinfo  E on lower(PA.examid)=lower(E.examid) where lower(PA.nehurollno)=? and";
-            sql += " lower(E.category)=? and lower(E.nehurollno)=lower(PA.nehurollno)";
+            sql += " lower(E.category)=? and lower(E.nehurollno)=lower(PA.nehurollno) and lower(E.exammonth)=? and lower(E.examyear)=?";
             //sql += "P.papercode= PA.papercode and  and E.examid=PA.examid and PA.subjectcode=S.subjectcode Group By subjectcode";
             pst = con.prepareStatement(sql);
             //CCH.getCmbSubjectName());//subjectid);
             pst.setString(1, nehurollno.toLowerCase());
             pst.setString(2, cat.toLowerCase());
+            pst.setString(3, exammonth.toLowerCase());
+              pst.setString(4, examyear.toLowerCase());
             rs = pst.executeQuery();
             if (rs.next()) {
                 examid = rs.getString("examid");

@@ -19,6 +19,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -100,7 +101,6 @@
                           <select name="cmbStream" id="cmbStream" required="" title="Stream not Selected">
                             <option value="-1">-</option>
                             <c:set var="streamcode" value="${param.cmbStream}"></c:set>
-
                             <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'streams','streamcode','streamname',streamcode)}">                                
                             </c:out>
                           </select> 

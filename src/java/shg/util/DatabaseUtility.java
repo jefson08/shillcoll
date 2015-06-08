@@ -379,9 +379,11 @@ public class DatabaseUtility {
         ConnectionPool connectionPool = null;
         try {
             connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
+            System.out.println("value="+valueField);
             con = connectionPool.getConnection();
 
             sql = "SELECT " + valueField + ", " + optionField + " FROM " + tablename;// + " WHERE "+ valueField + " = ?";
+            
             st = con.createStatement();
             //pst.setString(1, defValue);
             rs = st.executeQuery(sql);
