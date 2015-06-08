@@ -24,8 +24,8 @@ public class examinfo_Bean {
     private String pmtstatus = "TRUE";
     static private String examId;
     static private int serial;
-    static private String exmonth;
-    static private String exyear;
+    static private String exmonth="";
+    static private String exyear="";
     
     public String getExmonth() {
         return exmonth;
@@ -33,7 +33,7 @@ public class examinfo_Bean {
     
     public void setExmonth(String exmonth) {
         
-        examinfo_Bean.exmonth = exmonth;
+        this.exmonth = exmonth;
     }
     
     public String getExyear() {
@@ -42,7 +42,7 @@ public class examinfo_Bean {
     
     public void setExyear(String exyear) {
         
-        examinfo_Bean.exyear = exyear;
+       this.exyear = exyear;
     }
     
     public String getErrorssuccmsg() {
@@ -59,7 +59,7 @@ public class examinfo_Bean {
     
     public void setExamId(String examId) {
         // System.out.println("examid:" + examId);
-        examinfo_Bean.examId = examId;
+        this.examId = examId;
     }
     
     public int getSerial() {
@@ -68,7 +68,7 @@ public class examinfo_Bean {
     
     public void setSerial(int serial) {
         // System.out.println("slno:" + serial);
-        examinfo_Bean.serial = serial;
+        this.serial = serial;
     }
     
     public String getRadYearOrSem() {
@@ -154,14 +154,14 @@ public class examinfo_Bean {
     }
     
     public boolean isExmonthValid() {
-        if (Validator.isNullValue(getExmonth())) {
+        if (Validator.isNullValue(getExmonth())||getExmonth().equals("")) {
             return false;
         }
         return true;
     }
     
     public boolean isExyearValid() {
-        if (Validator.isNullValue(getExyear())) {
+        if (Validator.isNullValue(getExyear())||getExyear().equals("")) {
             return false;
         }
         return true;
