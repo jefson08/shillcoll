@@ -25,6 +25,14 @@ $(document).ready(function () {
     });
     $("#txtPmtDate").mask("99-99-9999");
 
+//populate RegYear from the current year
+    var currentYear = (new Date).getFullYear();
+    $("#regnoyear").empty();
+    currentYear = currentYear - 1;
+    for (var i = 1; i <= 2; i++) {
+        $("#regnoyear").append("<option value='" + currentYear + "'>");
+        currentYear++;
+    }
 
     var validator = $("#examinformation_edit").bind("invalid-form.validate", function () {
         $("#summary").html("Your form contains " + validator.numberOfInvalids() + " errors, see details below.");
@@ -105,8 +113,8 @@ $(document).ready(function () {
                 //calling function to populate reg no based on nehu roll number
                 $(this).getRegNo(jQuery.trim(response));
 
-                //calling a function for populating sem/year
-                //$(this).getSemYear(jQuery.trim(rollnum));
+                // populate default regyear 
+                $(this).getRegNoYear(jQuery.trim(response));
 
             },
             error: function (xhr) {
@@ -114,6 +122,29 @@ $(document).ready(function () {
             }
         });
     });
+
+//function to populate regnoyear if available
+    (function ($) {
+        $.fn.getRegNoYear = function (param) {
+            $.ajax({
+                type: "POST",
+                url: "../examinfo_PopulateRegnoYear",
+                data: ({
+                    term: param
+                }),
+                success: function (response) {
+
+                    if (!jQuery.trim(response))
+                        response = "AF";
+
+                    $("#regyear").val(jQuery.trim(response));
+                },
+                error: function (xhr) {
+                    //            //alert(xhr.status);
+                }
+            });
+        }
+    })(jQuery);
 
     //function to populate batch
     (function ($) {

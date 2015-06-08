@@ -18,26 +18,40 @@ $.validator.prototype.checkForm = function () {
 
 $(document).ready(function () {
 
-    //to populate datalist base on option selected
-    $('#radYear').click(function () {
-        $("#semyr").empty();
-        for (var i = 1; i <= 3; i++) {
-            $('#semyr').append("<option value='" + "y" + i + "'>");
+    //to populate datalist base on option selected SEM/YEAR
+    $('#seye').live('click', function () {
+        if ($('#radYear').is(':checked')) {
+            $("#semyr").empty();
+            for (var i = 1; i <= 3; i++) {
+                $('#semyr').append("<option value='" + "y" + i + "'>");
+            }
+        }
+        else if ($('#radSem').is(':checked')) {
+            $("#semyr").empty();
+            for (var i = 1; i <= 6; i++) {
+                $('#semyr').append("<option value='" + "s" + i + "'>");
+            }
+        }
+        else {
+            alert("Please Select System Year or Semester!");
         }
 
     });
-    $('#radSem').click(function () {
-        $("#semyr").empty();
-        for (var i = 1; i <= 6; i++) {
-            $('#semyr').append("<option value='" + "s" + i + "'>");
-        }
-    });
-
+    
     //populate Year from the current year
     var currentYear = (new Date).getFullYear();
     $("#eyear").empty();
     for (var i = 1; i <= 2; i++) {
         $("#eyear").append("<option value='" + currentYear + "'>");
+        currentYear++;
+    }
+
+//populate RegYear from the current year
+    var currentYear = (new Date).getFullYear();
+    $("#Regnoyear").empty();
+    currentYear = currentYear - 1;
+    for (var i = 1; i <= 2; i++) {
+        $("#Regnoyear").append("<option value='" + currentYear + "'>");
         currentYear++;
     }
 
@@ -78,7 +92,6 @@ $(document).ready(function () {
             form.submit();
         }
     });
-
 
     //binding datalist to event //and populate college roll number 
     document.getElementById('rollno').addEventListener('input', function () {
@@ -129,12 +142,38 @@ $(document).ready(function () {
 
                 //calling function to populate reg no based on nehu roll number
                 $(this).getRegNo(jQuery.trim(response));
+
+                // populate default regyear 
+                $(this).getRegNoYear(jQuery.trim(response));
             },
             error: function (xhr) {
                 //alert(xhr.status);
             }
         });
     });
+
+    //function to populate regnoyear if available
+    (function ($) {
+        $.fn.getRegNoYear = function (param) {
+            $.ajax({
+                type: "POST",
+                url: "../examinfo_PopulateRegnoYear",
+                data: ({
+                    term: param
+                }),
+                success: function (response) {
+
+                    if (!jQuery.trim(response))
+                        response = "AF";
+
+                    $("#regyear").val(jQuery.trim(response));
+                },
+                error: function (xhr) {
+                    //            //alert(xhr.status);
+                }
+            });
+        }
+    })(jQuery);
 
     //function to populate batch
     (function ($) {

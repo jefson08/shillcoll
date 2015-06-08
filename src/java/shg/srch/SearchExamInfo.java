@@ -42,6 +42,8 @@ public class SearchExamInfo extends HttpServlet {
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
 
+        String regno = "", regnoyear = "", Regno = "";
+
         String txtsrchval = request.getParameter("txtexaminfosearch");
 
         int limit = Integer.parseInt(request.getParameter("limit"));
@@ -69,6 +71,7 @@ public class SearchExamInfo extends HttpServlet {
                     + "  studentdetails.studentname, \n"
                     + "  examinfo.nehurollno, \n"
                     + "  examinfo.regno, \n"
+                    + "  examinfo.regnoyear, \n"
                     + "  examinfo.semoryear, \n"
                     + "  examinfo.batch, \n"
                     + "  examinfo.exammonth, \n"
@@ -106,20 +109,32 @@ public class SearchExamInfo extends HttpServlet {
                 navig += "</div>";
                 output += navig;
                 output += "<form name=\"editstudent\" id=\"editstudent\" action=\"examinfo_edit.jsp\" method=\"post\">";
-                output += "<div class=\"CSSTableGenerator\"><table><tr><td> Name </td> <td>NEHU Roll Number</td><td>Registration Number</td><td>Batch</td><td>Semester/Year</td><td>Exam Date</td></tr>";
+                output += "<div class=\"CSSTableGenerator\"><table><tr><td> Name </td> <td>NEHU Roll Number</td><td>Registration No. & Year </td><td>Batch</td><td>Semester/Year</td><td>Exam Date</td></tr>";
 
                 do {
-                    output += "<tr><td>" + rs.getString("studentname") + "</td>" 
-                            + "<td><a class=\"editStu\" rollno=\"" + rs.getString("rollno")
-                            + "\"" + "txtBatch=\"" + rs.getString("batch") 
-                            + "\"" + "txtNehurollno=\"" + rs.getString("nehurollno") 
-                            + "\"" + "txtRegno=\"" + rs.getString("regno") 
+
+                    regno = rs.getString("regno");
+                    regnoyear = rs.getString("regnoyear");
+                    Regno = "AF";
+
+                    if (!regno.equalsIgnoreCase("AF")) {
+                        Regno = regno + " Of " + regnoyear;
+                    }
+
+                    output += "<tr><td>" + rs.getString("studentname") + "</td>"
+                            + "<td><a class=\"editStu\" "
+                            + "rollno=\"" + rs.getString("rollno")
+                            + "\"" + "txtBatch=\"" + rs.getString("batch")
+                            + "\"" + "txtNehurollno=\"" + rs.getString("nehurollno")
+                            + "\"" + "txtRegno=\"" + rs.getString("regno")
+                            + "\"" + "regyear=\"" + regnoyear
                             + "\" style=\"text-decoration:underline\">"
-                            
-                            + rs.getString("nehurollno") + "</a></td><td>" + rs.getString("regno")
+                            + rs.getString("nehurollno") + "</a>"
+                            + "</td><td>" + Regno
                             + "</td><td>" + rs.getString("batch")
                             + "</td><td>" + rs.getString("semoryear")
                             + "</td><td>" + rs.getString("exammonth") + "-" + rs.getString("examyear");
+
                     output += "</td></tr>";
 
                 } while (rs.next());
@@ -129,6 +144,7 @@ public class SearchExamInfo extends HttpServlet {
                 output += "<input type=\"hidden\" name=\"txtBatch\" id=\"txtBatch\" />";
                 output += "<input type=\"hidden\" name=\"txtNehurollno\" id=\"txtNehurollno\" />";
                 output += "<input type=\"hidden\" name=\"txtRegno\" id=\"txtRegno\" />";
+                output += "<input type=\"hidden\" name=\"regyear\" id=\"regyear\" />";
                 output += "</form>";
             } else {
                 output = "Not Matching Record(s) Found";

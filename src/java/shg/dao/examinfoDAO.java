@@ -27,6 +27,8 @@ public class examinfoDAO {
     private String sql = "";
     private ConnectionPool connectionPool = null;
     private int affectedRows;
+    int ryear;
+    String newryear;
 
     public int insertExamInfo(ServletContext context, examinfo_Bean examinfo) {
         try {
@@ -43,9 +45,15 @@ public class examinfoDAO {
             con.setAutoCommit(false);
             //resetting values since declared as static
             examinfo.setExamId(null);
-        
 
             String exid = generateExamid(examinfo.getRollno());
+
+            if (!examinfo.getRegyear().equalsIgnoreCase("AF")) {
+                ryear = Integer.parseInt(examinfo.getRegyear()) + 1;
+                newryear = examinfo.getRegyear() + "-" + ryear;
+            } else {
+                newryear = examinfo.getRegyear();
+            }
 
 //            System.out.println("ExamID::" + examinfo.getExamId());
 //            System.out.println("SLNO::" + examinfo.getSerial());
@@ -58,8 +66,8 @@ public class examinfoDAO {
 //            System.out.println("batch::" + examinfo.getTxtBatch());
 //            System.out.println("ExMonth::" + examinfo.getExmonth());
 //            System.out.println("ExYear::" + examinfo.getExyear());
-
-            sql = "INSERT INTO examinfo (examid,serial,rollno,nehurollno,regno,category,semoryear,dop,batch,pmtstatus,exammonth,examyear) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+//            System.out.println("RegYear::" + examinfo.getRegyear());
+            sql = "INSERT INTO examinfo (examid,serial,rollno,nehurollno,regno,category,semoryear,dop,batch,pmtstatus,exammonth,examyear,regnoyear) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             pst = con.prepareStatement(sql);
 
@@ -75,6 +83,7 @@ public class examinfoDAO {
             pst.setBoolean(10, Boolean.valueOf(examinfo.getPmtstatus()));
             pst.setString(11, examinfo.getExmonth());
             pst.setString(12, examinfo.getExyear());
+            pst.setString(13, newryear);
 
             affectedRows = pst.executeUpdate();
             if (affectedRows <= 0) {
@@ -86,6 +95,7 @@ public class examinfoDAO {
             //resetting values since declared as static
             examinfo.setExmonth("");
             examinfo.setExyear("");
+            examinfo.setRegyear("");
 
         } catch (Exception e) {
             try {

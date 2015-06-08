@@ -26,6 +26,8 @@ public class examinfo_Edit_DAO {
     private String sql = "";
     private ConnectionPool connectionPool = null;
     private int affectedRows;
+    int ryear;
+    String newryear;
 
     public int examinfoUpdate(ServletContext context, examinfo_Bean examinfo) {
         try {
@@ -39,14 +41,21 @@ public class examinfo_Edit_DAO {
         try {
             con.setAutoCommit(false);
 
-            //examid serial rollno nehurollno regno category semoryear dop batch pmtstatus 
-            sql = "UPDATE examinfo SET nehurollno = ?,regno = ? WHERE lower(rollno) = ? ";
+            if (!examinfo.getRegyear().equalsIgnoreCase("AF")) {
+                ryear = Integer.parseInt(examinfo.getRegyear()) + 1;
+                newryear = examinfo.getRegyear() + "-" + ryear;
+            } else {
+                newryear = examinfo.getRegyear();
+            }
+
+            sql = "UPDATE examinfo SET nehurollno = ?,regno = ?, regnoyear = ? WHERE lower(rollno) = ? ";
 
             pst = con.prepareStatement(sql);
 
             pst.setString(1, examinfo.getTxtNehurollno());
             pst.setString(2, examinfo.getTxtRegno());
-            pst.setString(3, examinfo.getRollno().toLowerCase());
+            pst.setString(3, newryear);
+            pst.setString(4, examinfo.getRollno().toLowerCase());
 
             affectedRows = pst.executeUpdate();
             if (affectedRows <= 0) {
@@ -54,6 +63,7 @@ public class examinfo_Edit_DAO {
             }
             con.commit();
             examinfo.setErrorssuccmsg("Message :: Student Updated Succesfully");
+            examinfo.setRegyear("");
         } catch (Exception e) {
             try {
                 con.rollback();

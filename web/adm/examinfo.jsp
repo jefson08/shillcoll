@@ -152,11 +152,14 @@
                                                         </c:if>
                                                    
                                                         Of  
-                                                        <input type="text" list="Regnoyear" id="Regyear" name="Regyear" size="10" autocomplete="off" placeholder="Year"
-                                                               <c:set var="ry" value="${param.Regyear}"/>
+                                                        <input type="text" list="Regnoyear" id="regyear" name="regyear" size="10" autocomplete="off" placeholder="Year"
+                                                               <c:set var="ry" value="${param.regyear}"/>
                                                                value="<c:out escapeXml="false" value="${ry}"/>">
                                                         <datalist id="Regnoyear" name="Regnoyear"> 
                                                         </datalist>
+                                                        <c:if test="${param.submitted and !examInfo.regyearValid}" var="v10">
+                                                            <span style="color: red"> Registration Year Invalid </span>
+                                                        </c:if>
                                                     </td>
                                                 </tr>
 
@@ -258,7 +261,7 @@
                                     </div>
                                 </form>
 
-                                <c:if test="${param.submitted and !v0 and !v1 and !v2 and !v3 and !v4 and !v5 and !v6 and !v7 and !v8 and !v9}">
+                                <c:if test="${param.submitted and !v0 and !v1 and !v2 and !v3 and !v4 and !v5 and !v6 and !v7 and !v8 and !v9 and !v10}">
 
                                     <%
                                         examInfoDAO.insertExamInfo(getServletContext(), examInfo);

@@ -51,15 +51,16 @@ $(document).ready(function () {
 
     $(".editStu").live("click", function () {
         var rollno = $(this).attr("rollno");
-        var batch = $(this).attr('txtBatch');
-        var nehuroll = $(this).attr('txtNehurollno');
-        var regno = $(this).attr('txtRegno');
-
+        var batch = $(this).attr("txtBatch");
+        var nehuroll = $(this).attr("txtNehurollno");
+        var regno = $(this).attr("txtRegno");
+        var regyear = $(this).attr("regyear");
 
         $('#rollno').attr("value", rollno);
         $('#txtBatch').attr("value", batch);
         $('#txtNehurollno').attr("value", nehuroll);
         $('#txtRegno').attr("value", regno);
+        $('#regyear').attr("value", regyear);
 
         $("#editstudent").submit();
 

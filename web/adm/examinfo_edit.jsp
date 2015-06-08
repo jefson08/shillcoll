@@ -137,16 +137,21 @@
                                                         <c:if test="${param.submitted and !examInfo.txtRegnoEditValid}" var="v4">
                                                             <span style="color: red">   Registration Number Invalid </span>
                                                         </c:if>
-                                                        Of  
-                                                        <input type="text" list="Regnoyear" id="Regyear" name="Regyear" size="10" autocomplete="off" placeholder="Year"
-                                                               <c:set var="ry" value="${param.Regyear}"/>
+
+                                                        Of 
+                                                        <input type="text" list="regnoyear" id="regyear" name="regyear" size="10" autocomplete="off" placeholder="Year"
+                                                               <c:set var="ry" value="${param.regyear}"/>
                                                                value="<c:out escapeXml="false" value="${ry}"/>">
-                                                        <datalist id="Regnoyear" name="Regnoyear"> 
+                                                        <datalist id="regnoyear" name="regnoyear"> 
                                                         </datalist>
+
+                                                        <c:if test="${param.submitted and !examInfo.regyearValid}" var="v5">
+                                                            <span style="color: red"> Registration Year Invalid </span>
+                                                        </c:if>
+
                                                     </td>
                                                     <td></td>
                                                 </tr>
-
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td height="29">&nbsp;</td>
@@ -160,7 +165,7 @@
                                     </div>
                                 </form>
 
-                                <c:if test="${param.submitted and !v1 and !v2 and !v3 and !v4}">
+                                <c:if test="${param.submitted and !v1 and !v2 and !v3 and !v4 and !v5}">
 
                                     <%
                                         examinfoEDAO.examinfoUpdate(getServletContext(), examInfo);
