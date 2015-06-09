@@ -1,8 +1,9 @@
 <%-- 
     Document   : teib
     Created on : Mar 5, 2015, 10:37:35 PM
-    Author     : B Mukhim
+    Author     : Teibor
 --%>
+
 <%@page import="shg.bean.examinfo_Bean"%>
 <%@page autoFlush="true" buffer="32kb" %>
 
