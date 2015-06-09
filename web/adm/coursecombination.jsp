@@ -14,7 +14,11 @@
 <jsp:useBean id="subpaper" class="shg.util.SubjectAndPaper"></jsp:useBean>
 <jsp:setProperty name="comb" property="*"></jsp:setProperty>
 <%@page import="shg.util.shgUtil"%>
-
+<%@page import="java.sql.SQLException"%>
+<%@page import="DBConnection.ConnectionPool"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.ResultSet"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,6 +36,17 @@
         <title>Subject Combination</title>
     </head>
     <body>
+
+        <%
+            Connection con = null;
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String sql;
+            ServletContext context = null;
+            ConnectionPool connectionPool = null;
+            // Statement s=con.createStatement();
+%>
+
         <h1></h1>
         <div id="header" ><%@include file="common-menu.jsp" %>
             <span id="header-span"><%=application.getInitParameter("displayName")%></span>
@@ -60,6 +75,49 @@
 
                                 <form name="frmcourse" method="POST" action="" id="frmcourse">
                                     <input type="hidden" name="submitted" value="true" />
+                                    <table border="3" style="width: 600" id="tab" name="tab">
+                                        <tr>
+                                            <th colspan="2">Course Combination Summary</th>
+                                        </tr>
+                                        <tr bgcolor="yellow">
+                                            <th width="200">Course Name</th>
+                                            <th width="400">Combination Name</th>
+
+                                        </tr>
+                                        <%
+                                            try {
+                                                //            context = getServletContext();
+                                                context = getServletContext();
+                                                connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
+                                                con = connectionPool.getConnection();
+                                            } catch (SQLException e) {
+                                                //            response.sendRedirect("output.jsp?message=Connection not Established ");
+                                                System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
+                                                //return null;
+                                            }
+
+                                            String sql11 = "SELECT course.coursename,combination.combinationname \n"
+                                                    + " FROM shgdb.course,  shgdb.combination,  shgdb.coursedetails\n"
+                                                    + "where  course.coursecode = coursedetails.coursecode AND  coursedetails.combinationcode = combination.combinationcode order by coursename asc ";
+                                            pst = con.prepareStatement(sql11);
+                                            System.out.println("Statements " + pst);
+                                            rs = pst.executeQuery();
+                                            while (rs.next()) {
+                                        %>
+
+                                        <tr>
+                                            <td><%=rs.getString(1)%></td>
+                                            <td><%=rs.getString(2)%></td>
+                                            <!--                                                            <td><input type="checkbox" name="amount1" id="amount1"></td>-->
+                                        </tr>
+
+                                        <%}%>
+                                        <tr>
+                                            <!--<td><input type="button" name="sub" class="sub" value="add"></td>-->
+                                        </tr>    
+
+                                    </table> 
+                                    <br>
                                     <table border="0">
                                         <tbody>
 
@@ -72,14 +130,14 @@
                                                         <c:set var="ccode" value="${param.coursecode}"></c:set>
                                                         <c:out escapeXml="false" value="${dbutil.populatePopup(pageContext.request.servletContext,'course','coursecode','coursename',ccode)}"> </c:out>                               
                                                         </select>
-                                                        <c:if test="${param.submitted and !comb.coursecodeValid}" var="v2">
+                                                    <c:if test="${param.submitted and !comb.coursecodeValid}" var="v2">
                                                         <span style="color: red">Course Not Selected </span>
                                                     </c:if> 
-                                                    </td>
-                                                </tr>       
-                                                <tr>
-                                                    <td>Effective Year *</td>
-                                                    <td> : </td>
+                                                </td>
+                                            </tr>       
+                                            <tr>
+                                                <td>Effective Year *</td>
+                                                <td> : </td>
                                                 <c:choose>
                                                     <c:when test="${param.submitted}">
                                                         <c:set var="dt" value="${param.txteffectiveyear}"></c:set>
@@ -120,29 +178,35 @@
 
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td></td><td></td>
-                                                <td>       
-                                                    <div id="divsub" style="background: " >
 
-                                                        <c:if test="${param.submitted}">
-                                                            <c:out escapeXml="false" value="${subpaper.getSubjectAndPaper(pageContext.request.servletContext, param.coursecode, paramValues.subjectcode , paramValues.papercode)}">
 
-                                                            </c:out>
-                                                        </c:if>
-
-                                                    </div>                
-                                                </td>
-                                            </tr>
-                                            <tr>
-
-                                                <td> <input type="submit" value="SUBMIT"> </td>
-
-                                            </tr>
                                         </tbody>
                                     </table>
+                                    <table>
+                                        <tr>
+                                            <td></td><td></td>
+                                            <td>       
+                                                <div id="divsub" style="background: " >
 
+                                                    <c:if test="${param.submitted}">
+                                                        <c:out escapeXml="false" value="${subpaper.getSubjectAndPaper(pageContext.request.servletContext, param.coursecode, paramValues.subjectcode , paramValues.papercode)}">
+
+                                                        </c:out>
+                                                    </c:if>
+
+                                                </div>                
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td> <input type="submit" value="SUBMIT"> </td>
+
+                                        </tr>
+                                    </table>
                                 </form>
+                            </div>
+                            <div id="comb">
+
                             </div>
                             <div id="msg" >
 

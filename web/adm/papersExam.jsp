@@ -48,7 +48,7 @@
             ServletContext context = null;
             ConnectionPool connectionPool = null;
             // Statement s=con.createStatement();
-        %>
+%>
 
 
 
@@ -86,7 +86,7 @@
 
                                         System.out.print("examid  ::" + examid);
                                         //String examid=examInfo.getExamId();
-%>  
+                                    %>  
                                     <input type="hidden" name="submitted1" value="true" />
                                     <input type="text" name ="examid" id="examid" value="<%=examid%>" hidden>
 
@@ -112,12 +112,12 @@
                                                         </tr>
                                                         <%
                                                             try {
-                //            context = getServletContext();
+                                                                //            context = getServletContext();
                                                                 context = getServletContext();
                                                                 connectionPool = (ConnectionPool) context.getAttribute("ConnectionPool");
                                                                 con = connectionPool.getConnection();
                                                             } catch (SQLException e) {
-                //            response.sendRedirect("output.jsp?message=Connection not Established ");
+                                                                //            response.sendRedirect("output.jsp?message=Connection not Established ");
                                                                 System.out.println("Exception thrown by class " + this.getClass() + " at " + new java.util.Date() + " :: " + e);
                                                                 //return null;
                                                             }
@@ -134,9 +134,9 @@
                                                         <tr>
                                                             <td><%=rs.getString(2)%></td>
                                                             <td align="right" class="num"><%=rs.getString(3)%></td>
-<!--                                                            <td><input type="checkbox" name="amount1" id="amount1"></td>-->
+                                                            <!--                                                            <td><input type="checkbox" name="amount1" id="amount1"></td>-->
                                                         </tr>
-                                                        
+
                                                         <%}%>
                                                         <tr>
                                                             <!--<td><input type="button" name="sub" class="sub" value="add"></td>-->
@@ -191,7 +191,7 @@
                                             </tr>
                                             <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
                                         </tbody></table>
-                                                <table><tbody>
+                                    <table><tbody>
                                             <tr>
                                                 <td></td><td></td>
                                                 <td>       

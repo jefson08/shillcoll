@@ -112,8 +112,7 @@
                                                 <td></td><td></td>
                                                 <td>
                                                     <input type="submit" value="Save" name="cmdSave"  /> 
-                                                    <input type="button" value="Reset" name="reset" id ="reset"/> 
-
+                                                
                                                 </td>
                                             </tr>
                                         </tbody>

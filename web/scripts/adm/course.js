@@ -68,5 +68,21 @@ $(document).ready(function() {
 //        });
     });
 
+    $('td').click(function() {
+        var v=($(this).html());
+        alert(v);
+         $.ajax({
+            type: "POST",
+            url: "../GetComb",
+            data: ({v: $('#v').val()}),
+            success: function(response) {
+                $("#comb").html(response);
+            },
+            error: function(xhr) {
+                alert(xhr.status);
+                alert("error");
+            }
+        });
+    });
     
 });
