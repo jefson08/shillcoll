@@ -8,16 +8,19 @@ $(document).ready(function() {
      var YearOrSem='s';
  $('input[name=cmdSearch]').click(function () {
    //$('#srchlist').hide();
+  
         $('input[type=submit]').removeAttr('disabled');
-        $('input[name=cmdAddMore]').removeAttr('disabled');
+        
         var txtNehuRollNo = $('#txtNehuRollNo').val();
         var cmbNR=$('#cmbNR').val();
         var cmbYearOrSemNo=$('#cmbYearOrSemNo').val(); 
+       var txtExamMonth=$('#txtExamMonth').val();
+       var txtExamYear=$('#txtExamYear').val();
        
         $.ajax({
             type: "POST",
             url: "../GetExamPapers",
-            data: ({txtNehuRollNo: txtNehuRollNo, cmbNR: cmbNR, cmbYearOrSemNo:cmbYearOrSemNo}),
+            data: ({txtNehuRollNo: txtNehuRollNo, cmbNR: cmbNR, cmbYearOrSemNo:cmbYearOrSemNo, txtExamYear: txtExamYear, txtExamMonth: txtExamMonth}),
             success: function (response) {
                 // $('#msg').html(response);
                  $('#srchlist').html(response);
@@ -66,6 +69,37 @@ $(document).ready(function() {
         $('select[name=cmbPos]').attr('disabled','disabled'); 
      }
      })
+      var currentYear = (new Date).getFullYear();
+    $("#eyear").empty();
+    for (var i = 1; i <= 2; i++) {
+        $("#eyear").append("<option value='" + currentYear + "'>");
+        currentYear++;
+    }
+      $("#txtNehuRollNo").bind('input', function (){  
+        var roll = document.getElementById('txtNehuRollNo').value;
+      
+        $.ajax({
+            url : "../Marks_PopulateRollNo",
+            type : "POST",
+            async:false,
+            data : {
+                term : roll
+            },
+            dataType : "json",
+            success : function(response) {
+                
+                $("#nehurollno").empty();
+                for(var i=0, len=response.length; i<len; i++) {
+                    $("#nehurollno").append("<option value='" +jQuery.trim(response[i]) + "'>");
+                }
+                
+            },
+            error: function (xhr) {
+            //alert(xhr.status);
+            }
+            
+        });
+    });
    });
 
      

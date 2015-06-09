@@ -26,9 +26,10 @@ public class AddMarks {
     private String cmbPos;
 private String cmbYearOrSemNo;
 private String cmbNR;
+private String txtExamMonth;
+private String txtExamYear;
 
-
-    /**
+ /**
      * @return the txtNehuRollNo
      */
     public String getTxtNehuRollNo() {
@@ -167,7 +168,8 @@ private String cmbNR;
     public void setCmbDiv(String cmbDiv) {
         this.cmbDiv = cmbDiv;
     }
-     /**
+
+    /**
      * @return the cmbPos
      */
     public String getCmbPos() {
@@ -208,6 +210,37 @@ private String cmbNR;
     public void setCmbNR(String cmbNR) {
         this.cmbNR = cmbNR;
     }
+
+    /**
+     * @return the cmbExamMonth
+     */
+    public String getTxtExamMonth() {
+        return txtExamMonth;
+    }
+
+    /**
+     * @param txtExamMonth the cmbExamMonth to set
+     */
+    public void setTxtExamMonth(String txtExamMonth) {
+        this.txtExamMonth = txtExamMonth;
+    }
+
+    /**
+     * @return the txtExamYear
+     */
+    public String getTxtExamYear() {
+        return txtExamYear;
+    }
+
+    /**
+     * @param txtExamYear the cmbExamYear to set
+     */
+    public void setTxtExamYear(String txtExamYear) {
+        this.txtExamYear = txtExamYear;
+    }
+   
+
+   
 public boolean isTxtMarksThValid()
 {
       int itemsCount, i;
@@ -238,14 +271,28 @@ public boolean isTxtMarksPrValid()
     public boolean isCmbNRValid()
     {
          if (Validator.isNullValue(getCmbNR()) || getCmbNR().equals("-1")) {
-            System.out.println(getCmbNR());
+            //System.out.println(getCmbNR());
             return false;
         }
         return true;
     }
 
-    
-   
+    public boolean isTxtExamMonthValid()
+    {
+         if (Validator.isNullValue(getTxtExamMonth()) || getTxtExamMonth().equals("-1")) {
+           // System.out.println(getCmbNR());
+            return false;
+        }
+        return true;
+    }
+   public boolean isTxtExamYearValid()
+    {
+         if (Validator.isNullValue(getTxtExamYear()) || getTxtExamYear().equals("-1")) {
+           // System.out.println(getCmbNR());
+            return false;
+        }
+        return true;
+    }
     public boolean isCmbYearOrSemNoValid() {
         if (Validator.isNullValue(getCmbYearOrSemNo()) || getCmbYearOrSemNo().equals("-1")) {
             System.out.println(getCmbYearOrSemNo());
@@ -268,5 +315,5 @@ public boolean isTxtNehuRollNoValid(){
         }
         return true;
 } 
-   
-}
+
+   }

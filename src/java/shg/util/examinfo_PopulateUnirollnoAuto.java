@@ -16,7 +16,7 @@ import shg.valid.Validator;
 
 /**
  *
- * @author Rans
+ * @author Ransly
  */
 @WebServlet(name = "examinfo_PopulateUnirollnoAuto", urlPatterns = {"/examinfo_PopulateUnirollnoAuto"})
 public class examinfo_PopulateUnirollnoAuto extends HttpServlet {

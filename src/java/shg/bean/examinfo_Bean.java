@@ -15,56 +15,42 @@ public class examinfo_Bean {
     private String radYearOrSem;
     private String rollno;
     private String txtBatch;
-    private String txtUnirollno;
+    private String txtNehurollno;
     private String txtRegno;
-    private String seye;
+    static private String seye;
     private String nri;
     private String errorssuccmsg = "";
     private String txtPmtDate;
-    private String pmtstatus;
-    private static String examId;
-    private static int serial;
+    private String pmtstatus = "TRUE";
+    static private String examId;
+    static private int serial;
+    static private String exmonth = "";
+    static private String exyear = "";
+    static private String regyear = "";
 
-    public String getExamId() {
-        return examId;
+    public String getRegyear() {
+        return regyear;
     }
 
-    public void setExamId(String examId) {
-        
-        System.out.println("bean eid"+examId);
-        this.examId = examId;
+    public void setRegyear(String Regyear) {
+        this.regyear = Regyear;
     }
 
-    public int getSerial() {
-        return serial;
+    public String getExmonth() {
+        return exmonth;
     }
 
-    public void setSerial(int serial) {
-        this.serial = serial;
+    public void setExmonth(String exmonth) {
+        this.exmonth = exmonth;
     }
 
-    public String getRadYearOrSem() {
-        return radYearOrSem;
+    public String getExyear() {
+        return exyear;
     }
 
-    public void setRadYearOrSem(String radYearOrSem) {
-        this.radYearOrSem = radYearOrSem;
-    }
+    public void setExyear(String exyear) {
 
-    public String getPmtstatus() {
-        return pmtstatus;
-    }
-
-    public void setPmtstatus(String pmtstatus) {
-        this.pmtstatus = pmtstatus;
-    }
-
-    public String getTxtPmtDate() {
-        return txtPmtDate;
-    }
-
-    public void setTxtPmtDate(String txtPmtDate) {
-        this.txtPmtDate = txtPmtDate;
+        this.exyear = exyear;
     }
 
     public String getErrorssuccmsg() {
@@ -75,11 +61,57 @@ public class examinfo_Bean {
         this.errorssuccmsg = errorssuccmsg;
     }
 
+    public String getExamId() {
+        return examId;
+    }
+
+    public void setExamId(String examId) {
+        // System.out.println("examid:" + examId);
+        this.examId = examId;
+    }
+
+    public int getSerial() {
+        return serial;
+    }
+
+    public void setSerial(int serial) {
+        // System.out.println("slno:" + serial);
+        this.serial = serial;
+    }
+
+    public String getRadYearOrSem() {
+        return radYearOrSem;
+    }
+
+    public void setRadYearOrSem(String radYearOrSem) {
+        // System.out.println("sem/year:" + radYearOrSem);
+        this.radYearOrSem = radYearOrSem;
+    }
+
+    public String getPmtstatus() {
+        return pmtstatus;
+    }
+
+    public void setPmtstatus(String pmtstatus) {
+        // System.out.println("paystat:" + pmtstatus);
+        this.pmtstatus = pmtstatus;
+    }
+
+    public String getTxtPmtDate() {
+        return txtPmtDate;
+    }
+
+    public void setTxtPmtDate(String txtPmtDate) {
+        // System.out.println("paydate:" + txtPmtDate);
+        this.txtPmtDate = txtPmtDate;
+    }
+
     public String getNri() {
         return nri;
     }
 
     public void setNri(String nri) {
+        // System.out.println("nri:" + nri);
         this.nri = nri;
     }
 
@@ -89,7 +121,7 @@ public class examinfo_Bean {
     }
 
     public void setRollno(String rollno) {
-
+        // System.out.println("roll:" + rollno);
         this.rollno = rollno;
     }
 
@@ -98,6 +130,7 @@ public class examinfo_Bean {
     }
 
     public void setSeye(String seye) {
+        // System.out.println("seye:" + seye);
         this.seye = seye;
     }
 
@@ -106,6 +139,7 @@ public class examinfo_Bean {
     }
 
     public void setTxtBatch(String txtBatch) {
+        //  System.out.println("batch:" + txtBatch);
         this.txtBatch = txtBatch;
     }
 
@@ -114,15 +148,53 @@ public class examinfo_Bean {
     }
 
     public void setTxtRegno(String txtRegno) {
+        // System.out.println("REg:" + txtRegno);
         this.txtRegno = txtRegno;
     }
 
-    public String getTxtUnirollno() {
-        return txtUnirollno;
+    public String getTxtNehurollno() {
+        return txtNehurollno;
     }
 
-    public void setTxtUnirollno(String txtUnirollno) {
-        this.txtUnirollno = txtUnirollno;
+    public void setTxtNehurollno(String txtNehurollno) {
+        //System.out.println("nehu:" + txtNehurollno);
+        this.txtNehurollno = txtNehurollno;
+    }
+
+    public boolean isRegyearValid() {
+        System.out.println("ry::"+getRegyear());
+        if (Validator.isNullValue(getRegyear()) || getRegyear().equals("")) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isExmonthValid() {
+        if (Validator.isNullValue(getExmonth()) || getExmonth().equals("")) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isExyearValid() {
+        if (Validator.isNullValue(getExyear()) || getExyear().equals("")) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isTxtNehurollnoValid() {
+        if (Validator.isNullValue(getTxtNehurollno())) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isTxtNehurollnoEditValid() {
+        if (Validator.isNullValue(getTxtNehurollno()) || getTxtNehurollno().equalsIgnoreCase("AF")) {
+            return false;
+        }
+        return true;
     }
 
     public boolean isRadYearOrSemValid() {
@@ -139,7 +211,7 @@ public class examinfo_Bean {
         if (Validator.isNullValue(getPmtstatus())) {
             return false;
         }
-        if (getPmtstatus().trim().length() == 0 || !(getPmtstatus().toLowerCase().equals("y") || getPmtstatus().toLowerCase().equals("n"))) {
+        if (getPmtstatus().trim().length() == 0 || !(getPmtstatus().toLowerCase().equals("true") || getPmtstatus().toLowerCase().equals("false"))) {
             return false;
         }
         return true;
@@ -155,7 +227,6 @@ public class examinfo_Bean {
     }
 
     public boolean isRollnoValid() {
-        System.out.println("roll:" + getRollno());
         if (Validator.isNullValue(getRollno())) {
             return false;
         }
@@ -176,18 +247,20 @@ public class examinfo_Bean {
         return true;
     }
 
-    public boolean isTxtRegnoValid() {
-        if (!Validator.isNullValue(getTxtRegno())) {
-            if (!Validator.isNumeric(getTxtRegno())) {
-                return false;
-            }
+    public boolean isTxtRegnoEditValid() {
+        if (Validator.isNullValue(getTxtRegno()) || getTxtRegno().equalsIgnoreCase("AF")) {
+            //if (Validator.isNumeric(getTxtRegno())) {
+            return false;
+            //}
         }
         return true;
     }
 
-    public boolean isTxtUnirollnoValid() {
-        if (Validator.isNullValue(getTxtUnirollno())) {
+    public boolean isTxtRegnoValid() {
+        if (Validator.isNullValue(getTxtRegno())) {
+            // if (Validator.isNumeric(getTxtRegno())) {
             return false;
+            // }
         }
         return true;
     }
@@ -196,9 +269,9 @@ public class examinfo_Bean {
         if (Validator.isNullValue(getNri())) {
             return false;
         }
-//        if (getNri().trim().length() == 0 || !(getNri().toLowerCase().equals("r") || getNri().toLowerCase().equals("i") || getNri().toLowerCase().equals("n"))) {
-//            return false;
-//        }
+        if (getNri().trim().length() == 0 || !(getNri().toLowerCase().equals("r") || getNri().toLowerCase().equals("i") || getNri().toLowerCase().equals("n"))) {
+            return false;
+        }
         return true;
     }
 }

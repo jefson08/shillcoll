@@ -28,7 +28,7 @@ public class shgUtil {
         sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"stuenroll.jsp\" > Enroll Student </a></li></ul>");
         sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"clxii.jsp\" >  Student Board Subjects </a></li></ul>");
         sb.append("</ul>");
-        
+
         sb.append("<ul style=\"list-style:none; font-size: 16px; font-weight: bold;\" >");
         sb.append("<li> <a href=\"#\">Edit Data</a></li>");
         //menus
@@ -36,7 +36,7 @@ public class shgUtil {
         sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"CourseClassHonsEdit2.jsp\" > Edit Papers  </a></li></ul>");
         sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"editxii.jsp\" > Edit Board Subjects  </a></li></ul>");
         sb.append("</ul>");
-        
+
         sb.append("<ul style=\"list-style:none; font-size: 16px; font-weight: bold;\" >");
         sb.append("<li> <a href=\"#\">Master Data</a></li>");
         //menus
@@ -44,19 +44,20 @@ public class shgUtil {
         sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"CourseClassHons2.jsp\" > Add Papers  </a></li></ul>");
         sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"addcourse.jsp\" >  Add Course </a></li></ul>");
         sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"coursecombination.jsp\" >  Add Combination </a></li></ul>");
-        
+
         sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"boardNameBoardSubject.jsp\" >  Add Board Subjects </a></li></ul>");
         sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"editBoardSubject.jsp\" >  Edit Board Subjects </a></li></ul>");
-        
+
         sb.append("</ul>");
-        
+
         //Exam
         sb.append("<ul style=\"list-style:none; font-size: 16px; font-weight: bold;\" >");
         sb.append("<li> <a href=\"#\">Examination</a></li>");
         //menus
-        sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"stimprovement.jsp\" > Improvement </a></li></ul>");
-        sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"stimprovementEdit.jsp\" > Edit Improvement </a></li></ul>");
-        sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"srchimprovement.jsp\" > Search Improvement </a></li></ul>");
+        sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"examinfo.jsp\" >Infornmation Entry</a></li></ul>");
+        sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"examinfo_edit.jsp\" >Information Edit</a></li></ul>");
+        sb.append("<ul style=\"list-style:none; font-size: 15px; font-weight: normal;\" ><li> <a href=\"examinfo_search.jsp\" >Information Search </a></li></ul>");
+
         sb.append("</ul>");
         //Exam
         return sb;
