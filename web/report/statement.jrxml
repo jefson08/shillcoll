@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="statement" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="df99321b-68f6-4ab8-abd3-bcd231826337">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="gender" class="java.lang.String"/>
+	<field name="category" class="java.lang.String"/>
+	<field name="regno" class="java.lang.String"/>
+	<field name="nehurollno" class="java.lang.String"/>
+	<field name="combinationcode" class="java.lang.String"/>
+	<field name="studentname" class="java.lang.String"/>
+	<field name="subjectname" class="java.lang.String"/>
+	<field name="subcode" class="java.lang.String"/>
+	<field name="rollno" class="java.lang.String"/>
+	<field name="honsubcode" class="java.lang.String"/>
+	<field name="yearorsemno" class="java.lang.String"/>
+	<field name="batch" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="e478d169-6a7b-4690-ad11-a59cdbd5f0ff"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CATEGORY :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="3" width="100" height="20" uuid="b16ce72e-ae30-4446-b086-b377b0506251"/>
+				<textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="167" y="0" width="100" height="20" uuid="551863bb-15d6-4d27-a455-243eac8510bf"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CLASS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="506" y="-1" width="100" height="20" uuid="409242e9-9290-44af-ab0d-2ed3bdc9171e"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[BATCH: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="0" width="100" height="20" uuid="54a59adf-a1fa-4668-af27-6520cd544ae2"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[HONOURS :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="223" y="0" width="100" height="20" uuid="3fde97a0-61c3-4145-9466-9895ee5dd0f1"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{yearorsemno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="0" width="100" height="20" uuid="bbbdd6de-5410-403e-ae28-ed1548825d58"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{honsubcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="557" y="3" width="100" height="20" uuid="aeec154f-f66a-443e-8306-476e93d5a150"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{batch}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="4bdef899-46cd-42f9-ac11-e9fde3480489"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SEX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="100" height="20" uuid="e6e21ac6-39a1-43bd-ae1e-2a38866fd667"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[REGISTRATION NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="100" height="20" uuid="aea8d3e2-d50f-4a68-a25a-78849edae1ff"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ROLL NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="100" height="20" uuid="dd7ab634-c952-4613-8d4e-9530cbc546ff"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="0" width="100" height="20" uuid="7cc2a265-7bd8-42e1-a78b-a9228d184613"/>
+				<text><![CDATA[SUBJECTS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="100" height="20" uuid="6980185f-5a9c-4614-b245-7dbfa89e16ff"/>
+				<textFieldExpression><![CDATA[$F{gender}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="100" height="20" uuid="8b1b2fe4-fcbd-41ce-8501-6b471cdd41e8"/>
+				<textFieldExpression><![CDATA[$F{regno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="1" width="100" height="20" uuid="74c47bf6-5754-46c1-9dce-7bd2981f5f06"/>
+				<textFieldExpression><![CDATA[$F{nehurollno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="1" width="100" height="20" uuid="67a07e08-3ef4-48f1-a31b-b78eb3307bd6"/>
+				<textFieldExpression><![CDATA[$F{subjectname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="1" width="100" height="20" uuid="a29b700d-3e0e-49c5-9b3a-e111f54bffa3"/>
+				<textFieldExpression><![CDATA[$F{studentname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

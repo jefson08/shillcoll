@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="attendanceSheetReg" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ac78926a-1ed6-4ee8-b14a-5df47ba20b50">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Table Dataset 1" uuid="0da8ebf4-933a-4ae5-8790-9a0b0e6de147"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\new project\\backup\\web\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="conn" class="java.sql.Connection"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="studentname" class="java.lang.String"/>
+	<field name="nehurollno" class="java.lang.String"/>
+	<field name="regno" class="java.lang.String"/>
+	<field name="category" class="java.lang.String"/>
+	<field name="gender" class="java.lang.String"/>
+	<field name="subjectname" class="java.lang.String"/>
+	<field name="semoryear" class="java.lang.String"/>
+	<field name="rollno" class="java.lang.String"/>
+	<variable name="category_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{category}]]></variableExpression>
+	</variable>
+	<variable name="category_2" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{category}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement x="205" y="0" width="378" height="50" uuid="2db98174-5555-44ba-9647-d8d98abe7fef"/>
+				<textElement>
+					<font size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SHILLONG COLLEGE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="135" y="0" width="514" height="31" uuid="3dfd74dc-0efb-44ef-9d36-14cd9338acb0"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATTENDANCE SHEET OF THE CANDIDATE ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="33" width="153" height="31" uuid="f5f2db03-e5c0-4624-87a6-356205619718"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[CATEGORY:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="158" y="33" width="47" height="33" uuid="a22d27cc-4e4c-4ecd-9c47-a8c11561282c"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="566" y="34" width="100" height="31" uuid="257d3fd7-0d1e-4aaa-acd8-076e06f50d2f"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[CLASS :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="666" y="34" width="64" height="35" uuid="e26737b9-6980-4495-a308-5808cb00b78f"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{semoryear}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="226" y="31" width="167" height="33" uuid="5939752e-9cba-49f7-933c-9e5e303e3611"/>
+				<textElement>
+					<font size="24" isBold="false"/>
+				</textElement>
+				<text><![CDATA[HONOURS :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="216" y="34" width="1" height="32" uuid="153c3d15-5103-493e-8617-ef6f1d46d73d"/>
+			</line>
+			<line>
+				<reportElement x="562" y="32" width="1" height="32" uuid="5c23cdf9-5cf9-4d51-a5de-2ab193e67b92"/>
+			</line>
+			<textField>
+				<reportElement x="414" y="44" width="100" height="20" uuid="54a70019-531f-4bf0-9853-19c995e45932"/>
+				<textFieldExpression><![CDATA[$F{rollno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="100" y="15" width="100" height="20" uuid="2b76163c-3ac0-40e6-bf57-884a6f38de8e"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[REGISTRATION NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="15" width="100" height="20" uuid="52507936-2b6d-42fa-adc1-f06f03f64b5e"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CATEGORY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="15" width="100" height="20" uuid="8e2771f4-90f6-44b2-bf2a-fa27fd6e7a20"/>
+				<text><![CDATA[NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="15" width="100" height="20" uuid="fa86e676-8223-4560-9cbf-e827d19b815f"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SEX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="15" width="100" height="20" uuid="ee464222-4e12-4213-8adb-3249021e321a"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[PAPERS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="57e28b27-9a03-4c5c-8b15-67c329249746"/>
+			</line>
+			<line>
+				<reportElement x="0" y="46" width="802" height="1" uuid="fff3f068-8050-4102-a616-b1fe55215a7c"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="15" width="100" height="20" uuid="f1f590ae-f4a7-45fd-ba63-7a25e588d25f"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[NEHU ROLLNO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="583" y="15" width="100" height="20" uuid="60c11f83-68f2-4692-8eff-9babb88e439b"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SIGNATURE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="7" width="100" height="20" uuid="0191679e-41be-4c1c-9458-bc5366f1d388"/>
+				<textFieldExpression><![CDATA[$F{regno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="344" y="7" width="100" height="20" uuid="2727bfc3-7d64-43b1-bcf8-3c996bfda237"/>
+				<textFieldExpression><![CDATA[$F{studentname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="7" width="100" height="20" uuid="0e3bcb9b-6187-44f0-bde6-3a024f3e996a"/>
+				<textFieldExpression><![CDATA[$F{gender}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="7" width="100" height="20" uuid="48794d54-4f62-4106-8035-760a8b3d6496"/>
+				<textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="31" width="802" height="1" uuid="28b28afb-38d5-47e8-88f6-7a9d143447f5"/>
+			</line>
+			<subreport>
+				<reportElement x="444" y="7" width="187" height="20" uuid="2d940aaa-acba-4fc5-a157-8c8f57fb4dd6"/>
+				<subreportParameter name="rollno">
+					<subreportParameterExpression><![CDATA[$F{rollno}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{conn}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "attendanceSheetReg_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="10" y="7" width="100" height="20" uuid="92821405-310f-467b-ae7e-c51c6c82c8c0"/>
+				<textFieldExpression><![CDATA[$F{nehurollno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="945522aa-dd79-4106-b279-d2cbfed408a2"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="802" height="1" uuid="59e7a5a7-17e2-4259-a3b8-39a5a2cdf714"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
