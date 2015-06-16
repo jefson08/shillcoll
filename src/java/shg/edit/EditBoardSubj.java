@@ -40,13 +40,6 @@ public class EditBoardSubj extends HttpServlet {
 
         String srchby = request.getParameter("cmbBoardID");
         String stream = request.getParameter("cmbStream");
-        //System.out.println(srchby);
-        //System.out.println("Search by boardid:" + srchby);
-        //System.out.println("Search by stream:" + stream);
-        //boardid = getBoardID(srchby);
-        //int limit = Integer.parseInt(request.getParameter("limit"));
-        //int offset = Integer.parseInt(request.getParameter("offset"));
-
         if (Validator.isNullValue(srchby) && Validator.isNullValue(srchby)) {
             out.print("<b>Error : Enter search Value</b>");
             return;
@@ -64,9 +57,9 @@ public class EditBoardSubj extends HttpServlet {
         try {
             sql = "SELECT boardname FROM boardname WHERE boardid=?";
             pst = con.prepareStatement(sql);
-            pst.setString(1,srchby.toUpperCase());
+            pst.setString(1, srchby.toUpperCase());
             rs = pst.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 output += "<tr><td>Board *</td><td>" + rs.getString("boardname") + "</td></tr>";
             }
             sql = " SELECT \n"
@@ -83,19 +76,20 @@ public class EditBoardSubj extends HttpServlet {
             rs = pst.executeQuery();
             if (rs.next()) {
                 output += "<tr><td>Stream *</td><td>" + stream.toUpperCase() + "</td></tr>";
-                int i=0;
+                int i=1;
                 do {
-                    output += "<tr id="+i+"><td>Subject *</td><td>" + rs.getString("subjectname") + "</td><td align=\"left\"><img src=\"../images/remove.png\" alt=\"Remove\" imgno="+i+" id=\"DelIcon\"/></td><td><input type=\"text\" name=\"txtSubName\" size=\"50\" value=\"" + rs.getString("subjectname") + "\" hidden /></td><td></td></tr>"; 
+                    output += "<tr id="+i+"><td>Subject *</td><td><input type=\"text\" name=\"txtSubName\" id=\"txtSubName[" + i + "]\" value=\" "+rs.getString("subjectname")+" \" size=\"40\" readonly/></td><td align=\"left\"><img src=\"../images/remove.png\" alt=\"Remove\" imgno=" +i+ " id=\"DelIcon\"/></td><td></td></tr>";
+                    // output+= "<td><input type=\"text\" name=\"txtSubName\" id=\"txtSubName[" + i + "]\" value=\" "+rs.getString("subjectname")+" \" size=\"40\" /></td><td></td></tr>";
                     i++;
                 } while (rs.next());
             } else {
                 output = "Not Matching Record(s) Found";
             }
-           /* try{
-                Thread.sleep(5000);
-            }catch(InterruptedException t){
+            /* try{
+             Thread.sleep(5000);
+             }catch(InterruptedException t){
                
-            }*/
+             }*/
             out.print(output);
         } catch (SQLException e) {
             try {
@@ -124,21 +118,6 @@ public class EditBoardSubj extends HttpServlet {
         }
 
     }
-
-   /* public String getBoardID(String boaName) {
-        String boaid = "";
-        try {
-            boaName = boaName.substring(0, 4);
-            boaid = boaName.trim().toUpperCase();
-        } catch (Exception e) {
-            System.out.println("Cannot Generate Board ID. " + e);
-            boaid = null;
-        } finally {
-
-        }
-        return boaid;
-    }*/
-
     @Override
     public String getServletInfo() {
         return "Short description";

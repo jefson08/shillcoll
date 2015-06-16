@@ -19,16 +19,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="../style/loader.css" rel="stylesheet" />
         <link href="../style/master-css/style.css" rel="stylesheet" />
         <link href="../style/master-css/master-layout.css" rel="stylesheet" />
         <link href="../style/master-css/menu-style.css" rel="stylesheet" />
+        <link href="../scripts/jqueryui/ui.css" rel="stylesheet" />
         <link rel="stylesheet" href="../style/master-css/sweet-alert.css">
-        <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script>
-        <script type="text/javascript" src="../scripts/jquery/jquery.maskedinput-1.3.js"></script>
-        <script type="text/javascript" src="../scripts/jquery/script.js"></script>
+        <script type="text/javascript" src="../scripts/jquery/jquery-1.6.2.min.js"></script>       
+        <script type="text/javascript" src="../scripts/jqueryui/jquery-ui-1.8.16.custom.min.js"></script>
         <script type="text/javascript" src="../scripts/util/populateComboBox.js"></script> 
-        <script type="text/javascript" src="../scripts/util/net.js"></script> 
+        <script type="text/javascript" src="../scripts/jquery/script.js"></script> 
+        <script type="text/javascript" src="../scripts/util/net.js"></script>
+        <script src="../scripts/jquery/jquery.js"></script>
         <script src="../scripts/validate/jquery.validate.js"></script>
         <script src="../scripts/validate/additional-methods.js"></script>
         <script src="../scripts/validate/validators.js"></script>
@@ -63,8 +64,8 @@
                                 <div class="box-1">
                                     <form name="boardnamesubject" id="boardnamesubject" method="Post">
                                         <input type="hidden" name="submitted" value="true" />
-                                        <table border="0" id="Clear">
-                                            <tbody>
+                                        <table border="0" id="subjectName">
+                                            <tbody id="clear">
                                                 <tr>
                                                     <td>Board Name *</td>
                                                     <td> <select name="cmbBoardID" id="cmbBoardID">
@@ -91,9 +92,6 @@
                                                         </c:if>
                                                     </td>
                                                 </tr>                           
-                                        </table>
-                                        <table id="subjectName">
-                                            <tbody>
                                                 <tr>
                                                     <td colspan="2" style="text-align: center">
                                                         <c:if test="${param.submitted and !boardnamesubject.txtSubNameValid}" var="v3">
@@ -118,7 +116,7 @@
                                             </tbody>
                                         </table>
                                     </form>
-                                   <h3 id="warning"></h3> <!-- Error Message Display -->
+                                    <h3 id="warning"></h3> <!-- Error Message Display -->
                                     <c:if test="${param.submitted and !v1 and !v2 and !v3}">
                                         <%
                                             int i;

@@ -72,7 +72,7 @@ $(document).ready(function () {
         // alert("hurrayy");
         count++;
         var str = '<tr id=' + count + '><td>Subject *</td>';
-        str += '<td><input type="text" name="txtSubName" id=name="txtSubName[]" value="" size="50"/></td>';
+        str += '<td><input type="text" name="txtSubName" id="txtSubName[' + count + ']" value="" size="50"/></td>';
         str += '<td><img src="../images/remove.png" alt="Remove" imgno=' + count + ' id="DelIcon"/>&nbsp;';
         str += '<img src="../images/add.png" alt="Add" imgno=' + count + ' id="ADDIcon"/></td>';
         str += '<td></td></tr>';
