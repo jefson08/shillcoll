@@ -5,7 +5,7 @@
 --%>
 <%if ("GET".equalsIgnoreCase(request.getMethod())) {
         out.print("Invalid request -- Please try again");
-        //return;
+        return;
     }%>
 <%@page  autoFlush="true" buffer="32kb" %>
 <%@page import="shg.util.shgUtil"%>
@@ -91,7 +91,7 @@
                                                 <td></td>
                                             </tr>  
                                             <tr>
-                                                <td>Board* &nbsp; &nbsp; &nbsp; &nbsp; </td>
+                                                <td>Board* &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; </td>
                                                 <td> <select name="cmbBoardID" id="cmbBoardID" title="Please select Board" required>
                                                         <option value="">-</option>
                                                         <c:set var="boaid" value="${param.cmbBoardID}"></c:set>
@@ -144,7 +144,7 @@
                                     </table>
                                     <table>
                                         <tr>
-                                            <td>Total Mark*</td>
+                                            <td>Maximum Marks of all the Papers*</td>
                                             <td><input type="text" name="txtTotalMarks" id="txtTotalMarks" value="${param.txtTotalMarks}" size="4" />
                                                 <c:if test="${param.submitted1 and !clxiiinfo.txtTotalMarksValid}" var="v3">
                                                     <span style="color: red">Total Marks is either be Blank OR invalid OR Total Marks can have maximum of 4 Digits</span>

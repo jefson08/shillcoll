@@ -149,7 +149,7 @@ public class Editclxii {//extends HttpServlet {
                 output += "<td> <select name=\"cmbStream\" id=\"cmbStream\" title=\"Please select Stream\" required>";
                 output += "<option value=\"" + rs.getString("stream") + "\">" + rs.getString("stream") + "</option>";
                 output += "</select></td><td></td></tr>";
-                 output += "<tr><td>Total Mark *</td><td><input type=\"text\" name=\"txtTotalMarks\" id=\"txtTotalMarks\" value=\"" + rs.getString("totalmark") + "\" size=\"4\" /></td><td></td></tr>";
+                 output += "<tr><td>Maximum Marks of all the Papers*</td><td><input type=\"text\" name=\"txtTotalMarks\" id=\"txtTotalMarks\" value=\"" + rs.getString("totalmark") + "\" size=\"4\" /></td><td></td></tr>";
                 output += "<tr><td colspan=3><table id=\"add_subject\"><tbody id=\"clear_subject\">";
                 int i = 0;
                 do {
