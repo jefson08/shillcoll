@@ -16,57 +16,32 @@
  */
 
 $(document).ready(function () {
-    $("select[name='cmbBoardID']").change(function () {
-        if ($(this).val() !== -1) {
-            PopulateDependentCombo(document.clxiiinfo.cmbBoardID, document.clxiiinfo.txtStream, '../populateStream');
+    var validator = $("#clxiiinfo").bind("invalid-form.validate", function () {
+        $("#summary").html("Your form contains " + validator.numberOfInvalids() + " errors, see details below.");
+    }).validate({
+        debug: true,
+        errorElement: "em",
+        errorContainer: $("#warning, #summary"),
+        errorPlacement: function (error, element) {
+           error.appendTo(element.parent("td").next("td"));
+        },
+        success: function (label) {
+            //label.text("ok!").addClass("success");
+        },
+        rules: {
+            rollno: "alphanumeric",
+        },
+        submitHandler: function (form) {
+            form.submit();
         }
-        else {
-            $('#txtStream').empty();
-        }
+    });
+    $('input[name=SeachAll]').click(function () {
+        document.location.href = '../clxiireport';
     })
 
-    $('#txtStream').change(function () {
-        var cmbboardID = document.getElementById('cmbBoardID').value;
-        var cmbstream = document.getElementById('txtStream').value;
-        $('#clxiiinfo').hide();
-        $("#waitbox").dialog("open");
-        $.ajax({
-            type: "POST",
-            url: "../searchPrevXii",
-            data: ({cmbboardID: cmbboardID, cmbstream: cmbstream}),
-            beforeSubmit: function () {
-                // $('#processing').css({visibility: 'visible'});
-                //alert("before submit");
-                return true;
-            },
-            success: function (response) {
+    $('input[name=print]').click(function () {
+        //alert($('#roll').val());
+        document.location.href = '../clxiireport_single_pdf?rollno=' + $('#roll').val() + '';
+    })
 
-                if (response === "Not Matching Record(s) Found") {
-                    //alert("Not Matching Record(s) Found");
-                    swal("Oops...", "Not Matching Record(s) Found!", "error");
-                    window.location.replace("../adm/searchPrevXii.jsp");
-                } else {
-                    //$('#msg').html(response);
-                    $("#waitbox").dialog("close");
-                    document.getElementById("Next").type = "button";
-                    $('#search_content > tbody:last').append(response);
-                }
-            },
-            error: function (xhr) {
-                alert(xhr.status);
-            }
-        });
-    });
-    $("#waitbox").dialog({
-        autoOpen: false,
-        open: function (event, ui) {
-            $(".ui-dialog-titlebar-close").hide();
-        }, //disable close button x located 
-        closeOnEscape: false, //upper right conner
-        height: 150,
-        width: 450,
-        modal: true,
-        show: 'Explode'
-
-    });
 });

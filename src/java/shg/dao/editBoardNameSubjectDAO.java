@@ -34,7 +34,7 @@ public class editBoardNameSubjectDAO {
         for (String item1 : Subj) {
             System.out.println(item1);
             len1 = item1.length();
-            if (len1 < 3) {
+            if (len1 < 4) {
                 return 0;
             }
         }
@@ -127,7 +127,7 @@ public class editBoardNameSubjectDAO {
         String Subid = "";
         try {
             Stream = Stream.substring(0, 2);
-            subjectname = subjectname.substring(0, 2);
+            subjectname = subjectname.substring(0, 4);
             Subid = subjectname.trim().toUpperCase().concat(Stream.trim().toUpperCase()).concat(boardid.trim().toUpperCase());
             if (Subid.length() > 10) {
                 Subid = Subid.substring(0, 10);

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clxiireport_single" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="a9698b51-096f-408a-8fe0-4e3b57feda50">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="rollno" class="java.lang.String"/>
+	<field name="studentname" class="java.lang.String"/>
+	<field name="photo" class="java.io.InputStream"/>
+	<field name="boardroll" class="java.lang.String"/>
+	<field name="yearpass" class="java.lang.Integer"/>
+	<field name="stream" class="java.lang.String"/>
+	<field name="totalmark" class="java.lang.Integer"/>
+	<field name="mark" class="java.lang.Integer"/>
+	<field name="subjectname" class="java.lang.String"/>
+	<variable name="mark_SUM" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{mark}]]></variableExpression>
+	</variable>
+	<variable name="total_mark" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{mark}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="107" splitType="Stretch">
+			<image>
+				<reportElement x="238" y="3" width="100" height="100" uuid="c775dda1-e331-479e-9473-7d687340bbd1"/>
+				<imageExpression><![CDATA["/home/jefson08/NetBeansProjects/shillcoll/web/images/college_logo.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="99" width="555" height="1" uuid="e2cb503a-52d9-48df-ad04-e3504d7278c8"/>
+			</line>
+			<line>
+				<reportElement x="0" y="102" width="555" height="1" uuid="d9cdf145-4298-4742-af13-fafbed30e2dc"/>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="114">
+			<staticText>
+				<reportElement x="41" y="5" width="70" height="15" uuid="26e6c710-54bb-4381-a22f-cdf2411d8f07"/>
+				<text><![CDATA[ROLL NO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="111" y="5" width="100" height="15" uuid="1cd2c5b3-de9d-462f-877b-bf73aec4aa62"/>
+				<textFieldExpression><![CDATA[$F{rollno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="41" y="23" width="70" height="15" uuid="542c2f6e-7bf1-4bd1-93ec-eab7bc021a9b"/>
+				<text><![CDATA[BOARD ROLL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="111" y="23" width="100" height="15" uuid="c7b56ab0-87f4-45df-b4b3-7367080144a9"/>
+				<textFieldExpression><![CDATA[$F{boardroll}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="41" y="41" width="70" height="15" uuid="346f183c-f57a-48bc-9e62-306d31192dea"/>
+				<text><![CDATA[NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="59" width="70" height="15" uuid="bf80ac22-ec2d-48f6-ae74-1cffb708a3d4"/>
+				<text><![CDATA[YEAR PASS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="111" y="59" width="100" height="15" uuid="3b427507-8fad-4e23-bb16-cafe43a2f54d"/>
+				<textFieldExpression><![CDATA[$F{yearpass}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="41" y="76" width="70" height="15" uuid="15d60cf4-56ff-4bed-aa58-1f28d899c23a"/>
+				<text><![CDATA[STREAM]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="111" y="76" width="100" height="17" uuid="674a9d55-5ccb-453d-a9ac-9573ebcb01ca"/>
+				<textFieldExpression><![CDATA[$F{stream}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="41" width="100" height="15" uuid="f9cc29d0-38aa-44fb-bb5f-ab8557b8905b"/>
+				<textFieldExpression><![CDATA[$F{studentname}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape">
+				<reportElement x="389" y="5" width="100" height="50" uuid="e118ae57-7da9-4a0a-8424-ac14d794eb94"/>
+				<imageExpression><![CDATA[$F{photo}]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement mode="Opaque" x="138" y="94" width="321" height="20" backcolor="#83F0CF" uuid="119e22c4-4e24-4ce6-ad69-795c9a88085a"/>
+				<staticText>
+					<reportElement x="0" y="3" width="100" height="17" uuid="e0277ba8-d553-4d82-9ed3-bae1f1cd0fb5"/>
+					<text><![CDATA[SUBJECT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="250" y="3" width="71" height="17" uuid="2096c13c-e96f-4790-8df1-30f57b8d0b45"/>
+					<text><![CDATA[MARK OBTAIN]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="138" y="0" width="321" height="20" backcolor="#DCF3F4" uuid="b0cd5202-d5b1-4c16-80bb-3c3df48eab5a">
+					<printWhenExpression><![CDATA[new Boolean( $V{REPORT_COUNT}.intValue() % 2 ==1 )]]></printWhenExpression>
+				</reportElement>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="138" y="0" width="321" height="20" backcolor="#E7E7F2" uuid="8c1422bc-cf59-42df-915d-b0cf1c6b6770">
+					<printWhenExpression><![CDATA[new Boolean( $V{REPORT_COUNT}.intValue() % 2 ==0 )]]></printWhenExpression>
+				</reportElement>
+			</frame>
+			<textField>
+				<reportElement x="388" y="5" width="71" height="15" uuid="70f8e6fc-6305-4f23-b57b-a947d0cdedc3"/>
+				<textFieldExpression><![CDATA[$F{mark}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="138" y="0" width="100" height="15" uuid="a73dba2f-1e05-4273-a38d-cbf42e43b719"/>
+				<textFieldExpression><![CDATA[$F{subjectname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="0" width="89" height="12" uuid="6724fe2d-5098-41f3-8a8c-428433630d7d"/>
+				<text><![CDATA[MAXIMUM MARK]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="100" y="0" width="84" height="12" uuid="4d5ec44f-d7f8-4615-af2b-06f795b1060b"/>
+				<textFieldExpression><![CDATA[$F{totalmark}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Auto" pattern="#,##0.00%">
+				<reportElement x="102" y="12" width="317" height="12" uuid="2db3e91a-c209-4b40-87ec-22a43f581bfa"/>
+				<textFieldExpression><![CDATA[new Double( $V{total_mark}.doubleValue() / $F{totalmark}.doubleValue() )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="271" y="0" width="106" height="12" uuid="7a20ca60-3f6a-4423-be17-0bf67055d34d"/>
+				<text><![CDATA[TOTAL MARK OBTAIN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="388" y="0" width="81" height="12" uuid="5a7876ca-364c-4022-a4ca-454ab41d6981"/>
+				<textFieldExpression><![CDATA[$V{total_mark}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="12" width="89" height="12" uuid="ed14da62-2346-47ad-9a25-598ad7d676d2"/>
+				<text><![CDATA[Percentage]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

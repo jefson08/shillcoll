@@ -191,7 +191,7 @@ public class BoardNameSubjectDAO {
         String Subid = "";
         try {
             Stream = Stream.substring(0, 2);
-            subjectname = subjectname.substring(0, 2);
+            subjectname = subjectname.substring(0, 4);
             Subid = subjectname.trim().toUpperCase().concat(Stream.trim().toUpperCase()).concat(boardid.trim().toUpperCase());
             if (Subid.length() > 10) {
                 Subid = Subid.substring(0, 10);

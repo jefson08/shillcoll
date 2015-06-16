@@ -43,7 +43,7 @@
                                         } else if (i == 1) {
                                             out.println("<script>swal(\"Good job!\", \"Record Added Sucessfully!\", \"success\");</script>");
                                         } else if (i == 3) {
-                                            out.println("<script>swal(\"Oops...\", \"Subject Name Should contain atleast 3 Letter!\", \"error\");</script>");
+                                            out.println("<script>swal(\"Oops...\", \"Subject Name Should contain atleast 4 Letter!\", \"error\");</script>");
                                         } else if (i == 6) {
                                             out.println("<script>swal(\"Oops...\", \"Board and Stream already exist!\", \"error\");</script>");
                                         } else if (i == 5) {

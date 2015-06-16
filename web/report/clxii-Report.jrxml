@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clxii-Report" language="groovy" pageWidth="1190" pageHeight="842" orientation="Landscape" columnWidth="1150" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="89c47be7-c0ed-49c3-8a1b-824850ca61f4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="33"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/jefson08/NetBeansProjects/shillcoll/web/report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="conn" class="java.sql.Connection" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="rollno" class="java.lang.String"/>
+	<field name="studentname" class="java.lang.String"/>
+	<field name="photo" class="java.io.InputStream"/>
+	<field name="boardroll" class="java.lang.String"/>
+	<field name="yearpass" class="java.lang.Integer"/>
+	<field name="stream" class="java.lang.String"/>
+	<field name="totalmark" class="java.lang.Integer"/>
+	<field name="boardid" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="144" splitType="Stretch">
+			<image>
+				<reportElement x="561" y="4" width="89" height="100" uuid="6704663b-ae88-4acc-9a0c-66c2d19da2d6"/>
+				<imageExpression><![CDATA["/home/jefson08/NetBeansProjects/shillcoll/web/images/college_logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="535" y="104" width="145" height="20" uuid="04984cbe-6a85-4faa-a9dc-a479126de5cb"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[CLASS XII RECORDS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="45" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="17" width="1150" height="28" backcolor="#C28B8B" uuid="b440bab5-331c-4114-be86-5e748ae90f9e"/>
+			</frame>
+			<staticText>
+				<reportElement x="6" y="22" width="100" height="20" uuid="147de087-1a63-4151-8e32-b44d712a8b15"/>
+				<text><![CDATA[ROLL NUMBER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="22" width="100" height="20" uuid="e13098b3-a143-4f01-a8ab-e71e2fb2551a"/>
+				<text><![CDATA[NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="22" width="100" height="20" uuid="993401f5-7640-4732-b8c3-518bd0fe626a"/>
+				<text><![CDATA[BOARD ROLL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="451" y="22" width="100" height="20" uuid="362ffdca-ed0e-41cb-ac3c-e65eb2b4772f"/>
+				<text><![CDATA[PHOTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="606" y="22" width="100" height="20" uuid="96e60754-adef-410c-8c67-af5fb239a826"/>
+				<text><![CDATA[YEAR PASS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="723" y="22" width="100" height="20" uuid="44922934-4c8c-47d3-b492-cb33c8e5d5e3"/>
+				<text><![CDATA[STREAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="846" y="22" width="100" height="20" uuid="d5321cbd-b74d-4532-8921-3b2bbd744f01"/>
+				<text><![CDATA[TOTAL MARK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="964" y="22" width="52" height="20" uuid="d18f2e12-5917-451a-8757-77c03b5a3d25"/>
+				<text><![CDATA[MARK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1016" y="22" width="100" height="20" uuid="956168d3-2c42-4a4b-9eb9-9defc30602d7"/>
+				<text><![CDATA[SUBJECT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="17" width="1149" height="1" uuid="605be061-78a6-449d-8559-23862d4d889e"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="1" y="0" width="1149" height="30" backcolor="#DCF3F4" uuid="d8902c66-07ac-4e48-a07e-50d29a804dac">
+					<printWhenExpression><![CDATA[new Boolean( $V{REPORT_COUNT}.intValue() % 2 ==1 )]]></printWhenExpression>
+				</reportElement>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="1" y="0" width="1149" height="30" backcolor="#E7E7F2" uuid="298e4584-f468-47e9-b3b6-6fd2f5248e67">
+					<printWhenExpression><![CDATA[new Boolean( $V{REPORT_COUNT}.intValue() % 2 ==0 )]]></printWhenExpression>
+				</reportElement>
+			</frame>
+			<textField>
+				<reportElement mode="Transparent" x="4" y="6" width="100" height="13" forecolor="#070204" backcolor="#F9F5F9" uuid="42143b73-bb43-44c1-81ae-3628b073d3d1"/>
+				<textFieldExpression><![CDATA[$F{rollno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="6" width="100" height="13" uuid="d9bbf259-9332-4e01-9aec-a957353b5a4c"/>
+				<textFieldExpression><![CDATA[$F{studentname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="313" y="6" width="87" height="13" uuid="8c9c4233-04da-4f48-8a37-8e70c224b0c7"/>
+				<textFieldExpression><![CDATA[$F{boardroll}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="964" y="6" width="186" height="13" uuid="7484e1fe-1ad2-4c88-9f98-1a1ea7723375"/>
+				<subreportParameter name="boardid">
+					<subreportParameterExpression><![CDATA[$F{boardid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="boardroll">
+					<subreportParameterExpression><![CDATA[$F{boardroll}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{conn}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "clxii-Report_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="844" y="6" width="100" height="13" uuid="d0347b88-c8b8-45a8-a1fd-d77e6f3208ae"/>
+				<textFieldExpression><![CDATA[$F{totalmark}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="721" y="6" width="100" height="13" uuid="20586c30-1706-4436-ac33-c430c7640322"/>
+				<textFieldExpression><![CDATA[$F{stream}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="604" y="6" width="100" height="13" uuid="553868f9-3652-4e41-b329-6304773bc8d1"/>
+				<textFieldExpression><![CDATA[$F{yearpass}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="1150" height="3" uuid="ca4fbda4-3cba-439d-968b-221df13c7363"/>
+			</line>
+			<image scaleImage="RealSize">
+				<reportElement x="451" y="6" width="100" height="24" uuid="f45eb15e-b3f8-47e1-97ce-6d3fd7af45a2"/>
+				<imageExpression><![CDATA[$F{photo}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -13,45 +13,24 @@ import shg.valid.Validator;
  */
 public class searchPrevXii {
 
-    private String cmbBoardID; 
-    private String txtStream;
-    
+    private String rollno; 
     /**
      * @return the cmbBoardID
      */
-    public String getCmbBoardID() {
-        return cmbBoardID;
+    public String getRollno() {
+        return rollno;
     }
 
     /**
      * @param cmbBoardID the cmbBoardID to set
      */
-    public void setCmbBoardID(String cmbBoardID) {  
-        this.cmbBoardID = cmbBoardID;
+    public void setRollno(String rollno) {  
+        this.rollno = rollno;
     }
-    public boolean isCmbBoardIDValid() {
-        if (Validator.isNullValue(getCmbBoardID()) || getCmbBoardID().equals("-1")) {
+    public boolean isRollnoValid() {
+        if (Validator.isNullValue(getRollno()) || getRollno().equals("-1")) {
             return false;
         }
         return true;
-    }
-
-
-    /**
-     * @return the txtStream
-     */
-    public String getTxtStream() {
-        return txtStream;
-    }
-
-    /**
-     * @param txtStream the txtStream to set
-     */
-    public void setTxtStream(String txtStream) {
-        this.txtStream = txtStream;
-    }
-
-    public boolean isTxtStreamValid() {
-        return !((Validator.isNullValue(getTxtStream())) || Validator.containsIllegalCharacters(getTxtStream()) || !(Validator.isText(getTxtStream())));
     }
 }
